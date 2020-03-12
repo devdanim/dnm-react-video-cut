@@ -193,6 +193,11 @@ export default class Draggable extends React.Component {
 
 Draggable.propTypes = {
     className: PropTypes.string,
+    axis: PropTypes.oneOf(["x","y"]),
+    position: PropTypes.shape({
+        xRatio: PropTypes.number,
+        yRatio: PropTypes.number
+    }),
     onDragStart: PropTypes.func,
     onDrag: PropTypes.func,
     onDragEnd: PropTypes.func,

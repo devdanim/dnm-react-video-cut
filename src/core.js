@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
-import './css/slider.css';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';

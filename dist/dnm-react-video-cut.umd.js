@@ -9384,36 +9384,6 @@
   Slider$1.Handle = Handle;
   Slider$1.createSliderWithTooltip = createSliderWithTooltip;
 
-  function styleInject(css, ref) {
-    if ( ref === void 0 ) ref = {};
-    var insertAt = ref.insertAt;
-
-    if (!css || typeof document === 'undefined') { return; }
-
-    var head = document.head || document.getElementsByTagName('head')[0];
-    var style = document.createElement('style');
-    style.type = 'text/css';
-
-    if (insertAt === 'top') {
-      if (head.firstChild) {
-        head.insertBefore(style, head.firstChild);
-      } else {
-        head.appendChild(style);
-      }
-    } else {
-      head.appendChild(style);
-    }
-
-    if (style.styleSheet) {
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-  }
-
-  var css_248z = ".rc-slider {\r\n  position: relative;\r\n  height: 14px;\r\n  padding: 5px 0;\r\n  width: 100%;\r\n  border-radius: 6px;\r\n  -ms-touch-action: none;\r\n  touch-action: none;\r\n  box-sizing: border-box;\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n}\r\n.rc-slider * {\r\n  box-sizing: border-box;\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n}\r\n.rc-slider-rail {\r\n  position: absolute;\r\n  width: 100%;\r\n  background-color: #e9e9e9;\r\n  height: 4px;\r\n  border-radius: 6px;\r\n}\r\n.rc-slider-track {\r\n  position: absolute;\r\n  left: 0;\r\n  height: 4px;\r\n  border-radius: 6px;\r\n  background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\r\n}\r\n.rc-slider-handle {\r\n  position: absolute;\r\n  width: 14px;\r\n  height: 14px;\r\n  cursor: pointer;\r\n  cursor: -webkit-grab;\r\n  margin-top: -5px;\r\n  cursor: grab;\r\n  border-radius: 50%;\r\n  border: solid 2px #46be8a;\r\n  background-color: #fff;\r\n  -ms-touch-action: pan-x;\r\n  touch-action: pan-x;\r\n}\r\n.rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\r\n  border-color: #92d275;\r\n  box-shadow: 0 0 0 5px #92d275;\r\n}\r\n.rc-slider-handle:focus {\r\n  outline: none;\r\n}\r\n.rc-slider-handle-click-focused:focus {\r\n  border-color: #46be8a;\r\n  box-shadow: unset;\r\n}\r\n.rc-slider-handle:hover {\r\n  border-color: #92d275;\r\n}\r\n.rc-slider-handle:active {\r\n  border-color: #92d275;\r\n  box-shadow: 0 0 5px #92d275;\r\n  cursor: -webkit-grabbing;\r\n  cursor: grabbing;\r\n}\r\n.rc-slider-mark {\r\n  position: absolute;\r\n  top: 18px;\r\n  left: 0;\r\n  width: 100%;\r\n  font-size: 12px;\r\n}\r\n.rc-slider-mark-text {\r\n  position: absolute;\r\n  display: inline-block;\r\n  vertical-align: middle;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  color: #999;\r\n}\r\n.rc-slider-mark-text-active {\r\n  color: #666;\r\n}\r\n.rc-slider-step {\r\n  position: absolute;\r\n  width: 100%;\r\n  height: 4px;\r\n  background: transparent;\r\n}\r\n.rc-slider-dot {\r\n  position: absolute;\r\n  bottom: -2px;\r\n  margin-left: -4px;\r\n  width: 8px;\r\n  height: 8px;\r\n  border: 2px solid #e9e9e9;\r\n  background-color: #fff;\r\n  cursor: pointer;\r\n  border-radius: 50%;\r\n  vertical-align: middle;\r\n}\r\n.rc-slider-dot-active {\r\n  border-color: #46be8a;\r\n}\r\n.rc-slider-dot-reverse {\r\n  margin-left: 0;\r\n  margin-right: -4px;\r\n}\r\n.rc-slider-disabled {\r\n  background-color: #e9e9e9;\r\n}\r\n.rc-slider-disabled .rc-slider-track {\r\n  background-color: #ccc;\r\n}\r\n.rc-slider-disabled .rc-slider-handle,\r\n.rc-slider-disabled .rc-slider-dot {\r\n  border-color: #ccc;\r\n  box-shadow: none;\r\n  background-color: #fff;\r\n  cursor: not-allowed;\r\n}\r\n.rc-slider-disabled .rc-slider-mark-text,\r\n.rc-slider-disabled .rc-slider-dot {\r\n  cursor: not-allowed !important;\r\n}\r\n.rc-slider-vertical {\r\n  width: 14px;\r\n  height: 100%;\r\n  padding: 0 5px;\r\n}\r\n.rc-slider-vertical .rc-slider-rail {\r\n  height: 100%;\r\n  width: 4px;\r\n}\r\n.rc-slider-vertical .rc-slider-track {\r\n  left: 5px;\r\n  bottom: 0;\r\n  width: 4px;\r\n}\r\n.rc-slider-vertical .rc-slider-handle {\r\n  margin-left: -5px;\r\n  -ms-touch-action: pan-y;\r\n  touch-action: pan-y;\r\n}\r\n.rc-slider-vertical .rc-slider-mark {\r\n  top: 0;\r\n  left: 18px;\r\n  height: 100%;\r\n}\r\n.rc-slider-vertical .rc-slider-step {\r\n  height: 100%;\r\n  width: 4px;\r\n}\r\n.rc-slider-vertical .rc-slider-dot {\r\n  left: 2px;\r\n  margin-bottom: -4px;\r\n}\r\n.rc-slider-vertical .rc-slider-dot:first-child {\r\n  margin-bottom: -4px;\r\n}\r\n.rc-slider-vertical .rc-slider-dot:last-child {\r\n  margin-bottom: -4px;\r\n}\r\n.rc-slider-tooltip-zoom-down-enter,\r\n.rc-slider-tooltip-zoom-down-appear {\r\n  animation-duration: 0.3s;\r\n  animation-fill-mode: both;\r\n  display: block !important;\r\n  animation-play-state: paused;\r\n}\r\n.rc-slider-tooltip-zoom-down-leave {\r\n  animation-duration: 0.3s;\r\n  animation-fill-mode: both;\r\n  display: block !important;\r\n  animation-play-state: paused;\r\n}\r\n.rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\r\n.rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\r\n  animation-name: rcSliderTooltipZoomDownIn;\r\n  animation-play-state: running;\r\n}\r\n.rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\r\n  animation-name: rcSliderTooltipZoomDownOut;\r\n  animation-play-state: running;\r\n}\r\n.rc-slider-tooltip-zoom-down-enter,\r\n.rc-slider-tooltip-zoom-down-appear {\r\n  transform: scale(0, 0);\r\n  animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\r\n}\r\n.rc-slider-tooltip-zoom-down-leave {\r\n  animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\r\n}\r\n@keyframes rcSliderTooltipZoomDownIn {\r\n  0% {\r\n    opacity: 0;\r\n    transform-origin: 50% 100%;\r\n    transform: scale(0, 0);\r\n  }\r\n  100% {\r\n    transform-origin: 50% 100%;\r\n    transform: scale(1, 1);\r\n  }\r\n}\r\n@keyframes rcSliderTooltipZoomDownOut {\r\n  0% {\r\n    transform-origin: 50% 100%;\r\n    transform: scale(1, 1);\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n    transform-origin: 50% 100%;\r\n    transform: scale(0, 0);\r\n  }\r\n}\r\n.rc-slider-tooltip {\r\n  position: absolute;\r\n  left: -9999px;\r\n  top: -9999px;\r\n  visibility: visible;\r\n  box-sizing: border-box;\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n}\r\n.rc-slider-tooltip * {\r\n  box-sizing: border-box;\r\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\r\n}\r\n.rc-slider-tooltip-hidden {\r\n  display: none;\r\n}\r\n.rc-slider-tooltip-placement-top {\r\n  padding: 4px 0 8px 0;\r\n}\r\n.rc-slider-tooltip-inner {\r\n  padding: 6px 2px;\r\n  min-width: 24px;\r\n  height: 24px;\r\n  font-size: 12px;\r\n  line-height: 1;\r\n  color: #fff;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  background-color: #6c6c6c;\r\n  border-radius: 6px;\r\n  box-shadow: 0 0 4px #d9d9d9;\r\n}\r\n.rc-slider-tooltip-arrow {\r\n  position: absolute;\r\n  width: 0;\r\n  height: 0;\r\n  border-color: transparent;\r\n  border-style: solid;\r\n}\r\n.rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\r\n  bottom: 4px;\r\n  left: 50%;\r\n  margin-left: -4px;\r\n  border-width: 4px 4px 0;\r\n  border-top-color: #6c6c6c;\r\n}\r\n\r\n.dnm-video-cut-player {\r\n  transform: scale(1);\r\n  opacity: 1;\r\n  width: 100%;\r\n  transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.dnm-video-cut-root.is-editing .dnm-video-cut-player {\r\n  transform: scale(0.9);\r\n  opacity: 0.8;\r\n  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n.dnm-video-cut-range {\r\n  width: 100%;\r\n  position: relative;\r\n  bottom: 17px;\r\n}\r\n\r\n.dnm-video-cut-playing-cursor {\r\n  height: 20px;\r\n  width: 10px;\r\n  background-color: white;\r\n  border-radius: 10px;\r\n  margin-top: -3px;\r\n  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n.dnm-video-cut-playing-cursor-draggable-item {\r\n  width: 10px;\r\n  z-index: 2;\r\n  position: relative;\r\n}\r\n\r\n.dnm-video-cut-playing-cursor-draggable-item:hover {\r\n  cursor: grab;\r\n}\r\n\r\n.dnm-video-cut-playing-cursor-draggable-item:active {\r\n  cursor: -webkit-grabbing;\r\n  cursor: grabbing;\r\n}\r\n\r\n.dnm-video-cut-playing-cursor {\r\n  transform: scale(1);\r\n  transition: all 0.2s ease-in-out;\r\n}\r\n\r\n.dnm-video-cut-playing-cursor:hover {\r\n  transform: scale(1.3);\r\n}\r\n\r\n.dnm-video-cut-progress-container {\r\n  width: calc(100% - 35px);\r\n  display: inline-block;\r\n  margin-left: 15px;\r\n  margin-top: 10px;\r\n}\r\n\r\n.dnm-video-cut-play-icon {\r\n  width: 20px;\r\n  height: 20px;\r\n  display: inline-block;\r\n  position: relative;\r\n  bottom: 20px;\r\n  transform: scale(1);\r\n  transition: all 0.2s ease-in-out;\r\n  background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\r\n  border-radius: 100px;\r\n}\r\n\r\n.dnm-video-cut-play-icon svg {\r\n  color: white;\r\n  width: 10px;\r\n  position: relative;\r\n}\r\n\r\n.dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {\r\n  left: 5px;\r\n  top: 1px;\r\n}\r\n\r\n.dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {\r\n  left: 6px;\r\n  top: 1px;\r\n}\r\n\r\n.dnm-video-cut-play-icon:hover {\r\n  cursor: pointer;\r\n  transform: scale(1.2);\r\n  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\r\n}\r\n";
-  styleInject(css_248z);
-
   var Draggable = /*#__PURE__*/function (_React$Component) {
     _inherits(Draggable, _React$Component);
 
@@ -9667,6 +9637,11 @@
   }(React__default.Component);
   Draggable.propTypes = {
     className: PropTypes.string,
+    axis: PropTypes.oneOf(["x", "y"]),
+    position: PropTypes.shape({
+      xRatio: PropTypes.number,
+      yRatio: PropTypes.number
+    }),
     onDragStart: PropTypes.func,
     onDrag: PropTypes.func,
     onDragEnd: PropTypes.func

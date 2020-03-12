@@ -2,3 +2,4 @@
 .cache
 node_modules
 examples/video.mp4
+examples/dev
