@@ -9470,8 +9470,8 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       if (yAxis) currentY = position.currentY;
 
       _this.updateState({
-        currentX: currentX,
-        currentY: currentY
+        currentX: currentX || 0,
+        currentY: currentY || 0
       });
     });
 
@@ -9718,7 +9718,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var lastTarget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "in";
       if (!inPoint) inPoint = _this.props.inPoint;
       if (!outPoint) outPoint = _this.props.outPoint;
-      var maxDuration = _this.props.maxDuration;
+      var _this$props = _this.props,
+          maxDuration = _this$props.maxDuration,
+          minDuration = _this$props.minDuration;
       var videoDuration = _this.state.videoDuration;
       var max = maxDuration || videoDuration;
       if (max > videoDuration) max = videoDuration;
@@ -9727,6 +9729,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (outValue - inValue > max) {
         if (lastTarget === "in") outValue = inValue + max;else inValue = outValue - max;
+      } else if (outValue - inValue < minDuration) {
+        if (lastTarget === "in") outValue = inValue + minDuration;else inValue = outValue - minDuration;
       }
 
       if (inValue < 0) inValue = 0;
@@ -9815,10 +9819,10 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value, e, a) {
-      var _this$props = _this.props,
-          onRangeChange = _this$props.onRangeChange,
-          outPoint = _this$props.outPoint;
+    _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
+      var _this$props2 = _this.props,
+          onRangeChange = _this$props2.onRangeChange,
+          outPoint = _this$props2.outPoint;
       var lastTarget = value[1] !== outPoint ? "out" : "in";
 
       var _this$getFormatedValu2 = _this.getFormatedValues(value[0], value[1], lastTarget),
@@ -9889,10 +9893,12 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var _this$state2 = this.state,
           videoDuration = _this$state2.videoDuration,
           isEditing = _this$state2.isEditing;
-      var _this$props2 = this.props,
-          inPoint = _this$props2.inPoint,
-          outPoint = _this$props2.outPoint,
-          src = _this$props2.src;
+      var _this$props3 = this.props,
+          inPoint = _this$props3.inPoint,
+          outPoint = _this$props3.outPoint,
+          src = _this$props3.src,
+          minDuration = _this$props3.minDuration,
+          maxDuration = _this$props3.maxDuration;
 
       if (!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
         this.handleRangeChange([inPoint, outPoint]);
@@ -9905,7 +9911,12 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
         var time;
-        if (prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) time = prevProps.inPoint > inPoint ? inPoint : outPoint;else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
+
+        if (prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
+          var max = maxDuration || videoDuration;
+          if (Math.abs(outPoint - inPoint - minDuration) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
+        } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
+
         this.seedVideoTo(time);
       }
     }
@@ -9943,9 +9954,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           isEditing = _this$state3.isEditing,
           playCursorPosition = _this$state3.playCursorPosition,
           isPlaying = _this$state3.isPlaying;
-      var _this$props3 = this.props,
-          src = _this$props3.src,
-          classes = _this$props3.classes;
+      var _this$props4 = this.props,
+          src = _this$props4.src,
+          classes = _this$props4.classes;
       return React.createElement("div", {
         className: "dnm-video-cut-root ".concat(isEditing ? "is-editing" : "", " ").concat(isPlaying ? "is-playing" : "is-paused", " ").concat(classes.root || "")
       }, React.createElement("video", {
@@ -9992,13 +10003,15 @@ DnmVideoCut.propTypes = {
   src: PropTypes.string.isRequired,
   inPoint: PropTypes.number,
   outPoint: PropTypes.number,
-  maxDuration: PropTypes.number
+  maxDuration: PropTypes.number,
+  minDuration: PropTypes.number
 };
 DnmVideoCut.defaultProps = {
   classes: {},
   inPoint: 0,
   outPoint: 0,
-  maxDuration: 0
+  maxDuration: 0,
+  minDuration: 0
 };
 
 export default DnmVideoCut;

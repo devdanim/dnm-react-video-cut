@@ -28,6 +28,7 @@ class App extends React.Component {
                 outPoint={outPoint}
                 src={video}
                 maxDuration={10}
+                minDuration={4}
                 onRangeChange={this.handleRangeChange}
             />
         )

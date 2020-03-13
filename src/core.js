@@ -29,7 +29,7 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration, isEditing } = this.state;
-        const { inPoint, outPoint, src } = this.props;
+        const { inPoint, outPoint, src, minDuration, maxDuration } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint]);
         }
@@ -39,7 +39,11 @@ export default class DnmVideoCut extends React.Component {
         }
         if(isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
             let time;
-            if(prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) time = prevProps.inPoint > inPoint ? inPoint : outPoint;
+            if(prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
+                const max = maxDuration || videoDuration;
+                if(Math.abs(outPoint - inPoint - minDuration) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;
+                else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
+            }
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
             this.seedVideoTo(time);
         }
@@ -77,7 +81,7 @@ export default class DnmVideoCut extends React.Component {
     getFormatedValues = (inPoint, outPoint, lastTarget = "in") => {
         if(!inPoint) inPoint = this.props.inPoint;  
         if(!outPoint) outPoint = this.props.outPoint;
-        const { maxDuration } = this.props;
+        const { maxDuration, minDuration } = this.props;
         const { videoDuration } = this.state;
 
         let max = maxDuration || videoDuration;
@@ -89,6 +93,9 @@ export default class DnmVideoCut extends React.Component {
         if(outValue - inValue > max) {
             if(lastTarget === "in") outValue = inValue + max;
             else inValue = outValue - max;
+        } else if(outValue - inValue < minDuration) {
+            if(lastTarget === "in") outValue = inValue + minDuration;
+            else inValue = outValue - minDuration;
         }
         
         if(inValue < 0) inValue = 0;
@@ -156,7 +163,7 @@ export default class DnmVideoCut extends React.Component {
         })
     }
 
-    handleRangeChange = (value, e, a) => {
+    handleRangeChange = (value) => {
         const { onRangeChange, outPoint } = this.props;
         const lastTarget = value[1] !== outPoint ? "out" : "in";
         const { inValue, outValue } = this.getFormatedValues(value[0], value[1], lastTarget);
@@ -232,7 +239,8 @@ DnmVideoCut.propTypes = {
     src: PropTypes.string.isRequired,
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
-    maxDuration: PropTypes.number
+    maxDuration: PropTypes.number,
+    minDuration: PropTypes.number
 };
 
 DnmVideoCut.defaultProps = {
@@ -240,4 +248,5 @@ DnmVideoCut.defaultProps = {
     inPoint: 0,
     outPoint: 0,
     maxDuration: 0,
+    minDuration: 0
 };

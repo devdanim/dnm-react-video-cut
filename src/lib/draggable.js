@@ -124,7 +124,7 @@ export default class Draggable extends React.Component {
         const { xAxis, yAxis } = this.getAxis();
         if(xAxis) currentX = position.currentX;
         if(yAxis) currentY = position.currentY;
-        this.updateState({ currentX, currentY });
+        this.updateState({ currentX: currentX || 0, currentY: currentY || 0 });
     }
 
     getContainerDimensions = () => {
