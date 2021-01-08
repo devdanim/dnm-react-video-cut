@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -44,7 +44,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "npm-login-noninteractive": "^0.1.4",
-    "onchange": "^5.2.0",
+    "onchange": "^7.1.0",
     "parcel-bundler": "^1.12.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -53,9 +53,10 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-postcss": "^2.0.3",
-    "rollup-plugin-terser": "^4.0.4"
+    "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.22",
     "rc-slider": "^9.2.2"
   }
 }

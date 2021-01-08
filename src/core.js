@@ -1,9 +1,14 @@
 import React from 'react';
+// this comment tells babel to convert jsx to calls to a function called jsx instead of React.createElement
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
+import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
+
 
 const Range = Slider.Range;
 export default class DnmVideoCut extends React.Component {
@@ -45,7 +50,7 @@ export default class DnmVideoCut extends React.Component {
                 else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
             }
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
-            this.seedVideoTo(time);
+            this.seekVideoTo(time);
         }
 
     }
@@ -72,8 +77,7 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    seedVideoTo(time) {
-        console.log(time);
+    seekVideoTo(time) {
         const video = this.videoRef.current;
         if(video) video.currentTime = time;
     }
@@ -177,7 +181,7 @@ export default class DnmVideoCut extends React.Component {
 
     handleAfterRangeChange = () => {
         const { playCursorPosition, videoDuration } = this.state;
-        this.seedVideoTo(playCursorPosition.xRatio * videoDuration);
+        this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
         this.setState({ isEditing: false });
     }
 
@@ -188,7 +192,7 @@ export default class DnmVideoCut extends React.Component {
     handlePlayCursorDrag = (position) => {
         const { xRatio } = position;
         const { videoDuration } = this.state;
-        this.seedVideoTo(videoDuration * xRatio);
+        this.seekVideoTo(videoDuration * xRatio);
         this.setState({ playCursorPosition: position });
     }
 
@@ -198,31 +202,33 @@ export default class DnmVideoCut extends React.Component {
         const { src, classes } = this.props;
 
         return (
-            <div className={`dnm-video-cut-root ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"} ${classes.root || ""}`}>
-                <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} />
-                <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
-                    {isPlaying ? <PauseIcon /> : <PlayIcon /> }
-                </div>
-                <div className="dnm-video-cut-progress-container">
-                    <Draggable 
-                        className="dnm-video-cut-playing-cursor-draggable-item"
-                        axis="x" 
-                        onDrag={this.handlePlayCursorDrag}
-                        onDragStart={this.pauseVideo}
-                        position={playCursorPosition}
-                    >
-                        <div className="dnm-video-cut-playing-cursor" />
-                    </Draggable>
-                    <Range 
-                        className={`dnm-video-cut-range ${classes.range || ""}`}
-                        min={0}
-                        max={videoDuration || 0}
-                        step={.05}
-                        value={[inValue, outValue]} 
-                        onChange={this.handleRangeChange}
-                        onBeforeChange={this.handleBeforeRangeChange}
-                        onAfterChange={this.handleAfterRangeChange}
-                    />
+            <div css={css`${styles}`}> 
+                <div className={`dnm-video-cut-root ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"} ${classes.root || ""}`}>
+                    <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} />
+                    <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
+                        {isPlaying ? <PauseIcon /> : <PlayIcon /> }
+                    </div>
+                    <div className="dnm-video-cut-progress-container">
+                        <Draggable 
+                            className="dnm-video-cut-playing-cursor-draggable-item"
+                            axis="x" 
+                            onDrag={this.handlePlayCursorDrag}
+                            onDragStart={this.pauseVideo}
+                            position={playCursorPosition}
+                        >
+                            <div className="dnm-video-cut-playing-cursor" />
+                        </Draggable>
+                        <Range 
+                            className={`dnm-video-cut-range ${classes.range || ""}`}
+                            min={0}
+                            max={videoDuration || 0}
+                            step={.05}
+                            value={[inValue, outValue]} 
+                            onChange={this.handleRangeChange}
+                            onBeforeChange={this.handleBeforeRangeChange}
+                            onAfterChange={this.handleAfterRangeChange}
+                        />
+                    </div>
                 </div>
             </div>
         );
