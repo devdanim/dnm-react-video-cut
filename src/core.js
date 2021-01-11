@@ -1,7 +1,7 @@
 import React from 'react';
 // this comment tells babel to convert jsx to calls to a function called jsx instead of React.createElement
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
 import styles from './css/styles';
@@ -157,14 +157,12 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    handleLoad = () => {
+    handleLoadedData = () => {
         const video = this.videoRef.current;
         if(video) {
             const { inPoint } = this.props;
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
-            video.addEventListener('loadedmetadata', () => {
-                this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
-            });
+            this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
         }
     }
 
@@ -204,7 +202,7 @@ export default class DnmVideoCut extends React.Component {
 
         return (
             <div css={css`${styles}`}> 
-                <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoad} />
+                <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoadedData} />
                 <div className={`dnm-video-cut-root ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"} ${classes.root || ""}`}>
                     <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                         {isPlaying ? <PauseIcon /> : <PlayIcon /> }

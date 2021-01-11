@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -56,7 +56,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.22",
+    "@emotion/react": "^11.1.4",
     "lodash-es": "^4.17.20",
     "rc-slider": "^9.2.2"
   }
