@@ -11,7 +11,7 @@ const external = {
         'react',
         'react-dom',
         'prop-types',
-        'lodash-es/debounce',
+        'lodash-es/throttle',
     ],
     umd: ['react', 'react-dom', 'prop-types']
 };

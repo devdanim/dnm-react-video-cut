@@ -156,10 +156,10 @@ export default css`
     left: 2px;
     margin-bottom: -4px;
   }
-  .rc-slider-vertical .rc-slider-dot:first-child {
+  .rc-slider-vertical .rc-slider-dot:first-of-type {
     margin-bottom: -4px;
   }
-  .rc-slider-vertical .rc-slider-dot:last-child {
+  .rc-slider-vertical .rc-slider-dot:last-of-type {
     margin-bottom: -4px;
   }
   .rc-slider-tooltip-zoom-down-enter,
