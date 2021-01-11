@@ -31,9 +31,11 @@ export default class DnmVideoCut extends React.Component {
     componentDidMount() {
         const { inPoint } = this.props;
         this.getStateFromProps();
-        if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
+        if (typeof inPoint !== "undefined") {
+            this.seekVideoTo(inPoint);
+            this.updatePlayCursorPosition();
+        }
         window.addEventListener("keydown", this.handleKeyPress);
-        window.addEventListener('resize', this.onWindowResize);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -61,7 +63,6 @@ export default class DnmVideoCut extends React.Component {
 
     componentWillUnmount = () => {
         window.removeEventListener("keydown", this.handleKeyPress);
-        window.removeEventListener('resize', this.onWindowResize);
     }
 
 
@@ -82,9 +83,10 @@ export default class DnmVideoCut extends React.Component {
     }
 
     _seekVideoTo(time) {
-        console.log("Seek video to", time);
-        const video = this.videoRef.current;
-        if(video) video.currentTime = time;
+        if (!isNaN(time)) {
+            const video = this.videoRef.current;
+            if(video) video.currentTime = time;
+        }
     }
 
     getFormatedValues = (inPoint, outPoint, lastTarget = "in") => {

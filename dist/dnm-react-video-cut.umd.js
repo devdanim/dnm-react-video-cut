@@ -11277,312 +11277,6 @@
   }
   var styles = css(_templateObject());
 
-  var Draggable = /*#__PURE__*/function (_React$Component) {
-    _inherits(Draggable, _React$Component);
-
-    function Draggable(props) {
-      var _this;
-
-      _classCallCheck(this, Draggable);
-
-      _this = _possibleConstructorReturn(this, _getPrototypeOf(Draggable).call(this, props));
-
-      _defineProperty(_assertThisInitialized(_this), "handleDragStart", function (e) {
-        if (e.type === "touchstart") {
-          _this.initialX = e.touches[0].clientX - _this.xOffset;
-          _this.initialY = e.touches[0].clientY - _this.yOffset;
-        } else {
-          _this.initialX = e.clientX - _this.xOffset;
-          _this.initialY = e.clientY - _this.yOffset;
-        }
-
-        if (e.target === _this.draggableRef.current || _this.draggableRef.current.contains(e.target)) {
-          var onDragStart = _this.props.onDragStart;
-          if (onDragStart) onDragStart();
-          _this.active = true;
-        }
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleDrag", function (e) {
-        if (_this.active) {
-          e.preventDefault();
-          var currentX, currentY;
-
-          if (e.type === "touchmove") {
-            currentX = e.touches[0].clientX - _this.initialX;
-            currentY = e.touches[0].clientY - _this.initialY;
-          } else {
-            currentX = e.clientX - _this.initialX;
-            currentY = e.clientY - _this.initialY;
-          }
-
-          var forceDragEnd = false;
-          var xMargin = 50;
-          var yMargin = 50;
-
-          var _this$getContainerDim = _this.getContainerDimensions(),
-              containerWidth = _this$getContainerDim.containerWidth,
-              containerHeight = _this$getContainerDim.containerHeight;
-
-          var _this$getAxis = _this.getAxis(),
-              xAxis = _this$getAxis.xAxis,
-              yAxis = _this$getAxis.yAxis;
-
-          if (currentX > containerWidth) {
-            if (xAxis && currentX + xMargin > containerWidth) forceDragEnd = true;
-            currentX = containerWidth;
-          } else if (currentX < 0) {
-            if (xAxis && currentX < -xMargin) forceDragEnd = true;
-            currentX = 0;
-          }
-
-          if (currentY > containerHeight) {
-            if (yAxis && currentY + yMargin > containerHeight) forceDragEnd = true;
-            currentY = containerHeight;
-          } else if (currentY < 0) {
-            if (yAxis && currentY < -yMargin) forceDragEnd = true;
-            currentY = 0;
-          }
-
-          if (forceDragEnd === true) _this.handleDragEnd();
-          _this.xOffset = currentX;
-          _this.yOffset = currentY;
-
-          _this.updateState({
-            currentX: currentX,
-            currentXRatio: currentX / containerWidth,
-            currentY: currentY,
-            currentYRatio: currentY / containerHeight
-          });
-        }
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleDragEnd", function (e) {
-        var _this$getCurrentPosit = _this.getCurrentPosition(),
-            currentX = _this$getCurrentPosit.currentX,
-            currentY = _this$getCurrentPosit.currentY;
-
-        _this.initialX = currentX;
-        _this.initialY = currentY;
-        _this.active = false;
-        var onDragEnd = _this.props.onDragEnd;
-        if (onDragEnd) onDragEnd();
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "handleWindowResize", function () {
-        var position = _this.getCurrentPositionWithPercent();
-
-        var _this$getAxis2 = _this.getAxis(),
-            xAxis = _this$getAxis2.xAxis,
-            yAxis = _this$getAxis2.yAxis;
-
-        var currentX = xAxis ? position.currentX : 0;
-        var currentY = yAxis ? position.currentY : 0;
-
-        _this.updateState({
-          currentX: currentX,
-          currentY: currentY
-        });
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "getContainerDimensions", function () {
-        var containerWidth = _this.container ? _this.container.clientWidth - _this.draggableRef.current.clientWidth : 0;
-        var containerHeight = _this.container ? _this.container.clientHeight - _this.draggableRef.current.clientHeight : 0;
-        return {
-          containerWidth: containerWidth,
-          containerHeight: containerHeight
-        };
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "getCurrentPositionWithPercent", function () {
-        var _this$getCurrentPosit2 = _this.getCurrentPosition(),
-            currentXRatio = _this$getCurrentPosit2.currentXRatio,
-            currentYRatio = _this$getCurrentPosit2.currentYRatio;
-
-        var _this$getContainerDim2 = _this.getContainerDimensions(),
-            containerWidth = _this$getContainerDim2.containerWidth,
-            containerHeight = _this$getContainerDim2.containerHeight;
-
-        var currentX = currentXRatio * containerWidth;
-        var currentY = currentYRatio * containerHeight;
-        return {
-          currentX: currentX,
-          currentY: currentY
-        };
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "getAxis", function () {
-        var axis = _this.props.axis;
-        var xAxis = axis === "y" ? false : true;
-        var yAxis = axis === "x" ? false : true;
-        return {
-          xAxis: xAxis,
-          yAxis: yAxis
-        };
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "getCurrentPosition", function () {
-        var position = _this.props.position;
-
-        if (position) {
-          var xRatio = position.xRatio,
-              yRatio = position.yRatio;
-
-          var _this$getContainerDim3 = _this.getContainerDimensions(),
-              containerWidth = _this$getContainerDim3.containerWidth,
-              containerHeight = _this$getContainerDim3.containerHeight;
-
-          var currentX = xRatio * containerWidth;
-          var currentY = yRatio * containerHeight;
-          _this.xOffset = currentX;
-          _this.yOffset = currentY;
-          return {
-            currentX: currentX,
-            currentY: currentY,
-            currentXRatio: xRatio,
-            currentYRatio: yRatio
-          };
-        } else {
-          var _this$state = _this.state,
-              _currentX = _this$state.currentX,
-              _currentY = _this$state.currentY;
-          _this.xOffset = _currentX;
-          _this.yOffset = _currentY;
-          return _this.state;
-        }
-      });
-
-      _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
-        var _this$props = _this.props,
-            position = _this$props.position,
-            onDrag = _this$props.onDrag;
-        if (!position) _this.setState(state);else onDrag({
-          xRatio: state.currentXRatio,
-          yRatio: state.currentYRatio
-        });
-      });
-
-      _this.state = {
-        currentX: 0,
-        currentY: 0,
-        currentXRatio: 0,
-        currentYRatio: 0
-      };
-      _this.active = false;
-      _this.initialX = 0;
-      _this.initialY = 0;
-      _this.xOffset = 0;
-      _this.yOffset = 0;
-      _this.draggableRef = React__default.createRef();
-      return _this;
-    }
-
-    _createClass(Draggable, [{
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        this.container = ReactDOM__default.findDOMNode(this).parentNode;
-        this.container.addEventListener("touchstart", this.handleDragStart, false);
-        this.container.addEventListener("touchend", this.handleDragEnd, false);
-        this.container.addEventListener("touchmove", this.handleDrag, false);
-        this.container.addEventListener("mousedown", this.handleDragStart, false);
-        this.container.addEventListener("mouseup", this.handleDragEnd, false);
-        this.container.addEventListener("mousemove", this.handleDrag, false);
-        window.addEventListener("resize", this.handleWindowResize, false);
-      }
-    }, {
-      key: "componentWillUnmount",
-      value: function componentWillUnmount() {
-        this.container.removeEventListener("touchstart", this.handleDragStart);
-        this.container.removeEventListener("touchend", this.handleDragEnd);
-        this.container.removeEventListener("touchmove", this.handleDrag);
-        this.container.removeEventListener("mousedown", this.handleDragStart);
-        this.container.removeEventListener("mouseup", this.handleDragEnd);
-        this.container.removeEventListener("mousemove", this.handleDrag);
-        window.removeEventListener("resize", this.handleWindowResize, false);
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        var _this$getCurrentPosit3 = this.getCurrentPosition(),
-            currentX = _this$getCurrentPosit3.currentX,
-            currentY = _this$getCurrentPosit3.currentY;
-
-        var className = this.props.className;
-
-        var _this$getAxis3 = this.getAxis(),
-            xAxis = _this$getAxis3.xAxis,
-            yAxis = _this$getAxis3.yAxis;
-
-        return React__default.createElement("div", {
-          ref: this.draggableRef,
-          style: {
-            transform: "translate3d(".concat(xAxis ? currentX : 0, "px, ").concat(yAxis ? currentY : 0, "px, 0)")
-          },
-          className: "react-draggable ".concat(className || "")
-        }, this.props.children);
-      }
-    }]);
-
-    return Draggable;
-  }(React__default.Component);
-  Draggable.propTypes = {
-    className: PropTypes.string,
-    axis: PropTypes.oneOf(["x", "y"]),
-    position: PropTypes.shape({
-      xRatio: PropTypes.number,
-      yRatio: PropTypes.number
-    }),
-    onDragStart: PropTypes.func,
-    onDrag: PropTypes.func,
-    onDragEnd: PropTypes.func
-  };
-
-  var PlayIcon = /*#__PURE__*/function (_React$Component) {
-    _inherits(PlayIcon, _React$Component);
-
-    function PlayIcon() {
-      _classCallCheck(this, PlayIcon);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(PlayIcon).apply(this, arguments));
-    }
-
-    _createClass(PlayIcon, [{
-      key: "render",
-      value: function render() {
-        return React__default.createElement("svg", {
-          viewBox: "0 0 448 512"
-        }, React__default.createElement("path", {
-          d: "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
-        }));
-      }
-    }]);
-
-    return PlayIcon;
-  }(React__default.Component);
-
-  var PauseIcon = /*#__PURE__*/function (_React$Component) {
-    _inherits(PauseIcon, _React$Component);
-
-    function PauseIcon() {
-      _classCallCheck(this, PauseIcon);
-
-      return _possibleConstructorReturn(this, _getPrototypeOf(PauseIcon).apply(this, arguments));
-    }
-
-    _createClass(PauseIcon, [{
-      key: "render",
-      value: function render() {
-        return React__default.createElement("svg", {
-          viewBox: "0 0 448 512"
-        }, React__default.createElement("path", {
-          d: "M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"
-        }));
-      }
-    }]);
-
-    return PauseIcon;
-  }(React__default.Component);
-
   /** Detect free variable `global` from Node.js. */
   var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
 
@@ -29546,6 +29240,313 @@
     lodash.prototype[symIterator$1] = seq.toIterator;
   }
 
+  var Draggable = /*#__PURE__*/function (_React$Component) {
+    _inherits(Draggable, _React$Component);
+
+    function Draggable(props) {
+      var _this;
+
+      _classCallCheck(this, Draggable);
+
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(Draggable).call(this, props));
+
+      _defineProperty(_assertThisInitialized(_this), "handleDragStart", function (e) {
+        if (e.type === "touchstart") {
+          _this.initialX = e.touches[0].clientX - _this.xOffset;
+          _this.initialY = e.touches[0].clientY - _this.yOffset;
+        } else {
+          _this.initialX = e.clientX - _this.xOffset;
+          _this.initialY = e.clientY - _this.yOffset;
+        }
+
+        if (e.target === _this.draggableRef.current || _this.draggableRef.current.contains(e.target)) {
+          var onDragStart = _this.props.onDragStart;
+          if (onDragStart) onDragStart();
+          _this.active = true;
+        }
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleDrag", function (e) {
+        if (_this.active) {
+          e.preventDefault();
+          var currentX, currentY;
+
+          if (e.type === "touchmove") {
+            currentX = e.touches[0].clientX - _this.initialX;
+            currentY = e.touches[0].clientY - _this.initialY;
+          } else {
+            currentX = e.clientX - _this.initialX;
+            currentY = e.clientY - _this.initialY;
+          }
+
+          var forceDragEnd = false;
+          var xMargin = 50;
+          var yMargin = 50;
+
+          var _this$getContainerDim = _this.getContainerDimensions(),
+              containerWidth = _this$getContainerDim.containerWidth,
+              containerHeight = _this$getContainerDim.containerHeight;
+
+          var _this$getAxis = _this.getAxis(),
+              xAxis = _this$getAxis.xAxis,
+              yAxis = _this$getAxis.yAxis;
+
+          if (currentX > containerWidth) {
+            if (xAxis && currentX + xMargin > containerWidth) forceDragEnd = true;
+            currentX = containerWidth;
+          } else if (currentX < 0) {
+            if (xAxis && currentX < -xMargin) forceDragEnd = true;
+            currentX = 0;
+          }
+
+          if (currentY > containerHeight) {
+            if (yAxis && currentY + yMargin > containerHeight) forceDragEnd = true;
+            currentY = containerHeight;
+          } else if (currentY < 0) {
+            if (yAxis && currentY < -yMargin) forceDragEnd = true;
+            currentY = 0;
+          }
+
+          if (forceDragEnd === true) _this.handleDragEnd();
+          _this.xOffset = currentX;
+          _this.yOffset = currentY;
+
+          _this.updateState({
+            currentX: currentX,
+            currentXRatio: currentX / containerWidth,
+            currentY: currentY,
+            currentYRatio: currentY / containerHeight
+          });
+        }
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleDragEnd", function (e) {
+        var _this$getCurrentPosit = _this.getCurrentPosition(),
+            currentX = _this$getCurrentPosit.currentX,
+            currentY = _this$getCurrentPosit.currentY;
+
+        _this.initialX = currentX;
+        _this.initialY = currentY;
+        _this.active = false;
+        var onDragEnd = _this.props.onDragEnd;
+        if (onDragEnd) onDragEnd();
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "_handleWindowResize", function () {
+        var position = _this.getCurrentPositionWithPercent();
+
+        var _this$getAxis2 = _this.getAxis(),
+            xAxis = _this$getAxis2.xAxis,
+            yAxis = _this$getAxis2.yAxis;
+
+        var currentX = xAxis ? position.currentX : 0;
+        var currentY = yAxis ? position.currentY : 0;
+
+        _this.updateState({
+          currentX: currentX,
+          currentY: currentY
+        });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "getContainerDimensions", function () {
+        var containerWidth = _this.container ? _this.container.clientWidth - _this.draggableRef.current.clientWidth : 0;
+        var containerHeight = _this.container ? _this.container.clientHeight - _this.draggableRef.current.clientHeight : 0;
+        return {
+          containerWidth: containerWidth,
+          containerHeight: containerHeight
+        };
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "getCurrentPositionWithPercent", function () {
+        var _this$getCurrentPosit2 = _this.getCurrentPosition(),
+            currentXRatio = _this$getCurrentPosit2.currentXRatio,
+            currentYRatio = _this$getCurrentPosit2.currentYRatio;
+
+        var _this$getContainerDim2 = _this.getContainerDimensions(),
+            containerWidth = _this$getContainerDim2.containerWidth,
+            containerHeight = _this$getContainerDim2.containerHeight;
+
+        var currentX = currentXRatio * containerWidth;
+        var currentY = currentYRatio * containerHeight;
+        return {
+          currentX: currentX,
+          currentY: currentY
+        };
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "getAxis", function () {
+        var axis = _this.props.axis;
+        var xAxis = axis === "y" ? false : true;
+        var yAxis = axis === "x" ? false : true;
+        return {
+          xAxis: xAxis,
+          yAxis: yAxis
+        };
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "getCurrentPosition", function () {
+        var position = _this.props.position;
+
+        if (position) {
+          var xRatio = position.xRatio,
+              yRatio = position.yRatio;
+
+          var _this$getContainerDim3 = _this.getContainerDimensions(),
+              containerWidth = _this$getContainerDim3.containerWidth,
+              containerHeight = _this$getContainerDim3.containerHeight;
+
+          var currentX = xRatio * containerWidth;
+          var currentY = yRatio * containerHeight;
+          _this.xOffset = currentX;
+          _this.yOffset = currentY;
+          return {
+            currentX: currentX,
+            currentY: currentY,
+            currentXRatio: xRatio,
+            currentYRatio: yRatio
+          };
+        } else {
+          var _this$state = _this.state,
+              _currentX = _this$state.currentX,
+              _currentY = _this$state.currentY;
+          _this.xOffset = _currentX;
+          _this.yOffset = _currentY;
+          return _this.state;
+        }
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
+        var _this$props = _this.props,
+            position = _this$props.position,
+            onDrag = _this$props.onDrag;
+        if (!position) _this.setState(state);else onDrag({
+          xRatio: state.currentXRatio,
+          yRatio: state.currentYRatio
+        });
+      });
+
+      _this.state = {
+        currentX: 0,
+        currentY: 0,
+        currentXRatio: 0,
+        currentYRatio: 0
+      };
+      _this.active = false;
+      _this.initialX = 0;
+      _this.initialY = 0;
+      _this.xOffset = 0;
+      _this.yOffset = 0;
+      _this.draggableRef = React__default.createRef();
+      _this.handleWindowResize = throttle$1(_this._handleWindowResize, 200);
+      return _this;
+    }
+
+    _createClass(Draggable, [{
+      key: "componentDidMount",
+      value: function componentDidMount() {
+        this.container = ReactDOM__default.findDOMNode(this).parentNode;
+        this.container.addEventListener("touchstart", this.handleDragStart, false);
+        this.container.addEventListener("touchend", this.handleDragEnd, false);
+        this.container.addEventListener("touchmove", this.handleDrag, false);
+        this.container.addEventListener("mousedown", this.handleDragStart, false);
+        this.container.addEventListener("mouseup", this.handleDragEnd, false);
+        this.container.addEventListener("mousemove", this.handleDrag, false);
+        window.addEventListener("resize", this.handleWindowResize, false);
+      }
+    }, {
+      key: "componentWillUnmount",
+      value: function componentWillUnmount() {
+        this.container.removeEventListener("touchstart", this.handleDragStart);
+        this.container.removeEventListener("touchend", this.handleDragEnd);
+        this.container.removeEventListener("touchmove", this.handleDrag);
+        this.container.removeEventListener("mousedown", this.handleDragStart);
+        this.container.removeEventListener("mouseup", this.handleDragEnd);
+        this.container.removeEventListener("mousemove", this.handleDrag);
+        window.removeEventListener("resize", this.handleWindowResize, false);
+      }
+    }, {
+      key: "render",
+      value: function render() {
+        var _this$getCurrentPosit3 = this.getCurrentPosition(),
+            currentX = _this$getCurrentPosit3.currentX,
+            currentY = _this$getCurrentPosit3.currentY;
+
+        var className = this.props.className;
+
+        var _this$getAxis3 = this.getAxis(),
+            xAxis = _this$getAxis3.xAxis,
+            yAxis = _this$getAxis3.yAxis;
+
+        return React__default.createElement("div", {
+          ref: this.draggableRef,
+          style: {
+            transform: "translate3d(".concat(xAxis ? currentX : 0, "px, ").concat(yAxis ? currentY : 0, "px, 0)")
+          },
+          className: "react-draggable ".concat(className || "")
+        }, this.props.children);
+      }
+    }]);
+
+    return Draggable;
+  }(React__default.Component);
+  Draggable.propTypes = {
+    className: PropTypes.string,
+    axis: PropTypes.oneOf(["x", "y"]),
+    position: PropTypes.shape({
+      xRatio: PropTypes.number,
+      yRatio: PropTypes.number
+    }),
+    onDragStart: PropTypes.func,
+    onDrag: PropTypes.func,
+    onDragEnd: PropTypes.func
+  };
+
+  var PlayIcon = /*#__PURE__*/function (_React$Component) {
+    _inherits(PlayIcon, _React$Component);
+
+    function PlayIcon() {
+      _classCallCheck(this, PlayIcon);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(PlayIcon).apply(this, arguments));
+    }
+
+    _createClass(PlayIcon, [{
+      key: "render",
+      value: function render() {
+        return React__default.createElement("svg", {
+          viewBox: "0 0 448 512"
+        }, React__default.createElement("path", {
+          d: "M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"
+        }));
+      }
+    }]);
+
+    return PlayIcon;
+  }(React__default.Component);
+
+  var PauseIcon = /*#__PURE__*/function (_React$Component) {
+    _inherits(PauseIcon, _React$Component);
+
+    function PauseIcon() {
+      _classCallCheck(this, PauseIcon);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(PauseIcon).apply(this, arguments));
+    }
+
+    _createClass(PauseIcon, [{
+      key: "render",
+      value: function render() {
+        return React__default.createElement("svg", {
+          viewBox: "0 0 448 512"
+        }, React__default.createElement("path", {
+          d: "M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"
+        }));
+      }
+    }]);
+
+    return PauseIcon;
+  }(React__default.Component);
+
   function _templateObject$1() {
     var data = _taggedTemplateLiteral(["", ""]);
 
@@ -29569,7 +29570,6 @@
 
       _defineProperty(_assertThisInitialized(_this), "componentWillUnmount", function () {
         window.removeEventListener("keydown", _this.handleKeyPress);
-        window.removeEventListener('resize', _this.onWindowResize);
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleKeyPress", function (event) {
@@ -29752,9 +29752,13 @@
       value: function componentDidMount() {
         var inPoint = this.props.inPoint;
         this.getStateFromProps();
-        if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
+
+        if (typeof inPoint !== "undefined") {
+          this.seekVideoTo(inPoint);
+          this.updatePlayCursorPosition();
+        }
+
         window.addEventListener("keydown", this.handleKeyPress);
-        window.addEventListener('resize', this.onWindowResize);
       }
     }, {
       key: "componentDidUpdate",
@@ -29807,9 +29811,10 @@
     }, {
       key: "_seekVideoTo",
       value: function _seekVideoTo(time) {
-        console.log("Seek video to", time);
-        var video = this.videoRef.current;
-        if (video) video.currentTime = time;
+        if (!isNaN(time)) {
+          var video = this.videoRef.current;
+          if (video) video.currentTime = time;
+        }
       }
     }, {
       key: "render",

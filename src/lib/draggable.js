@@ -3,6 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import { throttle } from 'lodash-es';
 
 export default class Draggable extends React.Component {
     constructor(props) {
@@ -19,6 +20,7 @@ export default class Draggable extends React.Component {
         this.xOffset = 0;
         this.yOffset = 0;
         this.draggableRef = React.createRef();
+        this.handleWindowResize = throttle(this._handleWindowResize, 200);
     }
 
     componentDidMount() {  
@@ -119,7 +121,7 @@ export default class Draggable extends React.Component {
         if(onDragEnd) onDragEnd();
     }
 
-    handleWindowResize = () => {
+    _handleWindowResize = () => {
         const position = this.getCurrentPositionWithPercent();
         const { xAxis, yAxis } = this.getAxis();
         const currentX = xAxis ? position.currentX : 0;
