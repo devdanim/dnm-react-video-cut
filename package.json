@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "@emotion/core": "^10.0.22",
+    "lodash-es": "^4.17.20",
     "rc-slider": "^9.2.2"
   }
 }

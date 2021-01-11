@@ -11,7 +11,7 @@ const external = {
         'react',
         'react-dom',
         'prop-types',
-        // for example: 'lodash-es/isEqual',
+        'lodash-es/debounce',
     ],
     umd: ['react', 'react-dom', 'prop-types']
 };

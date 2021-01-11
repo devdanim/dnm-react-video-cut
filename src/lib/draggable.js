@@ -122,9 +122,9 @@ export default class Draggable extends React.Component {
     handleWindowResize = () => {
         const position = this.getCurrentPositionWithPercent();
         const { xAxis, yAxis } = this.getAxis();
-        if(xAxis) currentX = position.currentX;
-        if(yAxis) currentY = position.currentY;
-        this.updateState({ currentX: currentX || 0, currentY: currentY || 0 });
+        const currentX = xAxis ? position.currentX : 0;
+        const currentY = yAxis ? position.currentY : 0;
+        this.updateState({ currentX, currentY });
     }
 
     getContainerDimensions = () => {

@@ -8,6 +8,7 @@ import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
+import { debounce } from 'lodash-es';
 
 
 const Range = Slider.Range;
@@ -24,10 +25,13 @@ export default class DnmVideoCut extends React.Component {
             }
         }
         this.videoRef = React.createRef();
+        this.seekVideoTo = debounce(this._seekVideoTo, 100);
     }
 
     componentDidMount() {
+        const { inPoint } = this.props;
         this.getStateFromProps();
+        if (inPoint) this.seekVideoTo(inPoint);
         window.addEventListener("keydown", this.handleKeyPress);
         window.addEventListener('resize', this.onWindowResize);
     }
@@ -77,7 +81,7 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    seekVideoTo(time) {
+    _seekVideoTo(time) {
         const video = this.videoRef.current;
         if(video) video.currentTime = time;
     }
