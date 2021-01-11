@@ -29574,14 +29574,6 @@
         window.removeEventListener("keydown", _this.handleKeyPress);
       });
 
-      _defineProperty(_assertThisInitialized(_this), "handleKeyPress", function (event) {
-        if (event.keyCode === 32) {
-          event.preventDefault();
-
-          _this.toggleVideoAutoPlay();
-        }
-      });
-
       _defineProperty(_assertThisInitialized(_this), "getFormatedValues", function (inPoint, outPoint) {
         var lastTarget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "in";
         if (!inPoint) inPoint = _this.props.inPoint;
@@ -29687,6 +29679,30 @@
         });
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handleKeyPress", function (event) {
+        if (event.keyCode === 32) {
+          event.preventDefault();
+
+          _this.toggleVideoAutoPlay();
+        }
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleLoad", function () {
+        var video = _this.videoRef.current;
+
+        if (video) {
+          var inPoint = _this.props.inPoint;
+          if (typeof inPoint !== "undefined") _this.seekVideoTo(inPoint);
+          video.addEventListener('loadedmetadata', function () {
+            _this.setState({
+              videoDuration: video.duration
+            }, function () {
+              return _this.updatePlayCursorPosition();
+            });
+          });
+        }
+      });
+
       _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
         var _this$props2 = _this.props,
             onRangeChange = _this$props2.onRangeChange,
@@ -29752,14 +29768,6 @@
     _createClass(DnmVideoCut, [{
       key: "componentDidMount",
       value: function componentDidMount() {
-        var inPoint = this.props.inPoint;
-        this.getStateFromProps();
-
-        if (typeof inPoint !== "undefined") {
-          this.seekVideoTo(inPoint);
-          this.updatePlayCursorPosition();
-        }
-
         window.addEventListener("keydown", this.handleKeyPress);
       }
     }, {
@@ -29781,7 +29789,6 @@
 
         if (src !== prevProps.src) {
           this.pauseVideo();
-          this.getStateFromProps();
         }
 
         if (isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
@@ -29793,21 +29800,6 @@
           } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
 
           this.seekVideoTo(time);
-        }
-      }
-    }, {
-      key: "getStateFromProps",
-      value: function getStateFromProps() {
-        var _this2 = this;
-
-        var video = this.videoRef.current;
-
-        if (video) {
-          video.addEventListener('loadedmetadata', function () {
-            _this2.setState({
-              videoDuration: video.duration
-            });
-          });
         }
       }
     }, {
@@ -29835,15 +29827,16 @@
             classes = _this$props4.classes;
         return jsx("div", {
           css: css(_templateObject$1(), styles)
-        }, jsx("div", {
-          className: "dnm-video-cut-root ".concat(isEditing ? "is-editing" : "", " ").concat(isPlaying ? "is-playing" : "is-paused", " ").concat(classes.root || "")
         }, jsx("video", {
           className: "dnm-video-cut-player ".concat(classes.player || ""),
           src: "".concat(src),
           ref: this.videoRef,
           loop: true,
-          controls: false
+          controls: false,
+          onLoadedData: this.handleLoad
         }), jsx("div", {
+          className: "dnm-video-cut-root ".concat(isEditing ? "is-editing" : "", " ").concat(isPlaying ? "is-playing" : "is-paused", " ").concat(classes.root || "")
+        }, jsx("div", {
           className: "dnm-video-cut-play-icon",
           onClick: this.handleFreePlayClick
         }, isPlaying ? jsx(PauseIcon, null) : jsx(PlayIcon, null)), jsx("div", {

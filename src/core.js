@@ -29,12 +29,6 @@ export default class DnmVideoCut extends React.Component {
     }
 
     componentDidMount() {
-        const { inPoint } = this.props;
-        this.getStateFromProps();
-        if (typeof inPoint !== "undefined") {
-            this.seekVideoTo(inPoint);
-            this.updatePlayCursorPosition();
-        }
         window.addEventListener("keydown", this.handleKeyPress);
     }
 
@@ -46,7 +40,6 @@ export default class DnmVideoCut extends React.Component {
         }
         if(src !== prevProps.src) {
             this.pauseVideo();
-            this.getStateFromProps();
         }
         if(isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
             let time;
@@ -63,23 +56,6 @@ export default class DnmVideoCut extends React.Component {
 
     componentWillUnmount = () => {
         window.removeEventListener("keydown", this.handleKeyPress);
-    }
-
-
-    handleKeyPress = event => {
-        if(event.keyCode === 32) {
-            event.preventDefault();
-            this.toggleVideoAutoPlay();
-        }
-    }
-
-    getStateFromProps() {
-        const video = this.videoRef.current;
-        if(video) {
-            video.addEventListener('loadedmetadata', () => {
-                this.setState({ videoDuration: video.duration })
-            });
-        }
     }
 
     _seekVideoTo(time) {
@@ -174,6 +150,24 @@ export default class DnmVideoCut extends React.Component {
         })
     }
 
+    handleKeyPress = event => {
+        if(event.keyCode === 32) {
+            event.preventDefault();
+            this.toggleVideoAutoPlay();
+        }
+    }
+
+    handleLoad = () => {
+        const video = this.videoRef.current;
+        if(video) {
+            const { inPoint } = this.props;
+            if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
+            video.addEventListener('loadedmetadata', () => {
+                this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
+            });
+        }
+    }
+
     handleRangeChange = (value) => {
         const { onRangeChange, outPoint } = this.props;
         const lastTarget = value[1] !== outPoint ? "out" : "in";
@@ -210,8 +204,8 @@ export default class DnmVideoCut extends React.Component {
 
         return (
             <div css={css`${styles}`}> 
+                <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoad} />
                 <div className={`dnm-video-cut-root ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"} ${classes.root || ""}`}>
-                    <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} />
                     <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                         {isPlaying ? <PauseIcon /> : <PlayIcon /> }
                     </div>
