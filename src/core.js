@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 // this comment tells babel to convert jsx to calls to a function called jsx instead of React.createElement
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
@@ -8,6 +9,7 @@ import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
+import ZoomIcon from './lib/svg/zoom';
 import { throttle } from 'lodash-es';
 
 
@@ -21,12 +23,16 @@ export default class DnmVideoCut extends React.Component {
             isPlaying: false,
             rangeDisabled: true,
             forceCursorDragging: false,
+            zoomFactor: [0],
             playCursorPosition: {
                 xRatio: 0,
                 yRatio: 0,
+                currentX: 0,
+                currentY: 0,
             }
         }
         this.videoRef = React.createRef();
+        this.scrollable = React.createRef();
         this.seekVideoTo = throttle(this._seekVideoTo, 50);
     }
 
@@ -136,6 +142,12 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ isPlaying: false });
     }
 
+    scrollToCursor = () => {
+        const { playCursorPosition } = this.state;
+        const { currentX } = playCursorPosition;
+        this.scrollable.scrollLeft = currentX;
+    }
+
     updatePlayCursorPosition = (xRatio = null) => {
         if(xRatio === null) {
             const video = this.videoRef.current;
@@ -200,6 +212,8 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ playCursorPosition: position });
     }
 
+    handleZoomFactorChange = value => this.setState({ zoomFactor: value }, this.scrollToCursor);
+
     handleContainerMouseDown = (ev) => {
         ev.stopPropagation();
         const { target } = ev;
@@ -212,38 +226,58 @@ export default class DnmVideoCut extends React.Component {
 
     render() {
         const { inValue, outValue } = this.getFormatedValues();
-        const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging } = this.state;
+        const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
         const { src, classes, playerCursorWidth } = this.props;
 
         return (
             <div css={css`${styles}`}> 
-                <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoadedData} />
-                <div className={`dnm-video-cut-root ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"} ${classes.root || ""}`}>
-                    <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
-                        {isPlaying ? <PauseIcon /> : <PlayIcon /> }
-                    </div>
-                    <div className="dnm-video-cut-progress-container" onTouchStart={this.handleContainerMouseDown} onTouchEnd={this.handleContainerMouseUp} onMouseDown={this.handleContainerMouseDown} onMouseUp={this.handleContainerMouseUp}>
-                        <Draggable 
-                            className="dnm-video-cut-playing-cursor-draggable-item"
-                            axis="x" 
-                            forceDragging={forceCursorDragging}
-                            onDrag={this.handlePlayCursorDrag}
-                            onDragStart={this.pauseVideo}
-                            position={playCursorPosition}
-                            draggableWidth={playerCursorWidth}
-                        >
-                            <div className="dnm-video-cut-playing-cursor" />
-                        </Draggable>
-                        <Range 
-                            className={`dnm-video-cut-range ${classes.range || ""}`}
-                            min={0}
-                            max={videoDuration || 0}
-                            step={.05}
-                            value={[inValue, outValue]} 
-                            onChange={this.handleRangeChange}
-                            onBeforeChange={this.handleBeforeRangeChange}
-                            onAfterChange={this.handleAfterRangeChange}
-                        />
+                <div className={`dnm-video-cut-root ${classes.root || ""} ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
+                    <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoadedData} />
+                    <div>
+                        <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
+                            {isPlaying ? <PauseIcon /> : <PlayIcon /> }
+                        </div>
+                        <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
+                            <div className="dnm-video-cut-progress-container" style={{ width: `calc(${zoomFactor[0] + 100}% - 20px)` }} onTouchStart={this.handleContainerMouseDown} onTouchEnd={this.handleContainerMouseUp} onMouseDown={this.handleContainerMouseDown} onMouseUp={this.handleContainerMouseUp}>
+                                <Draggable 
+                                    className="dnm-video-cut-playing-cursor-draggable-item"
+                                    axis="x" 
+                                    forceDragging={forceCursorDragging}
+                                    onDrag={this.handlePlayCursorDrag}
+                                    onDragStart={this.pauseVideo}
+                                    position={playCursorPosition}
+                                    draggableWidth={playerCursorWidth}
+                                >
+                                    <div className="dnm-video-cut-playing-cursor" />
+                                </Draggable>
+                                <Range 
+                                    className={`dnm-video-cut-range ${classes.range || ""}`}
+                                    min={0}
+                                    max={videoDuration || 0}
+                                    step={.05}
+                                    value={[inValue, outValue]} 
+                                    onChange={this.handleRangeChange}
+                                    onBeforeChange={this.handleBeforeRangeChange}
+                                    onAfterChange={this.handleAfterRangeChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="dnm-video-cut-tools">
+                            <div className="dnm-video-cut-zoom">
+                                <Range 
+                                    className={`dnm-video-cut-zoom-range ${classes.zoomRange || ""}`}
+                                    min={0}
+                                    max={900}
+                                    step={.05}
+                                    value={zoomFactor} 
+                                    onChange={this.handleZoomFactorChange}
+                                />
+                                <div className="dnm-video-cut-zoom-icon">
+                                    <ZoomIcon />
+                                </div>
+                            </div>
+                            <div className="clearfix" />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -311,17 +311,26 @@ export default css`
   .dnm-video-cut-playing-cursor:hover {
     transform: scale(1.3);
   }
-  
-  .dnm-video-cut-progress-container {
-    width: calc(100% - 35px);
+
+  .dnm-video-cut-progress-scrollable-parent {
+    width: calc(100% - 45px);
     display: inline-block;
     margin-left: 15px;
-    margin-top: 10px;
+    margin-top: 5px;
+    padding-top: 10px;
+    overflow-x: scroll;
+  }
+
+  .dnm-video-cut-progress-container {
+    width: calc(500% - 20px);
+    margin-left: 10px;
+    padding-right: 10px;
+    height: 28px;
   }
   
   .dnm-video-cut-play-icon {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     display: inline-block;
     position: relative;
     bottom: 20px;
@@ -333,23 +342,59 @@ export default css`
   
   .dnm-video-cut-play-icon svg {
     color: white;
-    width: 10px;
+    width: 12px;
     position: relative;
   }
   
   .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {
-    left: 5px;
-    top: 1px;
+    left: 9px;
+    top: 8px; 
   }
   
   .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {
-    left: 6px;
-    top: 1px;
+    left: 10px;
+    top: 8px;
   }
   
   .dnm-video-cut-play-icon:hover {
     cursor: pointer;
     transform: scale(1.2);
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
-  }  
+  }
+
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .dnm-video-cut-tools {
+    margin-top: 5px;
+  }
+
+  .dnm-video-cut-zoom-icon {
+    width: 17px;
+  }
+  
+  .dnm-video-cut-zoom {
+    float: right;
+    width: 30%;
+    max-width: 200px;
+    display: inline-block;
+  }
+
+  .dnm-video-cut-zoom-icon {
+    width: 18px;
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .dnm-video-cut-zoom-range {
+    width: calc(100% - 28px);
+    display: inline-block;
+  }
+
+  .dnm-video-cut-zoom-icon svg {
+    color: rgb(168, 173, 181);
+  }
 `

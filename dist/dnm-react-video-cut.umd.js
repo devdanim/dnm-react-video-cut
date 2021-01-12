@@ -1,12 +1,12 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('prop-types'), require('react-dom')) :
-  typeof define === 'function' && define.amd ? define(['react', 'prop-types', 'react-dom'], factory) :
-  (global = global || self, global.DnmVideoCut = factory(global.React, global.PropTypes, global.ReactDOM));
-}(this, (function (React, PropTypes, ReactDOM) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom'), require('prop-types')) :
+  typeof define === 'function' && define.amd ? define(['react', 'react-dom', 'prop-types'], factory) :
+  (global = global || self, global.DnmVideoCut = factory(global.React, global.ReactDOM, global.PropTypes));
+}(this, (function (React, ReactDOM, PropTypes) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
-  PropTypes = PropTypes && Object.prototype.hasOwnProperty.call(PropTypes, 'default') ? PropTypes['default'] : PropTypes;
   var ReactDOM__default = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
+  PropTypes = PropTypes && Object.prototype.hasOwnProperty.call(PropTypes, 'default') ? PropTypes['default'] : PropTypes;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -11223,7 +11223,7 @@
   Slider$1.createSliderWithTooltip = createSliderWithTooltip;
 
   function _templateObject() {
-    var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: #ccc;\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: #ccc;\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n  \n  .dnm-video-cut-player {\n    transform: scale(1);\n    opacity: 1;\n    width: 100%;\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-root.is-editing .dnm-video-cut-player {\n    transform: scale(0.9);\n    opacity: 0.8;\n    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n  \n  .dnm-video-cut-progress-container {\n    width: calc(100% - 35px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 10px;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 20px;\n    height: 20px;\n    display: inline-block;\n    position: relative;\n    bottom: 20px;\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n  }\n  \n  .dnm-video-cut-play-icon svg {\n    color: white;\n    width: 10px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {\n    left: 5px;\n    top: 1px;\n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {\n    left: 6px;\n    top: 1px;\n  }\n  \n  .dnm-video-cut-play-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }  \n"]);
+    var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: #ccc;\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: #ccc;\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n  \n  .dnm-video-cut-player {\n    transform: scale(1);\n    opacity: 1;\n    width: 100%;\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-root.is-editing .dnm-video-cut-player {\n    transform: scale(0.9);\n    opacity: 0.8;\n    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n\n  .dnm-video-cut-progress-scrollable-parent {\n    width: calc(100% - 45px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 5px;\n    padding-top: 10px;\n    overflow-x: scroll;\n  }\n\n  .dnm-video-cut-progress-container {\n    width: calc(500% - 20px);\n    margin-left: 10px;\n    padding-right: 10px;\n    height: 28px;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 30px;\n    height: 30px;\n    display: inline-block;\n    position: relative;\n    bottom: 20px;\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n  }\n  \n  .dnm-video-cut-play-icon svg {\n    color: white;\n    width: 12px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {\n    left: 9px;\n    top: 8px; \n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {\n    left: 10px;\n    top: 8px;\n  }\n  \n  .dnm-video-cut-play-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }\n\n  .clearfix::after {\n    content: \"\";\n    clear: both;\n    display: table;\n  }\n\n  .dnm-video-cut-tools {\n    margin-top: 5px;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 17px;\n  }\n  \n  .dnm-video-cut-zoom {\n    float: right;\n    width: 30%;\n    max-width: 200px;\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 18px;\n    display: inline-block;\n    margin-left: 10px;\n  }\n\n  .dnm-video-cut-zoom-range {\n    width: calc(100% - 28px);\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon svg {\n    color: rgb(168, 173, 181);\n  }\n"]);
 
     _templateObject = function _templateObject() {
       return data;
@@ -29210,8 +29210,11 @@
         var _this$props = _this.props,
             draggableWidth = _this$props.draggableWidth,
             draggableHeight = _this$props.draggableHeight;
-        _this.initialX = _this.draggableRef.current.offsetLeft + (draggableWidth || 0);
-        _this.initialY = _this.draggableRef.current.offsetTop + (draggableHeight || 0);
+
+        var rect = _this.container.getBoundingClientRect();
+
+        _this.initialX = rect.left + (draggableWidth || 0) / 2;
+        _this.initialY = rect.top + (draggableHeight || 0) / 2;
 
         if (e.target === _this.draggableRef.current || _this.draggableRef.current.contains(e.target)) {
           var onDragStart = _this.props.onDragStart;
@@ -29297,8 +29300,21 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "getContainerDimensions", function () {
-        var containerWidth = _this.container ? _this.container.clientWidth - _this.draggableRef.current.clientWidth : 0;
-        var containerHeight = _this.container ? _this.container.clientHeight - _this.draggableRef.current.clientHeight : 0;
+        var containerWidth = 0;
+        var containerHeight = 0;
+
+        if (_this.container) {
+          var paddings = ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom"].map(function (p) {
+            return Math.round(getComputedStyle(_this.container)[p].replace("px", "") || 0);
+          });
+          containerWidth = _this.container.clientWidth - (paddings[0] + paddings[1]) - _this.draggableRef.current.clientWidth;
+          containerHeight = _this.container.clientHeight - (paddings[2] + paddings[3]) - _this.draggableRef.current.clientHeight;
+        }
+
+        console.log({
+          containerWidth: containerWidth,
+          containerHeight: containerHeight
+        });
         return {
           containerWidth: containerWidth,
           containerHeight: containerHeight
@@ -29490,6 +29506,30 @@
     return PauseIcon;
   }(React__default.Component);
 
+  var ZoomIcon = /*#__PURE__*/function (_React$Component) {
+    _inherits(ZoomIcon, _React$Component);
+
+    function ZoomIcon() {
+      _classCallCheck(this, ZoomIcon);
+
+      return _possibleConstructorReturn(this, _getPrototypeOf(ZoomIcon).apply(this, arguments));
+    }
+
+    _createClass(ZoomIcon, [{
+      key: "render",
+      value: function render() {
+        return React__default.createElement("svg", {
+          viewBox: "0 0 512 512"
+        }, React__default.createElement("path", {
+          fill: "currentColor",
+          d: "M304 192v32c0 6.6-5.4 12-12 12h-56v56c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-56h-56c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h56v-56c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v56h56c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"
+        }));
+      }
+    }]);
+
+    return ZoomIcon;
+  }(React__default.Component);
+
   function _templateObject$1() {
     var data = _taggedTemplateLiteral(["", ""]);
 
@@ -29600,6 +29640,12 @@
         });
       });
 
+      _defineProperty(_assertThisInitialized(_this), "scrollToCursor", function () {
+        var playCursorPosition = _this.state.playCursorPosition;
+        var currentX = playCursorPosition.currentX;
+        _this.scrollable.scrollLeft = currentX;
+      });
+
       _defineProperty(_assertThisInitialized(_this), "updatePlayCursorPosition", function () {
         var xRatio = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -29695,6 +29741,12 @@
         });
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handleZoomFactorChange", function (value) {
+        return _this.setState({
+          zoomFactor: value
+        }, _this.scrollToCursor);
+      });
+
       _defineProperty(_assertThisInitialized(_this), "handleContainerMouseDown", function (ev) {
         ev.stopPropagation();
         var target = ev.target;
@@ -29723,12 +29775,16 @@
         isPlaying: false,
         rangeDisabled: true,
         forceCursorDragging: false,
+        zoomFactor: [0],
         playCursorPosition: {
           xRatio: 0,
-          yRatio: 0
+          yRatio: 0,
+          currentX: 0,
+          currentY: 0
         }
       };
       _this.videoRef = React__default.createRef();
+      _this.scrollable = React__default.createRef();
       _this.seekVideoTo = throttle$1(_this._seekVideoTo, 50);
       return _this;
     }
@@ -29790,13 +29846,16 @@
             isEditing = _this$state3.isEditing,
             playCursorPosition = _this$state3.playCursorPosition,
             isPlaying = _this$state3.isPlaying,
-            forceCursorDragging = _this$state3.forceCursorDragging;
+            forceCursorDragging = _this$state3.forceCursorDragging,
+            zoomFactor = _this$state3.zoomFactor;
         var _this$props4 = this.props,
             src = _this$props4.src,
             classes = _this$props4.classes,
             playerCursorWidth = _this$props4.playerCursorWidth;
         return jsx("div", {
           css: css(_templateObject$1(), styles)
+        }, jsx("div", {
+          className: "dnm-video-cut-root ".concat(classes.root || "", " ").concat(isEditing ? "is-editing" : "", " ").concat(isPlaying ? "is-playing" : "is-paused")
         }, jsx("video", {
           className: "dnm-video-cut-player ".concat(classes.player || ""),
           src: "".concat(src),
@@ -29804,13 +29863,17 @@
           loop: true,
           controls: false,
           onLoadedData: this.handleLoadedData
-        }), jsx("div", {
-          className: "dnm-video-cut-root ".concat(isEditing ? "is-editing" : "", " ").concat(isPlaying ? "is-playing" : "is-paused", " ").concat(classes.root || "")
-        }, jsx("div", {
+        }), jsx("div", null, jsx("div", {
           className: "dnm-video-cut-play-icon",
           onClick: this.handleFreePlayClick
         }, isPlaying ? jsx(PauseIcon, null) : jsx(PlayIcon, null)), jsx("div", {
+          className: "dnm-video-cut-progress-scrollable-parent",
+          ref: this.scrollable
+        }, jsx("div", {
           className: "dnm-video-cut-progress-container",
+          style: {
+            width: "calc(".concat(zoomFactor[0] + 100, "% - 20px)")
+          },
           onTouchStart: this.handleContainerMouseDown,
           onTouchEnd: this.handleContainerMouseUp,
           onMouseDown: this.handleContainerMouseDown,
@@ -29834,7 +29897,22 @@
           onChange: this.handleRangeChange,
           onBeforeChange: this.handleBeforeRangeChange,
           onAfterChange: this.handleAfterRangeChange
-        }))));
+        }))), jsx("div", {
+          className: "dnm-video-cut-tools"
+        }, jsx("div", {
+          className: "dnm-video-cut-zoom"
+        }, jsx(Range$2, {
+          className: "dnm-video-cut-zoom-range ".concat(classes.zoomRange || ""),
+          min: 0,
+          max: 900,
+          step: .05,
+          value: zoomFactor,
+          onChange: this.handleZoomFactorChange
+        }), jsx("div", {
+          className: "dnm-video-cut-zoom-icon"
+        }, jsx(ZoomIcon, null))), jsx("div", {
+          className: "clearfix"
+        })))));
       }
     }]);
 

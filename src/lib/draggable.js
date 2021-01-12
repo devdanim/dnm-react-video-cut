@@ -45,8 +45,10 @@ export default class Draggable extends React.Component {
     handleDragStart = (e) => {
         const { draggableWidth, draggableHeight } = this.props;
 
-        this.initialX = this.draggableRef.current.offsetLeft + (draggableWidth || 0);
-        this.initialY = this.draggableRef.current.offsetTop + (draggableHeight || 0);
+        const rect = this.container.getBoundingClientRect();
+
+        this.initialX = rect.left + (draggableWidth || 0) / 2;
+        this.initialY = rect.top + (draggableHeight || 0) / 2;
 
         if (e.target === this.draggableRef.current || this.draggableRef.current.contains(e.target)) {
             const { onDragStart } = this.props;
@@ -80,8 +82,7 @@ export default class Draggable extends React.Component {
             if(currentX > containerWidth) {
                 if(xAxis && currentX + xMargin > containerWidth) forceDragEnd = true;
                 currentX = containerWidth;
-            }
-            else if(currentX < 0) {
+            } else if(currentX < 0) {
                 if(xAxis && currentX < -xMargin) forceDragEnd = true;
                 currentX = 0;
             }
@@ -122,8 +123,14 @@ export default class Draggable extends React.Component {
     }
 
     getContainerDimensions = () => {
-        const containerWidth = this.container ? this.container.clientWidth - this.draggableRef.current.clientWidth : 0;
-        const containerHeight = this.container ? this.container.clientHeight - this.draggableRef.current.clientHeight : 0;
+        let containerWidth = 0;
+        let containerHeight = 0;
+        if (this.container) {
+            const paddings = ["paddingLeft", "paddingRight", "paddingTop", "paddingBottom"].map(p => (Math.round(getComputedStyle(this.container)[p].replace("px", "") || 0)));
+            containerWidth = this.container.clientWidth - (paddings[0] + paddings[1]) - this.draggableRef.current.clientWidth;
+            containerHeight = this.container.clientHeight - (paddings[2] + paddings[3]) - this.draggableRef.current.clientHeight;
+        }
+        console.log({ containerWidth, containerHeight });
         return { containerWidth, containerHeight };
     }
 
