@@ -45,6 +45,40 @@
     return obj;
   }
 
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
   function _inherits(subClass, superClass) {
     if (typeof superClass !== "function" && superClass !== null) {
       throw new TypeError("Super expression must either be null or a function");
@@ -6485,9 +6519,9 @@
     didUpdate: PropTypes.func
   };
 
-  function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _defineProperty$2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -6663,7 +6697,7 @@
     return obj;
   }
 
-  function ownKeys$1(object, enumerableOnly) {
+  function ownKeys$2(object, enumerableOnly) {
     var keys = Object.keys(object);
 
     if (Object.getOwnPropertySymbols) {
@@ -6677,18 +6711,18 @@
     return keys;
   }
 
-  function _objectSpread2(target) {
+  function _objectSpread2$1(target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i] != null ? arguments[i] : {};
 
       if (i % 2) {
-        ownKeys$1(source, true).forEach(function (key) {
+        ownKeys$2(source, true).forEach(function (key) {
           _defineProperty$3(target, key, source[key]);
         });
       } else if (Object.getOwnPropertyDescriptors) {
         Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
       } else {
-        ownKeys$1(source).forEach(function (key) {
+        ownKeys$2(source).forEach(function (key) {
           Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
         });
       }
@@ -7946,7 +7980,7 @@
     var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight; // Provide default target point
 
     var points = [align.points[0], 'cc'];
-    return doAlign(el, tgtRegion, _objectSpread2({}, align, {
+    return doAlign(el, tgtRegion, _objectSpread2$1({}, align, {
       points: points
     }), pointInView);
   }
@@ -9769,9 +9803,9 @@
 
   function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
-  function ownKeys$2(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$2(source, true).forEach(function (key) { _defineProperty$4(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$2(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { _defineProperty$4(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _defineProperty$4(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -10165,9 +10199,9 @@
 
   function _typeof$5(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$5 = function _typeof(obj) { return typeof obj; }; } else { _typeof$5 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$5(obj); }
 
-  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { _defineProperty$5(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { _defineProperty$5(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _defineProperty$5(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -10992,9 +11026,9 @@
     }, typeof overlay === 'function' ? overlay() : overlay);
   };
 
-  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { _defineProperty$6(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { _defineProperty$6(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
   function _defineProperty$6(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -29173,13 +29207,11 @@
       _this = _possibleConstructorReturn(this, _getPrototypeOf(Draggable).call(this, props));
 
       _defineProperty(_assertThisInitialized(_this), "handleDragStart", function (e) {
-        if (e.type === "touchstart") {
-          _this.initialX = e.touches[0].clientX - _this.xOffset;
-          _this.initialY = e.touches[0].clientY - _this.yOffset;
-        } else {
-          _this.initialX = e.clientX - _this.xOffset;
-          _this.initialY = e.clientY - _this.yOffset;
-        }
+        var _this$props = _this.props,
+            draggableWidth = _this$props.draggableWidth,
+            draggableHeight = _this$props.draggableHeight;
+        _this.initialX = _this.draggableRef.current.offsetLeft + (draggableWidth || 0);
+        _this.initialY = _this.draggableRef.current.offsetTop + (draggableHeight || 0);
 
         if (e.target === _this.draggableRef.current || _this.draggableRef.current.contains(e.target)) {
           var onDragStart = _this.props.onDragStart;
@@ -29189,7 +29221,9 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleDrag", function (e) {
-        if (_this.active) {
+        var forceDragging = _this.props.forceDragging;
+
+        if (_this.active || forceDragging) {
           e.preventDefault();
           var currentX, currentY;
 
@@ -29202,7 +29236,7 @@
           }
 
           var forceDragEnd = false;
-          var xMargin = 50;
+          var xMargin = 5;
           var yMargin = 50;
 
           var _this$getContainerDim = _this.getContainerDimensions(),
@@ -29230,25 +29264,17 @@
           }
 
           if (forceDragEnd === true) _this.handleDragEnd();
-          _this.xOffset = currentX;
-          _this.yOffset = currentY;
 
           _this.updateState({
             currentX: currentX,
-            currentXRatio: currentX / containerWidth,
+            xRatio: currentX / containerWidth,
             currentY: currentY,
-            currentYRatio: currentY / containerHeight
+            yRatio: currentY / containerHeight
           });
         }
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleDragEnd", function (e) {
-        var _this$getCurrentPosit = _this.getCurrentPosition(),
-            currentX = _this$getCurrentPosit.currentX,
-            currentY = _this$getCurrentPosit.currentY;
-
-        _this.initialX = currentX;
-        _this.initialY = currentY;
         _this.active = false;
         var onDragEnd = _this.props.onDragEnd;
         if (onDragEnd) onDragEnd();
@@ -29280,16 +29306,16 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "getCurrentPositionWithPercent", function () {
-        var _this$getCurrentPosit2 = _this.getCurrentPosition(),
-            currentXRatio = _this$getCurrentPosit2.currentXRatio,
-            currentYRatio = _this$getCurrentPosit2.currentYRatio;
+        var _this$getCurrentPosit = _this.getCurrentPosition(),
+            xRatio = _this$getCurrentPosit.xRatio,
+            yRatio = _this$getCurrentPosit.yRatio;
 
         var _this$getContainerDim2 = _this.getContainerDimensions(),
             containerWidth = _this$getContainerDim2.containerWidth,
             containerHeight = _this$getContainerDim2.containerHeight;
 
-        var currentX = currentXRatio * containerWidth;
-        var currentY = currentYRatio * containerHeight;
+        var currentX = xRatio * containerWidth;
+        var currentY = yRatio * containerHeight;
         return {
           currentX: currentX,
           currentY: currentY
@@ -29319,45 +29345,36 @@
 
           var currentX = xRatio * containerWidth;
           var currentY = yRatio * containerHeight;
-          _this.xOffset = currentX;
-          _this.yOffset = currentY;
           return {
             currentX: currentX,
             currentY: currentY,
-            currentXRatio: xRatio,
-            currentYRatio: yRatio
+            xRatio: xRatio,
+            yRatio: yRatio
           };
         } else {
           var _this$state = _this.state,
               _currentX = _this$state.currentX,
               _currentY = _this$state.currentY;
-          _this.xOffset = _currentX;
-          _this.yOffset = _currentY;
           return _this.state;
         }
       });
 
       _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
-        var _this$props = _this.props,
-            position = _this$props.position,
-            onDrag = _this$props.onDrag;
-        if (!position) _this.setState(state);else onDrag({
-          xRatio: state.currentXRatio,
-          yRatio: state.currentYRatio
-        });
+        var _this$props2 = _this.props,
+            position = _this$props2.position,
+            onDrag = _this$props2.onDrag;
+        if (!position) _this.setState(state);else onDrag(_objectSpread2({}, position, {}, state));
       });
 
       _this.state = {
         currentX: 0,
         currentY: 0,
-        currentXRatio: 0,
-        currentYRatio: 0
+        xRatio: 0,
+        yRatio: 0
       };
       _this.active = false;
       _this.initialX = 0;
       _this.initialY = 0;
-      _this.xOffset = 0;
-      _this.yOffset = 0;
       _this.draggableRef = React__default.createRef();
       _this.handleWindowResize = throttle$1(_this._handleWindowResize, 200);
       return _this;
@@ -29389,9 +29406,9 @@
     }, {
       key: "render",
       value: function render() {
-        var _this$getCurrentPosit3 = this.getCurrentPosition(),
-            currentX = _this$getCurrentPosit3.currentX,
-            currentY = _this$getCurrentPosit3.currentY;
+        var _this$getCurrentPosit2 = this.getCurrentPosition(),
+            currentX = _this$getCurrentPosit2.currentX,
+            currentY = _this$getCurrentPosit2.currentY;
 
         var className = this.props.className;
 
@@ -29420,7 +29437,9 @@
     }),
     onDragStart: PropTypes.func,
     onDrag: PropTypes.func,
-    onDragEnd: PropTypes.func
+    onDragEnd: PropTypes.func,
+    draggableWidth: PropTypes.number,
+    draggableHeight: PropTypes.number
   };
 
   var PlayIcon = /*#__PURE__*/function (_React$Component) {
@@ -29625,19 +29644,23 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
-        var _this$props2 = _this.props,
-            onRangeChange = _this$props2.onRangeChange,
-            outPoint = _this$props2.outPoint;
-        var lastTarget = value[1] !== outPoint ? "out" : "in";
+        var rangeDisabled = _this.state.rangeDisabled;
 
-        var _this$getFormatedValu2 = _this.getFormatedValues(value[0], value[1], lastTarget),
-            inValue = _this$getFormatedValu2.inValue,
-            outValue = _this$getFormatedValu2.outValue;
+        if (!rangeDisabled) {
+          var _this$props2 = _this.props,
+              onRangeChange = _this$props2.onRangeChange,
+              outPoint = _this$props2.outPoint;
+          var lastTarget = value[1] !== outPoint ? "out" : "in";
 
-        onRangeChange([inValue, outValue]);
+          var _this$getFormatedValu2 = _this.getFormatedValues(value[0], value[1], lastTarget),
+              inValue = _this$getFormatedValu2.inValue,
+              outValue = _this$getFormatedValu2.outValue;
+
+          onRangeChange([inValue, outValue]);
+        }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "handleBeforeRangeChange", function () {
+      _defineProperty(_assertThisInitialized(_this), "handleBeforeRangeChange", function (ev, a) {
         _this.pauseVideo();
 
         _this.setState({
@@ -29672,10 +29695,34 @@
         });
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handleContainerMouseDown", function (ev) {
+        ev.stopPropagation();
+        var target = ev.target;
+
+        if (!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {
+          _this.setState({
+            rangeDisabled: true,
+            forceCursorDragging: true
+          });
+        } else _this.setState({
+          rangeDisabled: false,
+          forceCursorDragging: false
+        });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleContainerMouseUp", function () {
+        return _this.setState({
+          rangeDisabled: true,
+          forceCursorDragging: false
+        });
+      });
+
       _this.state = {
         videoDuration: 0,
         isEditing: false,
         isPlaying: false,
+        rangeDisabled: true,
+        forceCursorDragging: false,
         playCursorPosition: {
           xRatio: 0,
           yRatio: 0
@@ -29742,10 +29789,12 @@
             videoDuration = _this$state3.videoDuration,
             isEditing = _this$state3.isEditing,
             playCursorPosition = _this$state3.playCursorPosition,
-            isPlaying = _this$state3.isPlaying;
+            isPlaying = _this$state3.isPlaying,
+            forceCursorDragging = _this$state3.forceCursorDragging;
         var _this$props4 = this.props,
             src = _this$props4.src,
-            classes = _this$props4.classes;
+            classes = _this$props4.classes,
+            playerCursorWidth = _this$props4.playerCursorWidth;
         return jsx("div", {
           css: css(_templateObject$1(), styles)
         }, jsx("video", {
@@ -29761,13 +29810,19 @@
           className: "dnm-video-cut-play-icon",
           onClick: this.handleFreePlayClick
         }, isPlaying ? jsx(PauseIcon, null) : jsx(PlayIcon, null)), jsx("div", {
-          className: "dnm-video-cut-progress-container"
+          className: "dnm-video-cut-progress-container",
+          onTouchStart: this.handleContainerMouseDown,
+          onTouchEnd: this.handleContainerMouseUp,
+          onMouseDown: this.handleContainerMouseDown,
+          onMouseUp: this.handleContainerMouseUp
         }, jsx(Draggable, {
           className: "dnm-video-cut-playing-cursor-draggable-item",
           axis: "x",
+          forceDragging: forceCursorDragging,
           onDrag: this.handlePlayCursorDrag,
           onDragStart: this.pauseVideo,
-          position: playCursorPosition
+          position: playCursorPosition,
+          draggableWidth: playerCursorWidth
         }, jsx("div", {
           className: "dnm-video-cut-playing-cursor"
         })), jsx(Range$2, {
@@ -29796,14 +29851,16 @@
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
     maxDuration: PropTypes.number,
-    minDuration: PropTypes.number
+    minDuration: PropTypes.number,
+    draggableWidth: PropTypes.number
   };
   DnmVideoCut.defaultProps = {
     classes: {},
     inPoint: 0,
     outPoint: 0,
     maxDuration: 0,
-    minDuration: 0
+    minDuration: 0,
+    playerCursorWidth: 14
   };
 
   return DnmVideoCut;

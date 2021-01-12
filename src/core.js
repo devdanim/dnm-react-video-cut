@@ -19,6 +19,8 @@ export default class DnmVideoCut extends React.Component {
             videoDuration: 0,
             isEditing: false,
             isPlaying: false,
+            rangeDisabled: true,
+            forceCursorDragging: false,
             playCursorPosition: {
                 xRatio: 0,
                 yRatio: 0,
@@ -167,13 +169,16 @@ export default class DnmVideoCut extends React.Component {
     }
 
     handleRangeChange = (value) => {
-        const { onRangeChange, outPoint } = this.props;
-        const lastTarget = value[1] !== outPoint ? "out" : "in";
-        const { inValue, outValue } = this.getFormatedValues(value[0], value[1], lastTarget);
-        onRangeChange([inValue, outValue]);
+        const { rangeDisabled } = this.state;
+        if (!rangeDisabled) {
+            const { onRangeChange, outPoint } = this.props;
+            const lastTarget = value[1] !== outPoint ? "out" : "in";
+            const { inValue, outValue } = this.getFormatedValues(value[0], value[1], lastTarget);
+            onRangeChange([inValue, outValue]);
+        }
     }
 
-    handleBeforeRangeChange = () => {
+    handleBeforeRangeChange = (ev, a) => {
         this.pauseVideo();
         this.setState({ isEditing: true });
     }
@@ -195,10 +200,20 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ playCursorPosition: position });
     }
 
+    handleContainerMouseDown = (ev) => {
+        ev.stopPropagation();
+        const { target } = ev;
+        if(!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {
+            this.setState({ rangeDisabled: true, forceCursorDragging: true });
+        } else this.setState({ rangeDisabled: false, forceCursorDragging: false });
+    }
+
+    handleContainerMouseUp = () => this.setState({ rangeDisabled: true, forceCursorDragging: false });
+
     render() {
         const { inValue, outValue } = this.getFormatedValues();
-        const { videoDuration, isEditing, playCursorPosition, isPlaying } = this.state;
-        const { src, classes } = this.props;
+        const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging } = this.state;
+        const { src, classes, playerCursorWidth } = this.props;
 
         return (
             <div css={css`${styles}`}> 
@@ -207,13 +222,15 @@ export default class DnmVideoCut extends React.Component {
                     <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                         {isPlaying ? <PauseIcon /> : <PlayIcon /> }
                     </div>
-                    <div className="dnm-video-cut-progress-container">
+                    <div className="dnm-video-cut-progress-container" onTouchStart={this.handleContainerMouseDown} onTouchEnd={this.handleContainerMouseUp} onMouseDown={this.handleContainerMouseDown} onMouseUp={this.handleContainerMouseUp}>
                         <Draggable 
                             className="dnm-video-cut-playing-cursor-draggable-item"
                             axis="x" 
+                            forceDragging={forceCursorDragging}
                             onDrag={this.handlePlayCursorDrag}
                             onDragStart={this.pauseVideo}
                             position={playCursorPosition}
+                            draggableWidth={playerCursorWidth}
                         >
                             <div className="dnm-video-cut-playing-cursor" />
                         </Draggable>
@@ -245,7 +262,8 @@ DnmVideoCut.propTypes = {
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
     maxDuration: PropTypes.number,
-    minDuration: PropTypes.number
+    minDuration: PropTypes.number,
+    draggableWidth: PropTypes.number,
 };
 
 DnmVideoCut.defaultProps = {
@@ -253,5 +271,6 @@ DnmVideoCut.defaultProps = {
     inPoint: 0,
     outPoint: 0,
     maxDuration: 0,
-    minDuration: 0
+    minDuration: 0,
+    playerCursorWidth: 14,
 };

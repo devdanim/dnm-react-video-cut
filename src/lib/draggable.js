@@ -11,14 +11,12 @@ export default class Draggable extends React.Component {
         this.state = {
             currentX: 0,
             currentY: 0,
-            currentXRatio: 0,
-            currentYRatio: 0
+            xRatio: 0,
+            yRatio: 0
         }
         this.active = false;
         this.initialX = 0;
         this.initialY = 0;
-        this.xOffset = 0;
-        this.yOffset = 0;
         this.draggableRef = React.createRef();
         this.handleWindowResize = throttle(this._handleWindowResize, 200);
     }
@@ -45,13 +43,11 @@ export default class Draggable extends React.Component {
     }
 
     handleDragStart = (e) => {
-        if (e.type === "touchstart") {
-            this.initialX = e.touches[0].clientX - this.xOffset;
-            this.initialY = e.touches[0].clientY - this.yOffset;
-        } else {
-            this.initialX = e.clientX - this.xOffset;
-            this.initialY = e.clientY - this.yOffset;
-        }
+        const { draggableWidth, draggableHeight } = this.props;
+
+        this.initialX = this.draggableRef.current.offsetLeft + (draggableWidth || 0);
+        this.initialY = this.draggableRef.current.offsetTop + (draggableHeight || 0);
+
         if (e.target === this.draggableRef.current || this.draggableRef.current.contains(e.target)) {
             const { onDragStart } = this.props;
             if(onDragStart) onDragStart();
@@ -60,7 +56,8 @@ export default class Draggable extends React.Component {
     }
 
     handleDrag = (e) => {
-        if (this.active) {
+        const { forceDragging } = this.props;
+        if (this.active || forceDragging) {
             e.preventDefault();
 
             let currentX, currentY;
@@ -74,7 +71,7 @@ export default class Draggable extends React.Component {
             }
 
             let forceDragEnd = false;
-            const xMargin = 50;
+            const xMargin = 5;
             const yMargin = 50;
 
             const { containerWidth, containerHeight } = this.getContainerDimensions();
@@ -88,6 +85,7 @@ export default class Draggable extends React.Component {
                 if(xAxis && currentX < -xMargin) forceDragEnd = true;
                 currentX = 0;
             }
+
             
             if(currentY > containerHeight) {
                 if(yAxis && currentY + yMargin > containerHeight) forceDragEnd = true;
@@ -100,25 +98,19 @@ export default class Draggable extends React.Component {
 
             if(forceDragEnd === true) this.handleDragEnd();
 
-            this.xOffset = currentX;
-            this.yOffset = currentY;
-
             this.updateState({ 
                 currentX, 
-                currentXRatio: currentX / containerWidth, 
+                xRatio: currentX / containerWidth, 
                 currentY,
-                currentYRatio: currentY / containerHeight
-             });
+                yRatio: currentY / containerHeight
+            });
         }
     }
 
     handleDragEnd = (e) => {
-        const { currentX, currentY } = this.getCurrentPosition();
-        this.initialX = currentX;
-        this.initialY = currentY;
         this.active = false;
         const { onDragEnd } = this.props;
-        if(onDragEnd) onDragEnd();
+        if(onDragEnd) onDragEnd(); 
     }
 
     _handleWindowResize = () => {
@@ -136,10 +128,10 @@ export default class Draggable extends React.Component {
     }
 
     getCurrentPositionWithPercent = () => {
-        const { currentXRatio, currentYRatio } = this.getCurrentPosition();
+        const { xRatio, yRatio } = this.getCurrentPosition();
         const { containerWidth, containerHeight } = this.getContainerDimensions();
-        const currentX = currentXRatio * containerWidth;
-        const currentY = currentYRatio * containerHeight;
+        const currentX = xRatio * containerWidth;
+        const currentY = yRatio * containerHeight;
         return { currentX, currentY };
     }
 
@@ -157,27 +149,23 @@ export default class Draggable extends React.Component {
             const { containerWidth, containerHeight } = this.getContainerDimensions();    
             const currentX = xRatio * containerWidth;
             const currentY = yRatio * containerHeight;
-            this.xOffset = currentX;
-            this.yOffset = currentY;
             return {
                 currentX,
                 currentY,
-                currentXRatio: xRatio,
-                currentYRatio: yRatio,
+                xRatio: xRatio,
+                yRatio: yRatio,
             };
         }
         else {
             const { currentX, currentY } = this.state;
-            this.xOffset = currentX;
-            this.yOffset = currentY;
             return this.state;
         }
     }
 
     updateState = (state) => {
         const { position, onDrag } = this.props;
-        if(!position) this.setState(state);
-        else onDrag({ xRatio: state.currentXRatio, yRatio: state.currentYRatio });
+        if (!position) this.setState(state);
+        else onDrag({ ...position, ...state });
     }
 
     render() {
@@ -203,6 +191,8 @@ Draggable.propTypes = {
     onDragStart: PropTypes.func,
     onDrag: PropTypes.func,
     onDragEnd: PropTypes.func,
+    draggableWidth: PropTypes.number,
+    draggableHeight: PropTypes.number,
 };
 
 
