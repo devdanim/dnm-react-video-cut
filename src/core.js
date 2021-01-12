@@ -33,6 +33,7 @@ export default class DnmVideoCut extends React.Component {
         }
         this.videoRef = React.createRef();
         this.scrollable = React.createRef();
+        this.draggable = React.createRef();
         this.seekVideoTo = throttle(this._seekVideoTo, 50);
     }
 
@@ -121,7 +122,7 @@ export default class DnmVideoCut extends React.Component {
                 const time = video.currentTime;
                 if(time < inValue || time > outValue) video.currentTime = inValue;
             }
-            this.updatePlayCursorPosition();
+            this.updatePlayCursorPosition(null, true);
             setTimeout(() => this.monitorAutoplay(playInArea), 100);     
         }
     }
@@ -143,12 +144,17 @@ export default class DnmVideoCut extends React.Component {
     }
 
     scrollToCursor = () => {
-        const { playCursorPosition } = this.state;
+        const { playCursorPosition, zoomFactor } = this.state;
         const { currentX } = playCursorPosition;
-        this.scrollable.scrollLeft = currentX;
+        const scrollLeft = this.scrollable.current.scrollLeft;
+        const optimalScroll = currentX * (zoomFactor[0] + 100) / 100;
+        const { clientWidth } = this.scrollable.current;
+        // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
+        // if(scrollLeft > (optimalScroll - clientWidth) && scrollLeft < (optimalScroll + clientWidth)) this.scrollable.current.scrollLeft = optimalScroll;
     }
 
-    updatePlayCursorPosition = (xRatio = null) => {
+    updatePlayCursorPosition = (xRatio = null, autoScroll = false) => {
+        const { playCursorPosition } = this.state;
         if(xRatio === null) {
             const video = this.videoRef.current;
             const { videoDuration } = this.state;
@@ -156,11 +162,21 @@ export default class DnmVideoCut extends React.Component {
                 xRatio = video.currentTime / videoDuration;
             } else xRatio = 0;
         }
+        console.log("UPDATE FROM PARENT", {
+            xRatio,
+            currentX: (xRatio * playCursorPosition.currentX) / playCursorPosition.xRatio,
+            yRatio: 0,
+            currentY: 0,
+        });
         this.setState({
             playCursorPosition: {
                 xRatio,
-                yRatio: 0
+                currentX: (xRatio * playCursorPosition.currentX) / playCursorPosition.xRatio,
+                yRatio: 0,
+                currentY: 0,
             }
+        }, () => {
+            if (autoScroll === true) this.scrollToCursor();
         })
     }
 
@@ -209,10 +225,19 @@ export default class DnmVideoCut extends React.Component {
         const { xRatio } = position;
         const { videoDuration } = this.state;
         this.seekVideoTo(videoDuration * xRatio);
+        console.log("UPDATE DRAG", position);
         this.setState({ playCursorPosition: position });
     }
 
-    handleZoomFactorChange = value => this.setState({ zoomFactor: value }, this.scrollToCursor);
+    handleZoomFactorChange = value => {
+        const { zoomFactor, playCursorPosition } = this.state;
+        const { currentX } = playCursorPosition;
+        console.log("ZOOM", ((value[0] + 100) / (zoomFactor[0] + 100)) * currentX, currentX, value[0] + 100, zoomFactor[0] + 100);
+        this.setState({ zoomFactor: value, playCursorPosition: {
+            ...playCursorPosition,
+            currentX: ((value[0] + 100) / (zoomFactor[0] + 100)) * currentX,
+        } }, this.scrollToCursor);
+    }
 
     handleContainerMouseDown = (ev) => {
         ev.stopPropagation();
@@ -248,7 +273,7 @@ export default class DnmVideoCut extends React.Component {
                                     position={playCursorPosition}
                                     draggableWidth={playerCursorWidth}
                                 >
-                                    <div className="dnm-video-cut-playing-cursor" />
+                                    <div className="dnm-video-cut-playing-cursor" ref={this.draggable} />
                                 </Draggable>
                                 <Range 
                                     className={`dnm-video-cut-range ${classes.range || ""}`}

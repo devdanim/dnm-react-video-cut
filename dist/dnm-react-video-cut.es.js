@@ -29203,12 +29203,15 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
         if (onDragStart) onDragStart();
         _this.active = true;
       }
+
+      _this.lastMouseDown = new Date().getTime();
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDrag", function (e) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var forceDragging = _this.props.forceDragging;
 
-      if (_this.active || forceDragging) {
+      if (_this.active || forceDragging || force === true) {
         e.preventDefault();
         var currentX, currentY;
 
@@ -29263,6 +29266,7 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       _this.active = false;
       var onDragEnd = _this.props.onDragEnd;
       if (onDragEnd) onDragEnd();
+      if (new Date().getTime() - _this.lastMouseDown < 300) _this.handleDrag(e, true);
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleWindowResize", function () {
@@ -29293,10 +29297,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
         containerHeight = _this.container.clientHeight - (paddings[2] + paddings[3]) - _this.draggableRef.current.clientHeight;
       }
 
-      console.log({
-        containerWidth: containerWidth,
-        containerHeight: containerHeight
-      });
       return {
         containerWidth: containerWidth,
         containerHeight: containerHeight
@@ -29358,6 +29358,7 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
+      _this.lastMove = new Date().getTime();
       var _this$props2 = _this.props,
           position = _this$props2.position,
           onDrag = _this$props2.onDrag;
@@ -29590,7 +29591,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           if (time < inValue || time > outValue) video.currentTime = inValue;
         }
 
-        _this.updatePlayCursorPosition();
+        _this.updatePlayCursorPosition(null, true);
 
         setTimeout(function () {
           return _this.monitorAutoplay(playInArea);
@@ -29623,13 +29624,20 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "scrollToCursor", function () {
-      var playCursorPosition = _this.state.playCursorPosition;
+      var _this$state = _this.state,
+          playCursorPosition = _this$state.playCursorPosition,
+          zoomFactor = _this$state.zoomFactor;
       var currentX = playCursorPosition.currentX;
-      _this.scrollable.scrollLeft = currentX;
+      var scrollLeft = _this.scrollable.current.scrollLeft;
+      var optimalScroll = currentX * (zoomFactor[0] + 100) / 100;
+      var clientWidth = _this.scrollable.current.clientWidth; // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
+      // if(scrollLeft > (optimalScroll - clientWidth) && scrollLeft < (optimalScroll + clientWidth)) this.scrollable.current.scrollLeft = optimalScroll;
     });
 
     _defineProperty(_assertThisInitialized(_this), "updatePlayCursorPosition", function () {
       var xRatio = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      var autoScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var playCursorPosition = _this.state.playCursorPosition;
 
       if (xRatio === null) {
         var video = _this.videoRef.current;
@@ -29640,11 +29648,22 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         } else xRatio = 0;
       }
 
+      console.log("UPDATE FROM PARENT", {
+        xRatio: xRatio,
+        currentX: xRatio * playCursorPosition.currentX / playCursorPosition.xRatio,
+        yRatio: 0,
+        currentY: 0
+      });
+
       _this.setState({
         playCursorPosition: {
           xRatio: xRatio,
-          yRatio: 0
+          currentX: xRatio * playCursorPosition.currentX / playCursorPosition.xRatio,
+          yRatio: 0,
+          currentY: 0
         }
+      }, function () {
+        if (autoScroll === true) _this.scrollToCursor();
       });
     });
 
@@ -29697,9 +29716,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleAfterRangeChange", function () {
-      var _this$state = _this.state,
-          playCursorPosition = _this$state.playCursorPosition,
-          videoDuration = _this$state.videoDuration;
+      var _this$state2 = _this.state,
+          playCursorPosition = _this$state2.playCursorPosition,
+          videoDuration = _this$state2.videoDuration;
 
       _this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
 
@@ -29718,14 +29737,25 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       _this.seekVideoTo(videoDuration * xRatio);
 
+      console.log("UPDATE DRAG", position);
+
       _this.setState({
         playCursorPosition: position
       });
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleZoomFactorChange", function (value) {
-      return _this.setState({
-        zoomFactor: value
+      var _this$state3 = _this.state,
+          zoomFactor = _this$state3.zoomFactor,
+          playCursorPosition = _this$state3.playCursorPosition;
+      var currentX = playCursorPosition.currentX;
+      console.log("ZOOM", (value[0] + 100) / (zoomFactor[0] + 100) * currentX, currentX, value[0] + 100, zoomFactor[0] + 100);
+
+      _this.setState({
+        zoomFactor: value,
+        playCursorPosition: _objectSpread2({}, playCursorPosition, {
+          currentX: (value[0] + 100) / (zoomFactor[0] + 100) * currentX
+        })
       }, _this.scrollToCursor);
     });
 
@@ -29767,6 +29797,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     };
     _this.videoRef = React.createRef();
     _this.scrollable = React.createRef();
+    _this.draggable = React.createRef();
     _this.seekVideoTo = throttle$1(_this._seekVideoTo, 50);
     return _this;
   }
@@ -29779,9 +29810,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps, prevState) {
-      var _this$state2 = this.state,
-          videoDuration = _this$state2.videoDuration,
-          isEditing = _this$state2.isEditing;
+      var _this$state4 = this.state,
+          videoDuration = _this$state4.videoDuration,
+          isEditing = _this$state4.isEditing;
       var _this$props3 = this.props,
           inPoint = _this$props3.inPoint,
           outPoint = _this$props3.outPoint,
@@ -29823,13 +29854,13 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           inValue = _this$getFormatedValu3.inValue,
           outValue = _this$getFormatedValu3.outValue;
 
-      var _this$state3 = this.state,
-          videoDuration = _this$state3.videoDuration,
-          isEditing = _this$state3.isEditing,
-          playCursorPosition = _this$state3.playCursorPosition,
-          isPlaying = _this$state3.isPlaying,
-          forceCursorDragging = _this$state3.forceCursorDragging,
-          zoomFactor = _this$state3.zoomFactor;
+      var _this$state5 = this.state,
+          videoDuration = _this$state5.videoDuration,
+          isEditing = _this$state5.isEditing,
+          playCursorPosition = _this$state5.playCursorPosition,
+          isPlaying = _this$state5.isPlaying,
+          forceCursorDragging = _this$state5.forceCursorDragging,
+          zoomFactor = _this$state5.zoomFactor;
       var _this$props4 = this.props,
           src = _this$props4.src,
           classes = _this$props4.classes,
@@ -29869,7 +29900,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         position: playCursorPosition,
         draggableWidth: playerCursorWidth
       }, jsx("div", {
-        className: "dnm-video-cut-playing-cursor"
+        className: "dnm-video-cut-playing-cursor",
+        ref: this.draggable
       })), jsx(Range$2, {
         className: "dnm-video-cut-range ".concat(classes.range || ""),
         min: 0,
