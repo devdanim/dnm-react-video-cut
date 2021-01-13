@@ -29272,9 +29272,7 @@
           if (forceDragEnd === true) _this.handleDragEnd();
 
           _this.updateState({
-            currentX: currentX,
             xRatio: currentX / containerWidth,
-            currentY: currentY,
             yRatio: currentY / containerHeight
           });
         }
@@ -29288,18 +29286,10 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "_handleWindowResize", function () {
-        var position = _this.getCurrentPositionWithPercent();
-
-        var _this$getAxis2 = _this.getAxis(),
-            xAxis = _this$getAxis2.xAxis,
-            yAxis = _this$getAxis2.yAxis;
-
-        var currentX = xAxis ? position.currentX : 0;
-        var currentY = yAxis ? position.currentY : 0;
+        var render_key = _this.state.render_key;
 
         _this.updateState({
-          currentX: currentX,
-          currentY: currentY
+          render_key: render_key
         });
       });
 
@@ -29354,25 +29344,32 @@
         if (position) {
           var xRatio = position.xRatio,
               yRatio = position.yRatio;
-
-          var _this$getContainerDim3 = _this.getContainerDimensions(),
-              containerWidth = _this$getContainerDim3.containerWidth,
-              containerHeight = _this$getContainerDim3.containerHeight;
-
-          var currentX = xRatio * containerWidth;
-          var currentY = yRatio * containerHeight;
-          return {
-            currentX: currentX,
-            currentY: currentY,
+          return _objectSpread2({
             xRatio: xRatio,
             yRatio: yRatio
-          };
-        } else {
-          var _this$state = _this.state,
-              _currentX = _this$state.currentX,
-              _currentY = _this$state.currentY;
-          return _this.state;
+          }, _this.calculateCurrentPositionFromRatios(xRatio, yRatio));
         }
+
+        return _this.state;
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "calculateCurrentPositionFromRatios", function (xRatio, yRatio) {
+        var _this$getContainerDim3 = _this.getContainerDimensions(),
+            containerWidth = _this$getContainerDim3.containerWidth,
+            containerHeight = _this$getContainerDim3.containerHeight;
+
+        var currentX = xRatio * containerWidth;
+        var currentY = yRatio * containerHeight;
+        console.log({
+          containerWidth: containerWidth,
+          containerHeight: containerHeight,
+          currentX: currentX,
+          currentY: currentY
+        });
+        return {
+          currentX: currentX,
+          currentY: currentY
+        };
       });
 
       _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
@@ -29384,10 +29381,9 @@
       });
 
       _this.state = {
-        currentX: 0,
-        currentY: 0,
         xRatio: 0,
-        yRatio: 0
+        yRatio: 0,
+        render_key: 0
       };
       _this.active = false;
       _this.initialX = 0;
@@ -29400,6 +29396,7 @@
     _createClass(Draggable, [{
       key: "componentDidMount",
       value: function componentDidMount() {
+        var onMount = this.props.onMount;
         this.container = ReactDOM__default.findDOMNode(this).parentNode;
         this.container.addEventListener("touchstart", this.handleDragStart, false);
         this.container.addEventListener("touchend", this.handleDragEnd, false);
@@ -29408,6 +29405,7 @@
         this.container.addEventListener("mouseup", this.handleDragEnd, false);
         this.container.addEventListener("mousemove", this.handleDrag, false);
         window.addEventListener("resize", this.handleWindowResize, false);
+        if (onMount) onMount(this);
       }
     }, {
       key: "componentWillUnmount",
@@ -29429,9 +29427,9 @@
 
         var className = this.props.className;
 
-        var _this$getAxis3 = this.getAxis(),
-            xAxis = _this$getAxis3.xAxis,
-            yAxis = _this$getAxis3.yAxis;
+        var _this$getAxis2 = this.getAxis(),
+            xAxis = _this$getAxis2.xAxis,
+            yAxis = _this$getAxis2.yAxis;
 
         return React__default.createElement("div", {
           ref: this.draggableRef,
@@ -29645,17 +29643,22 @@
         var _this$state = _this.state,
             playCursorPosition = _this$state.playCursorPosition,
             zoomFactor = _this$state.zoomFactor;
-        var currentX = playCursorPosition.currentX;
+        var xRatio = playCursorPosition.xRatio,
+            yRatio = playCursorPosition.yRatio;
+
+        var _this$draggableApi$ca = _this.draggableApi.calculateCurrentPositionFromRatios(xRatio, yRatio),
+            currentX = _this$draggableApi$ca.currentX;
+
         var scrollLeft = _this.scrollable.current.scrollLeft;
-        var optimalScroll = currentX * (zoomFactor[0] + 100) / 100;
-        var clientWidth = _this.scrollable.current.clientWidth; // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
-        // if(scrollLeft > (optimalScroll - clientWidth) && scrollLeft < (optimalScroll + clientWidth)) this.scrollable.current.scrollLeft = optimalScroll;
+        var clientWidth = _this.scrollable.current.clientWidth;
+        console.log("CURRENT X", currentX); // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
+
+        if (scrollLeft > currentX - clientWidth && scrollLeft < currentX + clientWidth) _this.scrollable.current.scrollLeft = currentX;
       });
 
       _defineProperty(_assertThisInitialized(_this), "updatePlayCursorPosition", function () {
         var xRatio = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
         var autoScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-        var playCursorPosition = _this.state.playCursorPosition;
 
         if (xRatio === null) {
           var video = _this.videoRef.current;
@@ -29666,23 +29669,20 @@
           } else xRatio = 0;
         }
 
-        console.log("UPDATE FROM PARENT", {
+        var playCursorPosition = {
           xRatio: xRatio,
-          currentX: xRatio * playCursorPosition.currentX / playCursorPosition.xRatio,
-          yRatio: 0,
-          currentY: 0
-        });
+          yRatio: 0
+        };
 
         _this.setState({
-          playCursorPosition: {
-            xRatio: xRatio,
-            currentX: xRatio * playCursorPosition.currentX / playCursorPosition.xRatio,
-            yRatio: 0,
-            currentY: 0
-          }
+          playCursorPosition: playCursorPosition
         }, function () {
           if (autoScroll === true) _this.scrollToCursor();
         });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleDraggableApiMount", function (api) {
+        return _this.draggableApi = api;
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleKeyPress", function (event) {
@@ -29755,25 +29755,16 @@
 
         _this.seekVideoTo(videoDuration * xRatio);
 
-        console.log("UPDATE DRAG", position);
-
         _this.setState({
           playCursorPosition: position
         });
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleZoomFactorChange", function (value) {
-        var _this$state3 = _this.state,
-            zoomFactor = _this$state3.zoomFactor,
-            playCursorPosition = _this$state3.playCursorPosition;
-        var currentX = playCursorPosition.currentX;
-        console.log("ZOOM", (value[0] + 100) / (zoomFactor[0] + 100) * currentX, currentX, value[0] + 100, zoomFactor[0] + 100);
+        var zoomFactor = _this.state.zoomFactor;
 
         _this.setState({
-          zoomFactor: value,
-          playCursorPosition: _objectSpread2({}, playCursorPosition, {
-            currentX: (value[0] + 100) / (zoomFactor[0] + 100) * currentX
-          })
+          zoomFactor: value
         }, _this.scrollToCursor);
       });
 
@@ -29808,14 +29799,13 @@
         zoomFactor: [0],
         playCursorPosition: {
           xRatio: 0,
-          yRatio: 0,
-          currentX: 0,
-          currentY: 0
+          yRatio: 0
         }
       };
       _this.videoRef = React__default.createRef();
       _this.scrollable = React__default.createRef();
       _this.draggable = React__default.createRef();
+      _this.draggableApi = null;
       _this.seekVideoTo = throttle$1(_this._seekVideoTo, 50);
       return _this;
     }
@@ -29828,9 +29818,9 @@
     }, {
       key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps, prevState) {
-        var _this$state4 = this.state,
-            videoDuration = _this$state4.videoDuration,
-            isEditing = _this$state4.isEditing;
+        var _this$state3 = this.state,
+            videoDuration = _this$state3.videoDuration,
+            isEditing = _this$state3.isEditing;
         var _this$props3 = this.props,
             inPoint = _this$props3.inPoint,
             outPoint = _this$props3.outPoint,
@@ -29872,13 +29862,13 @@
             inValue = _this$getFormatedValu3.inValue,
             outValue = _this$getFormatedValu3.outValue;
 
-        var _this$state5 = this.state,
-            videoDuration = _this$state5.videoDuration,
-            isEditing = _this$state5.isEditing,
-            playCursorPosition = _this$state5.playCursorPosition,
-            isPlaying = _this$state5.isPlaying,
-            forceCursorDragging = _this$state5.forceCursorDragging,
-            zoomFactor = _this$state5.zoomFactor;
+        var _this$state4 = this.state,
+            videoDuration = _this$state4.videoDuration,
+            isEditing = _this$state4.isEditing,
+            playCursorPosition = _this$state4.playCursorPosition,
+            isPlaying = _this$state4.isPlaying,
+            forceCursorDragging = _this$state4.forceCursorDragging,
+            zoomFactor = _this$state4.zoomFactor;
         var _this$props4 = this.props,
             src = _this$props4.src,
             classes = _this$props4.classes,
@@ -29913,10 +29903,12 @@
           className: "dnm-video-cut-playing-cursor-draggable-item",
           axis: "x",
           forceDragging: forceCursorDragging,
+          onMount: this.handleDraggableApiMount,
           onDrag: this.handlePlayCursorDrag,
           onDragStart: this.pauseVideo,
           position: playCursorPosition,
-          draggableWidth: playerCursorWidth
+          draggableWidth: playerCursorWidth,
+          rerenderKey: zoomFactor[0]
         }, jsx("div", {
           className: "dnm-video-cut-playing-cursor",
           ref: this.draggable

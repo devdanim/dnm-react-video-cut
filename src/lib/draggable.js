@@ -9,10 +9,9 @@ export default class Draggable extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentX: 0,
-            currentY: 0,
             xRatio: 0,
-            yRatio: 0
+            yRatio: 0,
+            render_key: 0,
         }
         this.active = false;
         this.initialX = 0;
@@ -22,6 +21,7 @@ export default class Draggable extends React.Component {
     }
 
     componentDidMount() {  
+        const { onMount } = this.props;
         this.container = ReactDOM.findDOMNode(this).parentNode;
         this.container.addEventListener("touchstart", this.handleDragStart, false);
         this.container.addEventListener("touchend", this.handleDragEnd, false);
@@ -30,6 +30,7 @@ export default class Draggable extends React.Component {
         this.container.addEventListener("mouseup", this.handleDragEnd, false);
         this.container.addEventListener("mousemove", this.handleDrag, false);
         window.addEventListener("resize", this.handleWindowResize, false);
+        if (onMount) onMount(this);
     }
 
     componentWillUnmount() {
@@ -101,9 +102,7 @@ export default class Draggable extends React.Component {
             if(forceDragEnd === true) this.handleDragEnd();
 
             this.updateState({ 
-                currentX, 
                 xRatio: currentX / containerWidth, 
-                currentY,
                 yRatio: currentY / containerHeight
             });
         }
@@ -117,11 +116,8 @@ export default class Draggable extends React.Component {
     }
 
     _handleWindowResize = () => {
-        const position = this.getCurrentPositionWithPercent();
-        const { xAxis, yAxis } = this.getAxis();
-        const currentX = xAxis ? position.currentX : 0;
-        const currentY = yAxis ? position.currentY : 0;
-        this.updateState({ currentX, currentY });
+        const { render_key } = this.state;
+        this.updateState({ render_key });
     }
 
     getContainerDimensions = () => {
@@ -154,20 +150,20 @@ export default class Draggable extends React.Component {
         const { position } = this.props;
         if(position) {
             const { xRatio, yRatio } = position;
-            const { containerWidth, containerHeight } = this.getContainerDimensions();    
-            const currentX = xRatio * containerWidth;
-            const currentY = yRatio * containerHeight;
-            return {
-                currentX,
-                currentY,
-                xRatio: xRatio,
-                yRatio: yRatio,
-            };
+            return { xRatio, yRatio, ...this.calculateCurrentPositionFromRatios(xRatio, yRatio) };
         }
-        else {
-            const { currentX, currentY } = this.state;
-            return this.state;
-        }
+        return this.state;
+    }
+    
+    calculateCurrentPositionFromRatios = (xRatio, yRatio) => {
+        const { containerWidth, containerHeight } = this.getContainerDimensions();    
+        const currentX = xRatio * containerWidth;
+        const currentY = yRatio * containerHeight;
+        console.log({ containerWidth, containerHeight, currentX, currentY })
+        return {
+            currentX,
+            currentY,
+        };
     }
 
     updateState = (state) => {

@@ -26,14 +26,13 @@ export default class DnmVideoCut extends React.Component {
             zoomFactor: [0],
             playCursorPosition: {
                 xRatio: 0,
-                yRatio: 0,
-                currentX: 0,
-                currentY: 0,
+                yRatio: 0
             }
         }
         this.videoRef = React.createRef();
         this.scrollable = React.createRef();
         this.draggable = React.createRef();
+        this.draggableApi = null;
         this.seekVideoTo = throttle(this._seekVideoTo, 50);
     }
 
@@ -66,6 +65,7 @@ export default class DnmVideoCut extends React.Component {
     componentWillUnmount = () => {
         window.removeEventListener("keydown", this.handleKeyPress);
     }
+
 
     _seekVideoTo(time) {
         if (!isNaN(time)) {
@@ -145,16 +145,16 @@ export default class DnmVideoCut extends React.Component {
 
     scrollToCursor = () => {
         const { playCursorPosition, zoomFactor } = this.state;
-        const { currentX } = playCursorPosition;
+        const { xRatio, yRatio } = playCursorPosition;
+        const { currentX } = this.draggableApi.calculateCurrentPositionFromRatios(xRatio, yRatio);
         const scrollLeft = this.scrollable.current.scrollLeft;
-        const optimalScroll = currentX * (zoomFactor[0] + 100) / 100;
         const { clientWidth } = this.scrollable.current;
+        console.log("CURRENT X", currentX);
         // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
-        // if(scrollLeft > (optimalScroll - clientWidth) && scrollLeft < (optimalScroll + clientWidth)) this.scrollable.current.scrollLeft = optimalScroll;
+        if(scrollLeft > (currentX - clientWidth / 2) && scrollLeft < (currentX + clientWidth / 2)) this.scrollable.current.scrollLeft = currentX;
     }
 
     updatePlayCursorPosition = (xRatio = null, autoScroll = false) => {
-        const { playCursorPosition } = this.state;
         if(xRatio === null) {
             const video = this.videoRef.current;
             const { videoDuration } = this.state;
@@ -162,23 +162,16 @@ export default class DnmVideoCut extends React.Component {
                 xRatio = video.currentTime / videoDuration;
             } else xRatio = 0;
         }
-        console.log("UPDATE FROM PARENT", {
+        const playCursorPosition = {
             xRatio,
-            currentX: (xRatio * playCursorPosition.currentX) / playCursorPosition.xRatio,
             yRatio: 0,
-            currentY: 0,
-        });
-        this.setState({
-            playCursorPosition: {
-                xRatio,
-                currentX: (xRatio * playCursorPosition.currentX) / playCursorPosition.xRatio,
-                yRatio: 0,
-                currentY: 0,
-            }
-        }, () => {
+        };
+        this.setState({ playCursorPosition }, () => {
             if (autoScroll === true) this.scrollToCursor();
         })
     }
+
+    handleDraggableApiMount = (api) => this.draggableApi = api;
 
     handleKeyPress = event => {
         if(event.keyCode === 32) {
@@ -225,18 +218,12 @@ export default class DnmVideoCut extends React.Component {
         const { xRatio } = position;
         const { videoDuration } = this.state;
         this.seekVideoTo(videoDuration * xRatio);
-        console.log("UPDATE DRAG", position);
         this.setState({ playCursorPosition: position });
     }
 
     handleZoomFactorChange = value => {
-        const { zoomFactor, playCursorPosition } = this.state;
-        const { currentX } = playCursorPosition;
-        console.log("ZOOM", ((value[0] + 100) / (zoomFactor[0] + 100)) * currentX, currentX, value[0] + 100, zoomFactor[0] + 100);
-        this.setState({ zoomFactor: value, playCursorPosition: {
-            ...playCursorPosition,
-            currentX: ((value[0] + 100) / (zoomFactor[0] + 100)) * currentX,
-        } }, this.scrollToCursor);
+        const { zoomFactor } = this.state;
+        this.setState({ zoomFactor: value }, this.scrollToCursor);
     }
 
     handleContainerMouseDown = (ev) => {
@@ -268,10 +255,12 @@ export default class DnmVideoCut extends React.Component {
                                     className="dnm-video-cut-playing-cursor-draggable-item"
                                     axis="x" 
                                     forceDragging={forceCursorDragging}
+                                    onMount={this.handleDraggableApiMount}
                                     onDrag={this.handlePlayCursorDrag}
                                     onDragStart={this.pauseVideo}
                                     position={playCursorPosition}
                                     draggableWidth={playerCursorWidth}
+                                    rerenderKey={zoomFactor[0]}
                                 >
                                     <div className="dnm-video-cut-playing-cursor" ref={this.draggable} />
                                 </Draggable>
