@@ -29360,12 +29360,6 @@
 
         var currentX = xRatio * containerWidth;
         var currentY = yRatio * containerHeight;
-        console.log({
-          containerWidth: containerWidth,
-          containerHeight: containerHeight,
-          currentX: currentX,
-          currentY: currentY
-        });
         return {
           currentX: currentX,
           currentY: currentY
@@ -29388,6 +29382,7 @@
       _this.active = false;
       _this.initialX = 0;
       _this.initialY = 0;
+      _this.ghostContainerDimensions = _this.getContainerDimensions();
       _this.draggableRef = React__default.createRef();
       _this.handleWindowResize = throttle$1(_this._handleWindowResize, 200);
       return _this;
@@ -29406,6 +29401,18 @@
         this.container.addEventListener("mousemove", this.handleDrag, false);
         window.addEventListener("resize", this.handleWindowResize, false);
         if (onMount) onMount(this);
+      }
+    }, {
+      key: "componentDidUpdate",
+      value: function componentDidUpdate() {
+        var _this$ghostContainerD = this.ghostContainerDimensions,
+            containerWidth = _this$ghostContainerD.containerWidth,
+            containerHeight = _this$ghostContainerD.containerHeight;
+        this.ghostContainerDimensions = this.getContainerDimensions(); // Force rerender if container dimensions has changed
+
+        if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
+          this._handleWindowResize();
+        }
       }
     }, {
       key: "componentWillUnmount",
@@ -29642,18 +29649,18 @@
       _defineProperty(_assertThisInitialized(_this), "scrollToCursor", function () {
         var _this$state = _this.state,
             playCursorPosition = _this$state.playCursorPosition,
-            zoomFactor = _this$state.zoomFactor;
+            zoomFactor = _this$state.zoomFactor,
+            forceCursorDragging = _this$state.forceCursorDragging;
         var xRatio = playCursorPosition.xRatio,
             yRatio = playCursorPosition.yRatio;
 
         var _this$draggableApi$ca = _this.draggableApi.calculateCurrentPositionFromRatios(xRatio, yRatio),
             currentX = _this$draggableApi$ca.currentX;
 
-        var scrollLeft = _this.scrollable.current.scrollLeft;
-        var clientWidth = _this.scrollable.current.clientWidth;
-        console.log("CURRENT X", currentX); // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
-
-        if (scrollLeft > currentX - clientWidth && scrollLeft < currentX + clientWidth) _this.scrollable.current.scrollLeft = currentX;
+        var _this$scrollable$curr = _this.scrollable.current,
+            scrollLeft = _this$scrollable$curr.scrollLeft,
+            clientWidth = _this$scrollable$curr.clientWidth;
+        if (forceCursorDragging || currentX < scrollLeft || currentX > scrollLeft + clientWidth) _this.scrollable.current.scrollLeft = currentX;
       });
 
       _defineProperty(_assertThisInitialized(_this), "updatePlayCursorPosition", function () {
@@ -29760,6 +29767,18 @@
         });
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handleZoomFactorDragStart", function () {
+        return _this.setState({
+          forceCursorDragging: true
+        });
+      });
+
+      _defineProperty(_assertThisInitialized(_this), "handleZoomFactorDragEnd", function () {
+        return _this.setState({
+          forceCursorDragging: false
+        });
+      });
+
       _defineProperty(_assertThisInitialized(_this), "handleZoomFactorChange", function (value) {
         var zoomFactor = _this.state.zoomFactor;
 
@@ -29796,6 +29815,7 @@
         isPlaying: false,
         rangeDisabled: true,
         forceCursorDragging: false,
+        forceScrollToCursor: false,
         zoomFactor: [0],
         playCursorPosition: {
           xRatio: 0,
@@ -29931,6 +29951,8 @@
           max: 900,
           step: .05,
           value: zoomFactor,
+          onBeforeChange: this.handleZoomFactorDragStart,
+          onAfterChange: this.handleZoomFactorDragEnd,
           onChange: this.handleZoomFactorChange
         }), jsx("div", {
           className: "dnm-video-cut-zoom-icon"

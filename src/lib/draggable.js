@@ -16,6 +16,7 @@ export default class Draggable extends React.Component {
         this.active = false;
         this.initialX = 0;
         this.initialY = 0;
+        this.ghostContainerDimensions = this.getContainerDimensions();
         this.draggableRef = React.createRef();
         this.handleWindowResize = throttle(this._handleWindowResize, 200);
     }
@@ -31,6 +32,15 @@ export default class Draggable extends React.Component {
         this.container.addEventListener("mousemove", this.handleDrag, false);
         window.addEventListener("resize", this.handleWindowResize, false);
         if (onMount) onMount(this);
+    }
+
+    componentDidUpdate() {
+        const { containerWidth, containerHeight } = this.ghostContainerDimensions;
+        this.ghostContainerDimensions = this.getContainerDimensions();
+        // Force rerender if container dimensions has changed
+        if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
+            this._handleWindowResize();
+        }
     }
 
     componentWillUnmount() {
@@ -159,7 +169,6 @@ export default class Draggable extends React.Component {
         const { containerWidth, containerHeight } = this.getContainerDimensions();    
         const currentX = xRatio * containerWidth;
         const currentY = yRatio * containerHeight;
-        console.log({ containerWidth, containerHeight, currentX, currentY })
         return {
             currentX,
             currentY,
@@ -174,7 +183,6 @@ export default class Draggable extends React.Component {
     }
 
     render() {
-
         const { currentX, currentY } = this.getCurrentPosition();
         const { className } = this.props;
         const { xAxis, yAxis } = this.getAxis();

@@ -23,6 +23,7 @@ export default class DnmVideoCut extends React.Component {
             isPlaying: false,
             rangeDisabled: true,
             forceCursorDragging: false,
+            forceScrollToCursor: false,
             zoomFactor: [0],
             playCursorPosition: {
                 xRatio: 0,
@@ -144,14 +145,11 @@ export default class DnmVideoCut extends React.Component {
     }
 
     scrollToCursor = () => {
-        const { playCursorPosition, zoomFactor } = this.state;
+        const { playCursorPosition, zoomFactor, forceCursorDragging } = this.state;
         const { xRatio, yRatio } = playCursorPosition;
         const { currentX } = this.draggableApi.calculateCurrentPositionFromRatios(xRatio, yRatio);
-        const scrollLeft = this.scrollable.current.scrollLeft;
-        const { clientWidth } = this.scrollable.current;
-        console.log("CURRENT X", currentX);
-        // console.log(optimalScroll - clientWidth, scrollLeft, optimalScroll + clientWidth, optimalScroll, clientWidth);
-        if(scrollLeft > (currentX - clientWidth / 2) && scrollLeft < (currentX + clientWidth / 2)) this.scrollable.current.scrollLeft = currentX;
+        const { scrollLeft, clientWidth } = this.scrollable.current;
+        if(forceCursorDragging || currentX < scrollLeft || currentX > (scrollLeft + clientWidth)) this.scrollable.current.scrollLeft = currentX;
     }
 
     updatePlayCursorPosition = (xRatio = null, autoScroll = false) => {
@@ -221,6 +219,9 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ playCursorPosition: position });
     }
 
+    handleZoomFactorDragStart = () => this.setState({ forceCursorDragging: true });
+    handleZoomFactorDragEnd = () => this.setState({ forceCursorDragging: false });
+
     handleZoomFactorChange = value => {
         const { zoomFactor } = this.state;
         this.setState({ zoomFactor: value }, this.scrollToCursor);
@@ -284,6 +285,8 @@ export default class DnmVideoCut extends React.Component {
                                     max={900}
                                     step={.05}
                                     value={zoomFactor} 
+                                    onBeforeChange={this.handleZoomFactorDragStart}
+                                    onAfterChange={this.handleZoomFactorDragEnd}
                                     onChange={this.handleZoomFactorChange}
                                 />
                                 <div className="dnm-video-cut-zoom-icon">
