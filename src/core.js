@@ -169,6 +169,14 @@ export default class DnmVideoCut extends React.Component {
         })
     }
 
+    handleVideoPlayerError = event => {
+        const { error } = event.target;
+        if (error && error.code === 4) {
+            const { onNotSupportedVideoLoad } = this.props;
+            onNotSupportedVideoLoad(error.message);
+        }
+    }
+
     handleDraggableApiMount = (api) => this.draggableApi = api;
 
     handleKeyPress = event => {
@@ -245,7 +253,15 @@ export default class DnmVideoCut extends React.Component {
         return (
             <div css={css`${styles}`}> 
                 <div className={`dnm-video-cut-root ${classes.root || ""} ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
-                    <video className={`dnm-video-cut-player ${classes.player || ""}`} src={`${src}`} ref={this.videoRef} loop controls={false} onLoadedData={this.handleLoadedData} />
+                    <video 
+                        className={`dnm-video-cut-player ${classes.player || ""}`}
+                        src={`${src}`}
+                        ref={this.videoRef}
+                        loop
+                        controls={false}
+                        onLoadedData={this.handleLoadedData}
+                        onError={this.handleVideoPlayerError}
+                    />
                     <div>
                         <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                             {isPlaying ? <PauseIcon /> : <PlayIcon /> }

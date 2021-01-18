@@ -29670,6 +29670,15 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleVideoPlayerError", function (event) {
+      var error = event.target.error;
+
+      if (error && error.code === 4) {
+        var onNotSupportedVideoLoad = _this.props.onNotSupportedVideoLoad;
+        onNotSupportedVideoLoad(error.message);
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleDraggableApiMount", function (api) {
       return _this.draggableApi = api;
     });
@@ -29885,7 +29894,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         ref: this.videoRef,
         loop: true,
         controls: false,
-        onLoadedData: this.handleLoadedData
+        onLoadedData: this.handleLoadedData,
+        onError: this.handleVideoPlayerError
       }), jsx("div", null, jsx("div", {
         className: "dnm-video-cut-play-icon",
         onClick: this.handleFreePlayClick

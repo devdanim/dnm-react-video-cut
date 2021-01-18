@@ -30,6 +30,7 @@ class App extends React.Component {
                 maxDuration={10}
                 minDuration={4}
                 onRangeChange={this.handleRangeChange}
+                onNotSupportedVideoLoad={(err) => console.error("Video source not supported", err)}
             />
         )
     }
