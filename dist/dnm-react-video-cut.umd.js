@@ -29693,7 +29693,7 @@
 
         if (error && error.code === 4) {
           var onNotSupportedVideoLoad = _this.props.onNotSupportedVideoLoad;
-          onNotSupportedVideoLoad(error.message);
+          if (onNotSupportedVideoLoad) onNotSupportedVideoLoad(error.message);
         }
       });
 
@@ -29981,6 +29981,7 @@
       range: PropTypes.string
     }),
     onRangeChange: PropTypes.func.isRequired,
+    onNotSupportedVideoLoad: PropTypes.func,
     src: PropTypes.string.isRequired,
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,

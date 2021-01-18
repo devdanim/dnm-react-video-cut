@@ -173,7 +173,7 @@ export default class DnmVideoCut extends React.Component {
         const { error } = event.target;
         if (error && error.code === 4) {
             const { onNotSupportedVideoLoad } = this.props;
-            onNotSupportedVideoLoad(error.message);
+            if (onNotSupportedVideoLoad) onNotSupportedVideoLoad(error.message);
         }
     }
 
@@ -325,6 +325,7 @@ DnmVideoCut.propTypes = {
         range: PropTypes.string,
     }),
     onRangeChange: PropTypes.func.isRequired,
+    onNotSupportedVideoLoad: PropTypes.func,
     src: PropTypes.string.isRequired,
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
