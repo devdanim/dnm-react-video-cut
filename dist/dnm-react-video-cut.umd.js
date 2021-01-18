@@ -29574,14 +29574,24 @@
         var inValue = inPoint || 0;
         var outValue = outPoint || videoDuration;
 
-        if (outValue - inValue > max) {
-          if (lastTarget === "in") outValue = inValue + max;else inValue = outValue - max;
-        } else if (outValue - inValue < minDuration) {
-          if (lastTarget === "in") outValue = inValue + minDuration;else inValue = outValue - minDuration;
+        var format = function format(_lastTarget) {
+          if (outValue - inValue > max) {
+            if (_lastTarget === "in") outValue = inValue + max;else inValue = outValue - max;
+          } else if (outValue - inValue < minDuration) {
+            if (_lastTarget === "in") outValue = inValue + minDuration;else inValue = outValue - minDuration;
+          }
+        };
+
+        format(lastTarget);
+
+        if (inValue < 0) {
+          inValue = 0;
+          format("in");
+        } else if (outValue > videoDuration) {
+          outValue = videoDuration;
+          format("out");
         }
 
-        if (inValue < 0) inValue = 0;
-        if (outValue > videoDuration) outValue = videoDuration;
         return {
           inValue: inValue,
           outValue: outValue
