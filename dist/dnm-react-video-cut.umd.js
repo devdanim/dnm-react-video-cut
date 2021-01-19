@@ -29854,10 +29854,6 @@
       key: "componentDidMount",
       value: function componentDidMount() {
         window.addEventListener("keydown", this.handleKeyPress);
-        var _this$props3 = this.props,
-            inPoint = _this$props3.inPoint,
-            outPoint = _this$props3.outPoint;
-        this.handleRangeChange([inPoint, outPoint], true);
       }
     }, {
       key: "componentDidUpdate",
@@ -29865,15 +29861,15 @@
         var _this$state3 = this.state,
             videoDuration = _this$state3.videoDuration,
             isEditing = _this$state3.isEditing;
-        var _this$props4 = this.props,
-            inPoint = _this$props4.inPoint,
-            outPoint = _this$props4.outPoint,
-            src = _this$props4.src,
-            minDuration = _this$props4.minDuration,
-            maxDuration = _this$props4.maxDuration;
+        var _this$props3 = this.props,
+            inPoint = _this$props3.inPoint,
+            outPoint = _this$props3.outPoint,
+            src = _this$props3.src,
+            minDuration = _this$props3.minDuration,
+            maxDuration = _this$props3.maxDuration;
 
         if (!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
-          this.handleRangeChange([inPoint, outPoint]);
+          this.handleRangeChange([inPoint, outPoint], true);
         }
 
         if (src !== prevProps.src) {
@@ -29913,10 +29909,10 @@
             isPlaying = _this$state4.isPlaying,
             forceCursorDragging = _this$state4.forceCursorDragging,
             zoomFactor = _this$state4.zoomFactor;
-        var _this$props5 = this.props,
-            src = _this$props5.src,
-            classes = _this$props5.classes,
-            playerCursorWidth = _this$props5.playerCursorWidth;
+        var _this$props4 = this.props,
+            src = _this$props4.src,
+            classes = _this$props4.classes,
+            playerCursorWidth = _this$props4.playerCursorWidth;
         return jsx("div", {
           css: css(_templateObject$1(), styles)
         }, jsx("div", {

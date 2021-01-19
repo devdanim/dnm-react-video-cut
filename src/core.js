@@ -39,15 +39,13 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidMount() {
         window.addEventListener("keydown", this.handleKeyPress);
-        const { inPoint, outPoint } = this.props;
-        this.handleRangeChange([inPoint, outPoint], true);
     }
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration, isEditing } = this.state;
         const { inPoint, outPoint, src, minDuration, maxDuration } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
-            this.handleRangeChange([inPoint, outPoint]);
+            this.handleRangeChange([inPoint, outPoint], true);
         }
         if(src !== prevProps.src) {
             this.pauseVideo();
