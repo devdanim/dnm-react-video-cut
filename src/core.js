@@ -39,6 +39,8 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidMount() {
         window.addEventListener("keydown", this.handleKeyPress);
+        const { inPoint, outPoint } = this.props;
+        this.handleRangeChange([inPoint, outPoint]);
     }
 
     componentDidUpdate(prevProps, prevState) {
