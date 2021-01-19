@@ -40,7 +40,7 @@ export default class DnmVideoCut extends React.Component {
     componentDidMount() {
         window.addEventListener("keydown", this.handleKeyPress);
         const { inPoint, outPoint } = this.props;
-        this.handleRangeChange([inPoint, outPoint]);
+        this.handleRangeChange([inPoint, outPoint], true);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -205,9 +205,9 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    handleRangeChange = (value) => {
+    handleRangeChange = (value, force = false) => {
         const { rangeDisabled } = this.state;
-        if (!rangeDisabled) {
+        if (!rangeDisabled || force) {
             const { onRangeChange, outPoint } = this.props;
             const lastTarget = value[1] !== outPoint ? "out" : "in";
             const { inValue, outValue } = this.getFormatedValues(value[0], value[1], lastTarget);

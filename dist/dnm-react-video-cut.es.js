@@ -29717,9 +29717,10 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var rangeDisabled = _this.state.rangeDisabled;
 
-      if (!rangeDisabled) {
+      if (!rangeDisabled || force) {
         var _this$props2 = _this.props,
             onRangeChange = _this$props2.onRangeChange,
             outPoint = _this$props2.outPoint;
@@ -29838,7 +29839,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var _this$props3 = this.props,
           inPoint = _this$props3.inPoint,
           outPoint = _this$props3.outPoint;
-      this.handleRangeChange([inPoint, outPoint]);
+      this.handleRangeChange([inPoint, outPoint], true);
     }
   }, {
     key: "componentDidUpdate",
