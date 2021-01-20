@@ -8,7 +8,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             inPoint: 0,
-            outPoint: 100
+            outPoint: 100,
+            muted: false,
         }
         this.videoRef = React.createRef();
     }
@@ -20,16 +21,22 @@ class App extends React.Component {
         })
     }
 
+    handleMuteChange = (muted) => {
+        this.setState({ muted })
+    }
+
     render() {
-        const { inPoint, outPoint } = this.state;
+        const { inPoint, outPoint, muted } = this.state;
         return(
             <DnmVideoCut
                 inPoint={inPoint}
                 outPoint={outPoint}
+                muted={muted}
                 src={video}
                 maxDuration={10}
                 minDuration={4}
                 onRangeChange={this.handleRangeChange}
+                onMuteChange={this.handleMuteChange}
                 onNotSupportedVideoLoad={(err) => console.error("Video source not supported", err)}
             />
         )

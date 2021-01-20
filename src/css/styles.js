@@ -111,11 +111,11 @@ export default css`
     background-color: #e9e9e9;
   }
   .rc-slider-disabled .rc-slider-track {
-    background-color: #ccc;
+    background-color: rgb(197, 203, 212);
   }
   .rc-slider-disabled .rc-slider-handle,
   .rc-slider-disabled .rc-slider-dot {
-    border-color: #ccc;
+    border-color: rgb(197, 203, 212);
     box-shadow: none;
     background-color: #fff;
     cursor: not-allowed;
@@ -396,5 +396,73 @@ export default css`
 
   .dnm-video-cut-zoom-icon svg {
     color: rgb(168, 173, 181);
+  }
+
+  .dnm-video-cut-mute {
+    display: inline-block;
+    float: left;
+  }
+
+  .dnm-video-cut-checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    padding-top: 3px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    color: rgb(158 162 169);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .dnm-video-cut-checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  .dnm-video-cut-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: rgb(229, 233, 240);
+    border-radius: 5px;
+  }
+
+  .dnm-video-cut-checkbox-container:hover input ~ .dnm-video-cut-checkmark {
+    background-color: rgb(197, 203, 212);
+  }
+
+  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark {
+    background-color: #92d275;
+  }
+
+  .dnm-video-cut-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+
+  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark:after {
+    display: block;
+  }
+
+  .dnm-video-cut-checkbox-container .dnm-video-cut-checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
   }
 `

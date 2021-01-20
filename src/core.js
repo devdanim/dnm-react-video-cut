@@ -43,7 +43,7 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration, isEditing } = this.state;
-        const { inPoint, outPoint, src, minDuration, maxDuration } = this.props;
+        const { inPoint, outPoint, src, minDuration, maxDuration, muted, } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint], true);
         }
@@ -60,7 +60,7 @@ export default class DnmVideoCut extends React.Component {
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
             this.seekVideoTo(time);
         }
-
+        if(muted !== prevProps.muted) this.updatePlayerVolume();
     }
 
     componentWillUnmount = () => {
@@ -152,6 +152,14 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ isPlaying: false });
     }
 
+    updatePlayerVolume = () => {
+        const { muted } = this.props;
+        const video = this.videoRef.current;
+        if(video) {
+            video.volume = muted ? 0 : 0.5;
+        }
+    }
+
     scrollToCursor = () => {
         const { playCursorPosition, zoomFactor, forceCursorDragging } = this.state;
         const { xRatio, yRatio } = playCursorPosition;
@@ -199,6 +207,7 @@ export default class DnmVideoCut extends React.Component {
         if(video) {
             const { inPoint } = this.props;
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
+            this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
         }
     }
@@ -253,10 +262,15 @@ export default class DnmVideoCut extends React.Component {
 
     handleContainerMouseUp = () => this.setState({ rangeDisabled: true, forceCursorDragging: false });
 
+    handleMuteChange = (event) => {
+        const { onMuteChange } = this.props;
+        if (onMuteChange) onMuteChange(!event.target.checked);
+    }
+
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, classes, playerCursorWidth } = this.props;
+        const { src, classes, playerCursorWidth, muted, onMuteChange, } = this.props;
 
         return (
             <div css={css`${styles}`}> 
@@ -266,6 +280,7 @@ export default class DnmVideoCut extends React.Component {
                         src={`${src}`}
                         ref={this.videoRef}
                         loop
+                        muted={muted}
                         controls={false}
                         onLoadedData={this.handleLoadedData}
                         onError={this.handleVideoPlayerError}
@@ -302,6 +317,17 @@ export default class DnmVideoCut extends React.Component {
                             </div>
                         </div>
                         <div className="dnm-video-cut-tools">
+                            <div className="dnm-video-cut-mute">
+                                {
+                                    onMuteChange && (
+                                        <label className="dnm-video-cut-checkbox-container">
+                                            Enable sound
+                                            <input type="checkbox" checked={!muted} onChange={this.handleMuteChange} />
+                                            <span className="dnm-video-cut-checkmark" />
+                                        </label>
+                                    )
+                                }
+                            </div>
                             <div className="dnm-video-cut-zoom">
                                 <Range 
                                     className={`dnm-video-cut-zoom-range ${classes.zoomRange || ""}`}
@@ -340,6 +366,8 @@ DnmVideoCut.propTypes = {
     maxDuration: PropTypes.number,
     minDuration: PropTypes.number,
     draggableWidth: PropTypes.number,
+    muted: PropTypes.bool,
+    onMuteChange: PropTypes.func,
 };
 
 DnmVideoCut.defaultProps = {
@@ -349,4 +377,5 @@ DnmVideoCut.defaultProps = {
     maxDuration: 0,
     minDuration: 0,
     playerCursorWidth: 14,
+    muted: false,
 };
