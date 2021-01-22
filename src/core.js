@@ -43,7 +43,7 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration, isEditing } = this.state;
-        const { inPoint, outPoint, src, minDuration, maxDuration, muted, } = this.props;
+        const { inPoint, outPoint, src, muted, } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint], true);
         }
@@ -53,8 +53,8 @@ export default class DnmVideoCut extends React.Component {
         if(isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
             let time;
             if(prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
-                const max = maxDuration || videoDuration;
-                if(Math.abs(outPoint - inPoint - minDuration) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;
+                const { min, max } = this.getAcceptedDuration();
+                if(Math.abs(outPoint - inPoint - min) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;
                 else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
             }
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
@@ -75,14 +75,21 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
+    getAcceptedDuration = () => {
+        const { minDuration, maxDuration } = this.props;
+        const { videoDuration } = this.state;
+        let min = parseFloat(minDuration) || 0;
+        if (min < 0) min = 0;
+        let max = parseFloat(maxDuration) || videoDuration;
+        if (max > videoDuration) max = videoDuration;
+        return min > max ? { min: max, max: min } : { min, max };
+    }
+
     getFormatedValues = (inPoint, outPoint, lastTarget = "in") => {
         if(!inPoint) inPoint = this.props.inPoint;  
         if(!outPoint) outPoint = this.props.outPoint;
-        const { maxDuration, minDuration } = this.props;
+        const { min, max } = this.getAcceptedDuration();
         const { videoDuration } = this.state;
-
-        let max = maxDuration || videoDuration;
-        if(max > videoDuration) max = videoDuration;
 
         let inValue = inPoint || 0;
         let outValue = outPoint || videoDuration;
@@ -91,9 +98,9 @@ export default class DnmVideoCut extends React.Component {
             if(outValue - inValue > max) {
                 if(_lastTarget === "in") outValue = inValue + max;
                 else inValue = outValue - max;
-            } else if(outValue - inValue < minDuration) {
-                if(_lastTarget === "in") outValue = inValue + minDuration;
-                else inValue = outValue - minDuration;
+            } else if(outValue - inValue < min) {
+                if(_lastTarget === "in") outValue = inValue + min;
+                else inValue = outValue - min;
             }
         }
         format(lastTarget);

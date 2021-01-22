@@ -29561,24 +29561,42 @@
         window.removeEventListener("keydown", _this.handleKeyPress);
       });
 
+      _defineProperty(_assertThisInitialized(_this), "getAcceptedDuration", function () {
+        var _this$props = _this.props,
+            minDuration = _this$props.minDuration,
+            maxDuration = _this$props.maxDuration;
+        var videoDuration = _this.state.videoDuration;
+        var min = parseFloat(minDuration) || 0;
+        if (min < 0) min = 0;
+        var max = parseFloat(maxDuration) || videoDuration;
+        if (max > videoDuration) max = videoDuration;
+        return min > max ? {
+          min: max,
+          max: min
+        } : {
+          min: min,
+          max: max
+        };
+      });
+
       _defineProperty(_assertThisInitialized(_this), "getFormatedValues", function (inPoint, outPoint) {
         var lastTarget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "in";
         if (!inPoint) inPoint = _this.props.inPoint;
         if (!outPoint) outPoint = _this.props.outPoint;
-        var _this$props = _this.props,
-            maxDuration = _this$props.maxDuration,
-            minDuration = _this$props.minDuration;
+
+        var _this$getAcceptedDura = _this.getAcceptedDuration(),
+            min = _this$getAcceptedDura.min,
+            max = _this$getAcceptedDura.max;
+
         var videoDuration = _this.state.videoDuration;
-        var max = maxDuration || videoDuration;
-        if (max > videoDuration) max = videoDuration;
         var inValue = inPoint || 0;
         var outValue = outPoint || videoDuration;
 
         var format = function format(_lastTarget) {
           if (outValue - inValue > max) {
             if (_lastTarget === "in") outValue = inValue + max;else inValue = outValue - max;
-          } else if (outValue - inValue < minDuration) {
-            if (_lastTarget === "in") outValue = inValue + minDuration;else inValue = outValue - minDuration;
+          } else if (outValue - inValue < min) {
+            if (_lastTarget === "in") outValue = inValue + min;else inValue = outValue - min;
           }
         };
 
@@ -29881,8 +29899,6 @@
             inPoint = _this$props3.inPoint,
             outPoint = _this$props3.outPoint,
             src = _this$props3.src,
-            minDuration = _this$props3.minDuration,
-            maxDuration = _this$props3.maxDuration,
             muted = _this$props3.muted;
 
         if (!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
@@ -29897,8 +29913,11 @@
           var time;
 
           if (prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
-            var max = maxDuration || videoDuration;
-            if (Math.abs(outPoint - inPoint - minDuration) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
+            var _this$getAcceptedDura2 = this.getAcceptedDuration(),
+                min = _this$getAcceptedDura2.min,
+                max = _this$getAcceptedDura2.max;
+
+            if (Math.abs(outPoint - inPoint - min) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
           } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
 
           this.seekVideoTo(time);
