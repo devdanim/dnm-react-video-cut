@@ -32,6 +32,9 @@ class App extends React.Component {
                 inPoint={inPoint}
                 outPoint={outPoint}
                 muted={muted}
+                catalogue={{
+                    unmute: 'Custom unmute label'
+                }}
                 src={video}
                 maxDuration={10}
                 minDuration={4}

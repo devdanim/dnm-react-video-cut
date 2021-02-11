@@ -277,7 +277,7 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, classes, playerCursorWidth, muted, onMuteChange, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, } = this.props;
 
         return (
             <div css={css`${styles}`}> 
@@ -328,7 +328,7 @@ export default class DnmVideoCut extends React.Component {
                                 {
                                     onMuteChange && (
                                         <label className="dnm-video-cut-checkbox-container">
-                                            Enable sound
+                                            { catalogue.unmute }
                                             <input type="checkbox" checked={!muted} onChange={this.handleMuteChange} />
                                             <span className="dnm-video-cut-checkmark" />
                                         </label>
@@ -360,6 +360,7 @@ export default class DnmVideoCut extends React.Component {
 }
 
 DnmVideoCut.propTypes = {
+    catalogue: PropTypes.object,
     classes: PropTypes.shape({
         root: PropTypes.string,
         player: PropTypes.string,
@@ -378,6 +379,9 @@ DnmVideoCut.propTypes = {
 };
 
 DnmVideoCut.defaultProps = {
+    catalogue: {
+        unmute: 'Enable sound',
+    },
     classes: {},
     inPoint: 0,
     outPoint: 0,

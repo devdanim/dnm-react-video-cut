@@ -29949,6 +29949,7 @@
             zoomFactor = _this$state4.zoomFactor;
         var _this$props4 = this.props,
             src = _this$props4.src,
+            catalogue = _this$props4.catalogue,
             classes = _this$props4.classes,
             playerCursorWidth = _this$props4.playerCursorWidth,
             muted = _this$props4.muted,
@@ -30009,7 +30010,7 @@
           className: "dnm-video-cut-mute"
         }, onMuteChange && jsx("label", {
           className: "dnm-video-cut-checkbox-container"
-        }, "Enable sound", jsx("input", {
+        }, catalogue.unmute, jsx("input", {
           type: "checkbox",
           checked: !muted,
           onChange: this.handleMuteChange
@@ -30037,6 +30038,7 @@
     return DnmVideoCut;
   }(React__default.Component);
   DnmVideoCut.propTypes = {
+    catalogue: PropTypes.object,
     classes: PropTypes.shape({
       root: PropTypes.string,
       player: PropTypes.string,
@@ -30054,6 +30056,9 @@
     onMuteChange: PropTypes.func
   };
   DnmVideoCut.defaultProps = {
+    catalogue: {
+      unmute: 'Enable sound'
+    },
     classes: {},
     inPoint: 0,
     outPoint: 0,
