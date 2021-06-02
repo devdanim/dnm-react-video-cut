@@ -200,14 +200,6 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    handleVideoLoad = () => {
-        const { onVideoLoad } = this.props;
-        if (onVideoLoad) {
-            const video = this.videoRef.current;
-            onVideoLoad(video);
-        }
-    }
-
     handleDraggableApiMount = (api) => this.draggableApi = api;
 
     handleKeyPress = event => {
@@ -218,12 +210,14 @@ export default class DnmVideoCut extends React.Component {
     }
 
     handleLoadedData = () => {
+        const { onVideoLoadedData } = this.props;
         const video = this.videoRef.current;
-        if(video) {
+        if (video) {
             const { inPoint } = this.props;
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
+            if (onVideoLoadedData) onVideoLoadedData(video);
         }
     }
 
@@ -377,14 +371,16 @@ DnmVideoCut.propTypes = {
     }),
     onRangeChange: PropTypes.func.isRequired,
     onNotSupportedVideoLoad: PropTypes.func,
+    onVideoLoadedData: PropTypes.func,
     src: PropTypes.string.isRequired,
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
+    draggableWidth: PropTypes.number,
     maxDuration: PropTypes.number,
     minDuration: PropTypes.number,
-    draggableWidth: PropTypes.number,
     muted: PropTypes.bool,
     onMuteChange: PropTypes.func,
+    playerCursorWidth: PropTypes.int,
 };
 
 DnmVideoCut.defaultProps = {
@@ -392,10 +388,14 @@ DnmVideoCut.defaultProps = {
         unmute: 'Enable sound',
     },
     classes: {},
+    onRangeChange: points => null,
+    onNotSupportedVideoLoad: errMsg => null,
+    onVideoLoadedData: video => null,
     inPoint: 0,
     outPoint: 0,
+    draggableWidth: null,
     maxDuration: 0,
     minDuration: 0,
-    playerCursorWidth: 14,
     muted: false,
+    playerCursorWidth: 14,
 };

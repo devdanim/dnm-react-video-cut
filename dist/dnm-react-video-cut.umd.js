@@ -29734,15 +29734,6 @@
         }
       });
 
-      _defineProperty(_assertThisInitialized(_this), "handleVideoLoad", function () {
-        var onVideoLoad = _this.props.onVideoLoad;
-
-        if (onVideoLoad) {
-          var video = _this.videoRef.current;
-          onVideoLoad(video);
-        }
-      });
-
       _defineProperty(_assertThisInitialized(_this), "handleDraggableApiMount", function (api) {
         return _this.draggableApi = api;
       });
@@ -29756,6 +29747,7 @@
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleLoadedData", function () {
+        var onVideoLoadedData = _this.props.onVideoLoadedData;
         var video = _this.videoRef.current;
 
         if (video) {
@@ -29769,6 +29761,8 @@
           }, function () {
             return _this.updatePlayCursorPosition();
           });
+
+          if (onVideoLoadedData) onVideoLoadedData(video);
         }
       });
 
@@ -30056,26 +30050,38 @@
     }),
     onRangeChange: PropTypes.func.isRequired,
     onNotSupportedVideoLoad: PropTypes.func,
+    onVideoLoadedData: PropTypes.func,
     src: PropTypes.string.isRequired,
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
+    draggableWidth: PropTypes.number,
     maxDuration: PropTypes.number,
     minDuration: PropTypes.number,
-    draggableWidth: PropTypes.number,
     muted: PropTypes.bool,
-    onMuteChange: PropTypes.func
+    onMuteChange: PropTypes.func,
+    playerCursorWidth: PropTypes["int"]
   };
   DnmVideoCut.defaultProps = {
     catalogue: {
       unmute: 'Enable sound'
     },
     classes: {},
+    onRangeChange: function onRangeChange(points) {
+      return null;
+    },
+    onNotSupportedVideoLoad: function onNotSupportedVideoLoad(errMsg) {
+      return null;
+    },
+    onVideoLoadedData: function onVideoLoadedData(video) {
+      return null;
+    },
     inPoint: 0,
     outPoint: 0,
+    draggableWidth: null,
     maxDuration: 0,
     minDuration: 0,
-    playerCursorWidth: 14,
-    muted: false
+    muted: false,
+    playerCursorWidth: 14
   };
 
   return DnmVideoCut;
