@@ -200,6 +200,14 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
+    handleVideoLoad = () => {
+        const { onVideoLoad } = this.props;
+        if (onVideoLoad) {
+            const video = this.videoRef.current;
+            onVideoLoad(video);
+        }
+    }
+
     handleDraggableApiMount = (api) => this.draggableApi = api;
 
     handleKeyPress = event => {
@@ -290,6 +298,7 @@ export default class DnmVideoCut extends React.Component {
                         muted={muted}
                         controls={false}
                         onLoadedData={this.handleLoadedData}
+                        onLoad={this.handleVideoLoad}
                         onError={this.handleVideoPlayerError}
                     />
                     <div>
