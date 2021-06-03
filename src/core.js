@@ -382,7 +382,7 @@ DnmVideoCut.propTypes = {
     onMuteChange: PropTypes.func,
     playerCursorWidth: PropTypes.oneOfType([
         PropTypes.func,
-        PropTypes.int,
+        PropTypes.number,
     ]),
 };
 

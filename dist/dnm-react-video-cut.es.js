@@ -30041,7 +30041,7 @@ DnmVideoCut.propTypes = {
   minDuration: PropTypes.number,
   muted: PropTypes.bool,
   onMuteChange: PropTypes.func,
-  playerCursorWidth: PropTypes.oneOfType([PropTypes.func, PropTypes["int"]])
+  playerCursorWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number])
 };
 DnmVideoCut.defaultProps = {
   catalogue: {
