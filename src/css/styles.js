@@ -264,7 +264,6 @@ export default css`
     opacity: 1;
     width: 100%;
     max-height: 60vh;
-    transition: all 0.2s ease-in-out;
   }
   
   .dnm-video-cut-range {
