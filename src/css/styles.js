@@ -261,16 +261,10 @@ export default css`
   }
   
   .dnm-video-cut-player {
-    transform: scale(1);
     opacity: 1;
     width: 100%;
+    max-height: 60vh;
     transition: all 0.2s ease-in-out;
-  }
-  
-  .dnm-video-cut-root.is-editing .dnm-video-cut-player {
-    transform: scale(0.9);
-    opacity: 0.8;
-    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
   }
   
   .dnm-video-cut-range {

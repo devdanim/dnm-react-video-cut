@@ -34,7 +34,7 @@ export default class DnmVideoCut extends React.Component {
         this.scrollable = React.createRef();
         this.draggable = React.createRef();
         this.draggableApi = null;
-        this.seekVideoTo = throttle(this._seekVideoTo, 50);
+        this.seekVideoTo = throttle(this._seekVideoTo, 20);
     }
 
     componentDidMount() {
@@ -264,9 +264,10 @@ export default class DnmVideoCut extends React.Component {
     handleContainerMouseDown = (ev) => {
         ev.stopPropagation();
         const { target } = ev;
+        const { rangeDisabled, forceCursorDragging } = this.state;
         if(!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {
-            this.setState({ rangeDisabled: true, forceCursorDragging: true });
-        } else this.setState({ rangeDisabled: false, forceCursorDragging: false });
+            if (!rangeDisabled || !forceCursorDragging) this.setState({ rangeDisabled: true, forceCursorDragging: true });
+        } else if (rangeDisabled || forceCursorDragging) this.setState({ rangeDisabled: false, forceCursorDragging: false });
     }
 
     handleContainerMouseUp = () => this.setState({ rangeDisabled: true, forceCursorDragging: false });
@@ -278,12 +279,12 @@ export default class DnmVideoCut extends React.Component {
 
     render() {
         const { inValue, outValue } = this.getFormatedValues();
-        const { videoDuration, isEditing, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
+        const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
         const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, } = this.props;
 
         return (
             <div css={css`${styles}`}> 
-                <div className={`dnm-video-cut-root ${classes.root || ""} ${isEditing ? "is-editing" : ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
+                <div className={`dnm-video-cut-root ${classes.root || ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
                     <video 
                         className={`dnm-video-cut-player ${classes.player || ""}`}
                         src={`${src}`}
@@ -294,13 +295,21 @@ export default class DnmVideoCut extends React.Component {
                         onLoadedData={this.handleLoadedData}
                         onLoad={this.handleVideoLoad}
                         onError={this.handleVideoPlayerError}
+                        preload="auto"
                     />
                     <div>
                         <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                             {isPlaying ? <PauseIcon /> : <PlayIcon /> }
                         </div>
                         <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
-                            <div className="dnm-video-cut-progress-container" style={{ width: `calc(${zoomFactor[0] + 100}% - 20px)` }} onTouchStart={this.handleContainerMouseDown} onTouchEnd={this.handleContainerMouseUp} onMouseDown={this.handleContainerMouseDown} onMouseUp={this.handleContainerMouseUp}>
+                            <div 
+                                className="dnm-video-cut-progress-container" 
+                                style={{ width: `calc(${zoomFactor[0] + 100}% - 20px)` }} 
+                                onTouchMove={this.handleContainerMouseDown} 
+                                onTouchEnd={this.handleContainerMouseUp} 
+                                onMouseDown={this.handleContainerMouseDown} 
+                                onMouseUp={this.handleContainerMouseUp}
+                            >
                                 <Draggable 
                                     className="dnm-video-cut-playing-cursor-draggable-item"
                                     axis="x" 
