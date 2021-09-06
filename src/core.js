@@ -11,7 +11,7 @@ import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
 import ZoomIcon from './lib/svg/zoom';
 import { throttle } from 'lodash-es';
-
+import Waveform from './lib/Waveform';
 
 const Range = Slider.Range;
 export default class DnmVideoCut extends React.Component {
@@ -30,7 +30,7 @@ export default class DnmVideoCut extends React.Component {
                 yRatio: 0
             }
         }
-        this.videoRef = React.createRef();
+        this.playerRef = React.createRef();
         this.scrollable = React.createRef();
         this.draggable = React.createRef();
         this.draggableApi = null;
@@ -70,7 +70,7 @@ export default class DnmVideoCut extends React.Component {
 
     _seekVideoTo(time) {
         if (!isNaN(time)) {
-            const video = this.videoRef.current;
+            const video = this.playerRef.current;
             if(video) video.currentTime = time;
         }
     }
@@ -120,7 +120,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     toggleVideoAutoPlay = (playInArea) => {
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if(video) {
             if(video.paused) {
                 this.playVideo();
@@ -131,7 +131,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     monitorAutoplay = (playInArea = true) => {
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if(video && !video.paused) {
             if(playInArea === true) {
                 const { inValue, outValue } = this.getFormatedValues(); 
@@ -144,7 +144,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     playVideo = () => {
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if(video) {
             video.play();
         }
@@ -152,7 +152,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     pauseVideo = () => {
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if(video) {
             video.pause();
         }
@@ -161,7 +161,7 @@ export default class DnmVideoCut extends React.Component {
 
     updatePlayerVolume = () => {
         const { muted } = this.props;
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if(video) {
             video.volume = muted ? 0 : 0.5;
         }
@@ -177,7 +177,7 @@ export default class DnmVideoCut extends React.Component {
 
     updatePlayCursorPosition = (xRatio = null, autoScroll = false) => {
         if(xRatio === null) {
-            const video = this.videoRef.current;
+            const video = this.playerRef.current;
             const { videoDuration } = this.state;
             if(video && videoDuration) {
                 xRatio = video.currentTime / videoDuration;
@@ -192,7 +192,7 @@ export default class DnmVideoCut extends React.Component {
         })
     }
 
-    handleVideoPlayerError = event => {
+    handlePlayerError = event => {
         const { error } = event.target;
         if (error && error.code === 4) {
             const { onNotSupportedVideoLoad } = this.props;
@@ -211,7 +211,7 @@ export default class DnmVideoCut extends React.Component {
 
     handleLoadedData = () => {
         const { onVideoLoadedData } = this.props;
-        const video = this.videoRef.current;
+        const video = this.playerRef.current;
         if (video) {
             const { inPoint } = this.props;
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
@@ -253,6 +253,12 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ playCursorPosition: position });
     }
 
+    handleWaveformPositionChange = (position) => {
+        const { playCursorPosition } = this.state;
+        const { yRatio } = playCursorPosition;
+        this.setState({ playCursorPosition: { xRatio: position / 100, yRatio } });
+    }
+
     handleZoomFactorDragStart = () => this.setState({ forceCursorDragging: true });
     handleZoomFactorDragEnd = () => this.setState({ forceCursorDragging: false });
 
@@ -280,23 +286,47 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, } = this.props;
 
         return (
             <div css={css`${styles}`}> 
                 <div className={`dnm-video-cut-root ${classes.root || ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
-                    <video 
-                        className={`dnm-video-cut-player ${classes.player || ""}`}
-                        src={`${src}`}
-                        ref={this.videoRef}
-                        loop
-                        muted={muted}
-                        controls={false}
-                        onLoadedData={this.handleLoadedData}
-                        onLoad={this.handleVideoLoad}
-                        onError={this.handleVideoPlayerError}
-                        preload="auto"
-                    />
+                    {
+                        type === 'audio' ? (
+                            <React.Fragment>
+                                <Waveform 
+                                    src={src}
+                                    position={playCursorPosition.xRatio}
+                                    onPositionChange={this.handleWaveformPositionChange}
+                                    onRangeChange={this.handleRangeChange}
+                                    range={[inValue, outValue]} 
+                                />
+                                <audio 
+                                    className={`dnm-video-cut-audio-player ${classes.audioPlayer || ""}`}
+                                    src={src}
+                                    ref={this.playerRef}
+                                    loop
+                                    onLoadedData={this.handleLoadedData}
+                                    onLoad={this.handlePlayerLoad}
+                                    onError={this.handlePlayerError}
+                                    preload="auto"
+                                />
+                            </React.Fragment>
+                        ) : (
+                            <video 
+                                className={`dnm-video-cut-player ${classes.player || ""}`}
+                                src={src}
+                                ref={this.playerRef}
+                                loop
+                                muted={muted}
+                                controls={false}
+                                onLoadedData={this.handleLoadedData}
+                                onLoad={this.handlePlayerLoad}
+                                onError={this.handlePlayerError}
+                                preload="auto"
+                            />
+                        )
+                    }
                     <div>
                         <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
                             {isPlaying ? <PauseIcon /> : <PlayIcon /> }
@@ -336,17 +366,21 @@ export default class DnmVideoCut extends React.Component {
                             </div>
                         </div>
                         <div className="dnm-video-cut-tools">
-                            <div className="dnm-video-cut-mute">
-                                {
-                                    onMuteChange && (
-                                        <label className="dnm-video-cut-checkbox-container">
-                                            { catalogue.unmute }
-                                            <input type="checkbox" checked={!muted} onChange={this.handleMuteChange} />
-                                            <span className="dnm-video-cut-checkmark" />
-                                        </label>
-                                    )
-                                }
-                            </div>
+                            {
+                                type !== 'audio' ? (
+                                    <div className="dnm-video-cut-mute">
+                                        {
+                                            onMuteChange && (
+                                                <label className="dnm-video-cut-checkbox-container">
+                                                    { catalogue.unmute }
+                                                    <input type="checkbox" checked={!muted} onChange={this.handleMuteChange} />
+                                                    <span className="dnm-video-cut-checkmark" />
+                                                </label>
+                                            )
+                                        }
+                                    </div>
+                                ) : null
+                            }
                             <div className="dnm-video-cut-zoom">
                                 <Range 
                                     className={`dnm-video-cut-zoom-range ${classes.zoomRange || ""}`}

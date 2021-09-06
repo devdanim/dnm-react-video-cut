@@ -2,4 +2,5 @@
 .cache
 node_modules
 examples/video.*
+examples/music.*
 examples/dev

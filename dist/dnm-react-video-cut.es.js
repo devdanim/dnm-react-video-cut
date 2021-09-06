@@ -11205,7 +11205,7 @@ Slider$1.Handle = Handle;
 Slider$1.createSliderWithTooltip = createSliderWithTooltip;
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: rgb(197, 203, 212);\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: rgb(197, 203, 212);\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n  \n  .dnm-video-cut-player {\n    opacity: 1;\n    width: 100%;\n    max-height: 60vh;\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n\n  .dnm-video-cut-progress-scrollable-parent {\n    width: calc(100% - 45px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 5px;\n    padding-top: 10px;\n    overflow-x: scroll;\n  }\n\n  .dnm-video-cut-progress-container {\n    width: calc(500% - 20px);\n    margin-left: 10px;\n    padding-right: 10px;\n    height: 28px;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 30px;\n    height: 30px;\n    display: inline-block;\n    position: relative;\n    bottom: 20px;\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n  }\n  \n  .dnm-video-cut-play-icon svg {\n    color: white;\n    width: 12px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {\n    left: 9px;\n    top: 8px; \n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {\n    left: 10px;\n    top: 8px;\n  }\n  \n  .dnm-video-cut-play-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }\n\n  .clearfix::after {\n    content: \"\";\n    clear: both;\n    display: table;\n  }\n\n  .dnm-video-cut-tools {\n    margin-top: 5px;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 17px;\n  }\n  \n  .dnm-video-cut-zoom {\n    float: right;\n    width: 30%;\n    max-width: 200px;\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 18px;\n    display: inline-block;\n    margin-left: 10px;\n  }\n\n  .dnm-video-cut-zoom-range {\n    width: calc(100% - 28px);\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon svg {\n    color: rgb(168, 173, 181);\n  }\n\n  .dnm-video-cut-mute {\n    display: inline-block;\n    float: left;\n  }\n\n  .dnm-video-cut-checkbox-container {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    padding-top: 3px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 18px;\n    color: rgb(158 162 169);\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n  }\n\n  .dnm-video-cut-checkbox-container input {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n    height: 0;\n    width: 0;\n  }\n\n  .dnm-video-cut-checkmark {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n    background-color: rgb(229, 233, 240);\n    border-radius: 5px;\n  }\n\n  .dnm-video-cut-checkbox-container:hover input ~ .dnm-video-cut-checkmark {\n    background-color: rgb(197, 203, 212);\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark {\n    background-color: #92d275;\n  }\n\n  .dnm-video-cut-checkmark:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark:after {\n    display: block;\n  }\n\n  .dnm-video-cut-checkbox-container .dnm-video-cut-checkmark:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    -ms-transform: rotate(45deg);\n    transform: rotate(45deg);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: rgb(197, 203, 212);\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: rgb(197, 203, 212);\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n  \n  .dnm-video-cut-player {\n    opacity: 1;\n    width: 100%;\n    max-height: 60vh;\n  }\n\n  .dnm-video-cut-audio-player {\n    display: none;\n  }\n\n  .dnm-video-cut-audio-waveform {\n    width: 100%;\n    padding: 0;\n    margin: 0;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-region {\n    z-index: 3 !important;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-handle {\n    background-color: rgba(146, 210, 117, 0.9) !important;\n    width: 4px !important;\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n\n  .dnm-video-cut-progress-scrollable-parent {\n    width: calc(100% - 45px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 5px;\n    padding-top: 10px;\n    overflow-x: scroll;\n  }\n\n  .dnm-video-cut-progress-container {\n    width: calc(500% - 20px);\n    margin-left: 10px;\n    padding-right: 10px;\n    height: 28px;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 30px;\n    height: 30px;\n    display: inline-block;\n    position: relative;\n    bottom: 20px;\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n  }\n  \n  .dnm-video-cut-play-icon svg {\n    color: white;\n    width: 12px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {\n    left: 9px;\n    top: 8px; \n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {\n    left: 10px;\n    top: 8px;\n  }\n  \n  .dnm-video-cut-play-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }\n\n  .clearfix::after {\n    content: \"\";\n    clear: both;\n    display: table;\n  }\n\n  .dnm-video-cut-tools {\n    margin-top: 5px;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 17px;\n  }\n  \n  .dnm-video-cut-zoom {\n    float: right;\n    width: 30%;\n    max-width: 200px;\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon {\n    width: 18px;\n    display: inline-block;\n    margin-left: 10px;\n  }\n\n  .dnm-video-cut-zoom-range {\n    width: calc(100% - 28px);\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon svg {\n    color: rgb(168, 173, 181);\n  }\n\n  .dnm-video-cut-mute {\n    display: inline-block;\n    float: left;\n  }\n\n  .dnm-video-cut-checkbox-container {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    padding-top: 3px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 18px;\n    color: rgb(158 162 169);\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n  }\n\n  .dnm-video-cut-checkbox-container input {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n    height: 0;\n    width: 0;\n  }\n\n  .dnm-video-cut-checkmark {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n    background-color: rgb(229, 233, 240);\n    border-radius: 5px;\n  }\n\n  .dnm-video-cut-checkbox-container:hover input ~ .dnm-video-cut-checkmark {\n    background-color: rgb(197, 203, 212);\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark {\n    background-color: #92d275;\n  }\n\n  .dnm-video-cut-checkmark:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark:after {\n    display: block;\n  }\n\n  .dnm-video-cut-checkbox-container .dnm-video-cut-checkmark:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    -ms-transform: rotate(45deg);\n    transform: rotate(45deg);\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -16248,7 +16248,7 @@ function getAllKeysIn(object) {
 var DataView = getNative(root$1, 'DataView');
 
 /* Built-in method references that are verified to be native. */
-var Promise = getNative(root$1, 'Promise');
+var Promise$1 = getNative(root$1, 'Promise');
 
 /* Built-in method references that are verified to be native. */
 var Set = getNative(root$1, 'Set');
@@ -16265,7 +16265,7 @@ var dataViewTag$1 = '[object DataView]';
 /** Used to detect maps, sets, and weakmaps. */
 var dataViewCtorString = toSource(DataView),
     mapCtorString = toSource(Map$1),
-    promiseCtorString = toSource(Promise),
+    promiseCtorString = toSource(Promise$1),
     setCtorString = toSource(Set),
     weakMapCtorString = toSource(WeakMap$1);
 
@@ -16281,7 +16281,7 @@ var getTag = baseGetTag;
 // Fallback for data views, maps, sets, and weak maps in IE 11 and promises in Node.js < 6.
 if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag$1) ||
     (Map$1 && getTag(new Map$1) != mapTag$1) ||
-    (Promise && getTag(Promise.resolve()) != promiseTag) ||
+    (Promise$1 && getTag(Promise$1.resolve()) != promiseTag) ||
     (Set && getTag(new Set) != setTag$1) ||
     (WeakMap$1 && getTag(new WeakMap$1) != weakMapTag$1)) {
   getTag = function(value) {
@@ -16330,7 +16330,7 @@ function initCloneArray(array) {
 }
 
 /** Built-in value references. */
-var Uint8Array = root$1.Uint8Array;
+var Uint8Array$1 = root$1.Uint8Array;
 
 /**
  * Creates a clone of `arrayBuffer`.
@@ -16341,7 +16341,7 @@ var Uint8Array = root$1.Uint8Array;
  */
 function cloneArrayBuffer(arrayBuffer) {
   var result = new arrayBuffer.constructor(arrayBuffer.byteLength);
-  new Uint8Array(result).set(new Uint8Array(arrayBuffer));
+  new Uint8Array$1(result).set(new Uint8Array$1(arrayBuffer));
   return result;
 }
 
@@ -17182,7 +17182,7 @@ function equalByTag(object, other, tag, bitmask, customizer, equalFunc, stack) {
 
     case arrayBufferTag$3:
       if ((object.byteLength != other.byteLength) ||
-          !equalFunc(new Uint8Array(object), new Uint8Array(other))) {
+          !equalFunc(new Uint8Array$1(object), new Uint8Array$1(other))) {
         return false;
       }
       return true;
@@ -29518,6 +29518,9851 @@ var ZoomIcon = /*#__PURE__*/function (_React$Component) {
   return ZoomIcon;
 }(React.Component);
 
+var commonjsGlobal$1 = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+function unwrapExports$1 (x) {
+	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
+}
+
+function createCommonjsModule$1(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var wavesurfer = createCommonjsModule$1(function (module, exports) {
+/*!
+ * wavesurfer.js 4.1.1 (2020-09-25)
+ * https://wavesurfer-js.org
+ * @license BSD-3-Clause
+ */
+(function webpackUniversalModuleDefinition(root, factory) {
+	module.exports = factory();
+})(commonjsGlobal$1, function() {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/wavesurfer.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./node_modules/debounce/index.js":
+/*!****************************************!*\
+  !*** ./node_modules/debounce/index.js ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+/**
+ * Returns a function, that, as long as it continues to be invoked, will not
+ * be triggered. The function will be called after it stops being called for
+ * N milliseconds. If `immediate` is passed, trigger the function on the
+ * leading edge, instead of the trailing. The function also has a property 'clear' 
+ * that is a function which will clear the timer to prevent previously scheduled executions. 
+ *
+ * @source underscore.js
+ * @see http://unscriptable.com/2009/03/20/debouncing-javascript-methods/
+ * @param {Function} function to wrap
+ * @param {Number} timeout in ms (`100`)
+ * @param {Boolean} whether to execute at the beginning (`false`)
+ * @api public
+ */
+function debounce(func, wait, immediate){
+  var timeout, args, context, timestamp, result;
+  if (null == wait) wait = 100;
+
+  function later() {
+    var last = Date.now() - timestamp;
+
+    if (last < wait && last >= 0) {
+      timeout = setTimeout(later, wait - last);
+    } else {
+      timeout = null;
+      if (!immediate) {
+        result = func.apply(context, args);
+        context = args = null;
+      }
+    }
+  }
+  var debounced = function(){
+    context = this;
+    args = arguments;
+    timestamp = Date.now();
+    var callNow = immediate && !timeout;
+    if (!timeout) timeout = setTimeout(later, wait);
+    if (callNow) {
+      result = func.apply(context, args);
+      context = args = null;
+    }
+
+    return result;
+  };
+
+  debounced.clear = function() {
+    if (timeout) {
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+  
+  debounced.flush = function() {
+    if (timeout) {
+      result = func.apply(context, args);
+      context = args = null;
+      
+      clearTimeout(timeout);
+      timeout = null;
+    }
+  };
+
+  return debounced;
+}
+// Adds compatibility for ES modules
+debounce.debounce = debounce;
+
+module.exports = debounce;
+
+
+/***/ }),
+
+/***/ "./src/drawer.canvasentry.js":
+/*!***********************************!*\
+  !*** ./src/drawer.canvasentry.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _style = _interopRequireDefault(__webpack_require__(/*! ./util/style */ "./src/util/style.js"));
+
+var _getId = _interopRequireDefault(__webpack_require__(/*! ./util/get-id */ "./src/util/get-id.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+ * The `CanvasEntry` class represents an element consisting of a wave `canvas`
+ * and an (optional) progress wave `canvas`.
+ *
+ * The `MultiCanvas` renderer uses one or more `CanvasEntry` instances to
+ * render a waveform, depending on the zoom level.
+ */
+var CanvasEntry = /*#__PURE__*/function () {
+  function CanvasEntry() {
+    _classCallCheck(this, CanvasEntry);
+
+    /**
+     * The wave node
+     *
+     * @type {HTMLCanvasElement}
+     */
+    this.wave = null;
+    /**
+     * The wave canvas rendering context
+     *
+     * @type {CanvasRenderingContext2D}
+     */
+
+    this.waveCtx = null;
+    /**
+     * The (optional) progress wave node
+     *
+     * @type {HTMLCanvasElement}
+     */
+
+    this.progress = null;
+    /**
+     * The (optional) progress wave canvas rendering context
+     *
+     * @type {CanvasRenderingContext2D}
+     */
+
+    this.progressCtx = null;
+    /**
+     * Start of the area the canvas should render, between 0 and 1
+     *
+     * @type {number}
+     */
+
+    this.start = 0;
+    /**
+     * End of the area the canvas should render, between 0 and 1
+     *
+     * @type {number}
+     */
+
+    this.end = 1;
+    /**
+     * Unique identifier for this entry
+     *
+     * @type {string}
+     */
+
+    this.id = (0, _getId.default)(typeof this.constructor.name !== 'undefined' ? this.constructor.name.toLowerCase() + '_' : 'canvasentry_');
+    /**
+     * Canvas 2d context attributes
+     *
+     * @type {object}
+     */
+
+    this.canvasContextAttributes = {};
+  }
+  /**
+   * Store the wave canvas element and create the 2D rendering context
+   *
+   * @param {HTMLCanvasElement} element The wave `canvas` element.
+   */
+
+
+  _createClass(CanvasEntry, [{
+    key: "initWave",
+    value: function initWave(element) {
+      this.wave = element;
+      this.waveCtx = this.wave.getContext('2d', this.canvasContextAttributes);
+    }
+    /**
+     * Store the progress wave canvas element and create the 2D rendering
+     * context
+     *
+     * @param {HTMLCanvasElement} element The progress wave `canvas` element.
+     */
+
+  }, {
+    key: "initProgress",
+    value: function initProgress(element) {
+      this.progress = element;
+      this.progressCtx = this.progress.getContext('2d', this.canvasContextAttributes);
+    }
+    /**
+     * Update the dimensions
+     *
+     * @param {number} elementWidth Width of the entry
+     * @param {number} totalWidth Total width of the multi canvas renderer
+     * @param {number} width The new width of the element
+     * @param {number} height The new height of the element
+     */
+
+  }, {
+    key: "updateDimensions",
+    value: function updateDimensions(elementWidth, totalWidth, width, height) {
+      // where the canvas starts and ends in the waveform, represented as a
+      // decimal between 0 and 1
+      this.start = this.wave.offsetLeft / totalWidth || 0;
+      this.end = this.start + elementWidth / totalWidth; // set wave canvas dimensions
+
+      this.wave.width = width;
+      this.wave.height = height;
+      var elementSize = {
+        width: elementWidth + 'px'
+      };
+      (0, _style.default)(this.wave, elementSize);
+
+      if (this.hasProgressCanvas) {
+        // set progress canvas dimensions
+        this.progress.width = width;
+        this.progress.height = height;
+        (0, _style.default)(this.progress, elementSize);
+      }
+    }
+    /**
+     * Clear the wave and progress rendering contexts
+     */
+
+  }, {
+    key: "clearWave",
+    value: function clearWave() {
+      // wave
+      this.waveCtx.clearRect(0, 0, this.waveCtx.canvas.width, this.waveCtx.canvas.height); // progress
+
+      if (this.hasProgressCanvas) {
+        this.progressCtx.clearRect(0, 0, this.progressCtx.canvas.width, this.progressCtx.canvas.height);
+      }
+    }
+    /**
+     * Set the fill styles for wave and progress
+     *
+     * @param {string} waveColor Fill color for the wave canvas
+     * @param {?string} progressColor Fill color for the progress canvas
+     */
+
+  }, {
+    key: "setFillStyles",
+    value: function setFillStyles(waveColor, progressColor) {
+      this.waveCtx.fillStyle = waveColor;
+
+      if (this.hasProgressCanvas) {
+        this.progressCtx.fillStyle = progressColor;
+      }
+    }
+    /**
+     * Draw a rectangle for wave and progress
+     *
+     * @param {number} x X start position
+     * @param {number} y Y start position
+     * @param {number} width Width of the rectangle
+     * @param {number} height Height of the rectangle
+     * @param {number} radius Radius of the rectangle
+     */
+
+  }, {
+    key: "fillRects",
+    value: function fillRects(x, y, width, height, radius) {
+      this.fillRectToContext(this.waveCtx, x, y, width, height, radius);
+
+      if (this.hasProgressCanvas) {
+        this.fillRectToContext(this.progressCtx, x, y, width, height, radius);
+      }
+    }
+    /**
+     * Draw the actual rectangle on a `canvas` element
+     *
+     * @param {CanvasRenderingContext2D} ctx Rendering context of target canvas
+     * @param {number} x X start position
+     * @param {number} y Y start position
+     * @param {number} width Width of the rectangle
+     * @param {number} height Height of the rectangle
+     * @param {number} radius Radius of the rectangle
+     */
+
+  }, {
+    key: "fillRectToContext",
+    value: function fillRectToContext(ctx, x, y, width, height, radius) {
+      if (!ctx) {
+        return;
+      }
+
+      if (radius) {
+        this.drawRoundedRect(ctx, x, y, width, height, radius);
+      } else {
+        ctx.fillRect(x, y, width, height);
+      }
+    }
+    /**
+     * Draw a rounded rectangle on Canvas
+     *
+     * @param {CanvasRenderingContext2D} ctx Canvas context
+     * @param {number} x X-position of the rectangle
+     * @param {number} y Y-position of the rectangle
+     * @param {number} width Width of the rectangle
+     * @param {number} height Height of the rectangle
+     * @param {number} radius Radius of the rectangle
+     *
+     * @return {void}
+     * @example drawRoundedRect(ctx, 50, 50, 5, 10, 3)
+     */
+
+  }, {
+    key: "drawRoundedRect",
+    value: function drawRoundedRect(ctx, x, y, width, height, radius) {
+      if (height === 0) {
+        return;
+      } // peaks are float values from -1 to 1. Use absolute height values in
+      // order to correctly calculate rounded rectangle coordinates
+
+
+      if (height < 0) {
+        height *= -1;
+        y -= height;
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+    /**
+     * Render the actual wave and progress lines
+     *
+     * @param {number[]} peaks Array with peaks data
+     * @param {number} absmax Maximum peak value (absolute)
+     * @param {number} halfH Half the height of the waveform
+     * @param {number} offsetY Offset to the top
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that
+     * should be rendered
+     */
+
+  }, {
+    key: "drawLines",
+    value: function drawLines(peaks, absmax, halfH, offsetY, start, end) {
+      this.drawLineToContext(this.waveCtx, peaks, absmax, halfH, offsetY, start, end);
+
+      if (this.hasProgressCanvas) {
+        this.drawLineToContext(this.progressCtx, peaks, absmax, halfH, offsetY, start, end);
+      }
+    }
+    /**
+     * Render the actual waveform line on a `canvas` element
+     *
+     * @param {CanvasRenderingContext2D} ctx Rendering context of target canvas
+     * @param {number[]} peaks Array with peaks data
+     * @param {number} absmax Maximum peak value (absolute)
+     * @param {number} halfH Half the height of the waveform
+     * @param {number} offsetY Offset to the top
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that
+     * should be rendered
+     */
+
+  }, {
+    key: "drawLineToContext",
+    value: function drawLineToContext(ctx, peaks, absmax, halfH, offsetY, start, end) {
+      if (!ctx) {
+        return;
+      }
+
+      var length = peaks.length / 2;
+      var first = Math.round(length * this.start); // use one more peak value to make sure we join peaks at ends -- unless,
+      // of course, this is the last canvas
+
+      var last = Math.round(length * this.end) + 1;
+      var canvasStart = first;
+      var canvasEnd = last;
+      var scale = this.wave.width / (canvasEnd - canvasStart - 1); // optimization
+
+      var halfOffset = halfH + offsetY;
+      var absmaxHalf = absmax / halfH;
+      ctx.beginPath();
+      ctx.moveTo((canvasStart - first) * scale, halfOffset);
+      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart] || 0) / absmaxHalf));
+      var i, peak, h;
+
+      for (i = canvasStart; i < canvasEnd; i++) {
+        peak = peaks[2 * i] || 0;
+        h = Math.round(peak / absmaxHalf);
+        ctx.lineTo((i - first) * scale + this.halfPixel, halfOffset - h);
+      } // draw the bottom edge going backwards, to make a single
+      // closed hull to fill
+
+
+      var j = canvasEnd - 1;
+
+      for (j; j >= canvasStart; j--) {
+        peak = peaks[2 * j + 1] || 0;
+        h = Math.round(peak / absmaxHalf);
+        ctx.lineTo((j - first) * scale + this.halfPixel, halfOffset - h);
+      }
+
+      ctx.lineTo((canvasStart - first) * scale, halfOffset - Math.round((peaks[2 * canvasStart + 1] || 0) / absmaxHalf));
+      ctx.closePath();
+      ctx.fill();
+    }
+    /**
+     * Destroys this entry
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.waveCtx = null;
+      this.wave = null;
+      this.progressCtx = null;
+      this.progress = null;
+    }
+    /**
+     * Return image data of the wave `canvas` element
+     *
+     * When using a `type` of `'blob'`, this will return a `Promise` that
+     * resolves with a `Blob` instance.
+     *
+     * @param {string} format='image/png' An optional value of a format type.
+     * @param {number} quality=0.92 An optional value between 0 and 1.
+     * @param {string} type='dataURL' Either 'dataURL' or 'blob'.
+     * @return {string|Promise} When using the default `'dataURL'` `type` this
+     * returns a data URL. When using the `'blob'` `type` this returns a
+     * `Promise` that resolves with a `Blob` instance.
+     */
+
+  }, {
+    key: "getImage",
+    value: function getImage(format, quality, type) {
+      var _this = this;
+
+      if (type === 'blob') {
+        return new Promise(function (resolve) {
+          _this.wave.toBlob(resolve, format, quality);
+        });
+      } else if (type === 'dataURL') {
+        return this.wave.toDataURL(format, quality);
+      }
+    }
+  }]);
+
+  return CanvasEntry;
+}();
+
+exports.default = CanvasEntry;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/drawer.js":
+/*!***********************!*\
+  !*** ./src/drawer.js ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * Parent class for renderers
+ *
+ * @extends {Observer}
+ */
+var Drawer = /*#__PURE__*/function (_util$Observer) {
+  _inherits(Drawer, _util$Observer);
+
+  var _super = _createSuper(Drawer);
+
+  /**
+   * @param {HTMLElement} container The container node of the wavesurfer instance
+   * @param {WavesurferParams} params The wavesurfer initialisation options
+   */
+  function Drawer(container, params) {
+    var _this;
+
+    _classCallCheck(this, Drawer);
+
+    _this = _super.call(this);
+    _this.container = container;
+    /**
+     * @type {WavesurferParams}
+     */
+
+    _this.params = params;
+    /**
+     * The width of the renderer
+     * @type {number}
+     */
+
+    _this.width = 0;
+    /**
+     * The height of the renderer
+     * @type {number}
+     */
+
+    _this.height = params.height * _this.params.pixelRatio;
+    _this.lastPos = 0;
+    /**
+     * The `<wave>` element which is added to the container
+     * @type {HTMLElement}
+     */
+
+    _this.wrapper = null;
+    return _this;
+  }
+  /**
+   * Alias of `util.style`
+   *
+   * @param {HTMLElement} el The element that the styles will be applied to
+   * @param {Object} styles The map of propName: attribute, both are used as-is
+   * @return {HTMLElement} el
+   */
+
+
+  _createClass(Drawer, [{
+    key: "style",
+    value: function style(el, styles) {
+      return util.style(el, styles);
+    }
+    /**
+     * Create the wrapper `<wave>` element, style it and set up the events for
+     * interaction
+     */
+
+  }, {
+    key: "createWrapper",
+    value: function createWrapper() {
+      this.wrapper = this.container.appendChild(document.createElement('wave'));
+      this.style(this.wrapper, {
+        display: 'block',
+        position: 'relative',
+        userSelect: 'none',
+        webkitUserSelect: 'none',
+        height: this.params.height + 'px'
+      });
+
+      if (this.params.fillParent || this.params.scrollParent) {
+        this.style(this.wrapper, {
+          width: '100%',
+          overflowX: this.params.hideScrollbar ? 'hidden' : 'auto',
+          overflowY: 'hidden'
+        });
+      }
+
+      this.setupWrapperEvents();
+    }
+    /**
+     * Handle click event
+     *
+     * @param {Event} e Click event
+     * @param {?boolean} noPrevent Set to true to not call `e.preventDefault()`
+     * @return {number} Playback position from 0 to 1
+     */
+
+  }, {
+    key: "handleEvent",
+    value: function handleEvent(e, noPrevent) {
+      !noPrevent && e.preventDefault();
+      var clientX = e.targetTouches ? e.targetTouches[0].clientX : e.clientX;
+      var bbox = this.wrapper.getBoundingClientRect();
+      var nominalWidth = this.width;
+      var parentWidth = this.getWidth();
+      var progress;
+
+      if (!this.params.fillParent && nominalWidth < parentWidth) {
+        progress = (this.params.rtl ? bbox.right - clientX : clientX - bbox.left) * (this.params.pixelRatio / nominalWidth) || 0;
+      } else {
+        progress = ((this.params.rtl ? bbox.right - clientX : clientX - bbox.left) + this.wrapper.scrollLeft) / this.wrapper.scrollWidth || 0;
+      }
+
+      return util.clamp(progress, 0, 1);
+    }
+  }, {
+    key: "setupWrapperEvents",
+    value: function setupWrapperEvents() {
+      var _this2 = this;
+
+      this.wrapper.addEventListener('click', function (e) {
+        var scrollbarHeight = _this2.wrapper.offsetHeight - _this2.wrapper.clientHeight;
+
+        if (scrollbarHeight !== 0) {
+          // scrollbar is visible.  Check if click was on it
+          var bbox = _this2.wrapper.getBoundingClientRect();
+
+          if (e.clientY >= bbox.bottom - scrollbarHeight) {
+            // ignore mousedown as it was on the scrollbar
+            return;
+          }
+        }
+
+        if (_this2.params.interact) {
+          _this2.fireEvent('click', e, _this2.handleEvent(e));
+        }
+      });
+      this.wrapper.addEventListener('dblclick', function (e) {
+        if (_this2.params.interact) {
+          _this2.fireEvent('dblclick', e, _this2.handleEvent(e));
+        }
+      });
+      this.wrapper.addEventListener('scroll', function (e) {
+        return _this2.fireEvent('scroll', e);
+      });
+    }
+    /**
+     * Draw peaks on the canvas
+     *
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
+     * for split channel rendering
+     * @param {number} length The width of the area that should be drawn
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that should be
+     * rendered
+     */
+
+  }, {
+    key: "drawPeaks",
+    value: function drawPeaks(peaks, length, start, end) {
+      if (!this.setWidth(length)) {
+        this.clearWave();
+      }
+
+      this.params.barWidth ? this.drawBars(peaks, 0, start, end) : this.drawWave(peaks, 0, start, end);
+    }
+    /**
+     * Scroll to the beginning
+     */
+
+  }, {
+    key: "resetScroll",
+    value: function resetScroll() {
+      if (this.wrapper !== null) {
+        this.wrapper.scrollLeft = 0;
+      }
+    }
+    /**
+     * Recenter the view-port at a certain percent of the waveform
+     *
+     * @param {number} percent Value from 0 to 1 on the waveform
+     */
+
+  }, {
+    key: "recenter",
+    value: function recenter(percent) {
+      var position = this.wrapper.scrollWidth * percent;
+      this.recenterOnPosition(position, true);
+    }
+    /**
+     * Recenter the view-port on a position, either scroll there immediately or
+     * in steps of 5 pixels
+     *
+     * @param {number} position X-offset in pixels
+     * @param {boolean} immediate Set to true to immediately scroll somewhere
+     */
+
+  }, {
+    key: "recenterOnPosition",
+    value: function recenterOnPosition(position, immediate) {
+      var scrollLeft = this.wrapper.scrollLeft;
+      var half = ~~(this.wrapper.clientWidth / 2);
+      var maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
+      var target = position - half;
+      var offset = target - scrollLeft;
+
+      if (maxScroll == 0) {
+        // no need to continue if scrollbar is not there
+        return;
+      } // if the cursor is currently visible...
+
+
+      if (!immediate && -half <= offset && offset < half) {
+        // set rate at which waveform is centered
+        var rate = this.params.autoCenterRate; // make rate depend on width of view and length of waveform
+
+        rate /= half;
+        rate *= maxScroll;
+        offset = Math.max(-rate, Math.min(rate, offset));
+        target = scrollLeft + offset;
+      } // limit target to valid range (0 to maxScroll)
+
+
+      target = Math.max(0, Math.min(maxScroll, target)); // no use attempting to scroll if we're not moving
+
+      if (target != scrollLeft) {
+        this.wrapper.scrollLeft = target;
+      }
+    }
+    /**
+     * Get the current scroll position in pixels
+     *
+     * @return {number} Horizontal scroll position in pixels
+     */
+
+  }, {
+    key: "getScrollX",
+    value: function getScrollX() {
+      var x = 0;
+
+      if (this.wrapper) {
+        var pixelRatio = this.params.pixelRatio;
+        x = Math.round(this.wrapper.scrollLeft * pixelRatio); // In cases of elastic scroll (safari with mouse wheel) you can
+        // scroll beyond the limits of the container
+        // Calculate and floor the scrollable extent to make sure an out
+        // of bounds value is not returned
+        // Ticket #1312
+
+        if (this.params.scrollParent) {
+          var maxScroll = ~~(this.wrapper.scrollWidth * pixelRatio - this.getWidth());
+          x = Math.min(maxScroll, Math.max(0, x));
+        }
+      }
+
+      return x;
+    }
+    /**
+     * Get the width of the container
+     *
+     * @return {number} The width of the container
+     */
+
+  }, {
+    key: "getWidth",
+    value: function getWidth() {
+      return Math.round(this.container.clientWidth * this.params.pixelRatio);
+    }
+    /**
+     * Set the width of the container
+     *
+     * @param {number} width The new width of the container
+     * @return {boolean} Whether the width of the container was updated or not
+     */
+
+  }, {
+    key: "setWidth",
+    value: function setWidth(width) {
+      if (this.width == width) {
+        return false;
+      }
+
+      this.width = width;
+
+      if (this.params.fillParent || this.params.scrollParent) {
+        this.style(this.wrapper, {
+          width: ''
+        });
+      } else {
+        this.style(this.wrapper, {
+          width: ~~(this.width / this.params.pixelRatio) + 'px'
+        });
+      }
+
+      this.updateSize();
+      return true;
+    }
+    /**
+     * Set the height of the container
+     *
+     * @param {number} height The new height of the container.
+     * @return {boolean} Whether the height of the container was updated or not
+     */
+
+  }, {
+    key: "setHeight",
+    value: function setHeight(height) {
+      if (height == this.height) {
+        return false;
+      }
+
+      this.height = height;
+      this.style(this.wrapper, {
+        height: ~~(this.height / this.params.pixelRatio) + 'px'
+      });
+      this.updateSize();
+      return true;
+    }
+    /**
+     * Called by wavesurfer when progress should be rendered
+     *
+     * @param {number} progress From 0 to 1
+     */
+
+  }, {
+    key: "progress",
+    value: function progress(_progress) {
+      var minPxDelta = 1 / this.params.pixelRatio;
+      var pos = Math.round(_progress * this.width) * minPxDelta;
+
+      if (pos < this.lastPos || pos - this.lastPos >= minPxDelta) {
+        this.lastPos = pos;
+
+        if (this.params.scrollParent && this.params.autoCenter) {
+          var newPos = ~~(this.wrapper.scrollWidth * _progress);
+          this.recenterOnPosition(newPos, this.params.autoCenterImmediately);
+        }
+
+        this.updateProgress(pos);
+      }
+    }
+    /**
+     * This is called when wavesurfer is destroyed
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.unAll();
+
+      if (this.wrapper) {
+        if (this.wrapper.parentNode == this.container) {
+          this.container.removeChild(this.wrapper);
+        }
+
+        this.wrapper = null;
+      }
+    }
+    /* Renderer-specific methods */
+
+    /**
+     * Called after cursor related params have changed.
+     *
+     * @abstract
+     */
+
+  }, {
+    key: "updateCursor",
+    value: function updateCursor() {}
+    /**
+     * Called when the size of the container changes so the renderer can adjust
+     *
+     * @abstract
+     */
+
+  }, {
+    key: "updateSize",
+    value: function updateSize() {}
+    /**
+     * Draw a waveform with bars
+     *
+     * @abstract
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for split channel
+     * rendering
+     * @param {number} channelIndex The index of the current channel. Normally
+     * should be 0
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that should be
+     * rendered
+     */
+
+  }, {
+    key: "drawBars",
+    value: function drawBars(peaks, channelIndex, start, end) {}
+    /**
+     * Draw a waveform
+     *
+     * @abstract
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for split channel
+     * rendering
+     * @param {number} channelIndex The index of the current channel. Normally
+     * should be 0
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that should be
+     * rendered
+     */
+
+  }, {
+    key: "drawWave",
+    value: function drawWave(peaks, channelIndex, start, end) {}
+    /**
+     * Clear the waveform
+     *
+     * @abstract
+     */
+
+  }, {
+    key: "clearWave",
+    value: function clearWave() {}
+    /**
+     * Render the new progress
+     *
+     * @abstract
+     * @param {number} position X-Offset of progress position in pixels
+     */
+
+  }, {
+    key: "updateProgress",
+    value: function updateProgress(position) {}
+  }]);
+
+  return Drawer;
+}(util.Observer);
+
+exports.default = Drawer;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/drawer.multicanvas.js":
+/*!***********************************!*\
+  !*** ./src/drawer.multicanvas.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _drawer = _interopRequireDefault(__webpack_require__(/*! ./drawer */ "./src/drawer.js"));
+
+var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
+
+var _drawer2 = _interopRequireDefault(__webpack_require__(/*! ./drawer.canvasentry */ "./src/drawer.canvasentry.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * MultiCanvas renderer for wavesurfer. Is currently the default and sole
+ * builtin renderer.
+ *
+ * A `MultiCanvas` consists of one or more `CanvasEntry` instances, depending
+ * on the zoom level.
+ */
+var MultiCanvas = /*#__PURE__*/function (_Drawer) {
+  _inherits(MultiCanvas, _Drawer);
+
+  var _super = _createSuper(MultiCanvas);
+
+  /**
+   * @param {HTMLElement} container The container node of the wavesurfer instance
+   * @param {WavesurferParams} params The wavesurfer initialisation options
+   */
+  function MultiCanvas(container, params) {
+    var _this;
+
+    _classCallCheck(this, MultiCanvas);
+
+    _this = _super.call(this, container, params);
+    /**
+     * @type {number}
+     */
+
+    _this.maxCanvasWidth = params.maxCanvasWidth;
+    /**
+     * @type {number}
+     */
+
+    _this.maxCanvasElementWidth = Math.round(params.maxCanvasWidth / params.pixelRatio);
+    /**
+     * Whether or not the progress wave is rendered. If the `waveColor`
+     * and `progressColor` are the same color it is not.
+     *
+     * @type {boolean}
+     */
+
+    _this.hasProgressCanvas = params.waveColor != params.progressColor;
+    /**
+     * @type {number}
+     */
+
+    _this.halfPixel = 0.5 / params.pixelRatio;
+    /**
+     * List of `CanvasEntry` instances.
+     *
+     * @type {Array}
+     */
+
+    _this.canvases = [];
+    /**
+     * @type {HTMLElement}
+     */
+
+    _this.progressWave = null;
+    /**
+     * Class used to generate entries.
+     *
+     * @type {function}
+     */
+
+    _this.EntryClass = _drawer2.default;
+    /**
+     * Canvas 2d context attributes.
+     *
+     * @type {object}
+     */
+
+    _this.canvasContextAttributes = params.drawingContextAttributes;
+    /**
+     * Overlap added between entries to prevent vertical white stripes
+     * between `canvas` elements.
+     *
+     * @type {number}
+     */
+
+    _this.overlap = 2 * Math.ceil(params.pixelRatio / 2);
+    /**
+     * The radius of the wave bars. Makes bars rounded
+     *
+     * @type {number}
+     */
+
+    _this.barRadius = params.barRadius || 0;
+    return _this;
+  }
+  /**
+   * Initialize the drawer
+   */
+
+
+  _createClass(MultiCanvas, [{
+    key: "init",
+    value: function init() {
+      this.createWrapper();
+      this.createElements();
+    }
+    /**
+     * Create the canvas elements and style them
+     *
+     */
+
+  }, {
+    key: "createElements",
+    value: function createElements() {
+      this.progressWave = this.wrapper.appendChild(this.style(document.createElement('wave'), {
+        position: 'absolute',
+        zIndex: 3,
+        left: 0,
+        top: 0,
+        bottom: 0,
+        overflow: 'hidden',
+        width: '0',
+        display: 'none',
+        boxSizing: 'border-box',
+        borderRightStyle: 'solid',
+        pointerEvents: 'none'
+      }));
+      this.addCanvas();
+      this.updateCursor();
+    }
+    /**
+     * Update cursor style
+     */
+
+  }, {
+    key: "updateCursor",
+    value: function updateCursor() {
+      this.style(this.progressWave, {
+        borderRightWidth: this.params.cursorWidth + 'px',
+        borderRightColor: this.params.cursorColor
+      });
+    }
+    /**
+     * Adjust to the updated size by adding or removing canvases
+     */
+
+  }, {
+    key: "updateSize",
+    value: function updateSize() {
+      var _this2 = this;
+
+      var totalWidth = Math.round(this.width / this.params.pixelRatio);
+      var requiredCanvases = Math.ceil(totalWidth / (this.maxCanvasElementWidth + this.overlap)); // add required canvases
+
+      while (this.canvases.length < requiredCanvases) {
+        this.addCanvas();
+      } // remove older existing canvases, if any
+
+
+      while (this.canvases.length > requiredCanvases) {
+        this.removeCanvas();
+      }
+
+      var canvasWidth = this.maxCanvasWidth + this.overlap;
+      var lastCanvas = this.canvases.length - 1;
+      this.canvases.forEach(function (entry, i) {
+        if (i == lastCanvas) {
+          canvasWidth = _this2.width - _this2.maxCanvasWidth * lastCanvas;
+        }
+
+        _this2.updateDimensions(entry, canvasWidth, _this2.height);
+
+        entry.clearWave();
+      });
+    }
+    /**
+     * Add a canvas to the canvas list
+     *
+     */
+
+  }, {
+    key: "addCanvas",
+    value: function addCanvas() {
+      var entry = new this.EntryClass();
+      entry.canvasContextAttributes = this.canvasContextAttributes;
+      entry.hasProgressCanvas = this.hasProgressCanvas;
+      entry.halfPixel = this.halfPixel;
+      var leftOffset = this.maxCanvasElementWidth * this.canvases.length; // wave
+
+      entry.initWave(this.wrapper.appendChild(this.style(document.createElement('canvas'), {
+        position: 'absolute',
+        zIndex: 2,
+        left: leftOffset + 'px',
+        top: 0,
+        bottom: 0,
+        height: '100%',
+        pointerEvents: 'none'
+      }))); // progress
+
+      if (this.hasProgressCanvas) {
+        entry.initProgress(this.progressWave.appendChild(this.style(document.createElement('canvas'), {
+          position: 'absolute',
+          left: leftOffset + 'px',
+          top: 0,
+          bottom: 0,
+          height: '100%'
+        })));
+      }
+
+      this.canvases.push(entry);
+    }
+    /**
+     * Pop single canvas from the list
+     *
+     */
+
+  }, {
+    key: "removeCanvas",
+    value: function removeCanvas() {
+      var lastEntry = this.canvases[this.canvases.length - 1]; // wave
+
+      lastEntry.wave.parentElement.removeChild(lastEntry.wave); // progress
+
+      if (this.hasProgressCanvas) {
+        lastEntry.progress.parentElement.removeChild(lastEntry.progress);
+      } // cleanup
+
+
+      if (lastEntry) {
+        lastEntry.destroy();
+        lastEntry = null;
+      }
+
+      this.canvases.pop();
+    }
+    /**
+     * Update the dimensions of a canvas element
+     *
+     * @param {CanvasEntry} entry Target entry
+     * @param {number} width The new width of the element
+     * @param {number} height The new height of the element
+     */
+
+  }, {
+    key: "updateDimensions",
+    value: function updateDimensions(entry, width, height) {
+      var elementWidth = Math.round(width / this.params.pixelRatio);
+      var totalWidth = Math.round(this.width / this.params.pixelRatio); // update canvas dimensions
+
+      entry.updateDimensions(elementWidth, totalWidth, width, height); // style element
+
+      this.style(this.progressWave, {
+        display: 'block'
+      });
+    }
+    /**
+     * Clear the whole multi-canvas
+     */
+
+  }, {
+    key: "clearWave",
+    value: function clearWave() {
+      var _this3 = this;
+
+      util.frame(function () {
+        _this3.canvases.forEach(function (entry) {
+          return entry.clearWave();
+        });
+      })();
+    }
+    /**
+     * Draw a waveform with bars
+     *
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
+     * for split channel rendering
+     * @param {number} channelIndex The index of the current channel. Normally
+     * should be 0. Must be an integer.
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that should be
+     * rendered
+     * @returns {void}
+     */
+
+  }, {
+    key: "drawBars",
+    value: function drawBars(peaks, channelIndex, start, end) {
+      var _this4 = this;
+
+      return this.prepareDraw(peaks, channelIndex, start, end, function (_ref) {
+        var absmax = _ref.absmax,
+            hasMinVals = _ref.hasMinVals,
+            height = _ref.height,
+            offsetY = _ref.offsetY,
+            halfH = _ref.halfH,
+            peaks = _ref.peaks;
+
+        // if drawBars was called within ws.empty we don't pass a start and
+        // don't want anything to happen
+        if (start === undefined) {
+          return;
+        } // Skip every other value if there are negatives.
+
+
+        var peakIndexScale = hasMinVals ? 2 : 1;
+        var length = peaks.length / peakIndexScale;
+        var bar = _this4.params.barWidth * _this4.params.pixelRatio;
+        var gap = _this4.params.barGap === null ? Math.max(_this4.params.pixelRatio, ~~(bar / 2)) : Math.max(_this4.params.pixelRatio, _this4.params.barGap * _this4.params.pixelRatio);
+        var step = bar + gap;
+        var scale = length / _this4.width;
+        var first = start;
+        var last = end;
+        var i = first;
+
+        for (i; i < last; i += step) {
+          var peak = peaks[Math.floor(i * scale * peakIndexScale)] || 0;
+          var h = Math.round(peak / absmax * halfH);
+          /* in case of silences, allow the user to specify that we
+           * always draw *something* (normally a 1px high bar) */
+
+          if (h == 0 && _this4.params.barMinHeight) h = _this4.params.barMinHeight;
+
+          _this4.fillRect(i + _this4.halfPixel, halfH - h + offsetY, bar + _this4.halfPixel, h * 2, _this4.barRadius);
+        }
+      });
+    }
+    /**
+     * Draw a waveform
+     *
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays
+     * for split channel rendering
+     * @param {number} channelIndex The index of the current channel. Normally
+     * should be 0
+     * @param {number?} start The x-offset of the beginning of the area that
+     * should be rendered (If this isn't set only a flat line is rendered)
+     * @param {number?} end The x-offset of the end of the area that should be
+     * rendered
+     * @returns {void}
+     */
+
+  }, {
+    key: "drawWave",
+    value: function drawWave(peaks, channelIndex, start, end) {
+      var _this5 = this;
+
+      return this.prepareDraw(peaks, channelIndex, start, end, function (_ref2) {
+        var absmax = _ref2.absmax,
+            hasMinVals = _ref2.hasMinVals,
+            height = _ref2.height,
+            offsetY = _ref2.offsetY,
+            halfH = _ref2.halfH,
+            peaks = _ref2.peaks,
+            channelIndex = _ref2.channelIndex;
+
+        if (!hasMinVals) {
+          var reflectedPeaks = [];
+          var len = peaks.length;
+          var i = 0;
+
+          for (i; i < len; i++) {
+            reflectedPeaks[2 * i] = peaks[i];
+            reflectedPeaks[2 * i + 1] = -peaks[i];
+          }
+
+          peaks = reflectedPeaks;
+        } // if drawWave was called within ws.empty we don't pass a start and
+        // end and simply want a flat line
+
+
+        if (start !== undefined) {
+          _this5.drawLine(peaks, absmax, halfH, offsetY, start, end, channelIndex);
+        } // always draw a median line
+
+
+        _this5.fillRect(0, halfH + offsetY - _this5.halfPixel, _this5.width, _this5.halfPixel, _this5.barRadius);
+      });
+    }
+    /**
+     * Tell the canvas entries to render their portion of the waveform
+     *
+     * @param {number[]} peaks Peaks data
+     * @param {number} absmax Maximum peak value (absolute)
+     * @param {number} halfH Half the height of the waveform
+     * @param {number} offsetY Offset to the top
+     * @param {number} start The x-offset of the beginning of the area that
+     * should be rendered
+     * @param {number} end The x-offset of the end of the area that
+     * should be rendered
+     * @param {channelIndex} channelIndex The channel index of the line drawn
+     */
+
+  }, {
+    key: "drawLine",
+    value: function drawLine(peaks, absmax, halfH, offsetY, start, end, channelIndex) {
+      var _this6 = this;
+
+      var _ref3 = this.params.splitChannelsOptions.channelColors[channelIndex] || {},
+          waveColor = _ref3.waveColor,
+          progressColor = _ref3.progressColor;
+
+      this.canvases.forEach(function (entry, i) {
+        _this6.setFillStyles(entry, waveColor, progressColor);
+
+        entry.drawLines(peaks, absmax, halfH, offsetY, start, end);
+      });
+    }
+    /**
+     * Draw a rectangle on the multi-canvas
+     *
+     * @param {number} x X-position of the rectangle
+     * @param {number} y Y-position of the rectangle
+     * @param {number} width Width of the rectangle
+     * @param {number} height Height of the rectangle
+     * @param {number} radius Radius of the rectangle
+     */
+
+  }, {
+    key: "fillRect",
+    value: function fillRect(x, y, width, height, radius) {
+      var startCanvas = Math.floor(x / this.maxCanvasWidth);
+      var endCanvas = Math.min(Math.ceil((x + width) / this.maxCanvasWidth) + 1, this.canvases.length);
+      var i = startCanvas;
+
+      for (i; i < endCanvas; i++) {
+        var entry = this.canvases[i];
+        var leftOffset = i * this.maxCanvasWidth;
+        var intersection = {
+          x1: Math.max(x, i * this.maxCanvasWidth),
+          y1: y,
+          x2: Math.min(x + width, i * this.maxCanvasWidth + entry.wave.width),
+          y2: y + height
+        };
+
+        if (intersection.x1 < intersection.x2) {
+          this.setFillStyles(entry);
+          entry.fillRects(intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1, radius);
+        }
+      }
+    }
+    /**
+     * Returns whether to hide the channel from being drawn based on params.
+     *
+     * @param {number} channelIndex The index of the current channel.
+     * @returns {bool} True to hide the channel, false to draw.
+     */
+
+  }, {
+    key: "hideChannel",
+    value: function hideChannel(channelIndex) {
+      return this.params.splitChannels && this.params.splitChannelsOptions.filterChannels.includes(channelIndex);
+    }
+    /**
+     * Performs preparation tasks and calculations which are shared by `drawBars`
+     * and `drawWave`
+     *
+     * @param {number[]|Number.<Array[]>} peaks Can also be an array of arrays for
+     * split channel rendering
+     * @param {number} channelIndex The index of the current channel. Normally
+     * should be 0
+     * @param {number?} start The x-offset of the beginning of the area that
+     * should be rendered. If this isn't set only a flat line is rendered
+     * @param {number?} end The x-offset of the end of the area that should be
+     * rendered
+     * @param {function} fn The render function to call, e.g. `drawWave`
+     * @param {number} drawIndex The index of the current channel after filtering.
+     * @returns {void}
+     */
+
+  }, {
+    key: "prepareDraw",
+    value: function prepareDraw(peaks, channelIndex, start, end, fn, drawIndex) {
+      var _this7 = this;
+
+      return util.frame(function () {
+        // Split channels and call this function with the channelIndex set
+        if (peaks[0] instanceof Array) {
+          var channels = peaks;
+
+          if (_this7.params.splitChannels) {
+            var filteredChannels = channels.filter(function (c, i) {
+              return !_this7.hideChannel(i);
+            });
+
+            if (!_this7.params.splitChannelsOptions.overlay) {
+              _this7.setHeight(Math.max(filteredChannels.length, 1) * _this7.params.height * _this7.params.pixelRatio);
+            }
+
+            return channels.forEach(function (channelPeaks, i) {
+              return _this7.prepareDraw(channelPeaks, i, start, end, fn, filteredChannels.indexOf(channelPeaks));
+            });
+          }
+
+          peaks = channels[0];
+        } // Return and do not draw channel peaks if hidden.
+
+
+        if (_this7.hideChannel(channelIndex)) {
+          return;
+        } // calculate maximum modulation value, either from the barHeight
+        // parameter or if normalize=true from the largest value in the peak
+        // set
+
+
+        var absmax = 1 / _this7.params.barHeight;
+
+        if (_this7.params.normalize) {
+          var max = util.max(peaks);
+          var min = util.min(peaks);
+          absmax = -min > max ? -min : max;
+        } // Bar wave draws the bottom only as a reflection of the top,
+        // so we don't need negative values
+
+
+        var hasMinVals = [].some.call(peaks, function (val) {
+          return val < 0;
+        });
+        var height = _this7.params.height * _this7.params.pixelRatio;
+        var offsetY = height * drawIndex || 0;
+        var halfH = height / 2;
+        return fn({
+          absmax: absmax,
+          hasMinVals: hasMinVals,
+          height: height,
+          offsetY: offsetY,
+          halfH: halfH,
+          peaks: peaks,
+          channelIndex: channelIndex
+        });
+      })();
+    }
+    /**
+     * Set the fill styles for a certain entry (wave and progress)
+     *
+     * @param {CanvasEntry} entry Target entry
+     * @param {string} waveColor Wave color to draw this entry
+     * @param {string} progressColor Progress color to draw this entry
+     */
+
+  }, {
+    key: "setFillStyles",
+    value: function setFillStyles(entry) {
+      var waveColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.params.waveColor;
+      var progressColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.params.progressColor;
+      entry.setFillStyles(waveColor, progressColor);
+    }
+    /**
+     * Return image data of the multi-canvas
+     *
+     * When using a `type` of `'blob'`, this will return a `Promise`.
+     *
+     * @param {string} format='image/png' An optional value of a format type.
+     * @param {number} quality=0.92 An optional value between 0 and 1.
+     * @param {string} type='dataURL' Either 'dataURL' or 'blob'.
+     * @return {string|string[]|Promise} When using the default `'dataURL'`
+     * `type` this returns a single data URL or an array of data URLs,
+     * one for each canvas. When using the `'blob'` `type` this returns a
+     * `Promise` that resolves with an array of `Blob` instances, one for each
+     * canvas.
+     */
+
+  }, {
+    key: "getImage",
+    value: function getImage(format, quality, type) {
+      if (type === 'blob') {
+        return Promise.all(this.canvases.map(function (entry) {
+          return entry.getImage(format, quality, type);
+        }));
+      } else if (type === 'dataURL') {
+        var images = this.canvases.map(function (entry) {
+          return entry.getImage(format, quality, type);
+        });
+        return images.length > 1 ? images : images[0];
+      }
+    }
+    /**
+     * Render the new progress
+     *
+     * @param {number} position X-offset of progress position in pixels
+     */
+
+  }, {
+    key: "updateProgress",
+    value: function updateProgress(position) {
+      this.style(this.progressWave, {
+        width: position + 'px'
+      });
+    }
+  }]);
+
+  return MultiCanvas;
+}(_drawer.default);
+
+exports.default = MultiCanvas;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/mediaelement-webaudio.js":
+/*!**************************************!*\
+  !*** ./src/mediaelement-webaudio.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _mediaelement = _interopRequireDefault(__webpack_require__(/*! ./mediaelement */ "./src/mediaelement.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * MediaElementWebAudio backend: load audio via an HTML5 audio tag, but playback with the WebAudio API.
+ * The advantage here is that the html5 <audio> tag can perform range requests on the server and not
+ * buffer the entire file in one request, and you still get the filtering and scripting functionality
+ * of the webaudio API.
+ * Note that in order to use range requests and prevent buffering, you must provide peak data.
+ *
+ * @since 3.2.0
+ */
+var MediaElementWebAudio = /*#__PURE__*/function (_MediaElement) {
+  _inherits(MediaElementWebAudio, _MediaElement);
+
+  var _super = _createSuper(MediaElementWebAudio);
+
+  /**
+   * Construct the backend
+   *
+   * @param {WavesurferParams} params Wavesurfer parameters
+   */
+  function MediaElementWebAudio(params) {
+    var _this;
+
+    _classCallCheck(this, MediaElementWebAudio);
+
+    _this = _super.call(this, params);
+    /** @private */
+
+    _this.params = params;
+    /** @private */
+
+    _this.sourceMediaElement = null;
+    return _this;
+  }
+  /**
+   * Initialise the backend, called in `wavesurfer.createBackend()`
+   */
+
+
+  _createClass(MediaElementWebAudio, [{
+    key: "init",
+    value: function init() {
+      this.setPlaybackRate(this.params.audioRate);
+      this.createTimer();
+      this.createVolumeNode();
+      this.createScriptNode();
+      this.createAnalyserNode();
+    }
+    /**
+     * Private method called by both `load` (from url)
+     * and `loadElt` (existing media element) methods.
+     *
+     * @param {HTMLMediaElement} media HTML5 Audio or Video element
+     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     * @param {string} preload HTML 5 preload attribute value
+     * @private
+     */
+
+  }, {
+    key: "_load",
+    value: function _load(media, peaks, preload) {
+      _get(_getPrototypeOf(MediaElementWebAudio.prototype), "_load", this).call(this, media, peaks, preload);
+
+      this.createMediaElementSource(media);
+    }
+    /**
+     * Create MediaElementSource node
+     *
+     * @since 3.2.0
+     * @param {HTMLMediaElement} mediaElement HTML5 Audio to load
+     */
+
+  }, {
+    key: "createMediaElementSource",
+    value: function createMediaElementSource(mediaElement) {
+      this.sourceMediaElement = this.ac.createMediaElementSource(mediaElement);
+      this.sourceMediaElement.connect(this.analyser);
+    }
+  }, {
+    key: "play",
+    value: function play(start, end) {
+      this.resumeAudioContext();
+      return _get(_getPrototypeOf(MediaElementWebAudio.prototype), "play", this).call(this, start, end);
+    }
+    /**
+     * This is called when wavesurfer is destroyed
+     *
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      _get(_getPrototypeOf(MediaElementWebAudio.prototype), "destroy", this).call(this);
+
+      this.destroyWebAudio();
+    }
+  }]);
+
+  return MediaElementWebAudio;
+}(_mediaelement.default);
+
+exports.default = MediaElementWebAudio;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/mediaelement.js":
+/*!*****************************!*\
+  !*** ./src/mediaelement.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _webaudio = _interopRequireDefault(__webpack_require__(/*! ./webaudio */ "./src/webaudio.js"));
+
+var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+/**
+ * MediaElement backend
+ */
+var MediaElement = /*#__PURE__*/function (_WebAudio) {
+  _inherits(MediaElement, _WebAudio);
+
+  var _super = _createSuper(MediaElement);
+
+  /**
+   * Construct the backend
+   *
+   * @param {WavesurferParams} params Wavesurfer parameters
+   */
+  function MediaElement(params) {
+    var _this;
+
+    _classCallCheck(this, MediaElement);
+
+    _this = _super.call(this, params);
+    /** @private */
+
+    _this.params = params;
+    /**
+     * Initially a dummy media element to catch errors. Once `_load` is
+     * called, this will contain the actual `HTMLMediaElement`.
+     * @private
+     */
+
+    _this.media = {
+      currentTime: 0,
+      duration: 0,
+      paused: true,
+      playbackRate: 1,
+      play: function play() {},
+      pause: function pause() {},
+      volume: 0
+    };
+    /** @private */
+
+    _this.mediaType = params.mediaType.toLowerCase();
+    /** @private */
+
+    _this.elementPosition = params.elementPosition;
+    /** @private */
+
+    _this.peaks = null;
+    /** @private */
+
+    _this.playbackRate = 1;
+    /** @private */
+
+    _this.volume = 1;
+    /** @private */
+
+    _this.isMuted = false;
+    /** @private */
+
+    _this.buffer = null;
+    /** @private */
+
+    _this.onPlayEnd = null;
+    /** @private */
+
+    _this.mediaListeners = {};
+    return _this;
+  }
+  /**
+   * Initialise the backend, called in `wavesurfer.createBackend()`
+   */
+
+
+  _createClass(MediaElement, [{
+    key: "init",
+    value: function init() {
+      this.setPlaybackRate(this.params.audioRate);
+      this.createTimer();
+    }
+    /**
+     * Attach event listeners to media element.
+     */
+
+  }, {
+    key: "_setupMediaListeners",
+    value: function _setupMediaListeners() {
+      var _this2 = this;
+
+      this.mediaListeners.error = function () {
+        _this2.fireEvent('error', 'Error loading media element');
+      };
+
+      this.mediaListeners.canplay = function () {
+        _this2.fireEvent('canplay');
+      };
+
+      this.mediaListeners.ended = function () {
+        _this2.fireEvent('finish');
+      }; // listen to and relay play, pause and seeked events to enable
+      // playback control from the external media element
+
+
+      this.mediaListeners.play = function () {
+        _this2.fireEvent('play');
+      };
+
+      this.mediaListeners.pause = function () {
+        _this2.fireEvent('pause');
+      };
+
+      this.mediaListeners.seeked = function (event) {
+        _this2.fireEvent('seek');
+      };
+
+      this.mediaListeners.volumechange = function (event) {
+        _this2.isMuted = _this2.media.muted;
+
+        if (_this2.isMuted) {
+          _this2.volume = 0;
+        } else {
+          _this2.volume = _this2.media.volume;
+        }
+
+        _this2.fireEvent('volume');
+      }; // reset event listeners
+
+
+      Object.keys(this.mediaListeners).forEach(function (id) {
+        _this2.media.removeEventListener(id, _this2.mediaListeners[id]);
+
+        _this2.media.addEventListener(id, _this2.mediaListeners[id]);
+      });
+    }
+    /**
+     * Create a timer to provide a more precise `audioprocess` event.
+     */
+
+  }, {
+    key: "createTimer",
+    value: function createTimer() {
+      var _this3 = this;
+
+      var onAudioProcess = function onAudioProcess() {
+        if (_this3.isPaused()) {
+          return;
+        }
+
+        _this3.fireEvent('audioprocess', _this3.getCurrentTime()); // Call again in the next frame
+
+
+        util.frame(onAudioProcess)();
+      };
+
+      this.on('play', onAudioProcess); // Update the progress one more time to prevent it from being stuck in
+      // case of lower framerates
+
+      this.on('pause', function () {
+        _this3.fireEvent('audioprocess', _this3.getCurrentTime());
+      });
+    }
+    /**
+     * Create media element with url as its source,
+     * and append to container element.
+     *
+     * @param {string} url Path to media file
+     * @param {HTMLElement} container HTML element
+     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     * @param {string} preload HTML 5 preload attribute value
+     * @throws Will throw an error if the `url` argument is not a valid media
+     * element.
+     */
+
+  }, {
+    key: "load",
+    value: function load(url, container, peaks, preload) {
+      var media = document.createElement(this.mediaType);
+      media.controls = this.params.mediaControls;
+      media.autoplay = this.params.autoplay || false;
+      media.preload = preload == null ? 'auto' : preload;
+      media.src = url;
+      media.style.width = '100%';
+      var prevMedia = container.querySelector(this.mediaType);
+
+      if (prevMedia) {
+        container.removeChild(prevMedia);
+      }
+
+      container.appendChild(media);
+
+      this._load(media, peaks, preload);
+    }
+    /**
+     * Load existing media element.
+     *
+     * @param {HTMLMediaElement} elt HTML5 Audio or Video element
+     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     */
+
+  }, {
+    key: "loadElt",
+    value: function loadElt(elt, peaks) {
+      elt.controls = this.params.mediaControls;
+      elt.autoplay = this.params.autoplay || false;
+
+      this._load(elt, peaks, elt.preload);
+    }
+    /**
+     * Method called by both `load` (from url)
+     * and `loadElt` (existing media element) methods.
+     *
+     * @param {HTMLMediaElement} media HTML5 Audio or Video element
+     * @param {number[]|Number.<Array[]>} peaks Array of peak data
+     * @param {string} preload HTML 5 preload attribute value
+     * @throws Will throw an error if the `media` argument is not a valid media
+     * element.
+     * @private
+     */
+
+  }, {
+    key: "_load",
+    value: function _load(media, peaks, preload) {
+      // verify media element is valid
+      if (!(media instanceof HTMLMediaElement) || typeof media.addEventListener === 'undefined') {
+        throw new Error('media parameter is not a valid media element');
+      } // load must be called manually on iOS, otherwise peaks won't draw
+      // until a user interaction triggers load --> 'ready' event
+      //
+      // note that we avoid calling media.load here when given peaks and preload == 'none'
+      // as this almost always triggers some browser fetch of the media.
+
+
+      if (typeof media.load == 'function' && !(peaks && preload == 'none')) {
+        // Resets the media element and restarts the media resource. Any
+        // pending events are discarded. How much media data is fetched is
+        // still affected by the preload attribute.
+        media.load();
+      }
+
+      this.media = media;
+
+      this._setupMediaListeners();
+
+      this.peaks = peaks;
+      this.onPlayEnd = null;
+      this.buffer = null;
+      this.isMuted = media.muted;
+      this.setPlaybackRate(this.playbackRate);
+      this.setVolume(this.volume);
+    }
+    /**
+     * Used by `wavesurfer.isPlaying()` and `wavesurfer.playPause()`
+     *
+     * @return {boolean} Media paused or not
+     */
+
+  }, {
+    key: "isPaused",
+    value: function isPaused() {
+      return !this.media || this.media.paused;
+    }
+    /**
+     * Used by `wavesurfer.getDuration()`
+     *
+     * @return {number} Duration
+     */
+
+  }, {
+    key: "getDuration",
+    value: function getDuration() {
+      if (this.explicitDuration) {
+        return this.explicitDuration;
+      }
+
+      var duration = (this.buffer || this.media).duration;
+
+      if (duration >= Infinity) {
+        // streaming audio
+        duration = this.media.seekable.end(0);
+      }
+
+      return duration;
+    }
+    /**
+     * Returns the current time in seconds relative to the audio-clip's
+     * duration.
+     *
+     * @return {number} Current time
+     */
+
+  }, {
+    key: "getCurrentTime",
+    value: function getCurrentTime() {
+      return this.media && this.media.currentTime;
+    }
+    /**
+     * Get the position from 0 to 1
+     *
+     * @return {number} Current position
+     */
+
+  }, {
+    key: "getPlayedPercents",
+    value: function getPlayedPercents() {
+      return this.getCurrentTime() / this.getDuration() || 0;
+    }
+    /**
+     * Get the audio source playback rate.
+     *
+     * @return {number} Playback rate
+     */
+
+  }, {
+    key: "getPlaybackRate",
+    value: function getPlaybackRate() {
+      return this.playbackRate || this.media.playbackRate;
+    }
+    /**
+     * Set the audio source playback rate.
+     *
+     * @param {number} value Playback rate
+     */
+
+  }, {
+    key: "setPlaybackRate",
+    value: function setPlaybackRate(value) {
+      this.playbackRate = value || 1;
+      this.media.playbackRate = this.playbackRate;
+    }
+    /**
+     * Used by `wavesurfer.seekTo()`
+     *
+     * @param {number} start Position to start at in seconds
+     */
+
+  }, {
+    key: "seekTo",
+    value: function seekTo(start) {
+      if (start != null) {
+        this.media.currentTime = start;
+      }
+
+      this.clearPlayEnd();
+    }
+    /**
+     * Plays the loaded audio region.
+     *
+     * @param {number} start Start offset in seconds, relative to the beginning
+     * of a clip.
+     * @param {number} end When to stop, relative to the beginning of a clip.
+     * @emits MediaElement#play
+     * @return {Promise} Result
+     */
+
+  }, {
+    key: "play",
+    value: function play(start, end) {
+      this.seekTo(start);
+      var promise = this.media.play();
+      end && this.setPlayEnd(end);
+      return promise;
+    }
+    /**
+     * Pauses the loaded audio.
+     *
+     * @emits MediaElement#pause
+     * @return {Promise} Result
+     */
+
+  }, {
+    key: "pause",
+    value: function pause() {
+      var promise;
+
+      if (this.media) {
+        promise = this.media.pause();
+      }
+
+      this.clearPlayEnd();
+      return promise;
+    }
+    /**
+     * Set the play end
+     *
+     * @param {number} end Where to end
+     */
+
+  }, {
+    key: "setPlayEnd",
+    value: function setPlayEnd(end) {
+      var _this4 = this;
+
+      this.clearPlayEnd();
+
+      this._onPlayEnd = function (time) {
+        if (time >= end) {
+          _this4.pause();
+
+          _this4.seekTo(end);
+        }
+      };
+
+      this.on('audioprocess', this._onPlayEnd);
+    }
+    /** @private */
+
+  }, {
+    key: "clearPlayEnd",
+    value: function clearPlayEnd() {
+      if (this._onPlayEnd) {
+        this.un('audioprocess', this._onPlayEnd);
+        this._onPlayEnd = null;
+      }
+    }
+    /**
+     * Compute the max and min value of the waveform when broken into
+     * <length> subranges.
+     *
+     * @param {number} length How many subranges to break the waveform into.
+     * @param {number} first First sample in the required range.
+     * @param {number} last Last sample in the required range.
+     * @return {number[]|Number.<Array[]>} Array of 2*<length> peaks or array of
+     * arrays of peaks consisting of (max, min) values for each subrange.
+     */
+
+  }, {
+    key: "getPeaks",
+    value: function getPeaks(length, first, last) {
+      if (this.buffer) {
+        return _get(_getPrototypeOf(MediaElement.prototype), "getPeaks", this).call(this, length, first, last);
+      }
+
+      return this.peaks || [];
+    }
+    /**
+     * Set the sink id for the media player
+     *
+     * @param {string} deviceId String value representing audio device id.
+     * @returns {Promise} A Promise that resolves to `undefined` when there
+     * are no errors.
+     */
+
+  }, {
+    key: "setSinkId",
+    value: function setSinkId(deviceId) {
+      if (deviceId) {
+        if (!this.media.setSinkId) {
+          return Promise.reject(new Error('setSinkId is not supported in your browser'));
+        }
+
+        return this.media.setSinkId(deviceId);
+      }
+
+      return Promise.reject(new Error('Invalid deviceId: ' + deviceId));
+    }
+    /**
+     * Get the current volume
+     *
+     * @return {number} value A floating point value between 0 and 1.
+     */
+
+  }, {
+    key: "getVolume",
+    value: function getVolume() {
+      return this.volume;
+    }
+    /**
+     * Set the audio volume
+     *
+     * @param {number} value A floating point value between 0 and 1.
+     */
+
+  }, {
+    key: "setVolume",
+    value: function setVolume(value) {
+      this.volume = value; // no need to change when it's already at that volume
+
+      if (this.media.volume !== this.volume) {
+        this.media.volume = this.volume;
+      }
+    }
+    /**
+     * Enable or disable muted audio
+     *
+     * @since 4.0.0
+     * @param {boolean} muted Specify `true` to mute audio.
+     */
+
+  }, {
+    key: "setMute",
+    value: function setMute(muted) {
+      // This causes a volume change to be emitted too through the
+      // volumechange event listener.
+      this.isMuted = this.media.muted = muted;
+    }
+    /**
+     * This is called when wavesurfer is destroyed
+     *
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      var _this5 = this;
+
+      this.pause();
+      this.unAll();
+      this.destroyed = true; // cleanup media event listeners
+
+      Object.keys(this.mediaListeners).forEach(function (id) {
+        if (_this5.media) {
+          _this5.media.removeEventListener(id, _this5.mediaListeners[id]);
+        }
+      });
+
+      if (this.params.removeMediaElementOnDestroy && this.media && this.media.parentNode) {
+        this.media.parentNode.removeChild(this.media);
+      }
+
+      this.media = null;
+    }
+  }]);
+
+  return MediaElement;
+}(_webaudio.default);
+
+exports.default = MediaElement;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/peakcache.js":
+/*!**************************!*\
+  !*** ./src/peakcache.js ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+ * Caches the decoded peaks data to improve rendering speed for large audio
+ *
+ * Is used if the option parameter `partialRender` is set to `true`
+ */
+var PeakCache = /*#__PURE__*/function () {
+  /**
+   * Instantiate cache
+   */
+  function PeakCache() {
+    _classCallCheck(this, PeakCache);
+
+    this.clearPeakCache();
+  }
+  /**
+   * Empty the cache
+   */
+
+
+  _createClass(PeakCache, [{
+    key: "clearPeakCache",
+    value: function clearPeakCache() {
+      /**
+       * Flat array with entries that are always in pairs to mark the
+       * beginning and end of each subrange.  This is a convenience so we can
+       * iterate over the pairs for easy set difference operations.
+       * @private
+       */
+      this.peakCacheRanges = [];
+      /**
+       * Length of the entire cachable region, used for resetting the cache
+       * when this changes (zoom events, for instance).
+       * @private
+       */
+
+      this.peakCacheLength = -1;
+    }
+    /**
+     * Add a range of peaks to the cache
+     *
+     * @param {number} length The length of the range
+     * @param {number} start The x offset of the start of the range
+     * @param {number} end The x offset of the end of the range
+     * @return {Number.<Array[]>} Array with arrays of numbers
+     */
+
+  }, {
+    key: "addRangeToPeakCache",
+    value: function addRangeToPeakCache(length, start, end) {
+      if (length != this.peakCacheLength) {
+        this.clearPeakCache();
+        this.peakCacheLength = length;
+      } // Return ranges that weren't in the cache before the call.
+
+
+      var uncachedRanges = [];
+      var i = 0; // Skip ranges before the current start.
+
+      while (i < this.peakCacheRanges.length && this.peakCacheRanges[i] < start) {
+        i++;
+      } // If |i| is even, |start| falls after an existing range.  Otherwise,
+      // |start| falls between an existing range, and the uncached region
+      // starts when we encounter the next node in |peakCacheRanges| or
+      // |end|, whichever comes first.
+
+
+      if (i % 2 == 0) {
+        uncachedRanges.push(start);
+      }
+
+      while (i < this.peakCacheRanges.length && this.peakCacheRanges[i] <= end) {
+        uncachedRanges.push(this.peakCacheRanges[i]);
+        i++;
+      } // If |i| is even, |end| is after all existing ranges.
+
+
+      if (i % 2 == 0) {
+        uncachedRanges.push(end);
+      } // Filter out the 0-length ranges.
+
+
+      uncachedRanges = uncachedRanges.filter(function (item, pos, arr) {
+        if (pos == 0) {
+          return item != arr[pos + 1];
+        } else if (pos == arr.length - 1) {
+          return item != arr[pos - 1];
+        }
+
+        return item != arr[pos - 1] && item != arr[pos + 1];
+      }); // Merge the two ranges together, uncachedRanges will either contain
+      // wholly new points, or duplicates of points in peakCacheRanges.  If
+      // duplicates are detected, remove both and extend the range.
+
+      this.peakCacheRanges = this.peakCacheRanges.concat(uncachedRanges);
+      this.peakCacheRanges = this.peakCacheRanges.sort(function (a, b) {
+        return a - b;
+      }).filter(function (item, pos, arr) {
+        if (pos == 0) {
+          return item != arr[pos + 1];
+        } else if (pos == arr.length - 1) {
+          return item != arr[pos - 1];
+        }
+
+        return item != arr[pos - 1] && item != arr[pos + 1];
+      }); // Push the uncached ranges into an array of arrays for ease of
+      // iteration in the functions that call this.
+
+      var uncachedRangePairs = [];
+
+      for (i = 0; i < uncachedRanges.length; i += 2) {
+        uncachedRangePairs.push([uncachedRanges[i], uncachedRanges[i + 1]]);
+      }
+
+      return uncachedRangePairs;
+    }
+    /**
+     * For testing
+     *
+     * @return {Number.<Array[]>} Array with arrays of numbers
+     */
+
+  }, {
+    key: "getCacheRanges",
+    value: function getCacheRanges() {
+      var peakCacheRangePairs = [];
+      var i;
+
+      for (i = 0; i < this.peakCacheRanges.length; i += 2) {
+        peakCacheRangePairs.push([this.peakCacheRanges[i], this.peakCacheRanges[i + 1]]);
+      }
+
+      return peakCacheRangePairs;
+    }
+  }]);
+
+  return PeakCache;
+}();
+
+exports.default = PeakCache;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/clamp.js":
+/*!***************************!*\
+  !*** ./src/util/clamp.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = clamp;
+
+/**
+ * Returns a number limited to the given range.
+ *
+ * @param {number} val The number to be limited to a range
+ * @param {number} min The lower boundary of the limit range
+ * @param {number} max The upper boundary of the limit range
+ * @returns {number} A number in the range [min, max]
+ */
+function clamp(val, min, max) {
+  return Math.min(Math.max(min, val), max);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/fetch.js":
+/*!***************************!*\
+  !*** ./src/util/fetch.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = fetchFile;
+
+var _observer = _interopRequireDefault(__webpack_require__(/*! ./observer */ "./src/util/observer.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ProgressHandler = /*#__PURE__*/function () {
+  /**
+   * Instantiate ProgressHandler
+   *
+   * @param {Observer} instance The `fetchFile` observer instance.
+   * @param {Number} contentLength Content length.
+   * @param {Response} response Response object.
+   */
+  function ProgressHandler(instance, contentLength, response) {
+    _classCallCheck(this, ProgressHandler);
+
+    this.instance = instance;
+    this.instance._reader = response.body.getReader();
+    this.total = parseInt(contentLength, 10);
+    this.loaded = 0;
+  }
+  /**
+   * A method that is called once, immediately after the `ReadableStream``
+   * is constructed.
+   *
+   * @param {ReadableStreamDefaultController} controller Controller instance
+   *     used to control the stream.
+   */
+
+
+  _createClass(ProgressHandler, [{
+    key: "start",
+    value: function start(controller) {
+      var _this = this;
+
+      var read = function read() {
+        // instance._reader.read() returns a promise that resolves
+        // when a value has been received
+        _this.instance._reader.read().then(function (_ref) {
+          var done = _ref.done,
+              value = _ref.value;
+
+          // result objects contain two properties:
+          // done  - true if the stream has already given you all its data.
+          // value - some data. Always undefined when done is true.
+          if (done) {
+            // ensure onProgress called when content-length=0
+            if (_this.total === 0) {
+              _this.instance.onProgress.call(_this.instance, {
+                loaded: _this.loaded,
+                total: _this.total,
+                lengthComputable: false
+              });
+            } // no more data needs to be consumed, close the stream
+
+
+            controller.close();
+            return;
+          }
+
+          _this.loaded += value.byteLength;
+
+          _this.instance.onProgress.call(_this.instance, {
+            loaded: _this.loaded,
+            total: _this.total,
+            lengthComputable: !(_this.total === 0)
+          }); // enqueue the next data chunk into our target stream
+
+
+          controller.enqueue(value);
+          read();
+        }).catch(function (error) {
+          controller.error(error);
+        });
+      };
+
+      read();
+    }
+  }]);
+
+  return ProgressHandler;
+}();
+/**
+ * Load a file using `fetch`.
+ *
+ * @param {object} options Request options to use. See example below.
+ * @returns {Observer} Observer instance
+ * @example
+ * // default options
+ * let options = {
+ *     url: undefined,
+ *     method: 'GET',
+ *     mode: 'cors',
+ *     credentials: 'same-origin',
+ *     cache: 'default',
+ *     responseType: 'json',
+ *     requestHeaders: [],
+ *     redirect: 'follow',
+ *     referrer: 'client'
+ * };
+ *
+ * // override some options
+ * options.url = '../media/demo.wav';
+
+ * // available types: 'arraybuffer', 'blob', 'json' or 'text'
+ * options.responseType = 'arraybuffer';
+ *
+ * // make fetch call
+ * let request = util.fetchFile(options);
+ *
+ * // listen for events
+ * request.on('progress', e => {
+ *     console.log('progress', e);
+ * });
+ *
+ * request.on('success', data => {
+ *     console.log('success!', data);
+ * });
+ *
+ * request.on('error', e => {
+ *     console.warn('fetchFile error: ', e);
+ * });
+ */
+
+
+function fetchFile(options) {
+  if (!options) {
+    throw new Error('fetch options missing');
+  } else if (!options.url) {
+    throw new Error('fetch url missing');
+  }
+
+  var instance = new _observer.default();
+  var fetchHeaders = new Headers();
+  var fetchRequest = new Request(options.url); // add ability to abort
+
+  instance.controller = new AbortController(); // check if headers have to be added
+
+  if (options && options.requestHeaders) {
+    // add custom request headers
+    options.requestHeaders.forEach(function (header) {
+      fetchHeaders.append(header.key, header.value);
+    });
+  } // parse fetch options
+
+
+  var responseType = options.responseType || 'json';
+  var fetchOptions = {
+    method: options.method || 'GET',
+    headers: fetchHeaders,
+    mode: options.mode || 'cors',
+    credentials: options.credentials || 'same-origin',
+    cache: options.cache || 'default',
+    redirect: options.redirect || 'follow',
+    referrer: options.referrer || 'client',
+    signal: instance.controller.signal
+  };
+  fetch(fetchRequest, fetchOptions).then(function (response) {
+    // store response reference
+    instance.response = response;
+    var progressAvailable = true;
+
+    if (!response.body) {
+      // ReadableStream is not yet supported in this browser
+      // see https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
+      progressAvailable = false;
+    } // Server must send CORS header "Access-Control-Expose-Headers: content-length"
+
+
+    var contentLength = response.headers.get('content-length');
+
+    if (contentLength === null) {
+      // Content-Length server response header missing.
+      // Don't evaluate download progress if we can't compare against a total size
+      // see https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#Access-Control-Expose-Headers
+      progressAvailable = false;
+    }
+
+    if (!progressAvailable) {
+      // not able to check download progress so skip it
+      return response;
+    } // fire progress event when during load
+
+
+    instance.onProgress = function (e) {
+      instance.fireEvent('progress', e);
+    };
+
+    return new Response(new ReadableStream(new ProgressHandler(instance, contentLength, response)), fetchOptions);
+  }).then(function (response) {
+    var errMsg;
+
+    if (response.ok) {
+      switch (responseType) {
+        case 'arraybuffer':
+          return response.arrayBuffer();
+
+        case 'json':
+          return response.json();
+
+        case 'blob':
+          return response.blob();
+
+        case 'text':
+          return response.text();
+
+        default:
+          errMsg = 'Unknown responseType: ' + responseType;
+          break;
+      }
+    }
+
+    if (!errMsg) {
+      errMsg = 'HTTP error status: ' + response.status;
+    }
+
+    throw new Error(errMsg);
+  }).then(function (response) {
+    instance.fireEvent('success', response);
+  }).catch(function (error) {
+    instance.fireEvent('error', error);
+  }); // return the fetch request
+
+  instance.fetchRequest = fetchRequest;
+  return instance;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/frame.js":
+/*!***************************!*\
+  !*** ./src/util/frame.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = frame;
+
+var _requestAnimationFrame = _interopRequireDefault(__webpack_require__(/*! ./request-animation-frame */ "./src/util/request-animation-frame.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * Create a function which will be called at the next requestAnimationFrame
+ * cycle
+ *
+ * @param {function} func The function to call
+ *
+ * @return {func} The function wrapped within a requestAnimationFrame
+ */
+function frame(func) {
+  return function () {
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return (0, _requestAnimationFrame.default)(function () {
+      return func.apply(void 0, args);
+    });
+  };
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/get-id.js":
+/*!****************************!*\
+  !*** ./src/util/get-id.js ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = getId;
+
+/**
+ * Get a random prefixed ID
+ *
+ * @param {String} prefix Prefix to use. Default is `'wavesurfer_'`.
+ * @returns {String} Random prefixed ID
+ * @example
+ * console.log(getId()); // logs 'wavesurfer_b5pors4ru6g'
+ *
+ * let prefix = 'foo-';
+ * console.log(getId(prefix)); // logs 'foo-b5pors4ru6g'
+ */
+function getId(prefix) {
+  if (prefix === undefined) {
+    prefix = 'wavesurfer_';
+  }
+
+  return prefix + Math.random().toString(32).substring(2);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/index.js":
+/*!***************************!*\
+  !*** ./src/util/index.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "getId", {
+  enumerable: true,
+  get: function get() {
+    return _getId.default;
+  }
+});
+Object.defineProperty(exports, "max", {
+  enumerable: true,
+  get: function get() {
+    return _max.default;
+  }
+});
+Object.defineProperty(exports, "min", {
+  enumerable: true,
+  get: function get() {
+    return _min.default;
+  }
+});
+Object.defineProperty(exports, "Observer", {
+  enumerable: true,
+  get: function get() {
+    return _observer.default;
+  }
+});
+Object.defineProperty(exports, "style", {
+  enumerable: true,
+  get: function get() {
+    return _style.default;
+  }
+});
+Object.defineProperty(exports, "requestAnimationFrame", {
+  enumerable: true,
+  get: function get() {
+    return _requestAnimationFrame.default;
+  }
+});
+Object.defineProperty(exports, "frame", {
+  enumerable: true,
+  get: function get() {
+    return _frame.default;
+  }
+});
+Object.defineProperty(exports, "debounce", {
+  enumerable: true,
+  get: function get() {
+    return _debounce.default;
+  }
+});
+Object.defineProperty(exports, "preventClick", {
+  enumerable: true,
+  get: function get() {
+    return _preventClick.default;
+  }
+});
+Object.defineProperty(exports, "fetchFile", {
+  enumerable: true,
+  get: function get() {
+    return _fetch.default;
+  }
+});
+Object.defineProperty(exports, "clamp", {
+  enumerable: true,
+  get: function get() {
+    return _clamp.default;
+  }
+});
+
+var _getId = _interopRequireDefault(__webpack_require__(/*! ./get-id */ "./src/util/get-id.js"));
+
+var _max = _interopRequireDefault(__webpack_require__(/*! ./max */ "./src/util/max.js"));
+
+var _min = _interopRequireDefault(__webpack_require__(/*! ./min */ "./src/util/min.js"));
+
+var _observer = _interopRequireDefault(__webpack_require__(/*! ./observer */ "./src/util/observer.js"));
+
+var _style = _interopRequireDefault(__webpack_require__(/*! ./style */ "./src/util/style.js"));
+
+var _requestAnimationFrame = _interopRequireDefault(__webpack_require__(/*! ./request-animation-frame */ "./src/util/request-animation-frame.js"));
+
+var _frame = _interopRequireDefault(__webpack_require__(/*! ./frame */ "./src/util/frame.js"));
+
+var _debounce = _interopRequireDefault(__webpack_require__(/*! debounce */ "./node_modules/debounce/index.js"));
+
+var _preventClick = _interopRequireDefault(__webpack_require__(/*! ./prevent-click */ "./src/util/prevent-click.js"));
+
+var _fetch = _interopRequireDefault(__webpack_require__(/*! ./fetch */ "./src/util/fetch.js"));
+
+var _clamp = _interopRequireDefault(__webpack_require__(/*! ./clamp */ "./src/util/clamp.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ "./src/util/max.js":
+/*!*************************!*\
+  !*** ./src/util/max.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = max;
+
+/**
+ * Get the largest value
+ *
+ * @param   {Array} values Array of numbers
+ * @returns {Number} Largest number found
+ * @example console.log(max([1, 2, 3])); // logs 3
+ */
+function max(values) {
+  var largest = -Infinity;
+  Object.keys(values).forEach(function (i) {
+    if (values[i] > largest) {
+      largest = values[i];
+    }
+  });
+  return largest;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/min.js":
+/*!*************************!*\
+  !*** ./src/util/min.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = min;
+
+/**
+ * Get the smallest value
+ *
+ * @param   {Array} values Array of numbers
+ * @returns {Number} Smallest number found
+ * @example console.log(min([1, 2, 3])); // logs 1
+ */
+function min(values) {
+  var smallest = Number(Infinity);
+  Object.keys(values).forEach(function (i) {
+    if (values[i] < smallest) {
+      smallest = values[i];
+    }
+  });
+  return smallest;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/observer.js":
+/*!******************************!*\
+  !*** ./src/util/observer.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+/**
+ * @typedef {Object} ListenerDescriptor
+ * @property {string} name The name of the event
+ * @property {function} callback The callback
+ * @property {function} un The function to call to remove the listener
+ */
+
+/**
+ * Observer class
+ */
+var Observer = /*#__PURE__*/function () {
+  /**
+   * Instantiate Observer
+   */
+  function Observer() {
+    _classCallCheck(this, Observer);
+
+    /**
+     * @private
+     * @todo Initialise the handlers here already and remove the conditional
+     * assignment in `on()`
+     */
+    this._disabledEventEmissions = [];
+    this.handlers = null;
+  }
+  /**
+   * Attach a handler function for an event.
+   *
+   * @param {string} event Name of the event to listen to
+   * @param {function} fn The callback to trigger when the event is fired
+   * @return {ListenerDescriptor} The event descriptor
+   */
+
+
+  _createClass(Observer, [{
+    key: "on",
+    value: function on(event, fn) {
+      var _this = this;
+
+      if (!this.handlers) {
+        this.handlers = {};
+      }
+
+      var handlers = this.handlers[event];
+
+      if (!handlers) {
+        handlers = this.handlers[event] = [];
+      }
+
+      handlers.push(fn); // Return an event descriptor
+
+      return {
+        name: event,
+        callback: fn,
+        un: function un(e, fn) {
+          return _this.un(e, fn);
+        }
+      };
+    }
+    /**
+     * Remove an event handler.
+     *
+     * @param {string} event Name of the event the listener that should be
+     * removed listens to
+     * @param {function} fn The callback that should be removed
+     */
+
+  }, {
+    key: "un",
+    value: function un(event, fn) {
+      if (!this.handlers) {
+        return;
+      }
+
+      var handlers = this.handlers[event];
+      var i;
+
+      if (handlers) {
+        if (fn) {
+          for (i = handlers.length - 1; i >= 0; i--) {
+            if (handlers[i] == fn) {
+              handlers.splice(i, 1);
+            }
+          }
+        } else {
+          handlers.length = 0;
+        }
+      }
+    }
+    /**
+     * Remove all event handlers.
+     */
+
+  }, {
+    key: "unAll",
+    value: function unAll() {
+      this.handlers = null;
+    }
+    /**
+     * Attach a handler to an event. The handler is executed at most once per
+     * event type.
+     *
+     * @param {string} event The event to listen to
+     * @param {function} handler The callback that is only to be called once
+     * @return {ListenerDescriptor} The event descriptor
+     */
+
+  }, {
+    key: "once",
+    value: function once(event, handler) {
+      var _this2 = this;
+
+      var fn = function fn() {
+        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+          args[_key] = arguments[_key];
+        }
+
+        /*  eslint-disable no-invalid-this */
+        handler.apply(_this2, args);
+        /*  eslint-enable no-invalid-this */
+
+        setTimeout(function () {
+          _this2.un(event, fn);
+        }, 0);
+      };
+
+      return this.on(event, fn);
+    }
+    /**
+     * Disable firing a list of events by name. When specified, event handlers for any event type
+     * passed in here will not be called.
+     *
+     * @since 4.0.0
+     * @param {string[]} eventNames an array of event names to disable emissions for
+     * @example
+     * // disable seek and interaction events
+     * wavesurfer.setDisabledEventEmissions(['seek', 'interaction']);
+     */
+
+  }, {
+    key: "setDisabledEventEmissions",
+    value: function setDisabledEventEmissions(eventNames) {
+      this._disabledEventEmissions = eventNames;
+    }
+    /**
+     * plugins borrow part of this class without calling the constructor,
+     * so we have to be careful about _disabledEventEmissions
+     */
+
+  }, {
+    key: "_isDisabledEventEmission",
+    value: function _isDisabledEventEmission(event) {
+      return this._disabledEventEmissions && this._disabledEventEmissions.includes(event);
+    }
+    /**
+     * Manually fire an event
+     *
+     * @param {string} event The event to fire manually
+     * @param {...any} args The arguments with which to call the listeners
+     */
+
+  }, {
+    key: "fireEvent",
+    value: function fireEvent(event) {
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      if (!this.handlers || this._isDisabledEventEmission(event)) {
+        return;
+      }
+
+      var handlers = this.handlers[event];
+      handlers && handlers.forEach(function (fn) {
+        fn.apply(void 0, args);
+      });
+    }
+  }]);
+
+  return Observer;
+}();
+
+exports.default = Observer;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/prevent-click.js":
+/*!***********************************!*\
+  !*** ./src/util/prevent-click.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = preventClick;
+
+/**
+ * Stops propagation of click event and removes event listener
+ *
+ * @private
+ * @param {object} event The click event
+ */
+function preventClickHandler(event) {
+  event.stopPropagation();
+  document.body.removeEventListener('click', preventClickHandler, true);
+}
+/**
+ * Starts listening for click event and prevent propagation
+ *
+ * @param {object} values Values
+ */
+
+
+function preventClick(values) {
+  document.body.addEventListener('click', preventClickHandler, true);
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/request-animation-frame.js":
+/*!*********************************************!*\
+  !*** ./src/util/request-animation-frame.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+/* eslint-disable valid-jsdoc */
+
+/**
+ * Returns the `requestAnimationFrame` function for the browser, or a shim with
+ * `setTimeout` if the function is not found
+ *
+ * @return {function} Available `requestAnimationFrame` function for the browser
+ */
+var _default = (window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback, element) {
+  return setTimeout(callback, 1000 / 60);
+}).bind(window);
+
+exports.default = _default;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/util/style.js":
+/*!***************************!*\
+  !*** ./src/util/style.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = style;
+
+/**
+ * Apply a map of styles to an element
+ *
+ * @param {HTMLElement} el The element that the styles will be applied to
+ * @param {Object} styles The map of propName: attribute, both are used as-is
+ *
+ * @return {HTMLElement} el
+ */
+function style(el, styles) {
+  Object.keys(styles).forEach(function (prop) {
+    if (el.style[prop] !== styles[prop]) {
+      el.style[prop] = styles[prop];
+    }
+  });
+  return el;
+}
+
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/wavesurfer.js":
+/*!***************************!*\
+  !*** ./src/wavesurfer.js ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
+
+var _drawer = _interopRequireDefault(__webpack_require__(/*! ./drawer.multicanvas */ "./src/drawer.multicanvas.js"));
+
+var _webaudio = _interopRequireDefault(__webpack_require__(/*! ./webaudio */ "./src/webaudio.js"));
+
+var _mediaelement = _interopRequireDefault(__webpack_require__(/*! ./mediaelement */ "./src/mediaelement.js"));
+
+var _peakcache = _interopRequireDefault(__webpack_require__(/*! ./peakcache */ "./src/peakcache.js"));
+
+var _mediaelementWebaudio = _interopRequireDefault(__webpack_require__(/*! ./mediaelement-webaudio */ "./src/mediaelement-webaudio.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+/**
+ * WaveSurfer core library class
+ *
+ * @extends {Observer}
+ * @example
+ * const params = {
+ *   container: '#waveform',
+ *   waveColor: 'violet',
+ *   progressColor: 'purple'
+ * };
+ *
+ * // initialise like this
+ * const wavesurfer = WaveSurfer.create(params);
+ *
+ * // or like this ...
+ * const wavesurfer = new WaveSurfer(params);
+ * wavesurfer.init();
+ *
+ * // load audio file
+ * wavesurfer.load('example/media/demo.wav');
+ */
+
+
+var WaveSurfer = /*#__PURE__*/function (_util$Observer) {
+  _inherits(WaveSurfer, _util$Observer);
+
+  var _super = _createSuper(WaveSurfer);
+
+  _createClass(WaveSurfer, null, [{
+    key: "create",
+
+    /** @private */
+
+    /** @private */
+
+    /**
+     * Instantiate this class, call its `init` function and returns it
+     *
+     * @param {WavesurferParams} params The wavesurfer parameters
+     * @return {Object} WaveSurfer instance
+     * @example const wavesurfer = WaveSurfer.create(params);
+     */
+    value: function create(params) {
+      var wavesurfer = new WaveSurfer(params);
+      return wavesurfer.init();
+    }
+    /**
+     * The library version number is available as a static property of the
+     * WaveSurfer class
+     *
+     * @type {String}
+     * @example
+     * console.log('Using wavesurfer.js ' + WaveSurfer.VERSION);
+     */
+
+  }]);
+
+  /**
+   * Initialise wavesurfer instance
+   *
+   * @param {WavesurferParams} params Instantiation options for wavesurfer
+   * @example
+   * const wavesurfer = new WaveSurfer(params);
+   * @returns {this} Wavesurfer instance
+   */
+  function WaveSurfer(params) {
+    var _this;
+
+    _classCallCheck(this, WaveSurfer);
+
+    _this = _super.call(this);
+    /**
+     * Extract relevant parameters (or defaults)
+     * @private
+     */
+
+    _this.defaultParams = {
+      audioContext: null,
+      audioScriptProcessor: null,
+      audioRate: 1,
+      autoCenter: true,
+      autoCenterRate: 5,
+      autoCenterImmediately: false,
+      backend: 'WebAudio',
+      backgroundColor: null,
+      barHeight: 1,
+      barRadius: 0,
+      barGap: null,
+      barMinHeight: null,
+      container: null,
+      cursorColor: '#333',
+      cursorWidth: 1,
+      dragSelection: true,
+      drawingContextAttributes: {
+        // Boolean that hints the user agent to reduce the latency
+        // by desynchronizing the canvas paint cycle from the event
+        // loop
+        desynchronized: false
+      },
+      duration: null,
+      fillParent: true,
+      forceDecode: false,
+      height: 128,
+      hideScrollbar: false,
+      interact: true,
+      loopSelection: true,
+      maxCanvasWidth: 4000,
+      mediaContainer: null,
+      mediaControls: false,
+      mediaType: 'audio',
+      minPxPerSec: 20,
+      normalize: false,
+      partialRender: false,
+      pixelRatio: window.devicePixelRatio || screen.deviceXDPI / screen.logicalXDPI,
+      plugins: [],
+      progressColor: '#555',
+      removeMediaElementOnDestroy: true,
+      renderer: _drawer.default,
+      responsive: false,
+      rtl: false,
+      scrollParent: false,
+      skipLength: 2,
+      splitChannels: false,
+      splitChannelsOptions: {
+        overlay: false,
+        channelColors: {},
+        filterChannels: []
+      },
+      waveColor: '#999',
+      xhr: {}
+    };
+    _this.backends = {
+      MediaElement: _mediaelement.default,
+      WebAudio: _webaudio.default,
+      MediaElementWebAudio: _mediaelementWebaudio.default
+    };
+    _this.util = util;
+    _this.params = Object.assign({}, _this.defaultParams, params);
+    /** @private */
+
+    _this.container = 'string' == typeof params.container ? document.querySelector(_this.params.container) : _this.params.container;
+
+    if (!_this.container) {
+      throw new Error('Container element not found');
+    }
+
+    if (_this.params.mediaContainer == null) {
+      /** @private */
+      _this.mediaContainer = _this.container;
+    } else if (typeof _this.params.mediaContainer == 'string') {
+      /** @private */
+      _this.mediaContainer = document.querySelector(_this.params.mediaContainer);
+    } else {
+      /** @private */
+      _this.mediaContainer = _this.params.mediaContainer;
+    }
+
+    if (!_this.mediaContainer) {
+      throw new Error('Media Container element not found');
+    }
+
+    if (_this.params.maxCanvasWidth <= 1) {
+      throw new Error('maxCanvasWidth must be greater than 1');
+    } else if (_this.params.maxCanvasWidth % 2 == 1) {
+      throw new Error('maxCanvasWidth must be an even number');
+    }
+
+    if (_this.params.rtl === true) {
+      util.style(_this.container, {
+        transform: 'rotateY(180deg)'
+      });
+    }
+
+    if (_this.params.backgroundColor) {
+      _this.setBackgroundColor(_this.params.backgroundColor);
+    }
+    /**
+     * @private Used to save the current volume when muting so we can
+     * restore once unmuted
+     * @type {number}
+     */
+
+
+    _this.savedVolume = 0;
+    /**
+     * @private The current muted state
+     * @type {boolean}
+     */
+
+    _this.isMuted = false;
+    /**
+     * @private Will hold a list of event descriptors that need to be
+     * canceled on subsequent loads of audio
+     * @type {Object[]}
+     */
+
+    _this.tmpEvents = [];
+    /**
+     * @private Holds any running audio downloads
+     * @type {Observer}
+     */
+
+    _this.currentRequest = null;
+    /** @private */
+
+    _this.arraybuffer = null;
+    /** @private */
+
+    _this.drawer = null;
+    /** @private */
+
+    _this.backend = null;
+    /** @private */
+
+    _this.peakCache = null; // cache constructor objects
+
+    if (typeof _this.params.renderer !== 'function') {
+      throw new Error('Renderer parameter is invalid');
+    }
+    /**
+     * @private The uninitialised Drawer class
+     */
+
+
+    _this.Drawer = _this.params.renderer;
+    /**
+     * @private The uninitialised Backend class
+     */
+    // Back compat
+
+    if (_this.params.backend == 'AudioElement') {
+      _this.params.backend = 'MediaElement';
+    }
+
+    if ((_this.params.backend == 'WebAudio' || _this.params.backend === 'MediaElementWebAudio') && !_webaudio.default.prototype.supportsWebAudio.call(null)) {
+      _this.params.backend = 'MediaElement';
+    }
+
+    _this.Backend = _this.backends[_this.params.backend];
+    /**
+     * @private map of plugin names that are currently initialised
+     */
+
+    _this.initialisedPluginList = {};
+    /** @private */
+
+    _this.isDestroyed = false;
+    /**
+     * Get the current ready status.
+     *
+     * @example const isReady = wavesurfer.isReady;
+     * @return {boolean}
+     */
+
+    _this.isReady = false; // responsive debounced event listener. If this.params.responsive is not
+    // set, this is never called. Use 100ms or this.params.responsive as
+    // timeout for the debounce function.
+
+    var prevWidth = 0;
+    _this._onResize = util.debounce(function () {
+      if (prevWidth != _this.drawer.wrapper.clientWidth && !_this.params.scrollParent) {
+        prevWidth = _this.drawer.wrapper.clientWidth;
+
+        _this.drawer.fireEvent('redraw');
+      }
+    }, typeof _this.params.responsive === 'number' ? _this.params.responsive : 100);
+    return _possibleConstructorReturn(_this, _assertThisInitialized(_this));
+  }
+  /**
+   * Initialise the wave
+   *
+   * @example
+   * var wavesurfer = new WaveSurfer(params);
+   * wavesurfer.init();
+   * @return {this} The wavesurfer instance
+   */
+
+
+  _createClass(WaveSurfer, [{
+    key: "init",
+    value: function init() {
+      this.registerPlugins(this.params.plugins);
+      this.createDrawer();
+      this.createBackend();
+      this.createPeakCache();
+      return this;
+    }
+    /**
+     * Add and initialise array of plugins (if `plugin.deferInit` is falsey),
+     * this function is called in the init function of wavesurfer
+     *
+     * @param {PluginDefinition[]} plugins An array of plugin definitions
+     * @emits {WaveSurfer#plugins-registered} Called with the array of plugin definitions
+     * @return {this} The wavesurfer instance
+     */
+
+  }, {
+    key: "registerPlugins",
+    value: function registerPlugins(plugins) {
+      var _this2 = this;
+
+      // first instantiate all the plugins
+      plugins.forEach(function (plugin) {
+        return _this2.addPlugin(plugin);
+      }); // now run the init functions
+
+      plugins.forEach(function (plugin) {
+        // call init function of the plugin if deferInit is falsey
+        // in that case you would manually use initPlugins()
+        if (!plugin.deferInit) {
+          _this2.initPlugin(plugin.name);
+        }
+      });
+      this.fireEvent('plugins-registered', plugins);
+      return this;
+    }
+    /**
+     * Get a map of plugin names that are currently initialised
+     *
+     * @example wavesurfer.getPlugins();
+     * @return {Object} Object with plugin names
+     */
+
+  }, {
+    key: "getActivePlugins",
+    value: function getActivePlugins() {
+      return this.initialisedPluginList;
+    }
+    /**
+     * Add a plugin object to wavesurfer
+     *
+     * @param {PluginDefinition} plugin A plugin definition
+     * @emits {WaveSurfer#plugin-added} Called with the name of the plugin that was added
+     * @example wavesurfer.addPlugin(WaveSurfer.minimap());
+     * @return {this} The wavesurfer instance
+     */
+
+  }, {
+    key: "addPlugin",
+    value: function addPlugin(plugin) {
+      var _this3 = this;
+
+      if (!plugin.name) {
+        throw new Error('Plugin does not have a name!');
+      }
+
+      if (!plugin.instance) {
+        throw new Error("Plugin ".concat(plugin.name, " does not have an instance property!"));
+      } // staticProps properties are applied to wavesurfer instance
+
+
+      if (plugin.staticProps) {
+        Object.keys(plugin.staticProps).forEach(function (pluginStaticProp) {
+          /**
+           * Properties defined in a plugin definition's `staticProps` property are added as
+           * staticProps properties of the WaveSurfer instance
+           */
+          _this3[pluginStaticProp] = plugin.staticProps[pluginStaticProp];
+        });
+      }
+
+      var Instance = plugin.instance; // turn the plugin instance into an observer
+
+      var observerPrototypeKeys = Object.getOwnPropertyNames(util.Observer.prototype);
+      observerPrototypeKeys.forEach(function (key) {
+        Instance.prototype[key] = util.Observer.prototype[key];
+      });
+      /**
+       * Instantiated plugin classes are added as a property of the wavesurfer
+       * instance
+       * @type {Object}
+       */
+
+      this[plugin.name] = new Instance(plugin.params || {}, this);
+      this.fireEvent('plugin-added', plugin.name);
+      return this;
+    }
+    /**
+     * Initialise a plugin
+     *
+     * @param {string} name A plugin name
+     * @emits WaveSurfer#plugin-initialised
+     * @example wavesurfer.initPlugin('minimap');
+     * @return {this} The wavesurfer instance
+     */
+
+  }, {
+    key: "initPlugin",
+    value: function initPlugin(name) {
+      if (!this[name]) {
+        throw new Error("Plugin ".concat(name, " has not been added yet!"));
+      }
+
+      if (this.initialisedPluginList[name]) {
+        // destroy any already initialised plugins
+        this.destroyPlugin(name);
+      }
+
+      this[name].init();
+      this.initialisedPluginList[name] = true;
+      this.fireEvent('plugin-initialised', name);
+      return this;
+    }
+    /**
+     * Destroy a plugin
+     *
+     * @param {string} name A plugin name
+     * @emits WaveSurfer#plugin-destroyed
+     * @example wavesurfer.destroyPlugin('minimap');
+     * @returns {this} The wavesurfer instance
+     */
+
+  }, {
+    key: "destroyPlugin",
+    value: function destroyPlugin(name) {
+      if (!this[name]) {
+        throw new Error("Plugin ".concat(name, " has not been added yet and cannot be destroyed!"));
+      }
+
+      if (!this.initialisedPluginList[name]) {
+        throw new Error("Plugin ".concat(name, " is not active and cannot be destroyed!"));
+      }
+
+      if (typeof this[name].destroy !== 'function') {
+        throw new Error("Plugin ".concat(name, " does not have a destroy function!"));
+      }
+
+      this[name].destroy();
+      delete this.initialisedPluginList[name];
+      this.fireEvent('plugin-destroyed', name);
+      return this;
+    }
+    /**
+     * Destroy all initialised plugins. Convenience function to use when
+     * wavesurfer is removed
+     *
+     * @private
+     */
+
+  }, {
+    key: "destroyAllPlugins",
+    value: function destroyAllPlugins() {
+      var _this4 = this;
+
+      Object.keys(this.initialisedPluginList).forEach(function (name) {
+        return _this4.destroyPlugin(name);
+      });
+    }
+    /**
+     * Create the drawer and draw the waveform
+     *
+     * @private
+     * @emits WaveSurfer#drawer-created
+     */
+
+  }, {
+    key: "createDrawer",
+    value: function createDrawer() {
+      var _this5 = this;
+
+      this.drawer = new this.Drawer(this.container, this.params);
+      this.drawer.init();
+      this.fireEvent('drawer-created', this.drawer);
+
+      if (this.params.responsive !== false) {
+        window.addEventListener('resize', this._onResize, true);
+        window.addEventListener('orientationchange', this._onResize, true);
+      }
+
+      this.drawer.on('redraw', function () {
+        _this5.drawBuffer();
+
+        _this5.drawer.progress(_this5.backend.getPlayedPercents());
+      }); // Click-to-seek
+
+      this.drawer.on('click', function (e, progress) {
+        setTimeout(function () {
+          return _this5.seekTo(progress);
+        }, 0);
+      }); // Relay the scroll event from the drawer
+
+      this.drawer.on('scroll', function (e) {
+        if (_this5.params.partialRender) {
+          _this5.drawBuffer();
+        }
+
+        _this5.fireEvent('scroll', e);
+      });
+    }
+    /**
+     * Create the backend
+     *
+     * @private
+     * @emits WaveSurfer#backend-created
+     */
+
+  }, {
+    key: "createBackend",
+    value: function createBackend() {
+      var _this6 = this;
+
+      if (this.backend) {
+        this.backend.destroy();
+      }
+
+      this.backend = new this.Backend(this.params);
+      this.backend.init();
+      this.fireEvent('backend-created', this.backend);
+      this.backend.on('finish', function () {
+        _this6.drawer.progress(_this6.backend.getPlayedPercents());
+
+        _this6.fireEvent('finish');
+      });
+      this.backend.on('play', function () {
+        return _this6.fireEvent('play');
+      });
+      this.backend.on('pause', function () {
+        return _this6.fireEvent('pause');
+      });
+      this.backend.on('audioprocess', function (time) {
+        _this6.drawer.progress(_this6.backend.getPlayedPercents());
+
+        _this6.fireEvent('audioprocess', time);
+      }); // only needed for MediaElement and MediaElementWebAudio backend
+
+      if (this.params.backend === 'MediaElement' || this.params.backend === 'MediaElementWebAudio') {
+        this.backend.on('seek', function () {
+          _this6.drawer.progress(_this6.backend.getPlayedPercents());
+        });
+        this.backend.on('volume', function () {
+          var newVolume = _this6.getVolume();
+
+          _this6.fireEvent('volume', newVolume);
+
+          if (_this6.backend.isMuted !== _this6.isMuted) {
+            _this6.isMuted = _this6.backend.isMuted;
+
+            _this6.fireEvent('mute', _this6.isMuted);
+          }
+        });
+      }
+    }
+    /**
+     * Create the peak cache
+     *
+     * @private
+     */
+
+  }, {
+    key: "createPeakCache",
+    value: function createPeakCache() {
+      if (this.params.partialRender) {
+        this.peakCache = new _peakcache.default();
+      }
+    }
+    /**
+     * Get the duration of the audio clip
+     *
+     * @example const duration = wavesurfer.getDuration();
+     * @return {number} Duration in seconds
+     */
+
+  }, {
+    key: "getDuration",
+    value: function getDuration() {
+      return this.backend.getDuration();
+    }
+    /**
+     * Get the current playback position
+     *
+     * @example const currentTime = wavesurfer.getCurrentTime();
+     * @return {number} Playback position in seconds
+     */
+
+  }, {
+    key: "getCurrentTime",
+    value: function getCurrentTime() {
+      return this.backend.getCurrentTime();
+    }
+    /**
+     * Set the current play time in seconds.
+     *
+     * @param {number} seconds A positive number in seconds. E.g. 10 means 10
+     * seconds, 60 means 1 minute
+     */
+
+  }, {
+    key: "setCurrentTime",
+    value: function setCurrentTime(seconds) {
+      if (seconds >= this.getDuration()) {
+        this.seekTo(1);
+      } else {
+        this.seekTo(seconds / this.getDuration());
+      }
+    }
+    /**
+     * Starts playback from the current position. Optional start and end
+     * measured in seconds can be used to set the range of audio to play.
+     *
+     * @param {?number} start Position to start at
+     * @param {?number} end Position to end at
+     * @emits WaveSurfer#interaction
+     * @return {Promise} Result of the backend play method
+     * @example
+     * // play from second 1 to 5
+     * wavesurfer.play(1, 5);
+     */
+
+  }, {
+    key: "play",
+    value: function play(start, end) {
+      var _this7 = this;
+
+      this.fireEvent('interaction', function () {
+        return _this7.play(start, end);
+      });
+      return this.backend.play(start, end);
+    }
+    /**
+     * Set a point in seconds for playback to stop at.
+     *
+     * @param {number} position Position (in seconds) to stop at
+     * @version 3.3.0
+     */
+
+  }, {
+    key: "setPlayEnd",
+    value: function setPlayEnd(position) {
+      this.backend.setPlayEnd(position);
+    }
+    /**
+     * Stops and pauses playback
+     *
+     * @example wavesurfer.pause();
+     * @return {Promise} Result of the backend pause method
+     */
+
+  }, {
+    key: "pause",
+    value: function pause() {
+      if (!this.backend.isPaused()) {
+        return this.backend.pause();
+      }
+    }
+    /**
+     * Toggle playback
+     *
+     * @example wavesurfer.playPause();
+     * @return {Promise} Result of the backend play or pause method
+     */
+
+  }, {
+    key: "playPause",
+    value: function playPause() {
+      return this.backend.isPaused() ? this.play() : this.pause();
+    }
+    /**
+     * Get the current playback state
+     *
+     * @example const isPlaying = wavesurfer.isPlaying();
+     * @return {boolean} False if paused, true if playing
+     */
+
+  }, {
+    key: "isPlaying",
+    value: function isPlaying() {
+      return !this.backend.isPaused();
+    }
+    /**
+     * Skip backward
+     *
+     * @param {?number} seconds Amount to skip back, if not specified `skipLength`
+     * is used
+     * @example wavesurfer.skipBackward();
+     */
+
+  }, {
+    key: "skipBackward",
+    value: function skipBackward(seconds) {
+      this.skip(-seconds || -this.params.skipLength);
+    }
+    /**
+     * Skip forward
+     *
+     * @param {?number} seconds Amount to skip back, if not specified `skipLength`
+     * is used
+     * @example wavesurfer.skipForward();
+     */
+
+  }, {
+    key: "skipForward",
+    value: function skipForward(seconds) {
+      this.skip(seconds || this.params.skipLength);
+    }
+    /**
+     * Skip a number of seconds from the current position (use a negative value
+     * to go backwards).
+     *
+     * @param {number} offset Amount to skip back or forwards
+     * @example
+     * // go back 2 seconds
+     * wavesurfer.skip(-2);
+     */
+
+  }, {
+    key: "skip",
+    value: function skip(offset) {
+      var duration = this.getDuration() || 1;
+      var position = this.getCurrentTime() || 0;
+      position = Math.max(0, Math.min(duration, position + (offset || 0)));
+      this.seekAndCenter(position / duration);
+    }
+    /**
+     * Seeks to a position and centers the view
+     *
+     * @param {number} progress Between 0 (=beginning) and 1 (=end)
+     * @example
+     * // seek and go to the middle of the audio
+     * wavesurfer.seekTo(0.5);
+     */
+
+  }, {
+    key: "seekAndCenter",
+    value: function seekAndCenter(progress) {
+      this.seekTo(progress);
+      this.drawer.recenter(progress);
+    }
+    /**
+     * Seeks to a position
+     *
+     * @param {number} progress Between 0 (=beginning) and 1 (=end)
+     * @emits WaveSurfer#interaction
+     * @emits WaveSurfer#seek
+     * @example
+     * // seek to the middle of the audio
+     * wavesurfer.seekTo(0.5);
+     */
+
+  }, {
+    key: "seekTo",
+    value: function seekTo(progress) {
+      var _this8 = this;
+
+      // return an error if progress is not a number between 0 and 1
+      if (typeof progress !== 'number' || !isFinite(progress) || progress < 0 || progress > 1) {
+        throw new Error('Error calling wavesurfer.seekTo, parameter must be a number between 0 and 1!');
+      }
+
+      this.fireEvent('interaction', function () {
+        return _this8.seekTo(progress);
+      });
+      var paused = this.backend.isPaused(); // avoid draw wrong position while playing backward seeking
+
+      if (!paused) {
+        this.backend.pause();
+      } // avoid small scrolls while paused seeking
+
+
+      var oldScrollParent = this.params.scrollParent;
+      this.params.scrollParent = false;
+      this.backend.seekTo(progress * this.getDuration());
+      this.drawer.progress(progress);
+
+      if (!paused) {
+        this.backend.play();
+      }
+
+      this.params.scrollParent = oldScrollParent;
+      this.fireEvent('seek', progress);
+    }
+    /**
+     * Stops and goes to the beginning.
+     *
+     * @example wavesurfer.stop();
+     */
+
+  }, {
+    key: "stop",
+    value: function stop() {
+      this.pause();
+      this.seekTo(0);
+      this.drawer.progress(0);
+    }
+    /**
+     * Sets the ID of the audio device to use for output and returns a Promise.
+     *
+     * @param {string} deviceId String value representing underlying output
+     * device
+     * @returns {Promise} `Promise` that resolves to `undefined` when there are
+     * no errors detected.
+     */
+
+  }, {
+    key: "setSinkId",
+    value: function setSinkId(deviceId) {
+      return this.backend.setSinkId(deviceId);
+    }
+    /**
+     * Set the playback volume.
+     *
+     * @param {number} newVolume A value between 0 and 1, 0 being no
+     * volume and 1 being full volume.
+     * @emits WaveSurfer#volume
+     */
+
+  }, {
+    key: "setVolume",
+    value: function setVolume(newVolume) {
+      this.backend.setVolume(newVolume);
+      this.fireEvent('volume', newVolume);
+    }
+    /**
+     * Get the playback volume.
+     *
+     * @return {number} A value between 0 and 1, 0 being no
+     * volume and 1 being full volume.
+     */
+
+  }, {
+    key: "getVolume",
+    value: function getVolume() {
+      return this.backend.getVolume();
+    }
+    /**
+     * Set the playback rate.
+     *
+     * @param {number} rate A positive number. E.g. 0.5 means half the normal
+     * speed, 2 means double speed and so on.
+     * @example wavesurfer.setPlaybackRate(2);
+     */
+
+  }, {
+    key: "setPlaybackRate",
+    value: function setPlaybackRate(rate) {
+      this.backend.setPlaybackRate(rate);
+    }
+    /**
+     * Get the playback rate.
+     *
+     * @return {number} The current playback rate.
+     */
+
+  }, {
+    key: "getPlaybackRate",
+    value: function getPlaybackRate() {
+      return this.backend.getPlaybackRate();
+    }
+    /**
+     * Toggle the volume on and off. If not currently muted it will save the
+     * current volume value and turn the volume off. If currently muted then it
+     * will restore the volume to the saved value, and then rest the saved
+     * value.
+     *
+     * @example wavesurfer.toggleMute();
+     */
+
+  }, {
+    key: "toggleMute",
+    value: function toggleMute() {
+      this.setMute(!this.isMuted);
+    }
+    /**
+     * Enable or disable muted audio
+     *
+     * @param {boolean} mute Specify `true` to mute audio.
+     * @emits WaveSurfer#volume
+     * @emits WaveSurfer#mute
+     * @example
+     * // unmute
+     * wavesurfer.setMute(false);
+     * console.log(wavesurfer.getMute()) // logs false
+     */
+
+  }, {
+    key: "setMute",
+    value: function setMute(mute) {
+      // ignore all muting requests if the audio is already in that state
+      if (mute === this.isMuted) {
+        this.fireEvent('mute', this.isMuted);
+        return;
+      }
+
+      if (this.backend.setMute) {
+        // Backends such as the MediaElement backend have their own handling
+        // of mute, let them handle it.
+        this.backend.setMute(mute);
+        this.isMuted = mute;
+      } else {
+        if (mute) {
+          // If currently not muted then save current volume,
+          // turn off the volume and update the mute properties
+          this.savedVolume = this.backend.getVolume();
+          this.backend.setVolume(0);
+          this.isMuted = true;
+          this.fireEvent('volume', 0);
+        } else {
+          // If currently muted then restore to the saved volume
+          // and update the mute properties
+          this.backend.setVolume(this.savedVolume);
+          this.isMuted = false;
+          this.fireEvent('volume', this.savedVolume);
+        }
+      }
+
+      this.fireEvent('mute', this.isMuted);
+    }
+    /**
+     * Get the current mute status.
+     *
+     * @example const isMuted = wavesurfer.getMute();
+     * @return {boolean} Current mute status
+     */
+
+  }, {
+    key: "getMute",
+    value: function getMute() {
+      return this.isMuted;
+    }
+    /**
+     * Get the list of current set filters as an array.
+     *
+     * Filters must be set with setFilters method first
+     *
+     * @return {array} List of enabled filters
+     */
+
+  }, {
+    key: "getFilters",
+    value: function getFilters() {
+      return this.backend.filters || [];
+    }
+    /**
+     * Toggles `scrollParent` and redraws
+     *
+     * @example wavesurfer.toggleScroll();
+     */
+
+  }, {
+    key: "toggleScroll",
+    value: function toggleScroll() {
+      this.params.scrollParent = !this.params.scrollParent;
+      this.drawBuffer();
+    }
+    /**
+     * Toggle mouse interaction
+     *
+     * @example wavesurfer.toggleInteraction();
+     */
+
+  }, {
+    key: "toggleInteraction",
+    value: function toggleInteraction() {
+      this.params.interact = !this.params.interact;
+    }
+    /**
+     * Get the fill color of the waveform after the cursor.
+     *
+     * @return {string} A CSS color string.
+     */
+
+  }, {
+    key: "getWaveColor",
+    value: function getWaveColor() {
+      return this.params.waveColor;
+    }
+    /**
+     * Set the fill color of the waveform after the cursor.
+     *
+     * @param {string} color A CSS color string.
+     * @example wavesurfer.setWaveColor('#ddd');
+     */
+
+  }, {
+    key: "setWaveColor",
+    value: function setWaveColor(color) {
+      this.params.waveColor = color;
+      this.drawBuffer();
+    }
+    /**
+     * Get the fill color of the waveform behind the cursor.
+     *
+     * @return {string} A CSS color string.
+     */
+
+  }, {
+    key: "getProgressColor",
+    value: function getProgressColor() {
+      return this.params.progressColor;
+    }
+    /**
+     * Set the fill color of the waveform behind the cursor.
+     *
+     * @param {string} color A CSS color string.
+     * @example wavesurfer.setProgressColor('#400');
+     */
+
+  }, {
+    key: "setProgressColor",
+    value: function setProgressColor(color) {
+      this.params.progressColor = color;
+      this.drawBuffer();
+    }
+    /**
+     * Get the background color of the waveform container.
+     *
+     * @return {string} A CSS color string.
+     */
+
+  }, {
+    key: "getBackgroundColor",
+    value: function getBackgroundColor() {
+      return this.params.backgroundColor;
+    }
+    /**
+     * Set the background color of the waveform container.
+     *
+     * @param {string} color A CSS color string.
+     * @example wavesurfer.setBackgroundColor('#FF00FF');
+     */
+
+  }, {
+    key: "setBackgroundColor",
+    value: function setBackgroundColor(color) {
+      this.params.backgroundColor = color;
+      util.style(this.container, {
+        background: this.params.backgroundColor
+      });
+    }
+    /**
+     * Get the fill color of the cursor indicating the playhead
+     * position.
+     *
+     * @return {string} A CSS color string.
+     */
+
+  }, {
+    key: "getCursorColor",
+    value: function getCursorColor() {
+      return this.params.cursorColor;
+    }
+    /**
+     * Set the fill color of the cursor indicating the playhead
+     * position.
+     *
+     * @param {string} color A CSS color string.
+     * @example wavesurfer.setCursorColor('#222');
+     */
+
+  }, {
+    key: "setCursorColor",
+    value: function setCursorColor(color) {
+      this.params.cursorColor = color;
+      this.drawer.updateCursor();
+    }
+    /**
+     * Get the height of the waveform.
+     *
+     * @return {number} Height measured in pixels.
+     */
+
+  }, {
+    key: "getHeight",
+    value: function getHeight() {
+      return this.params.height;
+    }
+    /**
+     * Set the height of the waveform.
+     *
+     * @param {number} height Height measured in pixels.
+     * @example wavesurfer.setHeight(200);
+     */
+
+  }, {
+    key: "setHeight",
+    value: function setHeight(height) {
+      this.params.height = height;
+      this.drawer.setHeight(height * this.params.pixelRatio);
+      this.drawBuffer();
+    }
+    /**
+     * Hide channels from being drawn on the waveform if splitting channels.
+     *
+     * For example, if we want to draw only the peaks for the right stereo channel:
+     *
+     * const wavesurfer = new WaveSurfer.create({...splitChannels: true});
+     * wavesurfer.load('stereo_audio.mp3');
+     *
+     * wavesurfer.setFilteredChannel([0]); <-- hide left channel peaks.
+     *
+     * @param {array} channelIndices Channels to be filtered out from drawing.
+     * @version 4.0.0
+     */
+
+  }, {
+    key: "setFilteredChannels",
+    value: function setFilteredChannels(channelIndices) {
+      this.params.splitChannelsOptions.filterChannels = channelIndices;
+      this.drawBuffer();
+    }
+    /**
+     * Get the correct peaks for current wave view-port and render wave
+     *
+     * @private
+     * @emits WaveSurfer#redraw
+     */
+
+  }, {
+    key: "drawBuffer",
+    value: function drawBuffer() {
+      var nominalWidth = Math.round(this.getDuration() * this.params.minPxPerSec * this.params.pixelRatio);
+      var parentWidth = this.drawer.getWidth();
+      var width = nominalWidth; // always start at 0 after zooming for scrolling : issue redraw left part
+
+      var start = 0;
+      var end = Math.max(start + parentWidth, width); // Fill container
+
+      if (this.params.fillParent && (!this.params.scrollParent || nominalWidth < parentWidth)) {
+        width = parentWidth;
+        start = 0;
+        end = width;
+      }
+
+      var peaks;
+
+      if (this.params.partialRender) {
+        var newRanges = this.peakCache.addRangeToPeakCache(width, start, end);
+        var i;
+
+        for (i = 0; i < newRanges.length; i++) {
+          peaks = this.backend.getPeaks(width, newRanges[i][0], newRanges[i][1]);
+          this.drawer.drawPeaks(peaks, width, newRanges[i][0], newRanges[i][1]);
+        }
+      } else {
+        peaks = this.backend.getPeaks(width, start, end);
+        this.drawer.drawPeaks(peaks, width, start, end);
+      }
+
+      this.fireEvent('redraw', peaks, width);
+    }
+    /**
+     * Horizontally zooms the waveform in and out. It also changes the parameter
+     * `minPxPerSec` and enables the `scrollParent` option. Calling the function
+     * with a falsey parameter will reset the zoom state.
+     *
+     * @param {?number} pxPerSec Number of horizontal pixels per second of
+     * audio, if none is set the waveform returns to unzoomed state
+     * @emits WaveSurfer#zoom
+     * @example wavesurfer.zoom(20);
+     */
+
+  }, {
+    key: "zoom",
+    value: function zoom(pxPerSec) {
+      if (!pxPerSec) {
+        this.params.minPxPerSec = this.defaultParams.minPxPerSec;
+        this.params.scrollParent = false;
+      } else {
+        this.params.minPxPerSec = pxPerSec;
+        this.params.scrollParent = true;
+      }
+
+      this.drawBuffer();
+      this.drawer.progress(this.backend.getPlayedPercents());
+      this.drawer.recenter(this.getCurrentTime() / this.getDuration());
+      this.fireEvent('zoom', pxPerSec);
+    }
+    /**
+     * Decode buffer and load
+     *
+     * @private
+     * @param {ArrayBuffer} arraybuffer Buffer to process
+     */
+
+  }, {
+    key: "loadArrayBuffer",
+    value: function loadArrayBuffer(arraybuffer) {
+      var _this9 = this;
+
+      this.decodeArrayBuffer(arraybuffer, function (data) {
+        if (!_this9.isDestroyed) {
+          _this9.loadDecodedBuffer(data);
+        }
+      });
+    }
+    /**
+     * Directly load an externally decoded AudioBuffer
+     *
+     * @private
+     * @param {AudioBuffer} buffer Buffer to process
+     * @emits WaveSurfer#ready
+     */
+
+  }, {
+    key: "loadDecodedBuffer",
+    value: function loadDecodedBuffer(buffer) {
+      this.backend.load(buffer);
+      this.drawBuffer();
+      this.isReady = true;
+      this.fireEvent('ready');
+    }
+    /**
+     * Loads audio data from a Blob or File object
+     *
+     * @param {Blob|File} blob Audio data
+     * @example
+     */
+
+  }, {
+    key: "loadBlob",
+    value: function loadBlob(blob) {
+      var _this10 = this;
+
+      // Create file reader
+      var reader = new FileReader();
+      reader.addEventListener('progress', function (e) {
+        return _this10.onProgress(e);
+      });
+      reader.addEventListener('load', function (e) {
+        return _this10.loadArrayBuffer(e.target.result);
+      });
+      reader.addEventListener('error', function () {
+        return _this10.fireEvent('error', 'Error reading file');
+      });
+      reader.readAsArrayBuffer(blob);
+      this.empty();
+    }
+    /**
+     * Loads audio and re-renders the waveform.
+     *
+     * @param {string|HTMLMediaElement} url The url of the audio file or the
+     * audio element with the audio
+     * @param {number[]|Number.<Array[]>} peaks Wavesurfer does not have to decode
+     * the audio to render the waveform if this is specified
+     * @param {?string} preload (Use with backend `MediaElement` and `MediaElementWebAudio`)
+     * `'none'|'metadata'|'auto'` Preload attribute for the media element
+     * @param {?number} duration The duration of the audio. This is used to
+     * render the peaks data in the correct size for the audio duration (as
+     * befits the current `minPxPerSec` and zoom value) without having to decode
+     * the audio.
+     * @returns {void}
+     * @throws Will throw an error if the `url` argument is empty.
+     * @example
+     * // uses fetch or media element to load file (depending on backend)
+     * wavesurfer.load('http://example.com/demo.wav');
+     *
+     * // setting preload attribute with media element backend and supplying
+     * // peaks
+     * wavesurfer.load(
+     *   'http://example.com/demo.wav',
+     *   [0.0218, 0.0183, 0.0165, 0.0198, 0.2137, 0.2888],
+     *   true
+     * );
+     */
+
+  }, {
+    key: "load",
+    value: function load(url, peaks, preload, duration) {
+      if (!url) {
+        throw new Error('url parameter cannot be empty');
+      }
+
+      this.empty();
+
+      if (preload) {
+        // check whether the preload attribute will be usable and if not log
+        // a warning listing the reasons why not and nullify the variable
+        var preloadIgnoreReasons = {
+          "Preload is not 'auto', 'none' or 'metadata'": ['auto', 'metadata', 'none'].indexOf(preload) === -1,
+          'Peaks are not provided': !peaks,
+          "Backend is not of type 'MediaElement' or 'MediaElementWebAudio'": ['MediaElement', 'MediaElementWebAudio'].indexOf(this.params.backend) === -1,
+          'Url is not of type string': typeof url !== 'string'
+        };
+        var activeReasons = Object.keys(preloadIgnoreReasons).filter(function (reason) {
+          return preloadIgnoreReasons[reason];
+        });
+
+        if (activeReasons.length) {
+          // eslint-disable-next-line no-console
+          console.warn('Preload parameter of wavesurfer.load will be ignored because:\n\t- ' + activeReasons.join('\n\t- ')); // stop invalid values from being used
+
+          preload = null;
+        }
+      }
+
+      switch (this.params.backend) {
+        case 'WebAudio':
+          return this.loadBuffer(url, peaks, duration);
+
+        case 'MediaElement':
+        case 'MediaElementWebAudio':
+          return this.loadMediaElement(url, peaks, preload, duration);
+      }
+    }
+    /**
+     * Loads audio using Web Audio buffer backend.
+     *
+     * @private
+     * @param {string} url URL of audio file
+     * @param {number[]|Number.<Array[]>} peaks Peaks data
+     * @param {?number} duration Optional duration of audio file
+     * @returns {void}
+     */
+
+  }, {
+    key: "loadBuffer",
+    value: function loadBuffer(url, peaks, duration) {
+      var _this11 = this;
+
+      var load = function load(action) {
+        if (action) {
+          _this11.tmpEvents.push(_this11.once('ready', action));
+        }
+
+        return _this11.getArrayBuffer(url, function (data) {
+          return _this11.loadArrayBuffer(data);
+        });
+      };
+
+      if (peaks) {
+        this.backend.setPeaks(peaks, duration);
+        this.drawBuffer();
+        this.tmpEvents.push(this.once('interaction', load));
+      } else {
+        return load();
+      }
+    }
+    /**
+     * Either create a media element, or load an existing media element.
+     *
+     * @private
+     * @param {string|HTMLMediaElement} urlOrElt Either a path to a media file, or an
+     * existing HTML5 Audio/Video Element
+     * @param {number[]|Number.<Array[]>} peaks Array of peaks. Required to bypass web audio
+     * dependency
+     * @param {?boolean} preload Set to true if the preload attribute of the
+     * audio element should be enabled
+     * @param {?number} duration Optional duration of audio file
+     */
+
+  }, {
+    key: "loadMediaElement",
+    value: function loadMediaElement(urlOrElt, peaks, preload, duration) {
+      var _this12 = this;
+
+      var url = urlOrElt;
+
+      if (typeof urlOrElt === 'string') {
+        this.backend.load(url, this.mediaContainer, peaks, preload);
+      } else {
+        var elt = urlOrElt;
+        this.backend.loadElt(elt, peaks); // If peaks are not provided,
+        // url = element.src so we can get peaks with web audio
+
+        url = elt.src;
+      }
+
+      this.tmpEvents.push(this.backend.once('canplay', function () {
+        // ignore when backend was already destroyed
+        if (!_this12.backend.destroyed) {
+          _this12.drawBuffer();
+
+          _this12.isReady = true;
+
+          _this12.fireEvent('ready');
+        }
+      }), this.backend.once('error', function (err) {
+        return _this12.fireEvent('error', err);
+      }));
+
+      if (peaks) {
+        this.backend.setPeaks(peaks, duration);
+        this.drawBuffer();
+      } // If no pre-decoded peaks are provided, or are provided with
+      // forceDecode flag, attempt to download the audio file and decode it
+      // with Web Audio.
+
+
+      if ((!peaks || this.params.forceDecode) && this.backend.supportsWebAudio()) {
+        this.getArrayBuffer(url, function (arraybuffer) {
+          _this12.decodeArrayBuffer(arraybuffer, function (buffer) {
+            _this12.backend.buffer = buffer;
+
+            _this12.backend.setPeaks(null);
+
+            _this12.drawBuffer();
+
+            _this12.fireEvent('waveform-ready');
+          });
+        });
+      }
+    }
+    /**
+     * Decode an array buffer and pass data to a callback
+     *
+     * @private
+     * @param {Object} arraybuffer The array buffer to decode
+     * @param {function} callback The function to call on complete
+     */
+
+  }, {
+    key: "decodeArrayBuffer",
+    value: function decodeArrayBuffer(arraybuffer, callback) {
+      var _this13 = this;
+
+      this.arraybuffer = arraybuffer;
+      this.backend.decodeArrayBuffer(arraybuffer, function (data) {
+        // Only use the decoded data if we haven't been destroyed or
+        // another decode started in the meantime
+        if (!_this13.isDestroyed && _this13.arraybuffer == arraybuffer) {
+          callback(data);
+          _this13.arraybuffer = null;
+        }
+      }, function () {
+        return _this13.fireEvent('error', 'Error decoding audiobuffer');
+      });
+    }
+    /**
+     * Load an array buffer using fetch and pass the result to a callback
+     *
+     * @param {string} url The URL of the file object
+     * @param {function} callback The function to call on complete
+     * @returns {util.fetchFile} fetch call
+     * @private
+     */
+
+  }, {
+    key: "getArrayBuffer",
+    value: function getArrayBuffer(url, callback) {
+      var _this14 = this;
+
+      var options = Object.assign({
+        url: url,
+        responseType: 'arraybuffer'
+      }, this.params.xhr);
+      var request = util.fetchFile(options);
+      this.currentRequest = request;
+      this.tmpEvents.push(request.on('progress', function (e) {
+        _this14.onProgress(e);
+      }), request.on('success', function (data) {
+        callback(data);
+        _this14.currentRequest = null;
+      }), request.on('error', function (e) {
+        _this14.fireEvent('error', e);
+
+        _this14.currentRequest = null;
+      }));
+      return request;
+    }
+    /**
+     * Called while the audio file is loading
+     *
+     * @private
+     * @param {Event} e Progress event
+     * @emits WaveSurfer#loading
+     */
+
+  }, {
+    key: "onProgress",
+    value: function onProgress(e) {
+      var percentComplete;
+
+      if (e.lengthComputable) {
+        percentComplete = e.loaded / e.total;
+      } else {
+        // Approximate progress with an asymptotic
+        // function, and assume downloads in the 1-3 MB range.
+        percentComplete = e.loaded / (e.loaded + 1000000);
+      }
+
+      this.fireEvent('loading', Math.round(percentComplete * 100), e.target);
+    }
+    /**
+     * Exports PCM data into a JSON array and opens in a new window.
+     *
+     * @param {number} length=1024 The scale in which to export the peaks
+     * @param {number} accuracy=10000
+     * @param {?boolean} noWindow Set to true to disable opening a new
+     * window with the JSON
+     * @param {number} start Start index
+     * @param {number} end End index
+     * @return {Promise} Promise that resolves with array of peaks
+     */
+
+  }, {
+    key: "exportPCM",
+    value: function exportPCM(length, accuracy, noWindow, start, end) {
+      length = length || 1024;
+      start = start || 0;
+      accuracy = accuracy || 10000;
+      noWindow = noWindow || false;
+      var peaks = this.backend.getPeaks(length, start, end);
+      var arr = [].map.call(peaks, function (val) {
+        return Math.round(val * accuracy) / accuracy;
+      });
+      return new Promise(function (resolve, reject) {
+        var json = JSON.stringify(arr);
+
+        if (!noWindow) {
+          window.open('data:application/json;charset=utf-8,' + encodeURIComponent(json));
+        }
+
+        resolve(json);
+      });
+    }
+    /**
+     * Save waveform image as data URI.
+     *
+     * The default format is `'image/png'`. Other supported types are
+     * `'image/jpeg'` and `'image/webp'`.
+     *
+     * @param {string} format='image/png' A string indicating the image format.
+     * The default format type is `'image/png'`.
+     * @param {number} quality=1 A number between 0 and 1 indicating the image
+     * quality to use for image formats that use lossy compression such as
+     * `'image/jpeg'`` and `'image/webp'`.
+     * @param {string} type Image data type to return. Either 'dataURL' (default)
+     * or 'blob'.
+     * @return {string|string[]|Promise} When using `'dataURL'` type this returns
+     * a single data URL or an array of data URLs, one for each canvas. When using
+     * `'blob'` type this returns a `Promise` resolving with an array of `Blob`
+     * instances, one for each canvas.
+     */
+
+  }, {
+    key: "exportImage",
+    value: function exportImage(format, quality, type) {
+      if (!format) {
+        format = 'image/png';
+      }
+
+      if (!quality) {
+        quality = 1;
+      }
+
+      if (!type) {
+        type = 'dataURL';
+      }
+
+      return this.drawer.getImage(format, quality, type);
+    }
+    /**
+     * Cancel any fetch request currently in progress
+     */
+
+  }, {
+    key: "cancelAjax",
+    value: function cancelAjax() {
+      if (this.currentRequest && this.currentRequest.controller) {
+        // If the current request has a ProgressHandler, then its ReadableStream might need to be cancelled too
+        // See: Wavesurfer issue #2042
+        // See Firefox bug: https://bugzilla.mozilla.org/show_bug.cgi?id=1583815
+        if (this.currentRequest._reader) {
+          // Ignoring exceptions thrown by call to cancel()
+          this.currentRequest._reader.cancel().catch(function (err) {});
+        }
+
+        this.currentRequest.controller.abort();
+        this.currentRequest = null;
+      }
+    }
+    /**
+     * @private
+     */
+
+  }, {
+    key: "clearTmpEvents",
+    value: function clearTmpEvents() {
+      this.tmpEvents.forEach(function (e) {
+        return e.un();
+      });
+    }
+    /**
+     * Display empty waveform.
+     */
+
+  }, {
+    key: "empty",
+    value: function empty() {
+      if (!this.backend.isPaused()) {
+        this.stop();
+        this.backend.disconnectSource();
+      }
+
+      this.isReady = false;
+      this.cancelAjax();
+      this.clearTmpEvents(); // empty drawer
+
+      this.drawer.progress(0);
+      this.drawer.setWidth(0);
+      this.drawer.drawPeaks({
+        length: this.drawer.getWidth()
+      }, 0);
+    }
+    /**
+     * Remove events, elements and disconnect WebAudio nodes.
+     *
+     * @emits WaveSurfer#destroy
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.destroyAllPlugins();
+      this.fireEvent('destroy');
+      this.cancelAjax();
+      this.clearTmpEvents();
+      this.unAll();
+
+      if (this.params.responsive !== false) {
+        window.removeEventListener('resize', this._onResize, true);
+        window.removeEventListener('orientationchange', this._onResize, true);
+      }
+
+      if (this.backend) {
+        this.backend.destroy();
+      }
+
+      if (this.drawer) {
+        this.drawer.destroy();
+      }
+
+      this.isDestroyed = true;
+      this.isReady = false;
+      this.arraybuffer = null;
+    }
+  }]);
+
+  return WaveSurfer;
+}(util.Observer);
+
+exports.default = WaveSurfer;
+WaveSurfer.VERSION = "4.1.1";
+WaveSurfer.util = util;
+module.exports = exports.default;
+
+/***/ }),
+
+/***/ "./src/webaudio.js":
+/*!*************************!*\
+  !*** ./src/webaudio.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var util = _interopRequireWildcard(__webpack_require__(/*! ./util */ "./src/util/index.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+// using constants to prevent someone writing the string wrong
+var PLAYING = 'playing';
+var PAUSED = 'paused';
+var FINISHED = 'finished';
+/**
+ * WebAudio backend
+ *
+ * @extends {Observer}
+ */
+
+var WebAudio = /*#__PURE__*/function (_util$Observer) {
+  _inherits(WebAudio, _util$Observer);
+
+  var _super = _createSuper(WebAudio);
+
+  _createClass(WebAudio, [{
+    key: "supportsWebAudio",
+
+    /** scriptBufferSize: size of the processing buffer */
+
+    /** audioContext: allows to process audio with WebAudio API */
+
+    /** @private */
+
+    /** @private */
+
+    /**
+     * Does the browser support this backend
+     *
+     * @return {boolean} Whether or not this browser supports this backend
+     */
+    value: function supportsWebAudio() {
+      return !!(window.AudioContext || window.webkitAudioContext);
+    }
+    /**
+     * Get the audio context used by this backend or create one
+     *
+     * @return {AudioContext} Existing audio context, or creates a new one
+     */
+
+  }, {
+    key: "getAudioContext",
+    value: function getAudioContext() {
+      if (!window.WaveSurferAudioContext) {
+        window.WaveSurferAudioContext = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      return window.WaveSurferAudioContext;
+    }
+    /**
+     * Get the offline audio context used by this backend or create one
+     *
+     * @param {number} sampleRate The sample rate to use
+     * @return {OfflineAudioContext} Existing offline audio context, or creates
+     * a new one
+     */
+
+  }, {
+    key: "getOfflineAudioContext",
+    value: function getOfflineAudioContext(sampleRate) {
+      if (!window.WaveSurferOfflineAudioContext) {
+        window.WaveSurferOfflineAudioContext = new (window.OfflineAudioContext || window.webkitOfflineAudioContext)(1, 2, sampleRate);
+      }
+
+      return window.WaveSurferOfflineAudioContext;
+    }
+    /**
+     * Construct the backend
+     *
+     * @param {WavesurferParams} params Wavesurfer parameters
+     */
+
+  }]);
+
+  function WebAudio(params) {
+    var _this$stateBehaviors, _this$states;
+
+    var _this;
+
+    _classCallCheck(this, WebAudio);
+
+    _this = _super.call(this);
+    /** @private */
+
+    _this.audioContext = null;
+    _this.offlineAudioContext = null;
+    _this.stateBehaviors = (_this$stateBehaviors = {}, _defineProperty(_this$stateBehaviors, PLAYING, {
+      init: function init() {
+        this.addOnAudioProcess();
+      },
+      getPlayedPercents: function getPlayedPercents() {
+        var duration = this.getDuration();
+        return this.getCurrentTime() / duration || 0;
+      },
+      getCurrentTime: function getCurrentTime() {
+        return this.startPosition + this.getPlayedTime();
+      }
+    }), _defineProperty(_this$stateBehaviors, PAUSED, {
+      init: function init() {
+        this.removeOnAudioProcess();
+      },
+      getPlayedPercents: function getPlayedPercents() {
+        var duration = this.getDuration();
+        return this.getCurrentTime() / duration || 0;
+      },
+      getCurrentTime: function getCurrentTime() {
+        return this.startPosition;
+      }
+    }), _defineProperty(_this$stateBehaviors, FINISHED, {
+      init: function init() {
+        this.removeOnAudioProcess();
+        this.fireEvent('finish');
+      },
+      getPlayedPercents: function getPlayedPercents() {
+        return 1;
+      },
+      getCurrentTime: function getCurrentTime() {
+        return this.getDuration();
+      }
+    }), _this$stateBehaviors);
+    _this.params = params;
+    /** ac: Audio Context instance */
+
+    _this.ac = params.audioContext || (_this.supportsWebAudio() ? _this.getAudioContext() : {});
+    /**@private */
+
+    _this.lastPlay = _this.ac.currentTime;
+    /** @private */
+
+    _this.startPosition = 0;
+    /** @private */
+
+    _this.scheduledPause = null;
+    /** @private */
+
+    _this.states = (_this$states = {}, _defineProperty(_this$states, PLAYING, Object.create(_this.stateBehaviors[PLAYING])), _defineProperty(_this$states, PAUSED, Object.create(_this.stateBehaviors[PAUSED])), _defineProperty(_this$states, FINISHED, Object.create(_this.stateBehaviors[FINISHED])), _this$states);
+    /** @private */
+
+    _this.buffer = null;
+    /** @private */
+
+    _this.filters = [];
+    /** gainNode: allows to control audio volume */
+
+    _this.gainNode = null;
+    /** @private */
+
+    _this.mergedPeaks = null;
+    /** @private */
+
+    _this.offlineAc = null;
+    /** @private */
+
+    _this.peaks = null;
+    /** @private */
+
+    _this.playbackRate = 1;
+    /** analyser: provides audio analysis information */
+
+    _this.analyser = null;
+    /** scriptNode: allows processing audio */
+
+    _this.scriptNode = null;
+    /** @private */
+
+    _this.source = null;
+    /** @private */
+
+    _this.splitPeaks = [];
+    /** @private */
+
+    _this.state = null;
+    /** @private */
+
+    _this.explicitDuration = params.duration;
+    /**
+     * Boolean indicating if the backend was destroyed.
+     */
+
+    _this.destroyed = false;
+    return _this;
+  }
+  /**
+   * Initialise the backend, called in `wavesurfer.createBackend()`
+   */
+
+
+  _createClass(WebAudio, [{
+    key: "init",
+    value: function init() {
+      this.createVolumeNode();
+      this.createScriptNode();
+      this.createAnalyserNode();
+      this.setState(PAUSED);
+      this.setPlaybackRate(this.params.audioRate);
+      this.setLength(0);
+    }
+    /** @private */
+
+  }, {
+    key: "disconnectFilters",
+    value: function disconnectFilters() {
+      if (this.filters) {
+        this.filters.forEach(function (filter) {
+          filter && filter.disconnect();
+        });
+        this.filters = null; // Reconnect direct path
+
+        this.analyser.connect(this.gainNode);
+      }
+    }
+    /**
+     * @private
+     *
+     * @param {string} state The new state
+     */
+
+  }, {
+    key: "setState",
+    value: function setState(state) {
+      if (this.state !== this.states[state]) {
+        this.state = this.states[state];
+        this.state.init.call(this);
+      }
+    }
+    /**
+     * Unpacked `setFilters()`
+     *
+     * @param {...AudioNode} filters One or more filters to set
+     */
+
+  }, {
+    key: "setFilter",
+    value: function setFilter() {
+      for (var _len = arguments.length, filters = new Array(_len), _key = 0; _key < _len; _key++) {
+        filters[_key] = arguments[_key];
+      }
+
+      this.setFilters(filters);
+    }
+    /**
+     * Insert custom Web Audio nodes into the graph
+     *
+     * @param {AudioNode[]} filters Packed filters array
+     * @example
+     * const lowpass = wavesurfer.backend.ac.createBiquadFilter();
+     * wavesurfer.backend.setFilter(lowpass);
+     */
+
+  }, {
+    key: "setFilters",
+    value: function setFilters(filters) {
+      // Remove existing filters
+      this.disconnectFilters(); // Insert filters if filter array not empty
+
+      if (filters && filters.length) {
+        this.filters = filters; // Disconnect direct path before inserting filters
+
+        this.analyser.disconnect(); // Connect each filter in turn
+
+        filters.reduce(function (prev, curr) {
+          prev.connect(curr);
+          return curr;
+        }, this.analyser).connect(this.gainNode);
+      }
+    }
+    /** Create ScriptProcessorNode to process audio */
+
+  }, {
+    key: "createScriptNode",
+    value: function createScriptNode() {
+      if (this.params.audioScriptProcessor) {
+        this.scriptNode = this.params.audioScriptProcessor;
+      } else {
+        if (this.ac.createScriptProcessor) {
+          this.scriptNode = this.ac.createScriptProcessor(WebAudio.scriptBufferSize);
+        } else {
+          this.scriptNode = this.ac.createJavaScriptNode(WebAudio.scriptBufferSize);
+        }
+      }
+
+      this.scriptNode.connect(this.ac.destination);
+    }
+    /** @private */
+
+  }, {
+    key: "addOnAudioProcess",
+    value: function addOnAudioProcess() {
+      var _this2 = this;
+
+      this.scriptNode.onaudioprocess = function () {
+        var time = _this2.getCurrentTime();
+
+        if (time >= _this2.getDuration()) {
+          _this2.setState(FINISHED);
+
+          _this2.fireEvent('pause');
+        } else if (time >= _this2.scheduledPause) {
+          _this2.pause();
+        } else if (_this2.state === _this2.states[PLAYING]) {
+          _this2.fireEvent('audioprocess', time);
+        }
+      };
+    }
+    /** @private */
+
+  }, {
+    key: "removeOnAudioProcess",
+    value: function removeOnAudioProcess() {
+      this.scriptNode.onaudioprocess = function () {};
+    }
+    /** Create analyser node to perform audio analysis */
+
+  }, {
+    key: "createAnalyserNode",
+    value: function createAnalyserNode() {
+      this.analyser = this.ac.createAnalyser();
+      this.analyser.connect(this.gainNode);
+    }
+    /**
+     * Create the gain node needed to control the playback volume.
+     *
+     */
+
+  }, {
+    key: "createVolumeNode",
+    value: function createVolumeNode() {
+      // Create gain node using the AudioContext
+      if (this.ac.createGain) {
+        this.gainNode = this.ac.createGain();
+      } else {
+        this.gainNode = this.ac.createGainNode();
+      } // Add the gain node to the graph
+
+
+      this.gainNode.connect(this.ac.destination);
+    }
+    /**
+     * Set the sink id for the media player
+     *
+     * @param {string} deviceId String value representing audio device id.
+     * @returns {Promise} A Promise that resolves to `undefined` when there
+     * are no errors.
+     */
+
+  }, {
+    key: "setSinkId",
+    value: function setSinkId(deviceId) {
+      if (deviceId) {
+        /**
+         * The webaudio API doesn't currently support setting the device
+         * output. Here we create an HTMLAudioElement, connect the
+         * webaudio stream to that element and setSinkId there.
+         */
+        var audio = new window.Audio();
+
+        if (!audio.setSinkId) {
+          return Promise.reject(new Error('setSinkId is not supported in your browser'));
+        }
+
+        audio.autoplay = true;
+        var dest = this.ac.createMediaStreamDestination();
+        this.gainNode.disconnect();
+        this.gainNode.connect(dest);
+        audio.srcObject = dest.stream;
+        return audio.setSinkId(deviceId);
+      } else {
+        return Promise.reject(new Error('Invalid deviceId: ' + deviceId));
+      }
+    }
+    /**
+     * Set the audio volume
+     *
+     * @param {number} value A floating point value between 0 and 1.
+     */
+
+  }, {
+    key: "setVolume",
+    value: function setVolume(value) {
+      this.gainNode.gain.setValueAtTime(value, this.ac.currentTime);
+    }
+    /**
+     * Get the current volume
+     *
+     * @return {number} value A floating point value between 0 and 1.
+     */
+
+  }, {
+    key: "getVolume",
+    value: function getVolume() {
+      return this.gainNode.gain.value;
+    }
+    /**
+     * Decode an array buffer and pass data to a callback
+     *
+     * @private
+     * @param {ArrayBuffer} arraybuffer The array buffer to decode
+     * @param {function} callback The function to call on complete.
+     * @param {function} errback The function to call on error.
+     */
+
+  }, {
+    key: "decodeArrayBuffer",
+    value: function decodeArrayBuffer(arraybuffer, callback, errback) {
+      if (!this.offlineAc) {
+        this.offlineAc = this.getOfflineAudioContext(this.ac && this.ac.sampleRate ? this.ac.sampleRate : 44100);
+      }
+
+      this.offlineAc.decodeAudioData(arraybuffer, function (data) {
+        return callback(data);
+      }, errback);
+    }
+    /**
+     * Set pre-decoded peaks
+     *
+     * @param {number[]|Number.<Array[]>} peaks Peaks data
+     * @param {?number} duration Explicit duration
+     */
+
+  }, {
+    key: "setPeaks",
+    value: function setPeaks(peaks, duration) {
+      if (duration != null) {
+        this.explicitDuration = duration;
+      }
+
+      this.peaks = peaks;
+    }
+    /**
+     * Set the rendered length (different from the length of the audio)
+     *
+     * @param {number} length The rendered length
+     */
+
+  }, {
+    key: "setLength",
+    value: function setLength(length) {
+      // No resize, we can preserve the cached peaks.
+      if (this.mergedPeaks && length == 2 * this.mergedPeaks.length - 1 + 2) {
+        return;
+      }
+
+      this.splitPeaks = [];
+      this.mergedPeaks = []; // Set the last element of the sparse array so the peak arrays are
+      // appropriately sized for other calculations.
+
+      var channels = this.buffer ? this.buffer.numberOfChannels : 1;
+      var c;
+
+      for (c = 0; c < channels; c++) {
+        this.splitPeaks[c] = [];
+        this.splitPeaks[c][2 * (length - 1)] = 0;
+        this.splitPeaks[c][2 * (length - 1) + 1] = 0;
+      }
+
+      this.mergedPeaks[2 * (length - 1)] = 0;
+      this.mergedPeaks[2 * (length - 1) + 1] = 0;
+    }
+    /**
+     * Compute the max and min value of the waveform when broken into <length> subranges.
+     *
+     * @param {number} length How many subranges to break the waveform into.
+     * @param {number} first First sample in the required range.
+     * @param {number} last Last sample in the required range.
+     * @return {number[]|Number.<Array[]>} Array of 2*<length> peaks or array of arrays of
+     * peaks consisting of (max, min) values for each subrange.
+     */
+
+  }, {
+    key: "getPeaks",
+    value: function getPeaks(length, first, last) {
+      if (this.peaks) {
+        return this.peaks;
+      }
+
+      if (!this.buffer) {
+        return [];
+      }
+
+      first = first || 0;
+      last = last || length - 1;
+      this.setLength(length);
+
+      if (!this.buffer) {
+        return this.params.splitChannels ? this.splitPeaks : this.mergedPeaks;
+      }
+      /**
+       * The following snippet fixes a buffering data issue on the Safari
+       * browser which returned undefined It creates the missing buffer based
+       * on 1 channel, 4096 samples and the sampleRate from the current
+       * webaudio context 4096 samples seemed to be the best fit for rendering
+       * will review this code once a stable version of Safari TP is out
+       */
+
+
+      if (!this.buffer.length) {
+        var newBuffer = this.createBuffer(1, 4096, this.sampleRate);
+        this.buffer = newBuffer.buffer;
+      }
+
+      var sampleSize = this.buffer.length / length;
+      var sampleStep = ~~(sampleSize / 10) || 1;
+      var channels = this.buffer.numberOfChannels;
+      var c;
+
+      for (c = 0; c < channels; c++) {
+        var peaks = this.splitPeaks[c];
+        var chan = this.buffer.getChannelData(c);
+        var i = void 0;
+
+        for (i = first; i <= last; i++) {
+          var start = ~~(i * sampleSize);
+          var end = ~~(start + sampleSize);
+          /**
+           * Initialize the max and min to the first sample of this
+           * subrange, so that even if the samples are entirely
+           * on one side of zero, we still return the true max and
+           * min values in the subrange.
+           */
+
+          var min = chan[start];
+          var max = min;
+          var j = void 0;
+
+          for (j = start; j < end; j += sampleStep) {
+            var value = chan[j];
+
+            if (value > max) {
+              max = value;
+            }
+
+            if (value < min) {
+              min = value;
+            }
+          }
+
+          peaks[2 * i] = max;
+          peaks[2 * i + 1] = min;
+
+          if (c == 0 || max > this.mergedPeaks[2 * i]) {
+            this.mergedPeaks[2 * i] = max;
+          }
+
+          if (c == 0 || min < this.mergedPeaks[2 * i + 1]) {
+            this.mergedPeaks[2 * i + 1] = min;
+          }
+        }
+      }
+
+      return this.params.splitChannels ? this.splitPeaks : this.mergedPeaks;
+    }
+    /**
+     * Get the position from 0 to 1
+     *
+     * @return {number} Position
+     */
+
+  }, {
+    key: "getPlayedPercents",
+    value: function getPlayedPercents() {
+      return this.state.getPlayedPercents.call(this);
+    }
+    /** @private */
+
+  }, {
+    key: "disconnectSource",
+    value: function disconnectSource() {
+      if (this.source) {
+        this.source.disconnect();
+      }
+    }
+    /**
+     * Destroy all references with WebAudio, disconnecting audio nodes and closing Audio Context
+     */
+
+  }, {
+    key: "destroyWebAudio",
+    value: function destroyWebAudio() {
+      this.disconnectFilters();
+      this.disconnectSource();
+      this.gainNode.disconnect();
+      this.scriptNode.disconnect();
+      this.analyser.disconnect(); // close the audioContext if closeAudioContext option is set to true
+
+      if (this.params.closeAudioContext) {
+        // check if browser supports AudioContext.close()
+        if (typeof this.ac.close === 'function' && this.ac.state != 'closed') {
+          this.ac.close();
+        } // clear the reference to the audiocontext
+
+
+        this.ac = null; // clear the actual audiocontext, either passed as param or the
+        // global singleton
+
+        if (!this.params.audioContext) {
+          window.WaveSurferAudioContext = null;
+        } else {
+          this.params.audioContext = null;
+        } // clear the offlineAudioContext
+
+
+        window.WaveSurferOfflineAudioContext = null;
+      }
+    }
+    /**
+     * This is called when wavesurfer is destroyed
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      if (!this.isPaused()) {
+        this.pause();
+      }
+
+      this.unAll();
+      this.buffer = null;
+      this.destroyed = true;
+      this.destroyWebAudio();
+    }
+    /**
+     * Loaded a decoded audio buffer
+     *
+     * @param {Object} buffer Decoded audio buffer to load
+     */
+
+  }, {
+    key: "load",
+    value: function load(buffer) {
+      this.startPosition = 0;
+      this.lastPlay = this.ac.currentTime;
+      this.buffer = buffer;
+      this.createSource();
+    }
+    /** @private */
+
+  }, {
+    key: "createSource",
+    value: function createSource() {
+      this.disconnectSource();
+      this.source = this.ac.createBufferSource(); // adjust for old browsers
+
+      this.source.start = this.source.start || this.source.noteGrainOn;
+      this.source.stop = this.source.stop || this.source.noteOff;
+      this.source.playbackRate.setValueAtTime(this.playbackRate, this.ac.currentTime);
+      this.source.buffer = this.buffer;
+      this.source.connect(this.analyser);
+    }
+    /**
+     * @private
+     *
+     * some browsers require an explicit call to #resume before they will play back audio
+     */
+
+  }, {
+    key: "resumeAudioContext",
+    value: function resumeAudioContext() {
+      if (this.ac.state == 'suspended') {
+        this.ac.resume && this.ac.resume();
+      }
+    }
+    /**
+     * Used by `wavesurfer.isPlaying()` and `wavesurfer.playPause()`
+     *
+     * @return {boolean} Whether or not this backend is currently paused
+     */
+
+  }, {
+    key: "isPaused",
+    value: function isPaused() {
+      return this.state !== this.states[PLAYING];
+    }
+    /**
+     * Used by `wavesurfer.getDuration()`
+     *
+     * @return {number} Duration of loaded buffer
+     */
+
+  }, {
+    key: "getDuration",
+    value: function getDuration() {
+      if (this.explicitDuration) {
+        return this.explicitDuration;
+      }
+
+      if (!this.buffer) {
+        return 0;
+      }
+
+      return this.buffer.duration;
+    }
+    /**
+     * Used by `wavesurfer.seekTo()`
+     *
+     * @param {number} start Position to start at in seconds
+     * @param {number} end Position to end at in seconds
+     * @return {{start: number, end: number}} Object containing start and end
+     * positions
+     */
+
+  }, {
+    key: "seekTo",
+    value: function seekTo(start, end) {
+      if (!this.buffer) {
+        return;
+      }
+
+      this.scheduledPause = null;
+
+      if (start == null) {
+        start = this.getCurrentTime();
+
+        if (start >= this.getDuration()) {
+          start = 0;
+        }
+      }
+
+      if (end == null) {
+        end = this.getDuration();
+      }
+
+      this.startPosition = start;
+      this.lastPlay = this.ac.currentTime;
+
+      if (this.state === this.states[FINISHED]) {
+        this.setState(PAUSED);
+      }
+
+      return {
+        start: start,
+        end: end
+      };
+    }
+    /**
+     * Get the playback position in seconds
+     *
+     * @return {number} The playback position in seconds
+     */
+
+  }, {
+    key: "getPlayedTime",
+    value: function getPlayedTime() {
+      return (this.ac.currentTime - this.lastPlay) * this.playbackRate;
+    }
+    /**
+     * Plays the loaded audio region.
+     *
+     * @param {number} start Start offset in seconds, relative to the beginning
+     * of a clip.
+     * @param {number} end When to stop relative to the beginning of a clip.
+     */
+
+  }, {
+    key: "play",
+    value: function play(start, end) {
+      if (!this.buffer) {
+        return;
+      } // need to re-create source on each playback
+
+
+      this.createSource();
+      var adjustedTime = this.seekTo(start, end);
+      start = adjustedTime.start;
+      end = adjustedTime.end;
+      this.scheduledPause = end;
+      this.source.start(0, start);
+      this.resumeAudioContext();
+      this.setState(PLAYING);
+      this.fireEvent('play');
+    }
+    /**
+     * Pauses the loaded audio.
+     */
+
+  }, {
+    key: "pause",
+    value: function pause() {
+      this.scheduledPause = null;
+      this.startPosition += this.getPlayedTime();
+      this.source && this.source.stop(0);
+      this.setState(PAUSED);
+      this.fireEvent('pause');
+    }
+    /**
+     * Returns the current time in seconds relative to the audio-clip's
+     * duration.
+     *
+     * @return {number} The current time in seconds
+     */
+
+  }, {
+    key: "getCurrentTime",
+    value: function getCurrentTime() {
+      return this.state.getCurrentTime.call(this);
+    }
+    /**
+     * Returns the current playback rate. (0=no playback, 1=normal playback)
+     *
+     * @return {number} The current playback rate
+     */
+
+  }, {
+    key: "getPlaybackRate",
+    value: function getPlaybackRate() {
+      return this.playbackRate;
+    }
+    /**
+     * Set the audio source playback rate.
+     *
+     * @param {number} value The playback rate to use
+     */
+
+  }, {
+    key: "setPlaybackRate",
+    value: function setPlaybackRate(value) {
+      value = value || 1;
+
+      if (this.isPaused()) {
+        this.playbackRate = value;
+      } else {
+        this.pause();
+        this.playbackRate = value;
+        this.play();
+      }
+    }
+    /**
+     * Set a point in seconds for playback to stop at.
+     *
+     * @param {number} end Position to end at
+     * @version 3.3.0
+     */
+
+  }, {
+    key: "setPlayEnd",
+    value: function setPlayEnd(end) {
+      this.scheduledPause = end;
+    }
+  }]);
+
+  return WebAudio;
+}(util.Observer);
+
+exports.default = WebAudio;
+WebAudio.scriptBufferSize = 256;
+module.exports = exports.default;
+
+/***/ })
+
+/******/ });
+});
+
+});
+
+var WaveSurfer = unwrapExports$1(wavesurfer);
+
+/**
+ * @typedef {Object} MicrophonePluginParams
+ * @property {MediaStreamConstraints} constraints The constraints parameter is a
+ * MediaStreamConstaints object with two members: video and audio, describing
+ * the media types requested. Either or both must be specified.
+ * @property {number} bufferSize=4096 The buffer size in units of sample-frames.
+ * If specified, the bufferSize must be one of the following values: `256`,
+ * `512`, `1024`, `2048`, `4096`, `8192`, `16384`
+ * @property {number} numberOfInputChannels=1 Integer specifying the number of
+ * channels for this node's input. Values of up to 32 are supported.
+ * @property {number} numberOfOutputChannels=1 Integer specifying the number of
+ * channels for this node's output.
+ * @property {?boolean} deferInit Set to true to manually call
+ * `initPlugin('microphone')`
+ */
+
+/**
+ * Visualize microphone input in a wavesurfer instance.
+ *
+ * @implements {PluginClass}
+ * @extends {Observer}
+ * @example
+ * // es6
+ * import MicrophonePlugin from 'wavesurfer.microphone.js';
+ *
+ * // commonjs
+ * var MicrophonePlugin = require('wavesurfer.microphone.js');
+ *
+ * // if you are using <script> tags
+ * var MicrophonePlugin = window.WaveSurfer.microphone;
+ *
+ * // ... initialising wavesurfer with the plugin
+ * var wavesurfer = WaveSurfer.create({
+ *   // wavesurfer options ...
+ *   plugins: [
+ *     MicrophonePlugin.create({
+ *       // plugin options ...
+ *     })
+ *   ]
+ * });
+ */
+class MicrophonePlugin {
+    /**
+     * Microphone plugin definition factory
+     *
+     * This function must be used to create a plugin definition which can be
+     * used by wavesurfer to correctly instantiate the plugin.
+     *
+     * @param  {MicrophonePluginParams} params parameters use to initialise the plugin
+     * @return {PluginDefinition} an object representing the plugin
+     */
+    static create(params) {
+        return {
+            name: 'microphone',
+            deferInit: params && params.deferInit ? params.deferInit : false,
+            params: params,
+            instance: MicrophonePlugin
+        };
+    }
+
+    constructor(params, ws) {
+        this.params = params;
+        this.wavesurfer = ws;
+
+        this.active = false;
+        this.paused = false;
+        this.browser = this.detectBrowser();
+        this.reloadBufferFunction = e => this.reloadBuffer(e);
+
+        // cross-browser getUserMedia
+        const promisifiedOldGUM = (
+            constraints,
+            successCallback,
+            errorCallback
+        ) => {
+            // get a hold of getUserMedia, if present
+            const getUserMedia =
+                navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia ||
+                navigator.msGetUserMedia;
+            // Some browsers just don't implement it - return a rejected
+            // promise with an error to keep a consistent interface
+            if (!getUserMedia) {
+                return Promise.reject(
+                    new Error('getUserMedia is not implemented in this browser')
+                );
+            }
+            // otherwise, wrap the call to the old navigator.getUserMedia with
+            // a Promise
+            return new Promise((successCallback, errorCallback) => {
+                getUserMedia.call(
+                    navigator,
+                    constraints,
+                    successCallback,
+                    errorCallback
+                );
+            });
+        };
+        // Older browsers might not implement mediaDevices at all, so we set an
+        // empty object first
+        if (navigator.mediaDevices === undefined) {
+            navigator.mediaDevices = {};
+        }
+        // Some browsers partially implement mediaDevices. We can't just assign
+        // an object with getUserMedia as it would overwrite existing
+        // properties. Here, we will just add the getUserMedia property if it's
+        // missing.
+        if (navigator.mediaDevices.getUserMedia === undefined) {
+            navigator.mediaDevices.getUserMedia = promisifiedOldGUM;
+        }
+        this.constraints = this.params.constraints || {
+            video: false,
+            audio: true
+        };
+        this.bufferSize = this.params.bufferSize || 4096;
+        this.numberOfInputChannels = this.params.numberOfInputChannels || 1;
+        this.numberOfOutputChannels = this.params.numberOfOutputChannels || 1;
+
+        this._onBackendCreated = () => {
+            // wavesurfer's AudioContext where we'll route the mic signal to
+            this.micContext = this.wavesurfer.backend.getAudioContext();
+        };
+    }
+
+    init() {
+        this.wavesurfer.on('backend-created', this._onBackendCreated);
+        if (this.wavesurfer.backend) {
+            this._onBackendCreated();
+        }
+    }
+
+    /**
+     * Destroy the microphone plugin.
+     */
+    destroy() {
+        // make sure the buffer is not redrawn during
+        // cleanup and demolition of this plugin.
+        this.paused = true;
+
+        this.wavesurfer.un('backend-created', this._onBackendCreated);
+        this.stop();
+    }
+
+    /**
+     * Allow user to select audio input device, e.g. microphone, and
+     * start the visualization.
+     */
+    start() {
+        navigator.mediaDevices
+            .getUserMedia(this.constraints)
+            .then(data => this.gotStream(data))
+            .catch(data => this.deviceError(data));
+    }
+
+    /**
+     * Pause/resume visualization.
+     */
+    togglePlay() {
+        if (!this.active) {
+            // start it first
+            this.start();
+        } else {
+            // toggle paused
+            this.paused = !this.paused;
+
+            if (this.paused) {
+                this.pause();
+            } else {
+                this.play();
+            }
+        }
+    }
+
+    /**
+     * Play visualization.
+     */
+    play() {
+        this.paused = false;
+
+        this.connect();
+    }
+
+    /**
+     * Pause visualization.
+     */
+    pause() {
+        this.paused = true;
+
+        // disconnect sources so they can be used elsewhere
+        // (eg. during audio playback)
+        this.disconnect();
+    }
+
+    /**
+     * Stop the device stream and remove any remaining waveform drawing from
+     * the wavesurfer canvas.
+     */
+    stop() {
+        if (this.active) {
+            // stop visualization and device
+            this.stopDevice();
+
+            // empty last frame
+            this.wavesurfer.empty();
+        }
+    }
+
+    /**
+     * Stop the device and the visualization.
+     */
+    stopDevice() {
+        this.active = false;
+
+        // stop visualization
+        this.disconnect();
+
+        // stop stream from device
+        if (this.stream) {
+            // MediaStream.stop is deprecated since:
+            // - Firefox 44 (https://www.fxsitecompat.com/en-US/docs/2015/mediastream-stop-has-been-deprecated/)
+            // - Chrome 45 (https://developers.google.com/web/updates/2015/07/mediastream-deprecations)
+            if (
+                (this.browser.browser === 'chrome' &&
+                    this.browser.version >= 45) ||
+                (this.browser.browser === 'firefox' &&
+                    this.browser.version >= 44) ||
+                this.browser.browser === 'edge' ||
+                this.browser.browser === 'safari'
+            ) {
+                if (this.stream.getTracks) {
+                    // note that this should not be a call
+                    this.stream.getTracks().forEach(stream => stream.stop());
+                    return;
+                }
+            }
+
+            this.stream.stop();
+        }
+    }
+
+    /**
+     * Connect the media sources that feed the visualization.
+     */
+    connect() {
+        if (this.stream !== undefined) {
+            // Create a local buffer for data to be copied to the Wavesurfer buffer for Edge
+            if (this.browser.browser === 'edge') {
+                this.localAudioBuffer = this.micContext.createBuffer(
+                    this.numberOfInputChannels,
+                    this.bufferSize,
+                    this.micContext.sampleRate
+                );
+            }
+
+            // Create an AudioNode from the stream.
+            this.mediaStreamSource = this.micContext.createMediaStreamSource(
+                this.stream
+            );
+
+            this.levelChecker = this.micContext.createScriptProcessor(
+                this.bufferSize,
+                this.numberOfInputChannels,
+                this.numberOfOutputChannels
+            );
+            this.mediaStreamSource.connect(this.levelChecker);
+
+            this.levelChecker.connect(this.micContext.destination);
+            this.levelChecker.onaudioprocess = this.reloadBufferFunction;
+        }
+    }
+
+    /**
+     * Disconnect the media sources that feed the visualization.
+     */
+    disconnect() {
+        if (this.mediaStreamSource !== undefined) {
+            this.mediaStreamSource.disconnect();
+        }
+
+        if (this.levelChecker !== undefined) {
+            this.levelChecker.disconnect();
+            this.levelChecker.onaudioprocess = undefined;
+        }
+
+        if (this.localAudioBuffer !== undefined) {
+            this.localAudioBuffer = undefined;
+        }
+    }
+
+    /**
+     * Redraw the waveform.
+     *
+     * @param {object} event Audioprocess event
+     */
+    reloadBuffer(event) {
+        if (!this.paused) {
+            this.wavesurfer.empty();
+
+            if (this.browser.browser === 'edge') {
+                // copy audio data to a local audio buffer,
+                // from https://github.com/audiojs/audio-buffer-utils
+                let channel, l;
+                for (
+                    channel = 0,
+                    l = Math.min(
+                        this.localAudioBuffer.numberOfChannels,
+                        event.inputBuffer.numberOfChannels
+                    );
+                    channel < l;
+                    channel++
+                ) {
+                    this.localAudioBuffer
+                        .getChannelData(channel)
+                        .set(event.inputBuffer.getChannelData(channel));
+                }
+
+                this.wavesurfer.loadDecodedBuffer(this.localAudioBuffer);
+            } else {
+                this.wavesurfer.loadDecodedBuffer(event.inputBuffer);
+            }
+        }
+    }
+
+    /**
+     * Audio input device is ready.
+     *
+     * @param {MediaStream} stream The microphone's media stream.
+     */
+    gotStream(stream) {
+        this.stream = stream;
+        this.active = true;
+
+        // start visualization
+        this.play();
+
+        // notify listeners
+        this.fireEvent('deviceReady', stream);
+    }
+
+    /**
+     * Device error callback.
+     *
+     * @param {string} code Error message
+     */
+    deviceError(code) {
+        // notify listeners
+        this.fireEvent('deviceError', code);
+    }
+
+    /**
+     * Extract browser version out of the provided user agent string.
+     * @param {!string} uastring userAgent string.
+     * @param {!string} expr Regular expression used as match criteria.
+     * @param {!number} pos position in the version string to be returned.
+     * @return {!number} browser version.
+     */
+    extractVersion(uastring, expr, pos) {
+        const match = uastring.match(expr);
+        return match && match.length >= pos && parseInt(match[pos], 10);
+    }
+
+    /**
+     * Browser detector.
+     * @return {object} result containing browser, version and minVersion
+     *     properties.
+     */
+    detectBrowser() {
+        // Returned result object.
+        const result = {};
+        result.browser = null;
+        result.version = null;
+        result.minVersion = null;
+
+        // Non supported browser.
+        if (typeof window === 'undefined' || !window.navigator) {
+            result.browser = 'Not a supported browser.';
+            return result;
+        }
+
+        if (navigator.mozGetUserMedia) {
+            // Firefox
+            result.browser = 'firefox';
+            result.version = this.extractVersion(
+                navigator.userAgent,
+                /Firefox\/(\d+)\./,
+                1
+            );
+            result.minVersion = 31;
+            return result;
+        } else if (navigator.webkitGetUserMedia) {
+            // Chrome/Chromium/Webview/Opera
+            result.browser = 'chrome';
+            result.version = this.extractVersion(
+                navigator.userAgent,
+                /Chrom(e|ium)\/(\d+)\./,
+                2
+            );
+            result.minVersion = 38;
+            return result;
+        } else if (
+            navigator.mediaDevices &&
+            navigator.userAgent.match(/Edge\/(\d+).(\d+)$/)
+        ) {
+            // Edge
+            result.browser = 'edge';
+            result.version = this.extractVersion(
+                navigator.userAgent,
+                /Edge\/(\d+).(\d+)$/,
+                2
+            );
+            result.minVersion = 10547;
+            return result;
+        } else if (
+            window.RTCPeerConnection &&
+            navigator.userAgent.match(/AppleWebKit\/(\d+)\./)
+        ) {
+            // Safari
+            result.browser = 'safari';
+            result.minVersion = 11;
+            result.version = this.extractVersion(
+                navigator.userAgent,
+                /AppleWebKit\/(\d+)\./,
+                1
+            );
+            return result;
+        }
+
+        // Non supported browser default.
+        result.browser = 'Not a supported browser.';
+        return result;
+    }
+}
+
+/**
+ *  @since 4.0.0
+ *
+ * (Single) Region plugin class
+ *
+ * Must be turned into an observer before instantiating. This is done in
+ * `RegionsPlugin` (main plugin class).
+ *
+ * @extends {Observer}
+ */
+class Region {
+    constructor(params, regionsUtils, ws) {
+        this.wavesurfer = ws;
+        this.wrapper = ws.drawer.wrapper;
+        this.util = ws.util;
+        this.style = this.util.style;
+        this.regionsUtil = regionsUtils;
+
+        this.id = params.id == null ? ws.util.getId() : params.id;
+        this.start = Number(params.start) || 0;
+        this.end =
+            params.end == null
+                ? // small marker-like region
+                this.start +
+                (4 / this.wrapper.scrollWidth) * this.wavesurfer.getDuration()
+                : Number(params.end);
+        this.resize =
+            params.resize === undefined ? true : Boolean(params.resize);
+        this.drag = params.drag === undefined ? true : Boolean(params.drag);
+        // reflect resize and drag state of region for region-updated listener
+        this.isResizing = false;
+        this.isDragging = false;
+        this.loop = Boolean(params.loop);
+        this.color = params.color || 'rgba(0, 0, 0, 0.1)';
+        // The left and right handleStyle properties can be set to 'none' for
+        // no styling or can be assigned an object containing CSS properties.
+        this.handleStyle = params.handleStyle || {
+            left: {},
+            right: {}
+        };
+        this.handleLeftEl = null;
+        this.handleRightEl = null;
+        this.data = params.data || {};
+        this.attributes = params.attributes || {};
+
+        this.maxLength = params.maxLength;
+        // It assumes the minLength parameter value, or the regionsMinLength parameter value, if the first one not provided
+        this.minLength = params.minLength;
+        this._onRedraw = () => this.updateRender();
+
+        this.scroll = params.scroll !== false && ws.params.scrollParent;
+        this.scrollSpeed = params.scrollSpeed || 1;
+        this.scrollThreshold = params.scrollThreshold || 10;
+        // Determines whether the context menu is prevented from being opened.
+        this.preventContextMenu =
+            params.preventContextMenu === undefined
+                ? false
+                : Boolean(params.preventContextMenu);
+
+        // select channel ID to set region
+        let channelIdx =
+            params.channelIdx == null ? -1 : parseInt(params.channelIdx);
+        this.regionHeight = '100%';
+        this.marginTop = '0px';
+
+        if (channelIdx !== -1) {
+            let channelCount =
+                this.wavesurfer.backend.buffer != null
+                    ? this.wavesurfer.backend.buffer.numberOfChannels
+                    : -1;
+            if (channelCount >= 0 && channelIdx < channelCount) {
+                this.regionHeight = Math.floor((1 / channelCount) * 100) + '%';
+                this.marginTop =
+                    this.wavesurfer.getHeight() * channelIdx + 'px';
+            }
+        }
+
+        this.formatTimeCallback = params.formatTimeCallback;
+        this.edgeScrollWidth = params.edgeScrollWidth;
+        this.bindInOut();
+        this.render();
+        this.wavesurfer.on('zoom', this._onRedraw);
+        this.wavesurfer.on('redraw', this._onRedraw);
+        this.wavesurfer.fireEvent('region-created', this);
+    }
+
+    /* Update region params. */
+    update(params) {
+        if (params.start != null) {
+            this.start = Number(params.start);
+        }
+        if (params.end != null) {
+            this.end = Number(params.end);
+        }
+        if (params.loop != null) {
+            this.loop = Boolean(params.loop);
+        }
+        if (params.color != null) {
+            this.color = params.color;
+        }
+        if (params.handleStyle != null) {
+            this.handleStyle = params.handleStyle;
+        }
+        if (params.data != null) {
+            this.data = params.data;
+        }
+        if (params.resize != null) {
+            this.resize = Boolean(params.resize);
+            this.updateHandlesResize(this.resize);
+        }
+        if (params.drag != null) {
+            this.drag = Boolean(params.drag);
+        }
+        if (params.maxLength != null) {
+            this.maxLength = Number(params.maxLength);
+        }
+        if (params.minLength != null) {
+            this.minLength = Number(params.minLength);
+        }
+        if (params.attributes != null) {
+            this.attributes = params.attributes;
+        }
+
+        this.updateRender();
+        this.fireEvent('update');
+        this.wavesurfer.fireEvent('region-updated', this);
+    }
+
+    /* Remove a single region. */
+    remove() {
+        if (this.element) {
+            this.wrapper.removeChild(this.element);
+            this.element = null;
+            this.fireEvent('remove');
+            this.wavesurfer.un('zoom', this._onRedraw);
+            this.wavesurfer.un('redraw', this._onRedraw);
+            this.wavesurfer.fireEvent('region-removed', this);
+        }
+    }
+
+    /**
+     * Play the audio region.
+     * @param {number} start Optional offset to start playing at
+     */
+    play(start) {
+        const s = start || this.start;
+        this.wavesurfer.play(s, this.end);
+        this.fireEvent('play');
+        this.wavesurfer.fireEvent('region-play', this);
+    }
+
+    /**
+     * Play the audio region in a loop.
+     * @param {number} start Optional offset to start playing at
+     * */
+    playLoop(start) {
+        this.loop = true;
+        this.play(start);
+    }
+
+    /**
+     * Set looping on/off.
+     * @param {boolean} loop True if should play in loop
+     */
+    setLoop(loop) {
+        this.loop = loop;
+    }
+
+    /* Render a region as a DOM element. */
+    render() {
+        const regionEl = document.createElement('region');
+
+        regionEl.className = 'wavesurfer-region';
+        regionEl.title = this.formatTime(this.start, this.end);
+        regionEl.setAttribute('data-id', this.id);
+
+        for (const attrname in this.attributes) {
+            regionEl.setAttribute(
+                'data-region-' + attrname,
+                this.attributes[attrname]
+            );
+        }
+
+        this.style(regionEl, {
+            position: 'absolute',
+            zIndex: 2,
+            height: this.regionHeight,
+            top: this.marginTop
+        });
+
+        /* Resize handles */
+        if (this.resize) {
+            this.handleLeftEl = regionEl.appendChild(
+                document.createElement('handle')
+            );
+            this.handleRightEl = regionEl.appendChild(
+                document.createElement('handle')
+            );
+
+            this.handleLeftEl.className = 'wavesurfer-handle wavesurfer-handle-start';
+            this.handleRightEl.className = 'wavesurfer-handle wavesurfer-handle-end';
+
+            // Default CSS properties for both handles.
+            const css = {
+                cursor: 'col-resize',
+                position: 'absolute',
+                top: '0px',
+                width: '2px',
+                height: '100%',
+                backgroundColor: 'rgba(0, 0, 0, 1)'
+            };
+
+            // Merge CSS properties per handle.
+            const handleLeftCss =
+                this.handleStyle.left !== 'none'
+                    ? Object.assign({ left: '0px' }, css, this.handleStyle.left)
+                    : null;
+            const handleRightCss =
+                this.handleStyle.right !== 'none'
+                    ? Object.assign(
+                        { right: '0px' },
+                        css,
+                        this.handleStyle.right
+                    )
+                    : null;
+
+            if (handleLeftCss) {
+                this.style(this.handleLeftEl, handleLeftCss);
+            }
+
+            if (handleRightCss) {
+                this.style(this.handleRightEl, handleRightCss);
+            }
+        }
+
+        this.element = this.wrapper.appendChild(regionEl);
+        this.updateRender();
+        this.bindEvents(regionEl);
+    }
+
+    formatTime(start, end) {
+        if (this.formatTimeCallback) {
+            return this.formatTimeCallback(start, end);
+        }
+        return (start == end ? [start] : [start, end])
+            .map((time) =>
+                [
+                    Math.floor((time % 3600) / 60), // minutes
+                    ('00' + Math.floor(time % 60)).slice(-2) // seconds
+                ].join(':')
+            )
+            .join('-');
+    }
+
+    getWidth() {
+        return this.wavesurfer.drawer.width / this.wavesurfer.params.pixelRatio;
+    }
+
+    /* Update element's position, width, color. */
+    updateRender() {
+        // duration varies during loading process, so don't overwrite important data
+        const dur = this.wavesurfer.getDuration();
+        const width = this.getWidth();
+
+        var startLimited = this.start;
+        var endLimited = this.end;
+        if (startLimited < 0) {
+            startLimited = 0;
+            endLimited = endLimited - startLimited;
+        }
+        if (endLimited > dur) {
+            endLimited = dur;
+            startLimited = dur - (endLimited - startLimited);
+        }
+
+        if (this.minLength != null) {
+            endLimited = Math.max(startLimited + this.minLength, endLimited);
+        }
+
+        if (this.maxLength != null) {
+            endLimited = Math.min(startLimited + this.maxLength, endLimited);
+        }
+
+        if (this.element != null) {
+            // Calculate the left and width values of the region such that
+            // no gaps appear between regions.
+            const left = Math.round((startLimited / dur) * width);
+            const regionWidth = Math.round((endLimited / dur) * width) - left;
+
+            this.style(this.element, {
+                left: left + 'px',
+                width: regionWidth + 'px',
+                backgroundColor: this.color,
+                cursor: this.drag ? 'move' : 'default'
+            });
+
+            for (const attrname in this.attributes) {
+                this.element.setAttribute(
+                    'data-region-' + attrname,
+                    this.attributes[attrname]
+                );
+            }
+
+            this.element.title = this.formatTime(this.start, this.end);
+        }
+    }
+
+    /* Bind audio events. */
+    bindInOut() {
+        this.firedIn = false;
+        this.firedOut = false;
+
+        const onProcess = (time) => {
+            let start = Math.round(this.start * 10) / 10;
+            let end = Math.round(this.end * 10) / 10;
+            time = Math.round(time * 10) / 10;
+
+            if (
+                !this.firedOut &&
+                this.firedIn &&
+                (start > time || end <= time)
+            ) {
+                this.firedOut = true;
+                this.firedIn = false;
+                this.fireEvent('out');
+                this.wavesurfer.fireEvent('region-out', this);
+            }
+            if (!this.firedIn && start <= time && end > time) {
+                this.firedIn = true;
+                this.firedOut = false;
+                this.fireEvent('in');
+                this.wavesurfer.fireEvent('region-in', this);
+            }
+        };
+
+        this.wavesurfer.backend.on('audioprocess', onProcess);
+
+        this.on('remove', () => {
+            this.wavesurfer.backend.un('audioprocess', onProcess);
+        });
+
+        /* Loop playback. */
+        this.on('out', () => {
+            if (this.loop) {
+                const realTime = this.wavesurfer.getCurrentTime();
+                if (realTime >= this.start && realTime <= this.end) {
+                    this.wavesurfer.play(this.start);
+                }
+            }
+        });
+    }
+
+    /* Bind DOM events. */
+    bindEvents() {
+        const preventContextMenu = this.preventContextMenu;
+
+        this.element.addEventListener('mouseenter', (e) => {
+            this.fireEvent('mouseenter', e);
+            this.wavesurfer.fireEvent('region-mouseenter', this, e);
+        });
+
+        this.element.addEventListener('mouseleave', (e) => {
+            this.fireEvent('mouseleave', e);
+            this.wavesurfer.fireEvent('region-mouseleave', this, e);
+        });
+
+        this.element.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.fireEvent('click', e);
+            this.wavesurfer.fireEvent('region-click', this, e);
+        });
+
+        this.element.addEventListener('dblclick', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.fireEvent('dblclick', e);
+            this.wavesurfer.fireEvent('region-dblclick', this, e);
+        });
+
+        this.element.addEventListener('contextmenu', (e) => {
+            if (preventContextMenu) {
+                e.preventDefault();
+            }
+            this.fireEvent('contextmenu', e);
+            this.wavesurfer.fireEvent('region-contextmenu', this, e);
+        });
+
+        /* Drag or resize on mousemove. */
+        if (this.drag || this.resize) {
+            this.bindDragEvents();
+        }
+    }
+
+    bindDragEvents() {
+        const container = this.wavesurfer.drawer.container;
+        const scrollSpeed = this.scrollSpeed;
+        const scrollThreshold = this.scrollThreshold;
+        let startTime;
+        let touchId;
+        let drag;
+        let maxScroll;
+        let resize;
+        let updated = false;
+        let scrollDirection;
+        let wrapperRect;
+        let regionLeftHalfTime;
+        let regionRightHalfTime;
+
+        // Scroll when the user is dragging within the threshold
+        const edgeScroll = (e) => {
+            const duration = this.wavesurfer.getDuration();
+            if (!scrollDirection || (!drag && !resize)) {
+                return;
+            }
+
+            const x = e.clientX;
+            let distanceBetweenCursorAndWrapperEdge = 0;
+            let regionHalfTimeWidth = 0;
+            let adjustment = 0;
+
+            // Get the currently selected time according to the mouse position
+            let time = this.regionsUtil.getRegionSnapToGridValue(
+                this.wavesurfer.drawer.handleEvent(e) * duration
+            );
+
+            if (drag) {
+                // Considering the point of contact with the region while edgescrolling
+                if (scrollDirection === -1) {
+                    regionHalfTimeWidth = regionLeftHalfTime * this.wavesurfer.params.minPxPerSec;
+                    distanceBetweenCursorAndWrapperEdge = x - wrapperRect.left;
+                } else {
+                    regionHalfTimeWidth = regionRightHalfTime * this.wavesurfer.params.minPxPerSec;
+                    distanceBetweenCursorAndWrapperEdge = wrapperRect.right - x;
+                }
+            } else {
+                // Considering minLength while edgescroll
+                let minLength = this.minLength;
+                if (!minLength) {
+                    minLength = 0;
+                }
+
+                if (resize === 'start') {
+                    if (time > this.end - minLength) {
+                        time = this.end - minLength;
+                        adjustment = scrollSpeed * scrollDirection;
+                    }
+
+                    if (time < 0) {
+                        time = 0;
+                    }
+                } else if (resize === 'end') {
+                    if (time < this.start + minLength) {
+                        time = this.start + minLength;
+                        adjustment = scrollSpeed * scrollDirection;
+                    }
+
+                    if (time > duration) {
+                        time = duration;
+                    }
+                }
+            }
+
+            // Don't edgescroll if region has reached min or max limit
+            if (scrollDirection === -1) {
+                if (Math.round(this.wrapper.scrollLeft) === 0) {
+                    return;
+                }
+
+                if (Math.round(this.wrapper.scrollLeft - regionHalfTimeWidth + distanceBetweenCursorAndWrapperEdge) <= 0) {
+                    return;
+                }
+            } else {
+                if (Math.round(this.wrapper.scrollLeft) === maxScroll) {
+                    return;
+                }
+
+                if (Math.round(this.wrapper.scrollLeft + regionHalfTimeWidth - distanceBetweenCursorAndWrapperEdge) >= maxScroll) {
+                    return;
+                }
+            }
+
+            // Update scroll position
+            let scrollLeft = this.wrapper.scrollLeft - adjustment + scrollSpeed * scrollDirection;
+
+            if (scrollDirection === -1) {
+                const calculatedLeft = Math.max(0 + regionHalfTimeWidth - distanceBetweenCursorAndWrapperEdge, scrollLeft);
+                this.wrapper.scrollLeft = scrollLeft = calculatedLeft;
+            } else {
+                const calculatedRight = Math.min(maxScroll - regionHalfTimeWidth + distanceBetweenCursorAndWrapperEdge, scrollLeft);
+                this.wrapper.scrollLeft = scrollLeft = calculatedRight;
+            }
+
+            const delta = time - startTime;
+            startTime = time;
+
+            // Continue dragging or resizing
+            drag ? this.onDrag(delta) : this.onResize(delta, resize);
+
+            // Repeat
+            window.requestAnimationFrame(() => {
+                edgeScroll(e);
+            });
+        };
+
+        const onDown = (e) => {
+            const duration = this.wavesurfer.getDuration();
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+            touchId = e.targetTouches ? e.targetTouches[0].identifier : null;
+
+            // stop the event propagation, if this region is resizable or draggable
+            // and the event is therefore handled here.
+            if (this.drag || this.resize) {
+                e.stopPropagation();
+            }
+
+            // Store the selected startTime we begun dragging or resizing
+            startTime = this.regionsUtil.getRegionSnapToGridValue(
+                this.wavesurfer.drawer.handleEvent(e, true) * duration
+            );
+
+            // Store the selected point of contact when we begin dragging
+            regionLeftHalfTime = startTime - this.start;
+            regionRightHalfTime = this.end - startTime;
+
+            // Store for scroll calculations
+            maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
+            wrapperRect = this.wrapper.getBoundingClientRect();
+
+            this.isResizing = false;
+            this.isDragging = false;
+            if (e.target.tagName.toLowerCase() === 'handle') {
+                this.isResizing = true;
+                resize = e.target.classList.contains('wavesurfer-handle-start')
+                    ? 'start'
+                    : 'end';
+            } else {
+                this.isDragging = true;
+                drag = true;
+                resize = false;
+            }
+        };
+        const onUp = (e) => {
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+
+            if (drag || resize) {
+                this.isDragging = false;
+                this.isResizing = false;
+                drag = false;
+                scrollDirection = null;
+                resize = false;
+            }
+
+            if (updated) {
+                updated = false;
+                this.util.preventClick();
+                this.fireEvent('update-end', e);
+                this.wavesurfer.fireEvent('region-update-end', this, e);
+            }
+        };
+        const onMove = (e) => {
+            const duration = this.wavesurfer.getDuration();
+
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+            if (e.targetTouches && e.targetTouches[0].identifier != touchId) {
+                return;
+            }
+            if (!drag && !resize) {
+                return;
+            }
+            let time = this.regionsUtil.getRegionSnapToGridValue(
+                this.wavesurfer.drawer.handleEvent(e) * duration
+            );
+
+            if (drag) {
+                // To maintain relative cursor start point while dragging
+                const maxEnd = this.wavesurfer.getDuration();
+                if (time > maxEnd - regionRightHalfTime) {
+                    time = maxEnd - regionRightHalfTime;
+                }
+
+                if (time - regionLeftHalfTime < 0) {
+                    time = regionLeftHalfTime;
+                }
+            }
+
+            if (resize) {
+                // To maintain relative cursor start point while resizing
+                // we have to handle for minLength
+                let minLength = this.minLength;
+                if (!minLength) {
+                    minLength = 0;
+                }
+
+                if (resize === 'start') {
+                    if (time > this.end - minLength) {
+                        time = this.end - minLength;
+                    }
+
+                    if (time < 0) {
+                        time = 0;
+                    }
+                } else if (resize === 'end') {
+                    if (time < this.start + minLength) {
+                        time = this.start + minLength;
+                    }
+
+                    if (time > duration) {
+                        time = duration;
+                    }
+                }
+            }
+
+            let delta = time - startTime;
+            startTime = time;
+
+            // Drag
+            if (this.drag && drag) {
+                updated = updated || !!delta;
+                this.onDrag(delta);
+            }
+
+            // Resize
+            if (this.resize && resize) {
+                updated = updated || !!delta;
+                this.onResize(delta, resize);
+            }
+
+            if (
+                this.scroll &&
+                container.clientWidth < this.wrapper.scrollWidth
+            ) {
+                // Triggering edgescroll from within edgeScrollWidth
+                if (drag) {
+                    let x = e.clientX;
+
+                    // Check direction
+                    if (x < wrapperRect.left + this.edgeScrollWidth) {
+                        scrollDirection = -1;
+                    } else if (x > wrapperRect.right - this.edgeScrollWidth) {
+                        scrollDirection = 1;
+                    } else {
+                        scrollDirection = null;
+                    }
+                } else {
+                    let x = e.clientX;
+
+                    // Check direction
+                    if (x < wrapperRect.left + this.edgeScrollWidth) {
+                        scrollDirection = -1;
+                    } else if (x > wrapperRect.right - this.edgeScrollWidth) {
+                        scrollDirection = 1;
+                    } else {
+                        scrollDirection = null;
+                    }
+                }
+
+                if (scrollDirection) {
+                    edgeScroll(e);
+                }
+            }
+        };
+
+        this.element.addEventListener('mousedown', onDown);
+        this.element.addEventListener('touchstart', onDown);
+
+        document.body.addEventListener('mousemove', onMove);
+        document.body.addEventListener('touchmove', onMove);
+
+        document.body.addEventListener('mouseup', onUp);
+        document.body.addEventListener('touchend', onUp);
+
+        this.on('remove', () => {
+            document.body.removeEventListener('mouseup', onUp);
+            document.body.removeEventListener('touchend', onUp);
+            document.body.removeEventListener('mousemove', onMove);
+            document.body.removeEventListener('touchmove', onMove);
+        });
+
+        this.wavesurfer.on('destroy', () => {
+            document.body.removeEventListener('mouseup', onUp);
+            document.body.removeEventListener('touchend', onUp);
+        });
+    }
+
+    onDrag(delta) {
+        const maxEnd = this.wavesurfer.getDuration();
+        if (this.end + delta > maxEnd) {
+            delta = maxEnd - this.end;
+        }
+
+        if (this.start + delta < 0) {
+            delta = this.start * -1;
+        }
+
+        this.update({
+            start: this.start + delta,
+            end: this.end + delta
+        });
+    }
+
+    /**
+     * @example
+     * onResize(-5, 'start') // Moves the start point 5 seconds back
+     * onResize(0.5, 'end') // Moves the end point 0.5 seconds forward
+     *
+     * @param {number} delta How much to add or subtract, given in seconds
+     * @param {string} direction 'start 'or 'end'
+     */
+    onResize(delta, direction) {
+        const duration = this.wavesurfer.getDuration();
+        if (direction === 'start') {
+            // Check if changing the start by the given delta would result in the region being smaller than minLength
+            // Ignore cases where we are making the region wider rather than shrinking it
+            if (delta > 0 && this.end - (this.start + delta) < this.minLength) {
+                delta = this.end - this.minLength - this.start;
+            }
+
+            if (delta < 0 && (this.start + delta) < 0) {
+                delta = this.start * -1;
+            }
+
+            this.update({
+                start: Math.min(this.start + delta, this.end),
+                end: Math.max(this.start + delta, this.end)
+            });
+        } else {
+            // Check if changing the end by the given delta would result in the region being smaller than minLength
+            // Ignore cases where we are making the region wider rather than shrinking it
+            if (delta < 0 && this.end + delta - this.start < this.minLength) {
+                delta = this.start + this.minLength - this.end;
+            }
+
+            if (delta > 0 && (this.end + delta) > duration) {
+                delta = duration - this.end;
+            }
+
+            this.update({
+                start: Math.min(this.end + delta, this.start),
+                end: Math.max(this.end + delta, this.start)
+            });
+        }
+    }
+
+    updateHandlesResize(resize) {
+        const cursorStyle = resize ? 'col-resize' : 'auto';
+
+        this.handleLeftEl && this.style(this.handleLeftEl, { cursor: cursorStyle });
+        this.handleRightEl && this.style(this.handleRightEl, { cursor: cursorStyle });
+    }
+}
+
+/**
+ *  @since 4.0.0 This class has been split
+ *
+ * @typedef {Object} RegionsPluginParams
+ * @property {?boolean} dragSelection Enable creating regions by dragging with
+ * the mouse
+ * @property {?RegionParams[]} regions Regions that should be added upon
+ * initialisation
+ * @property {number} slop=2 The sensitivity of the mouse dragging
+ * @property {?number} snapToGridInterval Snap the regions to a grid of the specified multiples in seconds
+ * @property {?number} snapToGridOffset Shift the snap-to-grid by the specified seconds. May also be negative.
+ * @property {?boolean} deferInit Set to true to manually call
+ * @property {number[]} maxRegions Maximum number of regions that may be created by the user at one time.
+ * `initPlugin('regions')`
+ * @property {function} formatTimeCallback Allows custom formating for region tooltip.
+ * @property {?number} edgeScrollWidth='5% from container edges' Optional width for edgeScroll to start
+ */
+
+/**
+ * Regions are visual overlays on waveform that can be used to play and loop
+ * portions of audio. Regions can be dragged and resized.
+ *
+ * Visual customization is possible via CSS (using the selectors
+ * `.wavesurfer-region` and `.wavesurfer-handle`).
+ *
+ * @implements {PluginClass}
+ * @extends {Observer}
+ *
+ * @example
+ * // es6
+ * import RegionsPlugin from 'wavesurfer.regions.js';
+ *
+ * // commonjs
+ * var RegionsPlugin = require('wavesurfer.regions.js');
+ *
+ * // if you are using <script> tags
+ * var RegionsPlugin = window.WaveSurfer.regions;
+ *
+ * // ... initialising wavesurfer with the plugin
+ * var wavesurfer = WaveSurfer.create({
+ *   // wavesurfer options ...
+ *   plugins: [
+ *     RegionsPlugin.create({
+ *       // plugin options ...
+ *     })
+ *   ]
+ * });
+ */
+class RegionsPlugin {
+    /**
+     * Regions plugin definition factory
+     *
+     * This function must be used to create a plugin definition which can be
+     * used by wavesurfer to correctly instantiate the plugin.
+     *
+     * @param {RegionsPluginParams} params parameters use to initialise the plugin
+     * @return {PluginDefinition} an object representing the plugin
+     */
+    static create(params) {
+        return {
+            name: 'regions',
+            deferInit: params && params.deferInit ? params.deferInit : false,
+            params: params,
+            staticProps: {
+                addRegion(options) {
+                    if (!this.initialisedPluginList.regions) {
+                        this.initPlugin('regions');
+                    }
+                    return this.regions.add(options);
+                },
+
+                clearRegions() {
+                    this.regions && this.regions.clear();
+                },
+
+                enableDragSelection(options) {
+                    if (!this.initialisedPluginList.regions) {
+                        this.initPlugin('regions');
+                    }
+                    this.regions.enableDragSelection(options);
+                },
+
+                disableDragSelection() {
+                    this.regions.disableDragSelection();
+                }
+            },
+            instance: RegionsPlugin
+        };
+    }
+
+    constructor(params, ws) {
+        this.params = params;
+        this.wavesurfer = ws;
+        this.util = {
+            ...ws.util,
+            getRegionSnapToGridValue: value => {
+                return this.getRegionSnapToGridValue(value, params);
+            }
+        };
+        this.maxRegions = params.maxRegions;
+        this.regionsMinLength = params.regionsMinLength || null;
+
+        // turn the plugin instance into an observer
+        const observerPrototypeKeys = Object.getOwnPropertyNames(
+            this.util.Observer.prototype
+        );
+        observerPrototypeKeys.forEach(key => {
+            Region.prototype[key] = this.util.Observer.prototype[key];
+        });
+        this.wavesurfer.Region = Region;
+
+        this._onBackendCreated = () => {
+            this.wrapper = this.wavesurfer.drawer.wrapper;
+            if (this.params.regions) {
+                this.params.regions.forEach(region => {
+                    region.edgeScrollWidth = this.params.edgeScrollWidth || this.wrapper.clientWidth * 0.05;
+                    this.add(region);
+                });
+            }
+        };
+
+        // Id-based hash of regions
+        this.list = {};
+        this._onReady = () => {
+            this.wrapper = this.wavesurfer.drawer.wrapper;
+            if (this.params.dragSelection) {
+                this.enableDragSelection(this.params);
+            }
+            Object.keys(this.list).forEach(id => {
+                this.list[id].updateRender();
+            });
+        };
+    }
+
+    init() {
+        // Check if ws is ready
+        if (this.wavesurfer.isReady) {
+            this._onBackendCreated();
+            this._onReady();
+        } else {
+            this.wavesurfer.once('ready', this._onReady);
+            this.wavesurfer.once('backend-created', this._onBackendCreated);
+        }
+    }
+
+    destroy() {
+        this.wavesurfer.un('ready', this._onReady);
+        this.wavesurfer.un('backend-created', this._onBackendCreated);
+        this.disableDragSelection();
+        this.clear();
+    }
+
+    /**
+     * check to see if adding a new region would exceed maxRegions
+     * @return {boolean} whether we should proceed and create a region
+     * @private
+     */
+    wouldExceedMaxRegions() {
+        return (
+            this.maxRegions && Object.keys(this.list).length >= this.maxRegions
+        );
+    }
+
+    /**
+     * Add a region
+     *
+     * @param {object} params Region parameters
+     * @return {Region} The created region
+     */
+    add(params) {
+        if (this.wouldExceedMaxRegions()) return null;
+
+        if (!params.minLength && this.regionsMinLength) {
+            params = {...params, minLength: this.regionsMinLength};
+        }
+
+        const region = new this.wavesurfer.Region(params, this.util, this.wavesurfer);
+
+        this.list[region.id] = region;
+
+        region.on('remove', () => {
+            delete this.list[region.id];
+        });
+
+        return region;
+    }
+
+    /**
+     * Remove all regions
+     */
+    clear() {
+        Object.keys(this.list).forEach(id => {
+            this.list[id].remove();
+        });
+    }
+
+    enableDragSelection(params) {
+        this.disableDragSelection();
+
+        const slop = params.slop || 2;
+        const container = this.wavesurfer.drawer.container;
+        const scroll =
+            params.scroll !== false && this.wavesurfer.params.scrollParent;
+        const scrollSpeed = params.scrollSpeed || 1;
+        const scrollThreshold = params.scrollThreshold || 10;
+        let drag;
+        let duration = this.wavesurfer.getDuration();
+        let maxScroll;
+        let start;
+        let region;
+        let touchId;
+        let pxMove = 0;
+        let scrollDirection;
+        let wrapperRect;
+
+        // Scroll when the user is dragging within the threshold
+        const edgeScroll = e => {
+            if (!region || !scrollDirection) {
+                return;
+            }
+
+            // Update scroll position
+            let scrollLeft =
+                this.wrapper.scrollLeft + scrollSpeed * scrollDirection;
+            this.wrapper.scrollLeft = scrollLeft = Math.min(
+                maxScroll,
+                Math.max(0, scrollLeft)
+            );
+
+            // Update range
+            const end = this.wavesurfer.drawer.handleEvent(e);
+            region.update({
+                start: Math.min(end * duration, start * duration),
+                end: Math.max(end * duration, start * duration)
+            });
+
+            // Check that there is more to scroll and repeat
+            if (scrollLeft < maxScroll && scrollLeft > 0) {
+                window.requestAnimationFrame(() => {
+                    edgeScroll(e);
+                });
+            }
+        };
+
+        const eventDown = e => {
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+            duration = this.wavesurfer.getDuration();
+            touchId = e.targetTouches ? e.targetTouches[0].identifier : null;
+
+            // Store for scroll calculations
+            maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
+            wrapperRect = this.wrapper.getBoundingClientRect();
+
+            drag = true;
+            start = this.wavesurfer.drawer.handleEvent(e, true);
+            region = null;
+            scrollDirection = null;
+        };
+        this.wrapper.addEventListener('mousedown', eventDown);
+        this.wrapper.addEventListener('touchstart', eventDown);
+        this.on('disable-drag-selection', () => {
+            this.wrapper.removeEventListener('touchstart', eventDown);
+            this.wrapper.removeEventListener('mousedown', eventDown);
+        });
+
+        const eventUp = e => {
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+
+            drag = false;
+            pxMove = 0;
+            scrollDirection = null;
+
+            if (region) {
+                this.util.preventClick();
+                region.fireEvent('update-end', e);
+                this.wavesurfer.fireEvent('region-update-end', region, e);
+            }
+
+            region = null;
+        };
+        this.wrapper.addEventListener('mouseup', eventUp);
+        this.wrapper.addEventListener('touchend', eventUp);
+
+        document.body.addEventListener('mouseup', eventUp);
+        document.body.addEventListener('touchend', eventUp);
+        this.on('disable-drag-selection', () => {
+            document.body.removeEventListener('mouseup', eventUp);
+            document.body.removeEventListener('touchend', eventUp);
+            this.wrapper.removeEventListener('touchend', eventUp);
+            this.wrapper.removeEventListener('mouseup', eventUp);
+        });
+
+        const eventMove = e => {
+            if (!drag) {
+                return;
+            }
+            if (++pxMove <= slop) {
+                return;
+            }
+
+            if (e.touches && e.touches.length > 1) {
+                return;
+            }
+            if (e.targetTouches && e.targetTouches[0].identifier != touchId) {
+                return;
+            }
+
+            // auto-create a region during mouse drag, unless region-count would exceed "maxRegions"
+            if (!region) {
+                region = this.add(params || {});
+                if (!region) return;
+            }
+
+            const end = this.wavesurfer.drawer.handleEvent(e);
+            const startUpdate = this.wavesurfer.regions.util.getRegionSnapToGridValue(
+                start * duration
+            );
+            const endUpdate = this.wavesurfer.regions.util.getRegionSnapToGridValue(
+                end * duration
+            );
+            region.update({
+                start: Math.min(endUpdate, startUpdate),
+                end: Math.max(endUpdate, startUpdate)
+            });
+
+            // If scrolling is enabled
+            if (scroll && container.clientWidth < this.wrapper.scrollWidth) {
+                // Check threshold based on mouse
+                const x = e.clientX - wrapperRect.left;
+                if (x <= scrollThreshold) {
+                    scrollDirection = -1;
+                } else if (x >= wrapperRect.right - scrollThreshold) {
+                    scrollDirection = 1;
+                } else {
+                    scrollDirection = null;
+                }
+                scrollDirection && edgeScroll(e);
+            }
+        };
+        this.wrapper.addEventListener('mousemove', eventMove);
+        this.wrapper.addEventListener('touchmove', eventMove);
+        this.on('disable-drag-selection', () => {
+            this.wrapper.removeEventListener('touchmove', eventMove);
+            this.wrapper.removeEventListener('mousemove', eventMove);
+        });
+
+        this.wavesurfer.on('region-created', region => {
+            if (this.regionsMinLength) {
+                region.minLength = this.regionsMinLength;
+            }
+        });
+    }
+
+    disableDragSelection() {
+        this.fireEvent('disable-drag-selection');
+    }
+
+    /**
+     * Get current region
+     *
+     * The smallest region that contains the current time. If several such
+     * regions exist, take the first. Return `null` if none exist.
+     *
+     * @returns {Region} The current region
+     */
+    getCurrentRegion() {
+        const time = this.wavesurfer.getCurrentTime();
+        let min = null;
+        Object.keys(this.list).forEach(id => {
+            const cur = this.list[id];
+            if (cur.start <= time && cur.end >= time) {
+                if (!min || cur.end - cur.start < min.end - min.start) {
+                    min = cur;
+                }
+            }
+        });
+
+        return min;
+    }
+
+    /**
+     * Match the value to the grid, if required
+     *
+     * If the regions plugin params have a snapToGridInterval set, return the
+     * value matching the nearest grid interval. If no snapToGridInterval is set,
+     * the passed value will be returned without modification.
+     *
+     * @param {number} value the value to snap to the grid, if needed
+     * @param {Object} params the regions plugin params
+     * @returns {number} value
+     */
+    getRegionSnapToGridValue(value, params) {
+        if (params.snapToGridInterval) {
+            // the regions should snap to a grid
+            const offset = params.snapToGridOffset || 0;
+            return (
+                Math.round((value - offset) / params.snapToGridInterval) *
+                    params.snapToGridInterval +
+                offset
+            );
+        }
+
+        // no snap-to-grid
+        return value;
+    }
+}
+
+/* eslint-disable complexity, no-redeclare, no-var, one-var */
+
+/**
+ * Calculate FFT - Based on https://github.com/corbanbrook/dsp.js
+ *
+ * @param {Number} bufferSize Buffer size
+ * @param {Number} sampleRate Sample rate
+ * @param {Function} windowFunc Window function
+ * @param {Number} alpha Alpha channel
+ */
+function FFT(bufferSize, sampleRate, windowFunc, alpha) {
+    this.bufferSize = bufferSize;
+    this.sampleRate = sampleRate;
+    this.bandwidth = (2 / bufferSize) * (sampleRate / 2);
+
+    this.sinTable = new Float32Array(bufferSize);
+    this.cosTable = new Float32Array(bufferSize);
+    this.windowValues = new Float32Array(bufferSize);
+    this.reverseTable = new Uint32Array(bufferSize);
+
+    this.peakBand = 0;
+    this.peak = 0;
+
+    var i;
+    switch (windowFunc) {
+        case 'bartlett':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    (2 / (bufferSize - 1)) *
+                    ((bufferSize - 1) / 2 - Math.abs(i - (bufferSize - 1) / 2));
+            }
+            break;
+        case 'bartlettHann':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    0.62 -
+                    0.48 * Math.abs(i / (bufferSize - 1) - 0.5) -
+                    0.38 * Math.cos((Math.PI * 2 * i) / (bufferSize - 1));
+            }
+            break;
+        case 'blackman':
+            alpha = alpha || 0.16;
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    (1 - alpha) / 2 -
+                    0.5 * Math.cos((Math.PI * 2 * i) / (bufferSize - 1)) +
+                    (alpha / 2) *
+                        Math.cos((4 * Math.PI * i) / (bufferSize - 1));
+            }
+            break;
+        case 'cosine':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] = Math.cos(
+                    (Math.PI * i) / (bufferSize - 1) - Math.PI / 2
+                );
+            }
+            break;
+        case 'gauss':
+            alpha = alpha || 0.25;
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] = Math.pow(
+                    Math.E,
+                    -0.5 *
+                        Math.pow(
+                            (i - (bufferSize - 1) / 2) /
+                                ((alpha * (bufferSize - 1)) / 2),
+                            2
+                        )
+                );
+            }
+            break;
+        case 'hamming':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    0.54 -
+                    0.46 * Math.cos((Math.PI * 2 * i) / (bufferSize - 1));
+            }
+            break;
+        case 'hann':
+        case undefined:
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    0.5 * (1 - Math.cos((Math.PI * 2 * i) / (bufferSize - 1)));
+            }
+            break;
+        case 'lanczoz':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    Math.sin(Math.PI * ((2 * i) / (bufferSize - 1) - 1)) /
+                    (Math.PI * ((2 * i) / (bufferSize - 1) - 1));
+            }
+            break;
+        case 'rectangular':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] = 1;
+            }
+            break;
+        case 'triangular':
+            for (i = 0; i < bufferSize; i++) {
+                this.windowValues[i] =
+                    (2 / bufferSize) *
+                    (bufferSize / 2 - Math.abs(i - (bufferSize - 1) / 2));
+            }
+            break;
+        default:
+            throw Error("No such window function '" + windowFunc + "'");
+    }
+
+    var limit = 1;
+    var bit = bufferSize >> 1;
+    var i;
+
+    while (limit < bufferSize) {
+        for (i = 0; i < limit; i++) {
+            this.reverseTable[i + limit] = this.reverseTable[i] + bit;
+        }
+
+        limit = limit << 1;
+        bit = bit >> 1;
+    }
+
+    for (i = 0; i < bufferSize; i++) {
+        this.sinTable[i] = Math.sin(-Math.PI / i);
+        this.cosTable[i] = Math.cos(-Math.PI / i);
+    }
+
+    this.calculateSpectrum = function(buffer) {
+        // Locally scope variables for speed up
+        var bufferSize = this.bufferSize,
+            cosTable = this.cosTable,
+            sinTable = this.sinTable,
+            reverseTable = this.reverseTable,
+            real = new Float32Array(bufferSize),
+            imag = new Float32Array(bufferSize),
+            bSi = 2 / this.bufferSize,
+            sqrt = Math.sqrt,
+            rval,
+            ival,
+            mag,
+            spectrum = new Float32Array(bufferSize / 2);
+
+        var k = Math.floor(Math.log(bufferSize) / Math.LN2);
+
+        if (Math.pow(2, k) !== bufferSize) {
+            throw 'Invalid buffer size, must be a power of 2.';
+        }
+        if (bufferSize !== buffer.length) {
+            throw 'Supplied buffer is not the same size as defined FFT. FFT Size: ' +
+                bufferSize +
+                ' Buffer Size: ' +
+                buffer.length;
+        }
+
+        var halfSize = 1,
+            phaseShiftStepReal,
+            phaseShiftStepImag,
+            currentPhaseShiftReal,
+            currentPhaseShiftImag,
+            off,
+            tr,
+            ti,
+            tmpReal;
+
+        for (var i = 0; i < bufferSize; i++) {
+            real[i] =
+                buffer[reverseTable[i]] * this.windowValues[reverseTable[i]];
+            imag[i] = 0;
+        }
+
+        while (halfSize < bufferSize) {
+            phaseShiftStepReal = cosTable[halfSize];
+            phaseShiftStepImag = sinTable[halfSize];
+
+            currentPhaseShiftReal = 1;
+            currentPhaseShiftImag = 0;
+
+            for (var fftStep = 0; fftStep < halfSize; fftStep++) {
+                var i = fftStep;
+
+                while (i < bufferSize) {
+                    off = i + halfSize;
+                    tr =
+                        currentPhaseShiftReal * real[off] -
+                        currentPhaseShiftImag * imag[off];
+                    ti =
+                        currentPhaseShiftReal * imag[off] +
+                        currentPhaseShiftImag * real[off];
+
+                    real[off] = real[i] - tr;
+                    imag[off] = imag[i] - ti;
+                    real[i] += tr;
+                    imag[i] += ti;
+
+                    i += halfSize << 1;
+                }
+
+                tmpReal = currentPhaseShiftReal;
+                currentPhaseShiftReal =
+                    tmpReal * phaseShiftStepReal -
+                    currentPhaseShiftImag * phaseShiftStepImag;
+                currentPhaseShiftImag =
+                    tmpReal * phaseShiftStepImag +
+                    currentPhaseShiftImag * phaseShiftStepReal;
+            }
+
+            halfSize = halfSize << 1;
+        }
+
+        for (var i = 0, N = bufferSize / 2; i < N; i++) {
+            rval = real[i];
+            ival = imag[i];
+            mag = bSi * sqrt(rval * rval + ival * ival);
+
+            if (mag > this.peak) {
+                this.peakBand = i;
+                this.peak = mag;
+            }
+            spectrum[i] = mag;
+        }
+        return spectrum;
+    };
+}
+
+/* eslint-enable complexity, no-redeclare, no-var, one-var */
+
+/**
+ * @typedef {Object} SpectrogramPluginParams
+ * @property {string|HTMLElement} container Selector of element or element in
+ * which to render
+ * @property {number} fftSamples=512 Number of samples to fetch to FFT. Must be
+ * a power of 2.
+ * @property {boolean} labels Set to true to display frequency labels.
+ * @property {number} noverlap Size of the overlapping window. Must be <
+ * fftSamples. Auto deduced from canvas size by default.
+ * @property {string} windowFunc='hann' The window function to be used. One of
+ * these: `'bartlett'`, `'bartlettHann'`, `'blackman'`, `'cosine'`, `'gauss'`,
+ * `'hamming'`, `'hann'`, `'lanczoz'`, `'rectangular'`, `'triangular'`
+ * @property {?number} alpha Some window functions have this extra value.
+ * (Between 0 and 1)
+ * @property {number} pixelRatio=wavesurfer.params.pixelRatio to control the
+ * size of the spectrogram in relation with its canvas. 1 = Draw on the whole
+ * canvas. 2 = Draw on a quarter (1/2 the length and 1/2 the width)
+ * @property {?boolean} deferInit Set to true to manually call
+ * `initPlugin('spectrogram')`
+ * @property {?number[][]} colorMap A 256 long array of 4-element arrays.
+ * Each entry should contain a float between 0 and 1 and specify
+ * r, g, b, and alpha.
+ */
+
+/**
+ * Render a spectrogram visualisation of the audio.
+ *
+ * @implements {PluginClass}
+ * @extends {Observer}
+ * @example
+ * // es6
+ * import SpectrogramPlugin from 'wavesurfer.spectrogram.js';
+ *
+ * // commonjs
+ * var SpectrogramPlugin = require('wavesurfer.spectrogram.js');
+ *
+ * // if you are using <script> tags
+ * var SpectrogramPlugin = window.WaveSurfer.spectrogram;
+ *
+ * // ... initialising wavesurfer with the plugin
+ * var wavesurfer = WaveSurfer.create({
+ *   // wavesurfer options ...
+ *   plugins: [
+ *     SpectrogramPlugin.create({
+ *       // plugin options ...
+ *     })
+ *   ]
+ * });
+ */
+class SpectrogramPlugin {
+    /**
+     * Spectrogram plugin definition factory
+     *
+     * This function must be used to create a plugin definition which can be
+     * used by wavesurfer to correctly instantiate the plugin.
+     *
+     * @param  {SpectrogramPluginParams} params Parameters used to initialise the plugin
+     * @return {PluginDefinition} An object representing the plugin.
+     */
+    static create(params) {
+        return {
+            name: 'spectrogram',
+            deferInit: params && params.deferInit ? params.deferInit : false,
+            params: params,
+            staticProps: {
+                FFT: FFT
+            },
+            instance: SpectrogramPlugin
+        };
+    }
+
+    constructor(params, ws) {
+        this.params = params;
+        this.wavesurfer = ws;
+        this.util = ws.util;
+
+        this.frequenciesDataUrl = params.frequenciesDataUrl;
+        this._onScroll = e => {
+            this.updateScroll(e);
+        };
+        this._onRender = () => {
+            this.render();
+        };
+        this._onWrapperClick = e => {
+            this._wrapperClickHandler(e);
+        };
+        this._onReady = () => {
+            const drawer = (this.drawer = ws.drawer);
+
+            this.container =
+                'string' == typeof params.container
+                    ? document.querySelector(params.container)
+                    : params.container;
+
+            if (!this.container) {
+                throw Error('No container for WaveSurfer spectrogram');
+            }
+            if (params.colorMap) {
+                if (params.colorMap.length < 256) {
+                    throw new Error('Colormap must contain 256 elements');
+                }
+                for (let i = 0; i < params.colorMap.length; i++) {
+                    const cmEntry = params.colorMap[i];
+                    if (cmEntry.length !== 4) {
+                        throw new Error(
+                            'ColorMap entries must contain 4 values'
+                        );
+                    }
+                }
+                this.colorMap = params.colorMap;
+            } else {
+                this.colorMap = [];
+                for (let i = 0; i < 256; i++) {
+                    const val = (255 - i) / 256;
+                    this.colorMap.push([val, val, val, 1]);
+                }
+            }
+            this.width = drawer.width;
+            this.pixelRatio = this.params.pixelRatio || ws.params.pixelRatio;
+            this.fftSamples =
+                this.params.fftSamples || ws.params.fftSamples || 512;
+            this.height = this.fftSamples / 2;
+            this.noverlap = params.noverlap;
+            this.windowFunc = params.windowFunc;
+            this.alpha = params.alpha;
+
+            this.createWrapper();
+            this.createCanvas();
+            this.render();
+
+            drawer.wrapper.addEventListener('scroll', this._onScroll);
+            ws.on('redraw', this._onRender);
+        };
+    }
+
+    init() {
+        // Check if wavesurfer is ready
+        if (this.wavesurfer.isReady) {
+            this._onReady();
+        } else {
+            this.wavesurfer.once('ready', this._onReady);
+        }
+    }
+
+    destroy() {
+        this.unAll();
+        this.wavesurfer.un('ready', this._onReady);
+        this.wavesurfer.un('redraw', this._onRender);
+        this.drawer && this.drawer.wrapper.removeEventListener('scroll', this._onScroll);
+        this.wavesurfer = null;
+        this.util = null;
+        this.params = null;
+        if (this.wrapper) {
+            this.wrapper.removeEventListener('click', this._onWrapperClick);
+            this.wrapper.parentNode.removeChild(this.wrapper);
+            this.wrapper = null;
+        }
+    }
+
+    createWrapper() {
+        const prevSpectrogram = this.container.querySelector('spectrogram');
+        if (prevSpectrogram) {
+            this.container.removeChild(prevSpectrogram);
+        }
+        const wsParams = this.wavesurfer.params;
+        this.wrapper = document.createElement('spectrogram');
+        // if labels are active
+        if (this.params.labels) {
+            const labelsEl = (this.labelsEl = document.createElement('canvas'));
+            labelsEl.classList.add('spec-labels');
+            this.drawer.style(labelsEl, {
+                left: 0,
+                position: 'absolute',
+                zIndex: 9,
+                height: `${this.height / this.pixelRatio}px`,
+                width: `${55 / this.pixelRatio}px`
+            });
+            this.wrapper.appendChild(labelsEl);
+            this.loadLabels(
+                'rgba(68,68,68,0.5)',
+                '12px',
+                '10px',
+                '',
+                '#fff',
+                '#f7f7f7',
+                'center',
+                '#specLabels'
+            );
+        }
+
+        this.drawer.style(this.wrapper, {
+            display: 'block',
+            position: 'relative',
+            userSelect: 'none',
+            webkitUserSelect: 'none',
+            height: `${this.height / this.pixelRatio}px`
+        });
+
+        if (wsParams.fillParent || wsParams.scrollParent) {
+            this.drawer.style(this.wrapper, {
+                width: '100%',
+                overflowX: 'hidden',
+                overflowY: 'hidden'
+            });
+        }
+        this.container.appendChild(this.wrapper);
+
+        this.wrapper.addEventListener('click', this._onWrapperClick);
+    }
+
+    _wrapperClickHandler(event) {
+        event.preventDefault();
+        const relX = 'offsetX' in event ? event.offsetX : event.layerX;
+        this.fireEvent('click', relX / this.width || 0);
+    }
+
+    createCanvas() {
+        const canvas = (this.canvas = this.wrapper.appendChild(
+            document.createElement('canvas')
+        ));
+
+        this.spectrCc = canvas.getContext('2d');
+
+        this.util.style(canvas, {
+            position: 'absolute',
+            zIndex: 4
+        });
+    }
+
+    render() {
+        this.updateCanvasStyle();
+
+        if (this.frequenciesDataUrl) {
+            this.loadFrequenciesData(this.frequenciesDataUrl);
+        } else {
+            this.getFrequencies(this.drawSpectrogram);
+        }
+    }
+
+    updateCanvasStyle() {
+        const width = Math.round(this.width / this.pixelRatio) + 'px';
+        this.canvas.width = this.width;
+        this.canvas.height = this.height;
+        this.canvas.style.width = width;
+    }
+
+    drawSpectrogram(frequenciesData, my) {
+        const spectrCc = my.spectrCc;
+        const length = my.wavesurfer.backend.getDuration();
+        const height = my.height;
+        const pixels = my.resample(frequenciesData);
+        const heightFactor = my.buffer ? 2 / my.buffer.numberOfChannels : 1;
+        let i;
+        let j;
+
+        for (i = 0; i < pixels.length; i++) {
+            for (j = 0; j < pixels[i].length; j++) {
+                const colorMap = my.colorMap[pixels[i][j]];
+                my.spectrCc.fillStyle =
+                    'rgba(' +
+                    colorMap[0] * 256 +
+                    ', ' +
+                    colorMap[1] * 256 +
+                    ', ' +
+                    colorMap[2] * 256 +
+                    ',' +
+                    colorMap[3] +
+                    ')';
+                my.spectrCc.fillRect(
+                    i,
+                    height - j * heightFactor,
+                    1,
+                    heightFactor
+                );
+            }
+        }
+    }
+
+    getFrequencies(callback) {
+        const fftSamples = this.fftSamples;
+        const buffer = (this.buffer = this.wavesurfer.backend.buffer);
+        const channelOne = buffer.getChannelData(0);
+        const bufferLength = buffer.length;
+        const sampleRate = buffer.sampleRate;
+        const frequencies = [];
+
+        if (!buffer) {
+            this.fireEvent('error', 'Web Audio buffer is not available');
+            return;
+        }
+
+        let noverlap = this.noverlap;
+        if (!noverlap) {
+            const uniqueSamplesPerPx = buffer.length / this.canvas.width;
+            noverlap = Math.max(0, Math.round(fftSamples - uniqueSamplesPerPx));
+        }
+
+        const fft = new FFT(
+            fftSamples,
+            sampleRate,
+            this.windowFunc,
+            this.alpha
+        );
+        let currentOffset = 0;
+
+        while (currentOffset + fftSamples < channelOne.length) {
+            const segment = channelOne.slice(
+                currentOffset,
+                currentOffset + fftSamples
+            );
+            const spectrum = fft.calculateSpectrum(segment);
+            const array = new Uint8Array(fftSamples / 2);
+            let j;
+            for (j = 0; j < fftSamples / 2; j++) {
+                array[j] = Math.max(-255, Math.log10(spectrum[j]) * 45);
+            }
+            frequencies.push(array);
+            currentOffset += fftSamples - noverlap;
+        }
+        callback(frequencies, this);
+    }
+
+    loadFrequenciesData(url) {
+        const request = this.util.fetchFile({ url: url });
+
+        request.on('success', data =>
+            this.drawSpectrogram(JSON.parse(data), this)
+        );
+        request.on('error', e => this.fireEvent('error', e));
+
+        return request;
+    }
+
+    freqType(freq) {
+        return freq >= 1000 ? (freq / 1000).toFixed(1) : Math.round(freq);
+    }
+
+    unitType(freq) {
+        return freq >= 1000 ? 'KHz' : 'Hz';
+    }
+
+    loadLabels(
+        bgFill,
+        fontSizeFreq,
+        fontSizeUnit,
+        fontType,
+        textColorFreq,
+        textColorUnit,
+        textAlign,
+        container
+    ) {
+        const frequenciesHeight = this.height;
+        bgFill = bgFill || 'rgba(68,68,68,0)';
+        fontSizeFreq = fontSizeFreq || '12px';
+        fontSizeUnit = fontSizeUnit || '10px';
+        fontType = fontType || 'Helvetica';
+        textColorFreq = textColorFreq || '#fff';
+        textColorUnit = textColorUnit || '#fff';
+        textAlign = textAlign || 'center';
+        const bgWidth = 55;
+        const getMaxY = frequenciesHeight || 512;
+        const labelIndex = 5 * (getMaxY / 256);
+        const freqStart = 0;
+        const step =
+            (this.wavesurfer.backend.ac.sampleRate / 2 - freqStart) /
+            labelIndex;
+
+        // prepare canvas element for labels
+        const ctx = this.labelsEl.getContext('2d');
+        this.labelsEl.height = this.height;
+        this.labelsEl.width = bgWidth;
+
+        // fill background
+        ctx.fillStyle = bgFill;
+        ctx.fillRect(0, 0, bgWidth, getMaxY);
+        ctx.fill();
+        let i;
+
+        // render labels
+        for (i = 0; i <= labelIndex; i++) {
+            ctx.textAlign = textAlign;
+            ctx.textBaseline = 'middle';
+
+            const freq = freqStart + step * i;
+            const index = Math.round(
+                (freq / (this.sampleRate / 2)) * this.fftSamples
+            );
+            const label = this.freqType(freq);
+            const units = this.unitType(freq);
+            const yLabelOffset = 2;
+            const x = 16;
+            let y;
+
+            if (i == 0) {
+                y = getMaxY + i - 10;
+                // unit label
+                ctx.fillStyle = textColorUnit;
+                ctx.font = fontSizeUnit + ' ' + fontType;
+                ctx.fillText(units, x + 24, y);
+                // freq label
+                ctx.fillStyle = textColorFreq;
+                ctx.font = fontSizeFreq + ' ' + fontType;
+                ctx.fillText(label, x, y);
+            } else {
+                y = getMaxY - i * 50 + yLabelOffset;
+                // unit label
+                ctx.fillStyle = textColorUnit;
+                ctx.font = fontSizeUnit + ' ' + fontType;
+                ctx.fillText(units, x + 24, y);
+                // freq label
+                ctx.fillStyle = textColorFreq;
+                ctx.font = fontSizeFreq + ' ' + fontType;
+                ctx.fillText(label, x, y);
+            }
+        }
+    }
+
+    updateScroll(e) {
+        if (this.wrapper) {
+            this.wrapper.scrollLeft = e.target.scrollLeft;
+        }
+    }
+
+    resample(oldMatrix) {
+        const columnsNumber = this.width;
+        const newMatrix = [];
+
+        const oldPiece = 1 / oldMatrix.length;
+        const newPiece = 1 / columnsNumber;
+        let i;
+
+        for (i = 0; i < columnsNumber; i++) {
+            const column = new Array(oldMatrix[0].length);
+            let j;
+
+            for (j = 0; j < oldMatrix.length; j++) {
+                const oldStart = j * oldPiece;
+                const oldEnd = oldStart + oldPiece;
+                const newStart = i * newPiece;
+                const newEnd = newStart + newPiece;
+
+                const overlap =
+                    oldEnd <= newStart || newEnd <= oldStart
+                        ? 0
+                        : Math.min(
+                            Math.max(oldEnd, newStart),
+                            Math.max(newEnd, oldStart)
+                        ) -
+                        Math.max(
+                            Math.min(oldEnd, newStart),
+                            Math.min(newEnd, oldStart)
+                        );
+                let k;
+                /* eslint-disable max-depth */
+                if (overlap > 0) {
+                    for (k = 0; k < oldMatrix[0].length; k++) {
+                        if (column[k] == null) {
+                            column[k] = 0;
+                        }
+                        column[k] += (overlap / newPiece) * oldMatrix[j][k];
+                    }
+                }
+                /* eslint-enable max-depth */
+            }
+
+            const intColumn = new Uint8Array(oldMatrix[0].length);
+            let m;
+
+            for (m = 0; m < oldMatrix[0].length; m++) {
+                intColumn[m] = column[m];
+            }
+
+            newMatrix.push(intColumn);
+        }
+
+        return newMatrix;
+    }
+}
+
+var _typeof$6 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+var classCallCheck$1 = function (instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+};
+
+var createClass$1 = function () {
+  function defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  return function (Constructor, protoProps, staticProps) {
+    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) defineProperties(Constructor, staticProps);
+    return Constructor;
+  };
+}();
+
+var _extends$2 = Object.assign || function (target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i];
+
+    for (var key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        target[key] = source[key];
+      }
+    }
+  }
+
+  return target;
+};
+
+var inherits$1 = function (subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      enumerable: false,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+};
+
+var possibleConstructorReturn$1 = function (self, call) {
+  if (!self) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return call && (typeof call === "object" || typeof call === "function") ? call : self;
+};
+
+/**
+ * @typedef {Object} TimelinePluginParams
+ * @desc Extends the `WavesurferParams` wavesurfer was initialised with
+ * @property {!string|HTMLElement} container CSS selector or HTML element where
+ * the timeline should be drawn. This is the only required parameter.
+ * @property {number} notchPercentHeight=90 Height of notches in percent
+ * @property {string} unlabeledNotchColor='#c0c0c0' The colour of the notches
+ * that do not have labels
+ * @property {string} primaryColor='#000' The colour of the main notches
+ * @property {string} secondaryColor='#c0c0c0' The colour of the secondary
+ * notches
+ * @property {string} primaryFontColor='#000' The colour of the labels next to
+ * the main notches
+ * @property {string} secondaryFontColor='#000' The colour of the labels next to
+ * the secondary notches
+ * @property {number} labelPadding=5 The padding between the label and the notch
+ * @property {?number} zoomDebounce A debounce timeout to increase rendering
+ * performance for large files
+ * @property {string} fontFamily='Arial'
+ * @property {number} fontSize=10 Font size of labels in pixels
+ * @property {?number} duration Length of the track in seconds. Overrides
+ * getDuration() for setting length of timeline
+ * @property {function} formatTimeCallback (sec, pxPerSec) -> label
+ * @property {function} timeInterval (pxPerSec) -> seconds between notches
+ * @property {function} primaryLabelInterval (pxPerSec) -> cadence between
+ * labels in primary color
+ * @property {function} secondaryLabelInterval (pxPerSec) -> cadence between
+ * labels in secondary color
+ * @property {?number} offset Offset for the timeline start in seconds. May also be
+ * negative.
+ * @property {?boolean} deferInit Set to true to manually call
+ * `initPlugin('timeline')`
+ */
+
+/**
+ * Adds a timeline to the waveform.
+ *
+ * @implements {PluginClass}
+ * @extends {Observer}
+ * @example
+ * // es6
+ * import TimelinePlugin from 'wavesurfer.timeline.js';
+ *
+ * // commonjs
+ * var TimelinePlugin = require('wavesurfer.timeline.js');
+ *
+ * // if you are using <script> tags
+ * var TimelinePlugin = window.WaveSurfer.timeline;
+ *
+ * // ... initialising wavesurfer with the plugin
+ * var wavesurfer = WaveSurfer.create({
+ *   // wavesurfer options ...
+ *   plugins: [
+ *     TimelinePlugin.create({
+ *       // plugin options ...
+ *     })
+ *   ]
+ * });
+ */
+var TimelinePlugin = function () {
+  createClass$1(TimelinePlugin, null, [{
+    key: "create",
+
+    /**
+     * Timeline plugin definition factory
+     *
+     * This function must be used to create a plugin definition which can be
+     * used by wavesurfer to correctly instantiate the plugin.
+     *
+     * @param  {TimelinePluginParams} params parameters use to initialise the plugin
+     * @return {PluginDefinition} an object representing the plugin
+     */
+    value: function create(params) {
+      return {
+        name: "timeline",
+        deferInit: params && params.deferInit ? params.deferInit : false,
+        params: params,
+        instance: TimelinePlugin
+      };
+    }
+
+    // event handlers
+    /** @private */
+
+
+    /**
+     * @private
+     * @returns {void}
+     */
+
+
+    /** @private */
+
+
+    /**
+     * @private
+     * @param {object} e Click event
+     */
+
+  }]);
+
+  /**
+   * Creates an instance of TimelinePlugin.
+   *
+   * You probably want to use TimelinePlugin.create()
+   *
+   * @param {TimelinePluginParams} params Plugin parameters
+   * @param {object} ws Wavesurfer instance
+   */
+  function TimelinePlugin(params, ws) {
+    var _this = this;
+
+    classCallCheck$1(this, TimelinePlugin);
+
+    _initialiseProps.call(this);
+
+    /** @private */
+    this.container = "string" == typeof params.container ? document.querySelector(params.container) : params.container;
+
+    if (!this.container) {
+      throw new Error("No container for wavesurfer timeline");
+    }
+    /** @private */
+    this.wavesurfer = ws;
+    /** @private */
+    this.util = ws.util;
+    /** @private */
+    this.params = Object.assign({}, {
+      height: 20,
+      notchPercentHeight: 90,
+      labelPadding: 5,
+      unlabeledNotchColor: "#c0c0c0",
+      primaryColor: "#000",
+      secondaryColor: "#c0c0c0",
+      primaryFontColor: "#000",
+      secondaryFontColor: "#000",
+      fontFamily: "Arial",
+      fontSize: 10,
+      duration: null,
+      zoomDebounce: false,
+      formatTimeCallback: this.defaultFormatTimeCallback,
+      timeInterval: this.defaultTimeInterval,
+      primaryLabelInterval: this.defaultPrimaryLabelInterval,
+      secondaryLabelInterval: this.defaultSecondaryLabelInterval,
+      offset: 0
+    }, params);
+
+    /** @private */
+    this.canvases = [];
+    /** @private */
+    this.wrapper = null;
+    /** @private */
+    this.drawer = null;
+    /** @private */
+    this.pixelRatio = null;
+    /** @private */
+    this.maxCanvasWidth = null;
+    /** @private */
+    this.maxCanvasElementWidth = null;
+    /**
+     * This event handler has to be in the constructor function because it
+     * relies on the debounce function which is only available after
+     * instantiation
+     *
+     * Use a debounced function if `params.zoomDebounce` is defined
+     *
+     * @private
+     * @returns {void}
+     */
+    this._onZoom = this.params.zoomDebounce ? this.wavesurfer.util.debounce(function () {
+      return _this.render();
+    }, this.params.zoomDebounce) : function () {
+      return _this.render();
+    };
+  }
+
+  /**
+   * Initialisation function used by the plugin API
+   */
+
+
+  createClass$1(TimelinePlugin, [{
+    key: "init",
+    value: function init() {
+      // Check if ws is ready
+      if (this.wavesurfer.isReady) {
+        this._onReady();
+      } else {
+        this.wavesurfer.once("ready", this._onReady);
+      }
+    }
+
+    /**
+     * Destroy function used by the plugin API
+     */
+
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.unAll();
+      this.wavesurfer.un("redraw", this._onRedraw);
+      this.wavesurfer.un("zoom", this._onZoom);
+      this.wavesurfer.un("ready", this._onReady);
+      this.wavesurfer.drawer.wrapper.removeEventListener("scroll", this._onScroll);
+      if (this.wrapper && this.wrapper.parentNode) {
+        this.wrapper.removeEventListener("click", this._onWrapperClick);
+        this.wrapper.parentNode.removeChild(this.wrapper);
+        this.wrapper = null;
+      }
+    }
+
+    /**
+     * Create a timeline element to wrap the canvases drawn by this plugin
+     *
+     * @private
+     */
+
+  }, {
+    key: "createWrapper",
+    value: function createWrapper() {
+      var wsParams = this.wavesurfer.params;
+      this.container.innerHTML = "";
+      this.wrapper = this.container.appendChild(document.createElement("timeline"));
+      this.util.style(this.wrapper, {
+        display: "block",
+        position: "relative",
+        userSelect: "none",
+        webkitUserSelect: "none",
+        height: this.params.height + "px"
+      });
+
+      if (wsParams.fillParent || wsParams.scrollParent) {
+        this.util.style(this.wrapper, {
+          width: "100%",
+          overflowX: "hidden",
+          overflowY: "hidden"
+        });
+      }
+
+      this.wrapper.addEventListener("click", this._onWrapperClick);
+    }
+
+    /**
+     * Render the timeline (also updates the already rendered timeline)
+     *
+     * @private
+     */
+
+  }, {
+    key: "render",
+    value: function render() {
+      if (!this.wrapper) {
+        this.createWrapper();
+      }
+      this.updateCanvases();
+      this.updateCanvasesPositioning();
+      this.renderCanvases();
+    }
+
+    /**
+     * Add new timeline canvas
+     *
+     * @private
+     */
+
+  }, {
+    key: "addCanvas",
+    value: function addCanvas() {
+      var canvas = this.wrapper.appendChild(document.createElement("canvas"));
+      this.canvases.push(canvas);
+      this.util.style(canvas, {
+        position: "absolute",
+        zIndex: 4
+      });
+    }
+
+    /**
+     * Remove timeline canvas
+     *
+     * @private
+     */
+
+  }, {
+    key: "removeCanvas",
+    value: function removeCanvas() {
+      var canvas = this.canvases.pop();
+      canvas.parentElement.removeChild(canvas);
+    }
+
+    /**
+     * Make sure the correct of timeline canvas elements exist and are cached in
+     * this.canvases
+     *
+     * @private
+     */
+
+  }, {
+    key: "updateCanvases",
+    value: function updateCanvases() {
+      var totalWidth = Math.round(this.drawer.wrapper.scrollWidth);
+      var requiredCanvases = Math.ceil(totalWidth / this.maxCanvasElementWidth);
+
+      while (this.canvases.length < requiredCanvases) {
+        this.addCanvas();
+      }
+
+      while (this.canvases.length > requiredCanvases) {
+        this.removeCanvas();
+      }
+    }
+
+    /**
+     * Update the dimensions and positioning style for all the timeline canvases
+     *
+     * @private
+     */
+
+  }, {
+    key: "updateCanvasesPositioning",
+    value: function updateCanvasesPositioning() {
+      var _this2 = this;
+
+      // cache length for performance
+      var canvasesLength = this.canvases.length;
+      this.canvases.forEach(function (canvas, i) {
+        // canvas width is the max element width, or if it is the last the
+        // required width
+        var canvasWidth = i === canvasesLength - 1 ? _this2.drawer.wrapper.scrollWidth - _this2.maxCanvasElementWidth * (canvasesLength - 1) : _this2.maxCanvasElementWidth;
+        // set dimensions and style
+        canvas.width = canvasWidth * _this2.pixelRatio;
+        // on certain pixel ratios the canvas appears cut off at the bottom,
+        // therefore leave 1px extra
+        canvas.height = (_this2.params.height + 1) * _this2.pixelRatio;
+        _this2.util.style(canvas, {
+          width: canvasWidth + "px",
+          height: _this2.params.height + "px",
+          left: i * _this2.maxCanvasElementWidth + "px"
+        });
+      });
+    }
+
+    /**
+     * Render the timeline labels and notches
+     *
+     * @private
+     */
+
+  }, {
+    key: "renderCanvases",
+    value: function renderCanvases() {
+      var _this3 = this;
+
+      var duration = this.wavesurfer.timeline.params.duration || this.wavesurfer.backend.getDuration();
+
+      if (duration <= 0) {
+        return;
+      }
+      var wsParams = this.wavesurfer.params;
+      var fontSize = this.params.fontSize * wsParams.pixelRatio;
+      var totalSeconds = parseInt(duration, 10) + 1;
+      var width = wsParams.fillParent && !wsParams.scrollParent ? this.drawer.getWidth() : this.drawer.wrapper.scrollWidth * wsParams.pixelRatio;
+      var height1 = this.params.height * this.pixelRatio;
+      var height2 = this.params.height * (this.params.notchPercentHeight / 100) * this.pixelRatio;
+      var pixelsPerSecond = width / duration;
+
+      var formatTime = this.params.formatTimeCallback;
+      // if parameter is function, call the function with
+      // pixelsPerSecond, otherwise simply take the value as-is
+      var intervalFnOrVal = function intervalFnOrVal(option) {
+        return typeof option === "function" ? option(pixelsPerSecond) : option;
+      };
+      var timeInterval = intervalFnOrVal(this.params.timeInterval);
+      var primaryLabelInterval = intervalFnOrVal(this.params.primaryLabelInterval);
+      var secondaryLabelInterval = intervalFnOrVal(this.params.secondaryLabelInterval);
+
+      var curPixel = pixelsPerSecond * this.params.offset;
+      var curSeconds = 0;
+      var i = void 0;
+      // build an array of position data with index, second and pixel data,
+      // this is then used multiple times below
+      var positioning = [];
+      for (i = 0; i < totalSeconds / timeInterval; i++) {
+        positioning.push([i, curSeconds, curPixel]);
+        curSeconds += timeInterval;
+        curPixel += pixelsPerSecond * timeInterval;
+      }
+
+      // iterate over each position
+      var renderPositions = function renderPositions(cb) {
+        positioning.forEach(function (pos) {
+          cb(pos[0], pos[1], pos[2]);
+        });
+      };
+
+      // render primary labels
+      this.setFillStyles(this.params.primaryColor);
+      this.setFonts(fontSize + "px " + this.params.fontFamily);
+      this.setFillStyles(this.params.primaryFontColor);
+      renderPositions(function (i, curSeconds, curPixel) {
+        if (i % primaryLabelInterval === 0) {
+          _this3.fillRect(curPixel, 0, 1, height1);
+          _this3.fillText(formatTime(curSeconds, pixelsPerSecond), curPixel + _this3.params.labelPadding * _this3.pixelRatio, height1);
+        }
+      });
+
+      // render secondary labels
+      this.setFillStyles(this.params.secondaryColor);
+      this.setFonts(fontSize + "px " + this.params.fontFamily);
+      this.setFillStyles(this.params.secondaryFontColor);
+      renderPositions(function (i, curSeconds, curPixel) {
+        if (i % secondaryLabelInterval === 0) {
+          console.log();
+
+          _this3.fillRect(curPixel, 0, 1, height1);
+          _this3.fillText(formatTime(curSeconds, pixelsPerSecond), curPixel + _this3.params.labelPadding * _this3.pixelRatio, height1);
+        }
+      });
+
+      // render the actual notches (when no labels are used)
+      this.setFillStyles(this.params.unlabeledNotchColor);
+      renderPositions(function (i, curSeconds, curPixel) {
+        if (i % secondaryLabelInterval !== 0 && i % primaryLabelInterval !== 0) {
+          _this3.fillRect(curPixel, 0, 1, height2);
+        }
+      });
+    }
+
+    /**
+     * Set the canvas fill style
+     *
+     * @param {DOMString|CanvasGradient|CanvasPattern} fillStyle Fill style to
+     * use
+     * @private
+     */
+
+  }, {
+    key: "setFillStyles",
+    value: function setFillStyles(fillStyle) {
+      this.canvases.forEach(function (canvas) {
+        canvas.getContext("2d").fillStyle = fillStyle;
+      });
+    }
+
+    /**
+     * Set the canvas font
+     *
+     * @param {DOMString} font Font to use
+     * @private
+     */
+
+  }, {
+    key: "setFonts",
+    value: function setFonts(font) {
+      this.canvases.forEach(function (canvas) {
+        canvas.getContext("2d").font = font;
+      });
+    }
+
+    /**
+     * Draw a rectangle on the canvases
+     *
+     * (it figures out the offset for each canvas)
+     *
+     * @param {number} x X-position
+     * @param {number} y Y-position
+     * @param {number} width Width
+     * @param {number} height Height
+     * @private
+     */
+
+  }, {
+    key: "fillRect",
+    value: function fillRect(x, y, width, height) {
+      var _this4 = this;
+
+      this.canvases.forEach(function (canvas, i) {
+        var leftOffset = i * _this4.maxCanvasWidth;
+
+        var intersection = {
+          x1: Math.max(x, i * _this4.maxCanvasWidth),
+          y1: y,
+          x2: Math.min(x + width, i * _this4.maxCanvasWidth + canvas.width),
+          y2: y + height
+        };
+
+        if (intersection.x1 < intersection.x2) {
+          canvas.getContext("2d").fillRect(intersection.x1 - leftOffset, intersection.y1, intersection.x2 - intersection.x1, intersection.y2 - intersection.y1);
+        }
+      });
+    }
+
+    /**
+     * Fill a given text on the canvases
+     *
+     * @param {string} text Text to render
+     * @param {number} x X-position
+     * @param {number} y Y-position
+     * @private
+     */
+
+  }, {
+    key: "fillText",
+    value: function fillText(text, x, y) {
+      var textWidth = void 0;
+      var xOffset = 0;
+
+      this.canvases.forEach(function (canvas) {
+        var context = canvas.getContext("2d");
+        var canvasWidth = context.canvas.width;
+
+        if (xOffset > x + textWidth) {
+          return;
+        }
+
+        if (xOffset + canvasWidth > x) {
+          textWidth = context.measureText(text).width;
+          context.fillText(text, x - xOffset, y);
+        }
+
+        xOffset += canvasWidth;
+      });
+    }
+
+    /**
+     * Turn the time into a suitable label for the time.
+     *
+     * @param {number} seconds Seconds to format
+     * @param {number} pxPerSec Pixels per second
+     * @returns {number} Time
+     */
+
+  }, {
+    key: "defaultFormatTimeCallback",
+    value: function defaultFormatTimeCallback(seconds, pxPerSec) {
+      if (seconds / 60 > 1) {
+        // calculate minutes and seconds from seconds count
+        var minutes = parseInt(seconds / 60, 10);
+        seconds = parseInt(seconds % 60, 10);
+        // fill up seconds with zeroes
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        return minutes + ":" + seconds;
+      }
+      return Math.round(seconds * 1000) / 1000;
+    }
+
+    /**
+     * Return how many seconds should be between each notch
+     *
+     * @param {number} pxPerSec Pixels per second
+     * @returns {number} Time
+     */
+
+  }, {
+    key: "defaultTimeInterval",
+    value: function defaultTimeInterval(pxPerSec) {
+      if (pxPerSec >= 25) {
+        return 1;
+      } else if (pxPerSec * 5 >= 25) {
+        return 5;
+      } else if (pxPerSec * 15 >= 25) {
+        return 15;
+      }
+      return Math.ceil(0.5 / pxPerSec) * 60;
+    }
+
+    /**
+     * Return the cadence of notches that get labels in the primary color.
+     *
+     * @param {number} pxPerSec Pixels per second
+     * @returns {number} Cadence
+     */
+
+  }, {
+    key: "defaultPrimaryLabelInterval",
+    value: function defaultPrimaryLabelInterval(pxPerSec) {
+      if (pxPerSec >= 25) {
+        return 10;
+      } else if (pxPerSec * 5 >= 25) {
+        return 6;
+      } else if (pxPerSec * 15 >= 25) {
+        return 4;
+      }
+      return 4;
+    }
+
+    /**
+     * Return the cadence of notches that get labels in the secondary color.
+     *
+     * @param {number} pxPerSec Pixels per second
+     * @returns {number} Cadence
+     */
+
+  }, {
+    key: "defaultSecondaryLabelInterval",
+    value: function defaultSecondaryLabelInterval(pxPerSec) {
+      if (pxPerSec >= 25) {
+        return 5;
+      } else if (pxPerSec * 5 >= 25) {
+        return 2;
+      } else if (pxPerSec * 15 >= 25) {
+        return 2;
+      }
+      return 2;
+    }
+  }]);
+  return TimelinePlugin;
+}();
+
+var _initialiseProps = function _initialiseProps() {
+  var _this5 = this;
+
+  this._onScroll = function () {
+    if (_this5.wrapper && _this5.drawer.wrapper) {
+      _this5.wrapper.scrollLeft = _this5.drawer.wrapper.scrollLeft;
+    }
+  };
+
+  this._onRedraw = function () {
+    return _this5.render();
+  };
+
+  this._onReady = function () {
+    var ws = _this5.wavesurfer;
+    _this5.drawer = ws.drawer;
+    _this5.pixelRatio = ws.drawer.params.pixelRatio;
+    _this5.maxCanvasWidth = ws.drawer.maxCanvasWidth || ws.drawer.width;
+    _this5.maxCanvasElementWidth = ws.drawer.maxCanvasElementWidth || Math.round(_this5.maxCanvasWidth / _this5.pixelRatio);
+
+    // add listeners
+    ws.drawer.wrapper.addEventListener("scroll", _this5._onScroll);
+    ws.on("redraw", _this5._onRedraw);
+    ws.on("zoom", _this5._onZoom);
+
+    _this5.render();
+  };
+
+  this._onWrapperClick = function (e) {
+    e.preventDefault();
+    var relX = "offsetX" in e ? e.offsetX : e.layerX;
+    _this5.fireEvent("click", relX / _this5.wrapper.scrollWidth || 0);
+  };
+};
+
+/**
+ * @description Register event function
+ */
+function registerEvent(wavesurfer, event, func) {
+  wavesurfer.on(event, func);
+}
+
+/**
+ * @description Pass audio data to wavesurfer
+ */
+function loadAudio(wavesurfer, audioFileOrElt, audioPeaks) {
+  if (audioFileOrElt instanceof window.HTMLElement) {
+    // media element
+    wavesurfer.loadMediaElement(audioFileOrElt, audioPeaks);
+  } else if (typeof audioFileOrElt === 'string') {
+    // bog-standard string is handled by load method and ajax call
+    wavesurfer.load(audioFileOrElt, audioPeaks);
+  } else if (audioFileOrElt instanceof window.Blob || audioFileOrElt instanceof window.File) {
+    // blob or file is loaded with loadBlob method
+    wavesurfer.loadBlob(audioFileOrElt, audioPeaks);
+  } else {
+    throw new Error('Wavesurfer._loadAudio expects prop audioFile\n        to be either HTMLElement, string or file/blob');
+  }
+}
+
+/**
+ * @description Capitalise the first letter of a string
+ */
+function capitalizeFirstLetter(string) {
+  return string.split('-').map(function (part) {
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  }).join('');
+}
+
+/**
+ * @description Throws an error if the prop is defined and not an integer or not positive
+ */
+function positiveIntegerProptype(props, propName, componentName) {
+  var n = props[propName];
+  if (n !== undefined && (typeof n !== 'number' || n !== parseInt(n, 10) || n < 0)) {
+    return new Error('Invalid ' + propName + ' supplied to ' + componentName + ',\n      expected a positive integer');
+  }
+
+  return null;
+}
+
+/**
+ * @description Receives seconds and transforms this to the position as a float 0-1
+ */
+function _secToPos(duration, sec) {
+  return 1 / duration * sec;
+}
+
+/**
+ * @description Seek to the position (in seconds)
+ */
+function seekTo(wavesurfer, props) {
+  var duration = wavesurfer.getDuration() || props.duration;
+  var pos = _secToPos(duration, props.pos);
+
+  if (pos && !isNaN(pos)) {
+    if (props.autoCenter) {
+      wavesurfer.seekAndCenter(pos);
+    } else {
+      wavesurfer.seekTo(pos);
+    }
+  } else if (duration && props.pos) {
+    wavesurfer.seekTo(props.pos);
+  }
+}
+
+/**
+ * @description load a media element selector or HTML element
+ *              if selector, get the HTML element for it
+ *              and pass to _loadAudio
+ */
+function loadMediaElt(wavesurfer, selectorOrElt, audioPeaks) {
+  if (selectorOrElt instanceof window.HTMLElement) {
+    loadAudio(wavesurfer, selectorOrElt, audioPeaks);
+  } else {
+    if (!window.document.querySelector(selectorOrElt)) {
+      throw new Error('Media Element not found!');
+    }
+
+    loadAudio(wavesurfer, window.document.querySelector(selectorOrElt), audioPeaks);
+  }
+}
+
+var EVENTS = ['audioprocess', 'destroy', 'error', 'finish', 'interaction', 'loading', 'mute', 'pause', 'play', 'ready', 'scroll', 'seek', 'volume', 'waveform-ready', 'zoom'];
+
+var EVENT = {
+  // Fires continuously as the audio plays. Also fires on seeking.
+  AUDIO_PROCESS: EVENTS[0],
+  // When instance is destroyed.
+  DESTROY: EVENTS[1],
+  // Occurs on error. Callback will receive (string) error message.
+  ERROR: EVENTS[2],
+  // When it finishes playing.
+  FINISH: EVENTS[3],
+  // When there's interaction with the waveform.
+  INTERACTION: EVENTS[4],
+  // Fires continuously when loading via XHR or drag'n'drop. Callback will receive (integer) loading progress in percents [0..100] and (object) event target.
+  LOADING: EVENTS[5],
+  // On mute change. Callback will receive (boolean) new mute status.
+  MUTE: EVENTS[6],
+  // When audio is paused.
+  PAUSE: EVENTS[7],
+  // When playback starts.
+  PLAY: EVENTS[8],
+  // When audio is loaded, decoded and the waveform drawn. This fires before the waveform is drawn when using MediaElement, see waveform-ready.
+  READY: EVENTS[9],
+  // When the scrollbar is moved. Callback will receive a ScrollEvent object.
+  SCROLL: EVENTS[10],
+  // On seeking. Callback will receive (float) progress [0..1].
+  SEEK: EVENTS[11],
+  // On volume change. Callback will receive (integer) new volume.
+  VOLUME: EVENTS[12],
+  // Fires after the waveform is drawn when using the MediaElement backend. If you're using the WebAudio backend, you can use ready.
+  WAVEFORM_READY: EVENTS[13],
+  // On zooming. Callback will receive (integer) minPxPerSec.
+  ZOOM: EVENTS[14]
+};
+
+var REGIONS_EVENTS = ['region-in', 'region-out', 'region-removed', 'region-updated', 'region-mouseenter', 'region-mouseleave', 'region-click', 'region-dblclick', 'region-update-end', 'region-play'];
+
+var REGION_EVENTS = ['in', 'out', 'remove', 'update', 'update-end', 'click', 'dbclick', 'over', 'leave'];
+
+var Waveform = function (_React$Component) {
+  inherits$1(Waveform, _React$Component);
+
+  function Waveform(props) {
+    classCallCheck$1(this, Waveform);
+
+    var _this = possibleConstructorReturn$1(this, (Waveform.__proto__ || Object.getPrototypeOf(Waveform)).call(this, props));
+
+    _this.state = {
+      isReady: false
+    };
+
+    if ((typeof WaveSurfer === "undefined" ? "undefined" : _typeof$6(WaveSurfer)) === undefined) {
+      throw new Error("WaveSurfer is undefined!");
+    }
+    return _this;
+  }
+
+  createClass$1(Waveform, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      var _props = this.props,
+          options = _props.options,
+          spectrogramOptions = _props.spectrogramOptions,
+          timelineOptions = _props.timelineOptions;
+
+
+      options.plugins = [RegionsPlugin.create()];
+
+      if (this.props.micCallback) {
+        options.plugins.push(MicrophonePlugin.create());
+      }
+
+      if (spectrogramOptions) {
+        options.plugins.push(SpectrogramPlugin.create({
+          container: spectrogramOptions.container,
+          colorMap: spectrogramOptions.colorMap,
+          pixelRatio: spectrogramOptions.pixelRatio,
+          fftSamples: spectrogramOptions.fftSamples,
+          noverlap: spectrogramOptions.noverlap,
+          windowFunc: spectrogramOptions.windowFunc,
+          alpha: spectrogramOptions.alpha,
+          deferInit: spectrogramOptions.deferInit,
+          labels: spectrogramOptions.labels
+        }));
+      }
+
+      if (timelineOptions) {
+        options.plugins.push(TimelinePlugin.create({
+          container: timelineOptions.container,
+          pixelRatio: timelineOptions.pixelRatio,
+          zoomDebounce: timelineOptions.zoomDebounce,
+          height: timelineOptions.height || 50,
+          duration: timelineOptions.duration,
+          notchPercentHeight: timelineOptions.notchPercentHeight,
+          timeInterval: timelineOptions.timeInterval,
+          primaryLabelInterval: timelineOptions.primaryLabelInterval,
+          secondaryLabelInterval: timelineOptions.secondaryLabelInterval,
+          offset: timelineOptions.offset,
+          primaryColor: timelineOptions.primaryColor,
+          fontSize: timelineOptions.fontSize,
+          fontFamily: timelineOptions.fontFamily,
+          primaryFontColor: timelineOptions.primaryFontColor,
+          labelPadding: timelineOptions.labelPadding,
+          unlabeledNotchColor: timelineOptions.unlabeledNotchColor
+        }));
+      }
+
+      this._wavesurfer = WaveSurfer.create(_extends$2({}, options, {
+        container: this.wavesurferEl
+      }));
+
+      if (this.props.micCallback) {
+        this._wavesurfer.microphone.on("deviceReady", function (stream) {
+          _this2.props.micCallback({ stream: stream });
+        });
+        this._wavesurfer.microphone.on("deviceError", function (error) {
+          _this2.props.micCallback({ error: error });
+        });
+
+        this.props.micCallback({ micInstance: this._wavesurfer.microphone });
+      }
+
+      registerEvent(this._wavesurfer, EVENT.AUDIO_PROCESS, function (pos) {
+        if (Math.ceil(pos) !== Math.ceil(_this2.props.pos)) {
+          _this2.props.onPosChange({
+            wavesurfer: _this2._wavesurfer,
+            originalArgs: [Math.ceil(pos)]
+          });
+        }
+      });
+
+      registerEvent(this._wavesurfer, EVENT.SEEK, function (pos) {
+        var duration = _this2._wavesurfer.getDuration();
+
+        if (Math.ceil(duration * pos) !== Math.ceil(_this2.props.pos)) {
+          _this2.props.onPosChange({
+            wavesurfer: _this2._wavesurfer,
+            originalArgs: [Math.ceil(duration * pos)]
+          });
+        }
+      });
+
+      // file was loaded, wave was drawn
+      registerEvent(this._wavesurfer, EVENT.READY, function () {
+        _this2.setState({ isReady: true });
+
+        if (!_this2.props.micCallback) {
+          // set initial position
+          seekTo(_this2._wavesurfer, _this2.props);
+        }
+
+        // set initial volume
+        _this2._wavesurfer.setVolume(_this2.props.volume);
+
+        if (_this2.props.playing) {
+          // set initial playing state
+          _this2._wavesurfer.play();
+        }
+
+        // set initial zoom
+        _this2._wavesurfer.zoom(_this2.props.zoom);
+      });
+
+      EVENTS.forEach(function (event) {
+        var capLetter = capitalizeFirstLetter(event);
+        var propCallback = _this2.props["on" + capLetter];
+        if (propCallback) {
+          registerEvent(_this2._wavesurfer, event, function () {
+            for (var _len = arguments.length, originalArgs = Array(_len), _key = 0; _key < _len; _key++) {
+              originalArgs[_key] = arguments[_key];
+            }
+
+            if (event === EVENT.SEEK) {
+              var duration = _this2._wavesurfer.getDuration();
+              propCallback({
+                wavesurfer: _this2._wavesurfer,
+                pos: Math.ceil(duration * originalArgs)
+              });
+            } else {
+              propCallback(_extends$2({
+                wavesurfer: _this2._wavesurfer
+              }, originalArgs));
+            }
+          });
+        }
+      });
+
+      // if audioFile prop, load file
+      if (this.props.audioFile) {
+        loadAudio(this._wavesurfer, this.props.audioFile, this.props.audioPeaks);
+      }
+
+      // if mediaElt prop, load media Element
+      if (this.props.mediaElt) {
+        loadMediaElt(this._wavesurfer, this.props.mediaElt, this.props.audioPeaks);
+      }
+    }
+  }, {
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+      // update audioFile
+      if (this.props.audioFile !== nextProps.audioFile) {
+        this.setState({ isReady: false });
+        loadAudio(this._wavesurfer, nextProps.audioFile, nextProps.audioPeaks);
+      }
+
+      // update mediaElt
+      if (this.props.mediaElt !== nextProps.mediaElt) {
+        this.setState({ isReady: false });
+        loadMediaElt(this._wavesurfer, nextProps.mediaElt, nextProps.audioPeaks);
+      }
+
+      // update peaks
+      if (this.props.audioPeaks !== nextProps.audioPeaks) {
+        if (nextProps.mediaElt) {
+          loadMediaElt(this._wavesurfer, nextProps.mediaElt, nextProps.audioPeaks);
+        } else {
+          loadAudio(this._wavesurfer, nextProps.audioFile, nextProps.audioPeaks);
+        }
+      }
+
+      if (nextProps.playing) {
+        this._wavesurfer.play();
+      } else {
+        this._wavesurfer.pause();
+      }
+
+      // update volume
+      if (this.props.volume !== nextProps.volume) {
+        this._wavesurfer.setVolume(nextProps.volume);
+      }
+
+      // update zoom
+      if (this.props.zoom !== nextProps.zoom) {
+        this._wavesurfer.zoom(nextProps.zoom);
+      }
+
+      // update audioRate
+      if (this.props.options.audioRate !== nextProps.options.audioRate) {
+        this._wavesurfer.setPlaybackRate(nextProps.options.audioRate);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      // Clear buffer
+      delete this._wavesurfer.backend.buffer;
+
+      // unsubscribe all listeners
+      this._wavesurfer.unAll();
+
+      // destroy wavesurfer instance
+      this._wavesurfer.destroy();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var childrenWithProps = this.props.children ? React.Children.map(this.props.children, function (child) {
+        return React.cloneElement(child, {
+          wavesurfer: _this3._wavesurfer,
+          isReady: _this3.state.isReady
+        });
+      }) : false;
+
+      return React.createElement(
+        "div",
+        { className: "waveform" },
+        React.createElement("div", {
+          className: "wave",
+          ref: function ref(c) {
+            _this3.wavesurferEl = c;
+          }
+        }),
+        this._wavesurfer && this.state.isReady && childrenWithProps
+      );
+    }
+  }]);
+  return Waveform;
+}(React.Component);
+
+function styleInject(css, ref) {
+  if ( ref === void 0 ) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') { return; }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css$2 = ".styles_reactWaves__1M36F {\n  width: 85%;\n  display: inline-block;\n  text-align: center;\n  margin: 2em auto;\n  padding: 4px 15px 0 40px;\n  /* width */\n  /* Track */\n  /* Handle */\n  /* Handle on hover */ }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar {\n    margin-top: 20px;\n    width: 8px;\n    height: 8px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-track {\n    box-shadow: inset 0 0 1px grey;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb {\n    background: #4F49E2;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb:hover {\n    background: rgba(79, 73, 226, 0.85); }\n";
+var styles$1 = { "reactWaves": "styles_reactWaves__1M36F" };
+styleInject(css$2);
+
+var Regions = function (_React$Component) {
+  inherits$1(Regions, _React$Component);
+
+  function Regions() {
+    classCallCheck$1(this, Regions);
+    return possibleConstructorReturn$1(this, (Regions.__proto__ || Object.getPrototypeOf(Regions)).apply(this, arguments));
+  }
+
+  createClass$1(Regions, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.isReady) {
+        this._init.call(this);
+      }
+
+      this.props.wavesurfer.on('ready', this._init.bind(this));
+    }
+  }, {
+    key: 'UNSAFE_componentWillReceiveProps',
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+      // only update if the wavesurfer instance has been ready
+      if (!this.props.isReady) {
+        return;
+      }
+
+      // cache reference to old regions
+      var oldRegions = Object.create(this.props.wavesurfer.regions.list);
+      var newRegionId = void 0;
+      var oldRegionId = void 0;
+
+      for (newRegionId in nextProps.regions) {
+        if ({}.hasOwnProperty.call(nextProps.regions, newRegionId)) {
+          var newRegion = nextProps.regions[newRegionId];
+
+          // remove from oldRegions
+          delete oldRegions[newRegionId];
+
+          // new regions
+          if (!this.props.wavesurfer.regions.list[newRegionId] && nextProps.wavesurfer && nextProps.wavesurfer.addRegion) {
+            this._hookUpRegionEvents(nextProps.wavesurfer.addRegion(newRegion));
+
+            // update regions
+          } else if (oldRegions[newRegionId] && (oldRegions[newRegionId].start !== newRegion.start || oldRegions[newRegionId].end !== newRegion.end)) {
+            nextProps.wavesurfer.regions.list[newRegionId].update({
+              start: newRegion.start,
+              end: newRegion.end
+            });
+          }
+        }
+      }
+
+      // remove any old regions
+      for (oldRegionId in oldRegions) {
+        if ({}.hasOwnProperty.call(oldRegions, oldRegionId)) {
+          nextProps.wavesurfer.regions.list[oldRegionId].remove();
+        }
+      }
+    }
+  }, {
+    key: 'shouldComponentUpdate',
+    value: function shouldComponentUpdate() {
+      return false;
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      var _this2 = this;
+
+      REGION_EVENTS.forEach(function (e) {
+        _this2.props.wavesurfer.un(e);
+      });
+    }
+  }, {
+    key: '_init',
+    value: function _init() {
+      var _this3 = this;
+
+      var _props = this.props,
+          wavesurfer = _props.wavesurfer,
+          regions = _props.regions;
+
+      var newRegionId = void 0;
+
+      REGIONS_EVENTS.forEach(function (e) {
+        var propCallback = _this3.props['on' + capitalizeFirstLetter(e)];
+        if (!propCallback) return;
+
+        wavesurfer.on(e, function () {
+          for (var _len = arguments.length, originalArgs = Array(_len), _key = 0; _key < _len; _key++) {
+            originalArgs[_key] = arguments[_key];
+          }
+
+          propCallback({
+            wavesurfer: wavesurfer,
+            originalArgs: originalArgs
+          });
+        });
+      });
+
+      // add regions and hook up callbacks to region objects
+      for (newRegionId in regions) {
+        if ({}.hasOwnProperty.call(regions, newRegionId) && wavesurfer && wavesurfer.addRegion) {
+          this._hookUpRegionEvents(wavesurfer.addRegion(regions[newRegionId]));
+        }
+      }
+    }
+  }, {
+    key: '_hookUpRegionEvents',
+    value: function _hookUpRegionEvents(region) {
+      var _this4 = this;
+
+      REGION_EVENTS.forEach(function (e) {
+        var propCallback = _this4.props['onSingleRegion' + capitalizeFirstLetter(e)];
+        var wavesurfer = _this4.props.wavesurfer;
+
+
+        if (propCallback) {
+          region.on(e, function () {
+            for (var _len2 = arguments.length, originalArgs = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+              originalArgs[_key2] = arguments[_key2];
+            }
+
+            propCallback({
+              wavesurfer: wavesurfer,
+              originalArgs: originalArgs,
+              region: region
+            });
+          });
+        }
+      });
+
+      region.on('remove', function () {
+        REGION_EVENTS.forEach(function (e) {
+          region.un(e);
+        });
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return false;
+    }
+  }]);
+  return Regions;
+}(React.Component);
+
+Regions.propTypes = {
+  isReady: PropTypes.bool,
+  regions: PropTypes.object,
+  wavesurfer: PropTypes.object
+};
+
+Regions.defaultProps = {
+  regions: []
+};
+
+var ReactWaves = function (_React$Component) {
+  inherits$1(ReactWaves, _React$Component);
+
+  function ReactWaves(props) {
+    classCallCheck$1(this, ReactWaves);
+
+    var _this = possibleConstructorReturn$1(this, (ReactWaves.__proto__ || Object.getPrototypeOf(ReactWaves)).call(this, props));
+
+    _this.onPosChange = function (e) {
+      var pos = e.originalArgs && e.originalArgs[0];
+      var duration = e.wavesurfer && e.wavesurfer.getDuration();
+
+      if (_this.props.onPosChange) {
+        _this.props.onPosChange(pos, e.wavesurfer);
+      }
+
+      // We always update this.state.pos, because it is used for comparison in Waveform's AUDIO_PROCESS event handler
+      if (pos && pos !== _this.state.pos) {
+        _this.setState({
+          pos: pos,
+          duration: duration
+        });
+      }
+    };
+
+    _this.state = {
+      pos: _this.props.pos,
+      duration: _this.props.duration
+    };
+    return _this;
+  }
+
+  createClass$1(ReactWaves, [{
+    key: "UNSAFE_componentWillReceiveProps",
+    value: function UNSAFE_componentWillReceiveProps(nextProps) {
+      if (this.props.audioFile && nextProps.audioFile) {
+        this.setState({
+          pos: nextProps.pos,
+          duration: nextProps.duration
+        });
+      }
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return React.createElement(
+        "div",
+        {
+          className: styles$1.reactWaves + (this.props.className ? " " + this.props.className : "")
+        },
+        React.createElement(Waveform, _extends$2({}, this.props, {
+          pos: this.state.pos,
+          duration: this.state.duration,
+          onPosChange: this.onPosChange,
+          playing: this.props.playing
+        }))
+      );
+    }
+  }]);
+  return ReactWaves;
+}(React.Component);
+
+
+ReactWaves.propTypes = {
+  playing: PropTypes.bool,
+  pos: PropTypes.number,
+  audioFile: function audioFile(props, propName, componentName) {
+    var prop = props[propName];
+    if (prop && typeof prop !== "string" && !(prop instanceof window.Blob) && !(prop instanceof window.File)) {
+      return new Error("Invalid " + propName + " supplied to " + componentName + "\n        expected either string or file/blob");
+    }
+
+    return null;
+  },
+
+  mediaElt: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(window.HTMLElement)]),
+  audioPeaks: PropTypes.array,
+  volume: PropTypes.number,
+  zoom: PropTypes.number,
+  onPosChange: PropTypes.func,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
+  options: PropTypes.shape({
+    audioRate: PropTypes.number,
+    audioContext: PropTypes.object,
+    audioScriptProcessor: PropTypes.object,
+    autoCenter: PropTypes.bool,
+    backend: PropTypes.oneOf(["WebAudio", "MediaElement", "MediaElementWebAudio"]),
+    barGap: positiveIntegerProptype,
+    barHeight: positiveIntegerProptype,
+    barRadius: positiveIntegerProptype,
+    barWidth: function barWidth(props, propName, componentName) {
+      var prop = props[propName];
+      if (prop !== undefined && typeof prop !== "number") {
+        return new Error("Invalid " + propName + " supplied to " + componentName + "\n          expected either undefined or number");
+      }
+
+      return null;
+    },
+    closeAudioContext: PropTypes.bool,
+    cursorColor: PropTypes.string,
+    cursorWidth: positiveIntegerProptype,
+    fillParent: PropTypes.bool,
+    forceDecode: PropTypes.bool,
+    height: positiveIntegerProptype,
+    hideScrollbar: PropTypes.bool,
+    interact: PropTypes.bool,
+    loopSelection: PropTypes.bool,
+    maxCanvasWidth: positiveIntegerProptype,
+    mediaControls: PropTypes.bool,
+    mediaType: PropTypes.oneOf(["audio", "video"]),
+    minPxPerSec: positiveIntegerProptype,
+    normalize: PropTypes.bool,
+    partialRender: PropTypes.bool,
+    pixelRatio: PropTypes.number,
+    progressColor: PropTypes.string,
+    removeMediaElementOnDestroy: PropTypes.bool,
+    renderer: PropTypes.object,
+    responsive: PropTypes.bool,
+    scrollParent: PropTypes.bool,
+    skipLength: PropTypes.number,
+    splitChannels: PropTypes.bool,
+    waveColor: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(window.CanvasGradient)]),
+    xhr: PropTypes.object
+  }),
+  spectrogramOptions: PropTypes.object,
+  timelineOptions: PropTypes.object
+};
+
+ReactWaves.defaultProps = {
+  audioFile: "",
+  volume: 1,
+  zoom: 1,
+  options: {
+    barGap: 0,
+    barHeight: 2,
+    cursorWidth: 0,
+    height: 200,
+    hideScrollbar: true,
+    progressColor: "#EC407A",
+    responsive: true,
+    waveColor: "#D1D6DA"
+  },
+  pos: 0,
+  playing: false
+};
+
+var Waveform$1 = /*#__PURE__*/function (_React$Component) {
+  _inherits(Waveform, _React$Component);
+
+  function Waveform(props) {
+    var _this;
+
+    _classCallCheck(this, Waveform);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Waveform).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onLoading", function (_ref) {
+      var wavesurfer = _ref.wavesurfer;
+      wavesurfer.toggleInteraction();
+
+      _this.setState({
+        wavesurfer: wavesurfer
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onReady", function () {
+      var wavesurfer = _this.state.wavesurfer;
+      console.log("Ready", wavesurfer.getDuration());
+
+      _this.setState({
+        duration: wavesurfer.getDuration()
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "getRegions", function () {
+      var duration = _this.state.duration;
+      var range = _this.props.range;
+      return {
+        cut: {
+          id: 'cut',
+          start: range ? range[0] : 0,
+          end: range ? range[1] : 0,
+          color: 'rgba(146, 210, 117, 0.3)'
+        }
+      };
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleSingleRegionUpdate", function (e) {
+      var onRangeChange = _this.props.onRangeChange;
+      var _e$region = e.region,
+          start = _e$region.start,
+          end = _e$region.end;
+      onRangeChange([start, end], true);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "secondsToPosition", function (sec) {
+      var duration = _this.state.duration;
+      return 1 / _this.wavesurfer.getDuration() * sec;
+    });
+
+    _this.state = {
+      wavesurfer: null,
+      duration: 0
+    };
+    return _this;
+  }
+
+  _createClass(Waveform, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps) {
+      var wavesurfer = this.state.wavesurfer;
+      var position = this.props.position;
+
+      if (wavesurfer && prevProps.position !== position) {
+        wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
+      }
+    } // onPosChange = (newPosition) => {
+    //     const { onPositionChange, position } = this.props;
+    //     if (Math.ceil(position) !== newPosition) {
+    //         console.log("Position changed", newPosition);
+    //         this.ghostPosition = newPosition;
+    //         onPositionChange(newPosition);
+    //     }
+    // }
+
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          src = _this$props.src,
+          position = _this$props.position,
+          range = _this$props.range;
+      var regions = this.getRegions();
+      console.log(range, position, regions);
+      return React.createElement(ReactWaves, {
+        audioFile: src,
+        className: 'dnm-video-cut-audio-waveform',
+        options: {
+          barGap: 3,
+          barWidth: 4,
+          barHeight: 2,
+          barRadius: 3,
+          cursorWidth: 0,
+          height: 150,
+          hideScrollbar: true,
+          progressColor: '#46be8ae6',
+          responsive: true,
+          waveColor: '#D1D6DA'
+        },
+        zoom: 1,
+        pos: position,
+        playing: false,
+        onReady: this.onReady,
+        onLoading: this.onLoading,
+        onPosChange: this.onPosChange
+      }, React.createElement(Regions, {
+        onSingleRegionUpdate: this.handleSingleRegionUpdate,
+        regions: regions
+      }));
+    }
+  }]);
+
+  return Waveform;
+}(React.Component);
+
 function _templateObject$1() {
   var data = _taggedTemplateLiteral(["", ""]);
 
@@ -29599,7 +39444,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "toggleVideoAutoPlay", function (playInArea) {
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video) {
         if (video.paused) {
@@ -29612,7 +39457,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "monitorAutoplay", function () {
       var playInArea = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video && !video.paused) {
         if (playInArea === true) {
@@ -29633,7 +39478,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "playVideo", function () {
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video) {
         video.play();
@@ -29645,7 +39490,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "pauseVideo", function () {
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video) {
         video.pause();
@@ -29658,7 +39503,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "updatePlayerVolume", function () {
       var muted = _this.props.muted;
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video) {
         video.volume = muted ? 0 : 0.5;
@@ -29687,7 +39532,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var autoScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       if (xRatio === null) {
-        var video = _this.videoRef.current;
+        var video = _this.playerRef.current;
         var videoDuration = _this.state.videoDuration;
 
         if (video && videoDuration) {
@@ -29707,7 +39552,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "handleVideoPlayerError", function (event) {
+    _defineProperty(_assertThisInitialized(_this), "handlePlayerError", function (event) {
       var error = event.target.error;
 
       if (error && error.code === 4) {
@@ -29730,7 +39575,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleLoadedData", function () {
       var onVideoLoadedData = _this.props.onVideoLoadedData;
-      var video = _this.videoRef.current;
+      var video = _this.playerRef.current;
 
       if (video) {
         var inPoint = _this.props.inPoint;
@@ -29801,6 +39646,18 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "handleWaveformPositionChange", function (position) {
+      var playCursorPosition = _this.state.playCursorPosition;
+      var yRatio = playCursorPosition.yRatio;
+
+      _this.setState({
+        playCursorPosition: {
+          xRatio: position / 100,
+          yRatio: yRatio
+        }
+      });
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleZoomFactorDragStart", function () {
       return _this.setState({
         forceCursorDragging: true
@@ -29864,7 +39721,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         yRatio: 0
       }
     };
-    _this.videoRef = React.createRef();
+    _this.playerRef = React.createRef();
     _this.scrollable = React.createRef();
     _this.draggable = React.createRef();
     _this.draggableApi = null;
@@ -29917,7 +39774,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     key: "_seekVideoTo",
     value: function _seekVideoTo(time) {
       if (!isNaN(time)) {
-        var video = this.videoRef.current;
+        var video = this.playerRef.current;
         if (video) video.currentTime = time;
       }
     }
@@ -29940,21 +39797,37 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           classes = _this$props4.classes,
           playerCursorWidth = _this$props4.playerCursorWidth,
           muted = _this$props4.muted,
-          onMuteChange = _this$props4.onMuteChange;
+          onMuteChange = _this$props4.onMuteChange,
+          type = _this$props4.type;
       return jsx("div", {
         css: css(_templateObject$1(), styles)
       }, jsx("div", {
         className: "dnm-video-cut-root ".concat(classes.root || "", " ").concat(isPlaying ? "is-playing" : "is-paused")
-      }, jsx("video", {
+      }, type === 'audio' ? jsx(React.Fragment, null, jsx(Waveform$1, {
+        src: src,
+        position: playCursorPosition.xRatio,
+        onPositionChange: this.handleWaveformPositionChange,
+        onRangeChange: this.handleRangeChange,
+        range: [inValue, outValue]
+      }), jsx("audio", {
+        className: "dnm-video-cut-audio-player ".concat(classes.audioPlayer || ""),
+        src: src,
+        ref: this.playerRef,
+        loop: true,
+        onLoadedData: this.handleLoadedData,
+        onLoad: this.handlePlayerLoad,
+        onError: this.handlePlayerError,
+        preload: "auto"
+      })) : jsx("video", {
         className: "dnm-video-cut-player ".concat(classes.player || ""),
-        src: "".concat(src),
-        ref: this.videoRef,
+        src: src,
+        ref: this.playerRef,
         loop: true,
         muted: muted,
         controls: false,
         onLoadedData: this.handleLoadedData,
-        onLoad: this.handleVideoLoad,
-        onError: this.handleVideoPlayerError,
+        onLoad: this.handlePlayerLoad,
+        onError: this.handlePlayerError,
         preload: "auto"
       }), jsx("div", null, jsx("div", {
         className: "dnm-video-cut-play-icon",
@@ -29995,7 +39868,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onAfterChange: this.handleAfterRangeChange
       }))), jsx("div", {
         className: "dnm-video-cut-tools"
-      }, jsx("div", {
+      }, type !== 'audio' ? jsx("div", {
         className: "dnm-video-cut-mute"
       }, onMuteChange && jsx("label", {
         className: "dnm-video-cut-checkbox-container"
@@ -30005,7 +39878,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleMuteChange
       }), jsx("span", {
         className: "dnm-video-cut-checkmark"
-      }))), jsx("div", {
+      }))) : null, jsx("div", {
         className: "dnm-video-cut-zoom"
       }, jsx(Range$2, {
         className: "dnm-video-cut-zoom-range ".concat(classes.zoomRange || ""),

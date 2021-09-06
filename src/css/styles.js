@@ -265,6 +265,25 @@ export default css`
     width: 100%;
     max-height: 60vh;
   }
+
+  .dnm-video-cut-audio-player {
+    display: none;
+  }
+
+  .dnm-video-cut-audio-waveform {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dnm-video-cut-audio-waveform .wavesurfer-region {
+    z-index: 3 !important;
+  }
+  
+  .dnm-video-cut-audio-waveform .wavesurfer-handle {
+    background-color: rgba(146, 210, 117, 0.9) !important;
+    width: 4px !important;
+  }
   
   .dnm-video-cut-range {
     width: 100%;
