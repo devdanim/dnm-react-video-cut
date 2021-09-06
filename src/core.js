@@ -416,7 +416,7 @@ DnmVideoCut.propTypes = {
     onNotSupportedVideoLoad: PropTypes.func,
     onVideoLoadedData: PropTypes.func,
     src: PropTypes.string.isRequired,
-    type: PropTypes.string.oneOf(['audio', 'video']),
+    type: PropTypes.oneOf(['audio', 'video']),
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
     draggableWidth: PropTypes.number,
