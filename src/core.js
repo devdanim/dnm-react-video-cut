@@ -286,7 +286,7 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, } = this.props;
 
         return (
             <div css={css`${styles}`}> 
@@ -300,6 +300,7 @@ export default class DnmVideoCut extends React.Component {
                                     onPositionChange={this.handleWaveformPositionChange}
                                     onRangeChange={this.handleRangeChange}
                                     range={[inValue, outValue]} 
+                                    height={waveformHeight}
                                 />
                                 <audio 
                                     className={`dnm-video-cut-audio-player ${classes.audioPlayer || ""}`}
@@ -428,6 +429,7 @@ DnmVideoCut.propTypes = {
         PropTypes.func,
         PropTypes.number,
     ]),
+    waveformHeight: PropTypes.bool,
 };
 
 DnmVideoCut.defaultProps = {
@@ -446,4 +448,5 @@ DnmVideoCut.defaultProps = {
     minDuration: 0,
     muted: false,
     playerCursorWidth: 14,
+    waveformHeight: 150,
 };

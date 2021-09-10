@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactWaves, { Regions } from '@dschoon/react-waves';
- 
+import { debounce } from 'lodash-es';
+
 export default class Waveform extends React.Component {
 
     constructor(props) {
@@ -9,6 +10,15 @@ export default class Waveform extends React.Component {
         wavesurfer: null,
         duration: 0,
       }
+      this.redraw = debounce(this._redraw, 250);
+    }
+
+    componentDidMount() {
+      window.addEventListener('resize', this.redraw);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.redraw);
     }
 
     componentDidUpdate(prevProps) {
@@ -17,6 +27,11 @@ export default class Waveform extends React.Component {
         if (wavesurfer && prevProps.position !== position) {
             wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
         }
+    }
+     
+    _redraw = () => {
+        const { wavesurfer } = this.state;
+        if (wavesurfer) wavesurfer.drawBuffer();
     }
   
     onLoading = ({ wavesurfer }) => {
@@ -54,7 +69,7 @@ export default class Waveform extends React.Component {
     };
  
     render () {
-        const { src, position, range } = this.props;
+        const { src, position, range, height, } = this.props;
         const regions = this.getRegions();
 
         return (
@@ -67,7 +82,7 @@ export default class Waveform extends React.Component {
               barHeight: 2,
               barRadius: 3,
               cursorWidth: 0,
-              height: 150,
+              height,
               hideScrollbar: true,
               progressColor: '#46be8ae6',
               responsive: true,

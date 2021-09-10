@@ -39254,6 +39254,11 @@ var Waveform$1 = /*#__PURE__*/function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Waveform).call(this, props));
 
+    _defineProperty(_assertThisInitialized(_this), "_redraw", function () {
+      var wavesurfer = _this.state.wavesurfer;
+      if (wavesurfer) wavesurfer.drawBuffer();
+    });
+
     _defineProperty(_assertThisInitialized(_this), "onLoading", function (_ref) {
       var wavesurfer = _ref.wavesurfer;
       wavesurfer.toggleInteraction();
@@ -39301,10 +39306,21 @@ var Waveform$1 = /*#__PURE__*/function (_React$Component) {
       wavesurfer: null,
       duration: 0
     };
+    _this.redraw = debounce(_this._redraw, 250);
     return _this;
   }
 
   _createClass(Waveform, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.addEventListener('resize', this.redraw);
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      window.removeEventListener('resize', this.redraw);
+    }
+  }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate(prevProps) {
       var wavesurfer = this.state.wavesurfer;
@@ -39320,7 +39336,8 @@ var Waveform$1 = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           src = _this$props.src,
           position = _this$props.position,
-          range = _this$props.range;
+          range = _this$props.range,
+          height = _this$props.height;
       var regions = this.getRegions();
       return React.createElement(ReactWaves, {
         audioFile: src,
@@ -39331,7 +39348,7 @@ var Waveform$1 = /*#__PURE__*/function (_React$Component) {
           barHeight: 2,
           barRadius: 3,
           cursorWidth: 0,
-          height: 150,
+          height: height,
           hideScrollbar: true,
           progressColor: '#46be8ae6',
           responsive: true,
@@ -39787,7 +39804,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           playerCursorWidth = _this$props4.playerCursorWidth,
           muted = _this$props4.muted,
           onMuteChange = _this$props4.onMuteChange,
-          type = _this$props4.type;
+          type = _this$props4.type,
+          waveformHeight = _this$props4.waveformHeight;
       return jsx("div", {
         css: css(_templateObject$1(), styles)
       }, jsx("div", {
@@ -39797,7 +39815,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         position: playCursorPosition.xRatio,
         onPositionChange: this.handleWaveformPositionChange,
         onRangeChange: this.handleRangeChange,
-        range: [inValue, outValue]
+        range: [inValue, outValue],
+        height: waveformHeight
       }), jsx("audio", {
         className: "dnm-video-cut-audio-player ".concat(classes.audioPlayer || ""),
         src: src,
@@ -39907,7 +39926,8 @@ DnmVideoCut.propTypes = {
   minDuration: PropTypes.number,
   muted: PropTypes.bool,
   onMuteChange: PropTypes.func,
-  playerCursorWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number])
+  playerCursorWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
+  waveformHeight: PropTypes.bool
 };
 DnmVideoCut.defaultProps = {
   catalogue: {
@@ -39930,7 +39950,8 @@ DnmVideoCut.defaultProps = {
   maxDuration: 0,
   minDuration: 0,
   muted: false,
-  playerCursorWidth: 14
+  playerCursorWidth: 14,
+  waveformHeight: 150
 };
 
 export default DnmVideoCut;
