@@ -39359,8 +39359,7 @@
           pos: position,
           playing: false,
           onReady: this.onReady,
-          onLoading: this.onLoading,
-          onPosChange: this.onPosChange
+          onLoading: this.onLoading
         }, React__default.createElement(Regions, {
           onSingleRegionUpdate: this.handleSingleRegionUpdate,
           regions: regions

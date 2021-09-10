@@ -39341,8 +39341,7 @@ var Waveform$1 = /*#__PURE__*/function (_React$Component) {
         pos: position,
         playing: false,
         onReady: this.onReady,
-        onLoading: this.onLoading,
-        onPosChange: this.onPosChange
+        onLoading: this.onLoading
       }, React.createElement(Regions, {
         onSingleRegionUpdate: this.handleSingleRegionUpdate,
         regions: regions

@@ -78,7 +78,6 @@ export default class Waveform extends React.Component {
             playing={false} 
             onReady={this.onReady}
             onLoading={this.onLoading}
-            onPosChange={this.onPosChange}
           >
             <Regions
                 onSingleRegionUpdate={this.handleSingleRegionUpdate}
