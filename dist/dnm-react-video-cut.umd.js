@@ -39283,7 +39283,6 @@
 
       _defineProperty(_assertThisInitialized(_this), "onReady", function () {
         var wavesurfer = _this.state.wavesurfer;
-        console.log("Ready", wavesurfer.getDuration());
 
         _this.setState({
           duration: wavesurfer.getDuration()
@@ -39332,15 +39331,7 @@
         if (wavesurfer && prevProps.position !== position) {
           wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
         }
-      } // onPosChange = (newPosition) => {
-      //     const { onPositionChange, position } = this.props;
-      //     if (Math.ceil(position) !== newPosition) {
-      //         console.log("Position changed", newPosition);
-      //         this.ghostPosition = newPosition;
-      //         onPositionChange(newPosition);
-      //     }
-      // }
-
+      }
     }, {
       key: "render",
       value: function render() {
@@ -39349,7 +39340,6 @@
             position = _this$props.position,
             range = _this$props.range;
         var regions = this.getRegions();
-        console.log(range, position, regions);
         return React__default.createElement(ReactWaves, {
           audioFile: src,
           className: 'dnm-video-cut-audio-waveform',

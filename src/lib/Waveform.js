@@ -18,15 +18,6 @@ export default class Waveform extends React.Component {
             wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
         }
     }
-
-    // onPosChange = (newPosition) => {
-    //     const { onPositionChange, position } = this.props;
-    //     if (Math.ceil(position) !== newPosition) {
-    //         console.log("Position changed", newPosition);
-    //         this.ghostPosition = newPosition;
-    //         onPositionChange(newPosition);
-    //     }
-    // }
   
     onLoading = ({ wavesurfer }) => {
         wavesurfer.toggleInteraction();
@@ -35,7 +26,6 @@ export default class Waveform extends React.Component {
 
     onReady = () => {
         const { wavesurfer } = this.state;
-        console.log("Ready", wavesurfer.getDuration());
         this.setState({ duration: wavesurfer.getDuration() });
     }
 
@@ -66,8 +56,8 @@ export default class Waveform extends React.Component {
     render () {
         const { src, position, range } = this.props;
         const regions = this.getRegions();
-        console.log(range, position, regions);
-      return (
+
+        return (
           <ReactWaves
             audioFile={src}
             className={'dnm-video-cut-audio-waveform'}
