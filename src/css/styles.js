@@ -328,7 +328,7 @@ export default css`
     width: calc(100% - 45px);
     display: inline-block;
     margin-left: 15px;
-    margin-top: 5px;
+    margin-top: 0;
     padding-top: 10px;
     overflow-x: scroll;
   }
@@ -338,6 +338,8 @@ export default css`
     margin-left: 10px;
     padding-right: 10px;
     height: 28px;
+    position: relative;
+    padding-top: 25px;
   }
   
   .dnm-video-cut-play-icon {
@@ -351,13 +353,42 @@ export default css`
     background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
     border-radius: 100px;
   }
+
+  .dnm-video-cut-loop-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    position: absolute;
+    top: 0;
+    transform: scale(1);
+    transition: transform 0.2s ease-in-out;
+    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
+    border-radius: 100px;
+    z-index: 3;
+  }
   
+  .dnm-video-cut-loop-icon svg {
+    color: white;
+    width: 9px;
+    position: relative;
+  }
+
   .dnm-video-cut-play-icon svg {
     color: white;
     width: 12px;
     position: relative;
   }
   
+  .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {
+    left: 5px;
+    top: 1px; 
+  }
+  
+  .dnm-video-cut-root.is-paused .dnm-video-cut-loop-icon svg {
+    left: 6px;
+    top: 1px;
+  }
+
   .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {
     left: 9px;
     top: 8px; 
@@ -368,7 +399,7 @@ export default css`
     top: 8px;
   }
   
-  .dnm-video-cut-play-icon:hover {
+  .dnm-video-cut-play-icon:hover, .dnm-video-cut-loop-icon:hover {
     cursor: pointer;
     transform: scale(1.2);
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);

@@ -84,7 +84,7 @@ export default class Waveform extends React.Component {
               cursorWidth: 0,
               height,
               hideScrollbar: true,
-              progressColor: '#46be8ae6',
+              progressColor: '#aeb3b7',
               responsive: true,
               waveColor: '#D1D6DA',
             }}

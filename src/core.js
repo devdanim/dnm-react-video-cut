@@ -192,6 +192,20 @@ export default class DnmVideoCut extends React.Component {
         })
     }
 
+    getLoopElPosition = () => {
+        if (this.scrollable.current) {
+            const handleLeft = this.scrollable.current.getElementsByClassName('rc-slider-handle-1')[0];
+            const handleRight = this.scrollable.current.getElementsByClassName('rc-slider-handle-2')[0];
+            if (handleLeft && handleRight) {
+                const posLeft = parseFloat(handleLeft.style.left);
+                const posRight = parseFloat(handleRight.style.left);
+                const posIcon = `${posLeft + (posRight - posLeft) / 2}%`;
+                return posIcon;
+            }
+        } 
+        return '0';
+    }
+
     handlePlayerError = event => {
         const { error } = event.target;
         if (error && error.code === 4) {
@@ -288,6 +302,7 @@ export default class DnmVideoCut extends React.Component {
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
         const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, } = this.props;
 
+        const loopElPosition = this.getLoopElPosition();
         return (
             <div css={css`${styles}`}> 
                 <div className={`dnm-video-cut-root ${classes.root || ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
@@ -329,7 +344,10 @@ export default class DnmVideoCut extends React.Component {
                         )
                     }
                     <div>
-                        <div className="dnm-video-cut-play-icon" onClick={this.handleFreePlayClick}>
+                        <div 
+                            className="dnm-video-cut-play-icon" 
+                            onClick={this.handleFreePlayClick}
+                        >
                             {isPlaying ? <PauseIcon /> : <PlayIcon /> }
                         </div>
                         <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
@@ -341,6 +359,14 @@ export default class DnmVideoCut extends React.Component {
                                 onMouseDown={this.handleContainerMouseDown} 
                                 onMouseUp={this.handleContainerMouseUp}
                             >
+                                <div 
+                                    className="dnm-video-cut-loop-icon" 
+                                    onClick={this.handleFreePlayClick}
+                                    title="Click or press space to play the segment"
+                                    style={{ left: `calc(${loopElPosition} - 10px)` }}
+                                >
+                                    {isPlaying ? <PauseIcon /> : <PlayIcon /> }
+                                </div>
                                 <Draggable 
                                     className="dnm-video-cut-playing-cursor-draggable-item"
                                     axis="x" 
@@ -429,7 +455,7 @@ DnmVideoCut.propTypes = {
         PropTypes.func,
         PropTypes.number,
     ]),
-    waveformHeight: PropTypes.bool,
+    waveformHeight: PropTypes.number,
 };
 
 DnmVideoCut.defaultProps = {
