@@ -413,18 +413,20 @@ export default css`
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
   }
 
-  .clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-  }
-
   .dnm-video-cut-tools {
     margin-top: 5px;
-    width: 150px;
+    width: 100%;
     align-self: flex-end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row-reverse;
   }
 
+  .dnm-video-cut-zoom {
+    width: 150px;
+  }
+  
   .dnm-video-cut-zoom-icon {
     width: 17px;
   }

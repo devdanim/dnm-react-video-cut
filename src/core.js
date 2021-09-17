@@ -430,6 +430,22 @@ export default class DnmVideoCut extends React.Component {
                             </div>
                         </div>
                         <div className="dnm-video-cut-tools">
+                            {/* placing the zoom BEFORE the mute checkbox, the css will then handle it for BOTH audio and video: for audio, "space-between" will place the zoom as if it were "flex-start" */}
+                            <div className="dnm-video-cut-zoom">
+                                <Range
+                                    className={`dnm-video-cut-zoom-range ${classes.zoomRange || ""}`}
+                                    min={0}
+                                    max={900}
+                                    step={.05}
+                                    value={zoomFactor}
+                                    onBeforeChange={this.handleZoomFactorDragStart}
+                                    onAfterChange={this.handleZoomFactorDragEnd}
+                                    onChange={this.handleZoomFactorChange}
+                                />
+                                <div className="dnm-video-cut-zoom-icon">
+                                    <ZoomIcon />
+                                </div>
+                            </div>
                             {
                                 type !== 'audio' ? (
                                     <div className="dnm-video-cut-mute">
@@ -445,22 +461,6 @@ export default class DnmVideoCut extends React.Component {
                                     </div>
                                 ) : null
                             }
-                            <div className="dnm-video-cut-zoom">
-                                <Range 
-                                    className={`dnm-video-cut-zoom-range ${classes.zoomRange || ""}`}
-                                    min={0}
-                                    max={900}
-                                    step={.05}
-                                    value={zoomFactor} 
-                                    onBeforeChange={this.handleZoomFactorDragStart}
-                                    onAfterChange={this.handleZoomFactorDragEnd}
-                                    onChange={this.handleZoomFactorChange}
-                                />
-                                <div className="dnm-video-cut-zoom-icon">
-                                    <ZoomIcon />
-                                </div>
-                            </div>
-                            <div className="clearfix" />
                         </div>
                     </div>
                 </div>
