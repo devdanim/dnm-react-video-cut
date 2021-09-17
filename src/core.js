@@ -264,6 +264,11 @@ export default class DnmVideoCut extends React.Component {
         this.toggleVideoAutoPlay(false);
     }
 
+    handleLoopPlayClick = (event) => {
+        event.stopPropagation();
+        this.toggleVideoAutoPlay();
+    }
+
     handlePlayCursorDrag = (position) => {
         const { xRatio } = position;
         const { videoDuration } = this.state;
@@ -348,7 +353,7 @@ export default class DnmVideoCut extends React.Component {
                             />
                         )
                     }
-                    <div>
+                    <div className="dnm-video-cut-progress-root">
                         {
                             tooltipRenderer((
                                 <div 
@@ -360,48 +365,54 @@ export default class DnmVideoCut extends React.Component {
                             ), { title: isPlaying ? catalogue.pauseTooltip : catalogue.playTooltip })
                         }
                         <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
-                            <div 
-                                className="dnm-video-cut-progress-container" 
+                            <div
+                                className="dnm-video-cut-progress-scrollable-root" 
                                 style={{ width: `calc(${zoomFactor[0] + 100}% - 20px)` }} 
-                                onTouchMove={this.handleContainerMouseDown} 
-                                onTouchEnd={this.handleContainerMouseUp} 
-                                onMouseDown={this.handleContainerMouseDown} 
-                                onMouseUp={this.handleContainerMouseUp}
                             >
-                                {
-                                    tooltipRenderer((
-                                        <div 
-                                            className="dnm-video-cut-loop-icon" 
-                                            onClick={this.toggleVideoAutoPlay}
-                                            style={{ left: `calc(${loopElPosition} - 10px)` }}
-                                        >
-                                            {isPlaying ? <PauseIcon /> : <LoopIcon /> }
-                                        </div>
-                                    ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip })
-                                }
-                                <Draggable 
-                                    className="dnm-video-cut-playing-cursor-draggable-item"
-                                    axis="x" 
-                                    forceDragging={forceCursorDragging}
-                                    onMount={this.handleDraggableApiMount}
-                                    onDrag={this.handlePlayCursorDrag}
-                                    onDragStart={this.pauseVideo}
-                                    position={playCursorPosition}
-                                    draggableWidth={playerCursorWidth}
-                                    rerenderKey={zoomFactor[0]}
+                                <div className="dnm-video-cut-loop-icon-container">
+                                    {
+                                        tooltipRenderer((
+                                            <div 
+                                                className="dnm-video-cut-loop-icon" 
+                                                onClick={this.handleLoopPlayClick}
+                                                style={{ left: `calc(${loopElPosition} - 10px)` }}
+                                            >
+                                                {isPlaying ? <PauseIcon /> : <LoopIcon /> }
+                                            </div>
+                                        ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip })
+                                    }
+                                </div>
+                                <div 
+                                    className="dnm-video-cut-progress-container" 
+                                    onTouchMove={this.handleContainerMouseDown} 
+                                    onTouchEnd={this.handleContainerMouseUp} 
+                                    onMouseDown={this.handleContainerMouseDown} 
+                                    onMouseUp={this.handleContainerMouseUp}
                                 >
-                                    <div className="dnm-video-cut-playing-cursor" ref={this.draggable} />
-                                </Draggable>
-                                <Range 
-                                    className={`dnm-video-cut-range ${classes.range || ""}`}
-                                    min={0}
-                                    max={videoDuration || 0}
-                                    step={.05}
-                                    value={[inValue, outValue]} 
-                                    onChange={this.handleRangeChange}
-                                    onBeforeChange={this.handleBeforeRangeChange}
-                                    onAfterChange={this.handleAfterRangeChange}
-                                />
+                                    <Draggable 
+                                        className="dnm-video-cut-playing-cursor-draggable-item"
+                                        axis="x" 
+                                        forceDragging={forceCursorDragging}
+                                        onMount={this.handleDraggableApiMount}
+                                        onDrag={this.handlePlayCursorDrag}
+                                        onDragStart={this.pauseVideo}
+                                        position={playCursorPosition}
+                                        draggableWidth={playerCursorWidth}
+                                        rerenderKey={zoomFactor[0]}
+                                    >
+                                        <div className="dnm-video-cut-playing-cursor" ref={this.draggable} />
+                                    </Draggable>
+                                    <Range 
+                                        className={`dnm-video-cut-range ${classes.range || ""}`}
+                                        min={0}
+                                        max={videoDuration || 0}
+                                        step={.05}
+                                        value={[inValue, outValue]} 
+                                        onChange={this.handleRangeChange}
+                                        onBeforeChange={this.handleBeforeRangeChange}
+                                        onAfterChange={this.handleAfterRangeChange}
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className="dnm-video-cut-tools">

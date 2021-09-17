@@ -324,6 +324,12 @@ export default css`
     transform: scale(1.3);
   }
 
+  .dnm-video-cut-progress-root {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+  }
+
   .dnm-video-cut-progress-scrollable-parent {
     width: calc(100% - 45px);
     display: inline-block;
@@ -333,25 +339,27 @@ export default css`
     overflow-x: scroll;
   }
 
-  .dnm-video-cut-progress-container {
-    width: calc(500% - 20px);
+  .dnm-video-cut-progress-scrollable-root {
     margin-left: 10px;
     padding-right: 10px;
-    height: 28px;
     position: relative;
-    padding-top: 25px;
+  }
+
+  .dnm-video-cut-loop-icon-container {
+    height: 22px;
   }
   
   .dnm-video-cut-play-icon {
     width: 30px;
     height: 30px;
     display: inline-block;
-    position: relative;
-    bottom: 20px;
     transform: scale(1);
     transition: all 0.2s ease-in-out;
     background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
     border-radius: 100px;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
   }
 
   .dnm-video-cut-loop-icon {
@@ -365,6 +373,9 @@ export default css`
     background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
     border-radius: 100px;
     z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .dnm-video-cut-loop-icon svg {
@@ -380,24 +391,10 @@ export default css`
   
   .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {
     width: 9px;
-    left: 5px;
-    top: 1px; 
   }
   
   .dnm-video-cut-root.is-paused .dnm-video-cut-loop-icon svg {
     width: 14px;
-    left: 3px;
-    top: 3px;
-  }
-
-  .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {
-    left: 9px;
-    top: 8px; 
-  }
-  
-  .dnm-video-cut-root.is-paused .dnm-video-cut-play-icon svg {
-    left: 10px;
-    top: 8px;
   }
   
   .dnm-video-cut-play-icon:hover, .dnm-video-cut-loop-icon:hover {
