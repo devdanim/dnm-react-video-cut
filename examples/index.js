@@ -37,7 +37,11 @@ class App extends React.Component {
                     outPoint={outPoint}
                     muted={muted}
                     catalogue={{
-                        unmute: 'Custom unmute label'
+                        unmute: 'Enable sound',
+                        playTooltip: 'Click or press P to play',
+                        pauseTooltip: 'Click or press P to pause',
+                        loopPlayTooltip: 'Click or press space to play the segment',
+                        loopPauseTooltip: 'Click or press space to pause the segment',
                     }}
                     src={type === 'audio' ? music : video}
                     type={type}

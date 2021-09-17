@@ -369,7 +369,6 @@ export default css`
   
   .dnm-video-cut-loop-icon svg {
     color: white;
-    width: 9px;
     position: relative;
   }
 
@@ -380,13 +379,15 @@ export default css`
   }
   
   .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {
+    width: 9px;
     left: 5px;
     top: 1px; 
   }
   
   .dnm-video-cut-root.is-paused .dnm-video-cut-loop-icon svg {
-    left: 6px;
-    top: 1px;
+    width: 14px;
+    left: 3px;
+    top: 3px;
   }
 
   .dnm-video-cut-root.is-playing .dnm-video-cut-play-icon svg {

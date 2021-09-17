@@ -9,6 +9,7 @@ import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
+import LoopIcon from './lib/svg/loop';
 import ZoomIcon from './lib/svg/zoom';
 import { throttle } from 'lodash-es';
 import Waveform from './lib/Waveform';
@@ -220,6 +221,9 @@ export default class DnmVideoCut extends React.Component {
         if(event.keyCode === 32) {
             event.preventDefault();
             this.toggleVideoAutoPlay();
+        } else if (event.keyCode === 80) {
+            event.preventDefault();
+            this.handleFreePlayClick();
         }
     }
 
@@ -300,9 +304,10 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
+
         return (
             <div css={css`${styles}`}> 
                 <div className={`dnm-video-cut-root ${classes.root || ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
@@ -344,12 +349,16 @@ export default class DnmVideoCut extends React.Component {
                         )
                     }
                     <div>
-                        <div 
-                            className="dnm-video-cut-play-icon" 
-                            onClick={this.handleFreePlayClick}
-                        >
-                            {isPlaying ? <PauseIcon /> : <PlayIcon /> }
-                        </div>
+                        {
+                            tooltipRenderer((
+                                <div 
+                                    className="dnm-video-cut-play-icon" 
+                                    onClick={this.handleFreePlayClick}
+                                >
+                                    {isPlaying ? <PauseIcon /> : <PlayIcon /> }
+                                </div>
+                            ), { title: isPlaying ? catalogue.pauseTooltip : catalogue.playTooltip })
+                        }
                         <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
                             <div 
                                 className="dnm-video-cut-progress-container" 
@@ -359,14 +368,17 @@ export default class DnmVideoCut extends React.Component {
                                 onMouseDown={this.handleContainerMouseDown} 
                                 onMouseUp={this.handleContainerMouseUp}
                             >
-                                <div 
-                                    className="dnm-video-cut-loop-icon" 
-                                    onClick={this.handleFreePlayClick}
-                                    title="Click or press space to play the segment"
-                                    style={{ left: `calc(${loopElPosition} - 10px)` }}
-                                >
-                                    {isPlaying ? <PauseIcon /> : <PlayIcon /> }
-                                </div>
+                                {
+                                    tooltipRenderer((
+                                        <div 
+                                            className="dnm-video-cut-loop-icon" 
+                                            onClick={this.toggleVideoAutoPlay}
+                                            style={{ left: `calc(${loopElPosition} - 10px)` }}
+                                        >
+                                            {isPlaying ? <PauseIcon /> : <LoopIcon /> }
+                                        </div>
+                                    ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip })
+                                }
                                 <Draggable 
                                     className="dnm-video-cut-playing-cursor-draggable-item"
                                     axis="x" 
@@ -456,11 +468,16 @@ DnmVideoCut.propTypes = {
         PropTypes.number,
     ]),
     waveformHeight: PropTypes.number,
+    tooltipRenderer: PropTypes.func,
 };
 
 DnmVideoCut.defaultProps = {
     catalogue: {
         unmute: 'Enable sound',
+        playTooltip: 'Click or press P to play',
+        pauseTooltip: 'Click or press P to pause',
+        loopPlayTooltip: 'Click or press space to play the segment',
+        loopPauseTooltip: 'Click or press space to pause the segment',
     },
     classes: {},
     onRangeChange: points => null,
@@ -475,4 +492,5 @@ DnmVideoCut.defaultProps = {
     muted: false,
     playerCursorWidth: 14,
     waveformHeight: 150,
+    tooltipRenderer: (children, { title }) => children,
 };
