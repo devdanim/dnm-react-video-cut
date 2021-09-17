@@ -382,17 +382,18 @@ export default class DnmVideoCut extends React.Component {
                                     style={{ width: `calc(${zoomFactor[0] + 100}% - 20px)` }}
                                 >
                                     <div className="dnm-video-cut-loop-icon-container">
-                                        {
-                                            tooltipRenderer((
-                                                <div
-                                                    className="dnm-video-cut-loop-icon"
-                                                    onClick={this.handleLoopPlayClick}
-                                                    style={{ left: `calc(${loopElPosition} - 10px)` }}
-                                                >
-                                                    {isPlaying ? <PauseIcon /> : <LoopIcon /> }
-                                                </div>
-                                            ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop' })
-                                        }
+                                        <div className="dnm-video-cut-loop-icon-shell" style={{ position: 'absolute', left: `calc(${loopElPosition} - 10px)` }}>
+                                            {
+                                                tooltipRenderer((
+                                                    <div
+                                                        className="dnm-video-cut-loop-icon"
+                                                        onClick={this.handleLoopPlayClick}
+                                                    >
+                                                        {isPlaying ? <PauseIcon /> : <LoopIcon /> }
+                                                    </div>
+                                                ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop' })
+                                            }
+                                        </div>
                                     </div>
                                     <div
                                         className="dnm-video-cut-progress-container"

@@ -358,8 +358,6 @@ export default css`
   }
   
   .dnm-video-cut-loop-icon-container {
-    display: flex;
-    justify-content: center;
     height: 22px;
   }
   
@@ -380,8 +378,6 @@ export default css`
     width: 20px;
     height: 20px;
     display: block;
-    position: absolute;
-    top: 0;
     transform: scale(1);
     transition: transform 0.2s ease-in-out;
     background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
