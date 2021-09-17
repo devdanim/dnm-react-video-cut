@@ -374,7 +374,7 @@ export default class DnmVideoCut extends React.Component {
                                     >
                                         {isPlaying ? <PauseIcon /> : <PlayIcon /> }
                                     </div>
-                                ), { title: isPlaying ? catalogue.pauseTooltip : catalogue.playTooltip })
+                                ), { title: isPlaying ? catalogue.pauseTooltip : catalogue.playTooltip, id: 'play' })
                             }
                             <div className="dnm-video-cut-progress-scrollable-parent" ref={this.scrollable}>
                                 <div
@@ -391,7 +391,7 @@ export default class DnmVideoCut extends React.Component {
                                                 >
                                                     {isPlaying ? <PauseIcon /> : <LoopIcon /> }
                                                 </div>
-                                            ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip })
+                                            ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop' })
                                         }
                                     </div>
                                     <div

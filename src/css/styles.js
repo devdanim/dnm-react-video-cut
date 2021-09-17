@@ -358,6 +358,8 @@ export default css`
   }
   
   .dnm-video-cut-loop-icon-container {
+    display: flex;
+    justify-content: center;
     height: 22px;
   }
   
