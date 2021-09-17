@@ -41,6 +41,8 @@ export default class Waveform extends React.Component {
 
     onReady = () => {
         const { wavesurfer } = this.state;
+        const { onWaveformReady } = this.props;
+        onWaveformReady(wavesurfer);
         this.setState({ duration: wavesurfer.getDuration() });
     }
 
@@ -69,13 +71,13 @@ export default class Waveform extends React.Component {
     };
  
     render () {
-        const { src, position, range, height, } = this.props;
+        const { src, position, range, height, style, visible, } = this.props;
         const regions = this.getRegions();
 
         return (
           <ReactWaves
             audioFile={src}
-            className={'dnm-video-cut-audio-waveform'}
+            className={`dnm-video-cut-audio-waveform ${visible === false ? 'dnm-video-cut-audio-waveform-loading' : ''}`}
             options={{
               barGap: 3,
               barWidth: 4,

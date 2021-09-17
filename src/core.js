@@ -29,7 +29,8 @@ export default class DnmVideoCut extends React.Component {
             playCursorPosition: {
                 xRatio: 0,
                 yRatio: 0
-            }
+            },
+            waveformIsReady: false,
         }
         this.playerRef = React.createRef();
         this.scrollable = React.createRef();
@@ -44,12 +45,13 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration, isEditing } = this.state;
-        const { inPoint, outPoint, src, muted, } = this.props;
+        const { inPoint, outPoint, src, muted, type, } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint], true);
         }
         if(src !== prevProps.src) {
             this.pauseVideo();
+            if (type === 'audio') this.setState({ waveformIsReady: false });
         }
         if(isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
             let time;
@@ -207,6 +209,10 @@ export default class DnmVideoCut extends React.Component {
         return '0';
     }
 
+    handleWaveformReady = () => {
+        this.setState({ waveformIsReady: true });
+    }
+
     handlePlayerError = event => {
         const { error } = event.target;
         if (error && error.code === 4) {
@@ -308,8 +314,8 @@ export default class DnmVideoCut extends React.Component {
 
     render() {
         const { inValue, outValue } = this.getFormatedValues();
-        const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, } = this.props;
+        const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, waveformIsReady, } = this.state;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
 
@@ -319,11 +325,16 @@ export default class DnmVideoCut extends React.Component {
                     {
                         type === 'audio' ? (
                             <React.Fragment>
+                                {
+                                    !waveformIsReady && loader ? loader : null
+                                }
                                 <Waveform 
                                     src={src}
+                                    visible={waveformIsReady}
                                     position={playCursorPosition.xRatio}
                                     onPositionChange={this.handleWaveformPositionChange}
                                     onRangeChange={this.handleRangeChange}
+                                    onWaveformReady={this.handleWaveformReady}
                                     range={[inValue, outValue]} 
                                     height={waveformHeight}
                                 />

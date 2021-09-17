@@ -270,6 +270,11 @@ export default css`
     display: none;
   }
 
+  .dnm-video-cut-audio-waveform-loading {
+    height: 0;
+    overflow: hidden;
+  }
+
   .dnm-video-cut-audio-waveform {
     width: 100%;
     padding: 0;

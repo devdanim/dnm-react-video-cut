@@ -45,6 +45,7 @@ class App extends React.Component {
                     }}
                     src={type === 'audio' ? music : video}
                     type={type}
+                    loader={<p>Is loading...</p>}
                     maxDuration={10}
                     minDuration={4}
                     onRangeChange={this.handleRangeChange}
