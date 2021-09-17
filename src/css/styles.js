@@ -328,6 +328,13 @@ export default css`
     display: flex;
     justify-content: center; 
     align-items: center;
+    flex-flow: column;
+  }
+  
+  .dnm-video-cut-progress-core {
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .dnm-video-cut-progress-scrollable-parent {
@@ -344,7 +351,7 @@ export default css`
     padding-right: 10px;
     position: relative;
   }
-
+  
   .dnm-video-cut-loop-icon-container {
     height: 22px;
   }
@@ -411,19 +418,14 @@ export default css`
 
   .dnm-video-cut-tools {
     margin-top: 5px;
+    width: 150px;
+    align-self: flex-end;
   }
 
   .dnm-video-cut-zoom-icon {
     width: 17px;
   }
   
-  .dnm-video-cut-zoom {
-    float: right;
-    width: 30%;
-    max-width: 200px;
-    display: inline-block;
-  }
-
   .dnm-video-cut-zoom-icon {
     width: 18px;
     display: inline-block;
