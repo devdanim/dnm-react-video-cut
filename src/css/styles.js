@@ -280,6 +280,10 @@ export default css`
     padding: 0;
     margin: 0;
   }
+
+  .dnm-video-cut-audio-waveform canvas {
+    width: 100% !important;
+  }
   
   .dnm-video-cut-audio-waveform .wavesurfer-region {
     z-index: 3 !important;
