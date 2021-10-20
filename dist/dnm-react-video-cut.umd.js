@@ -39495,37 +39495,40 @@
         };
       });
 
-      _defineProperty(_assertThisInitialized(_this), "toggleVideoAutoPlay", function (playInArea) {
+      _defineProperty(_assertThisInitialized(_this), "toggleVideoAutoPlay", function () {
+        var playLoop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
         var video = _this.playerRef.current;
 
         if (video) {
-          if (video.paused) {
-            _this.playVideo();
+          _this.playLoop = playLoop;
 
-            _this.monitorAutoplay(playInArea);
+          if (video.paused) {
+            _this.monitorAutoplay(true);
+
+            _this.playVideo();
           } else _this.pauseVideo();
         }
       });
 
       _defineProperty(_assertThisInitialized(_this), "monitorAutoplay", function () {
-        var playInArea = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
         var video = _this.playerRef.current;
 
-        if (video && !video.paused) {
-          if (playInArea === true) {
+        if (video && (!video.paused || force)) {
+          if (_this.playLoop) {
             var _this$getFormatedValu = _this.getFormatedValues(),
                 inValue = _this$getFormatedValu.inValue,
                 outValue = _this$getFormatedValu.outValue;
 
             var time = video.currentTime;
-            if (time < inValue || time > outValue) video.currentTime = inValue;
+
+            if (time < inValue || time > outValue) {
+              // console.log("Auto set current time", inValue);
+              video.currentTime = inValue;
+            }
           }
 
           _this.updatePlayCursorPosition(null, true);
-
-          setTimeout(function () {
-            return _this.monitorAutoplay(playInArea);
-          }, 100);
         }
       });
 
@@ -39533,6 +39536,7 @@
         var video = _this.playerRef.current;
 
         if (video) {
+          // console.log("PLAY", video.currentTime);
           video.play();
         }
 
@@ -39545,6 +39549,7 @@
         var video = _this.playerRef.current;
 
         if (video) {
+          // console.log("PAUSE", video.currentTime);
           video.pause();
         }
 
@@ -39652,6 +39657,22 @@
         }
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handlePlayerLoad", function (ref) {
+        // console.log(ref);
+        _this.playerRef = {
+          current: ref
+        };
+        var video = _this.playerRef.current;
+
+        if (video) {
+          // console.log("Add timeupdate listener", video);  
+          video.addEventListener('timeupdate', function () {
+            // console.log("timeupdate");
+            _this.monitorAutoplay();
+          }, false);
+        }
+      });
+
       _defineProperty(_assertThisInitialized(_this), "handleLoadedData", function () {
         var onVideoLoadedData = _this.props.onVideoLoadedData;
         var video = _this.playerRef.current;
@@ -39674,9 +39695,8 @@
 
       _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
         var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-        var rangeDisabled = _this.state.rangeDisabled;
 
-        if (!rangeDisabled || force) {
+        if (!_this.rangeDisabled || force) {
           var _this$props2 = _this.props,
               onRangeChange = _this$props2.onRangeChange,
               outPoint = _this$props2.outPoint;
@@ -39693,9 +39713,7 @@
       _defineProperty(_assertThisInitialized(_this), "handleBeforeRangeChange", function (ev, a) {
         _this.pauseVideo();
 
-        _this.setState({
-          isEditing: true
-        });
+        _this.isEditing = true;
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleAfterRangeChange", function () {
@@ -39705,9 +39723,7 @@
 
         _this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
 
-        _this.setState({
-          isEditing: false
-        });
+        _this.isEditing = false;
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleFreePlayClick", function () {
@@ -39766,24 +39782,29 @@
       _defineProperty(_assertThisInitialized(_this), "handleContainerMouseDown", function (ev) {
         ev.stopPropagation();
         var target = ev.target;
-        var _this$state3 = _this.state,
-            rangeDisabled = _this$state3.rangeDisabled,
-            forceCursorDragging = _this$state3.forceCursorDragging;
+        var forceCursorDragging = _this.state.forceCursorDragging;
 
         if (!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {
-          if (!rangeDisabled || !forceCursorDragging) _this.setState({
-            rangeDisabled: true,
-            forceCursorDragging: true
+          if (!_this.rangeDisabled || !forceCursorDragging) {
+            _this.rangeDisabled = true;
+
+            _this.setState({
+              forceCursorDragging: true
+            });
+          }
+        } else if (_this.rangeDisabled || forceCursorDragging) {
+          _this.rangeDisabled = false;
+
+          _this.setState({
+            forceCursorDragging: false
           });
-        } else if (rangeDisabled || forceCursorDragging) _this.setState({
-          rangeDisabled: false,
-          forceCursorDragging: false
-        });
+        }
       });
 
       _defineProperty(_assertThisInitialized(_this), "handleContainerMouseUp", function () {
-        return _this.setState({
-          rangeDisabled: true,
+        _this.rangeDisabled = true;
+
+        _this.setState({
           forceCursorDragging: false
         });
       });
@@ -39795,11 +39816,8 @@
 
       _this.state = {
         videoDuration: 0,
-        isEditing: false,
         isPlaying: false,
-        rangeDisabled: true,
         forceCursorDragging: false,
-        forceScrollToCursor: false,
         zoomFactor: [0],
         playCursorPosition: {
           xRatio: 0,
@@ -39807,11 +39825,16 @@
         },
         waveformIsReady: false
       };
-      _this.playerRef = React__default.createRef();
+      _this.playLoop = false;
+      _this.playerRef = {
+        current: null
+      };
       _this.scrollable = React__default.createRef();
       _this.draggable = React__default.createRef();
       _this.draggableApi = null;
-      _this.seekVideoTo = throttle$1(_this._seekVideoTo, 20);
+      _this.rangeDisabled = true;
+      _this.isEditing = false;
+      _this.seekVideoTo = throttle$1(_this._seekVideoTo, 200);
       return _this;
     }
 
@@ -39823,9 +39846,7 @@
     }, {
       key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps, prevState) {
-        var _this$state4 = this.state,
-            videoDuration = _this$state4.videoDuration,
-            isEditing = _this$state4.isEditing;
+        var videoDuration = this.state.videoDuration;
         var _this$props3 = this.props,
             inPoint = _this$props3.inPoint,
             outPoint = _this$props3.outPoint,
@@ -39844,7 +39865,7 @@
           });
         }
 
-        if (isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
+        if (this.isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
           var time;
 
           if (prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
@@ -39864,7 +39885,8 @@
       key: "_seekVideoTo",
       value: function _seekVideoTo(time) {
         if (!isNaN(time)) {
-          var video = this.playerRef.current;
+          var video = this.playerRef.current; // console.log("Seek to", time);
+
           if (video) video.currentTime = time;
         }
       }
@@ -39875,13 +39897,13 @@
             inValue = _this$getFormatedValu3.inValue,
             outValue = _this$getFormatedValu3.outValue;
 
-        var _this$state5 = this.state,
-            videoDuration = _this$state5.videoDuration,
-            playCursorPosition = _this$state5.playCursorPosition,
-            isPlaying = _this$state5.isPlaying,
-            forceCursorDragging = _this$state5.forceCursorDragging,
-            zoomFactor = _this$state5.zoomFactor,
-            waveformIsReady = _this$state5.waveformIsReady;
+        var _this$state3 = this.state,
+            videoDuration = _this$state3.videoDuration,
+            playCursorPosition = _this$state3.playCursorPosition,
+            isPlaying = _this$state3.isPlaying,
+            forceCursorDragging = _this$state3.forceCursorDragging,
+            zoomFactor = _this$state3.zoomFactor,
+            waveformIsReady = _this$state3.waveformIsReady;
         var _this$props4 = this.props,
             src = _this$props4.src,
             catalogue = _this$props4.catalogue,
@@ -39893,7 +39915,8 @@
             waveformHeight = _this$props4.waveformHeight,
             tooltipRenderer = _this$props4.tooltipRenderer,
             loader = _this$props4.loader;
-        var loopElPosition = this.getLoopElPosition();
+        var loopElPosition = this.getLoopElPosition(); // console.log("RENDER");
+
         return jsx("div", {
           css: css(_templateObject$1(), styles)
         }, jsx("div", {
@@ -39910,21 +39933,19 @@
         }), jsx("audio", {
           className: "dnm-video-cut-audio-player ".concat(classes.audioPlayer || ""),
           src: src,
-          ref: this.playerRef,
+          ref: this.handlePlayerLoad,
           loop: true,
           onLoadedData: this.handleLoadedData,
-          onLoad: this.handlePlayerLoad,
           onError: this.handlePlayerError,
           preload: "auto"
         })) : jsx("video", {
           className: "dnm-video-cut-player ".concat(classes.player || ""),
           src: src,
-          ref: this.playerRef,
+          ref: this.handlePlayerLoad,
           loop: true,
           muted: muted,
           controls: false,
           onLoadedData: this.handleLoadedData,
-          onLoad: this.handlePlayerLoad,
           onError: this.handlePlayerError,
           preload: "auto"
         }), jsx("div", {

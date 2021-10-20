@@ -20,11 +20,8 @@ export default class DnmVideoCut extends React.Component {
         super(props);
         this.state = {
             videoDuration: 0,
-            isEditing: false,
             isPlaying: false,
-            rangeDisabled: true,
             forceCursorDragging: false,
-            forceScrollToCursor: false,
             zoomFactor: [0],
             playCursorPosition: {
                 xRatio: 0,
@@ -32,11 +29,14 @@ export default class DnmVideoCut extends React.Component {
             },
             waveformIsReady: false,
         }
-        this.playerRef = React.createRef();
+        this.playLoop = false;
+        this.playerRef = { current: null };
         this.scrollable = React.createRef();
         this.draggable = React.createRef();
         this.draggableApi = null;
-        this.seekVideoTo = throttle(this._seekVideoTo, 20);
+        this.rangeDisabled = true;
+        this.isEditing = false;
+        this.seekVideoTo = throttle(this._seekVideoTo, 200);
     }
 
     componentDidMount() {
@@ -44,7 +44,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { videoDuration, isEditing } = this.state;
+        const { videoDuration } = this.state;
         const { inPoint, outPoint, src, muted, type, } = this.props;
         if(!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint], true);
@@ -53,7 +53,7 @@ export default class DnmVideoCut extends React.Component {
             this.pauseVideo();
             if (type === 'audio') this.setState({ waveformIsReady: false });
         }
-        if(isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
+        if(this.isEditing && (prevProps.inPoint !== inPoint || prevProps.outPoint !== outPoint)) {
             let time;
             if(prevProps.inPoint !== inPoint && prevProps.outPoint !== outPoint) {
                 const { min, max } = this.getAcceptedDuration();
@@ -74,6 +74,7 @@ export default class DnmVideoCut extends React.Component {
     _seekVideoTo(time) {
         if (!isNaN(time)) {
             const video = this.playerRef.current;
+            // console.log("Seek to", time);
             if(video) video.currentTime = time;
         }
     }
@@ -122,33 +123,37 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
-    toggleVideoAutoPlay = (playInArea) => {
+    toggleVideoAutoPlay = (playLoop = true) => {
         const video = this.playerRef.current;
         if(video) {
+            this.playLoop = playLoop;
             if(video.paused) {
+                this.monitorAutoplay(true);
                 this.playVideo();
-                this.monitorAutoplay(playInArea);
             }
             else this.pauseVideo();
         }
     }
 
-    monitorAutoplay = (playInArea = true) => {
+    monitorAutoplay = (force = false) => {
         const video = this.playerRef.current;
-        if(video && !video.paused) {
-            if(playInArea === true) {
+        if(video && (!video.paused || force)) {
+            if(this.playLoop) {
                 const { inValue, outValue } = this.getFormatedValues(); 
                 const time = video.currentTime;
-                if(time < inValue || time > outValue) video.currentTime = inValue;
+                if(time < inValue || time > outValue) {
+                    // console.log("Auto set current time", inValue);
+                    video.currentTime = inValue;
+                }
             }
             this.updatePlayCursorPosition(null, true);
-            setTimeout(() => this.monitorAutoplay(playInArea), 100);     
         }
     }
 
     playVideo = () => {
         const video = this.playerRef.current;
         if(video) {
+            // console.log("PLAY", video.currentTime);
             video.play();
         }
         this.setState({ isPlaying: true });
@@ -157,6 +162,7 @@ export default class DnmVideoCut extends React.Component {
     pauseVideo = () => {
         const video = this.playerRef.current;
         if(video) {
+            // console.log("PAUSE", video.currentTime);
             video.pause();
         }
         this.setState({ isPlaying: false });
@@ -233,6 +239,19 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
+    handlePlayerLoad = (ref) => {
+        // console.log(ref);
+        this.playerRef = { current: ref };
+        const video = this.playerRef.current;
+        if (video) {
+            // console.log("Add timeupdate listener", video);  
+            video.addEventListener('timeupdate', () => {
+                // console.log("timeupdate");
+                this.monitorAutoplay();
+            }, false);
+        }
+    }
+
     handleLoadedData = () => {
         const { onVideoLoadedData } = this.props;
         const video = this.playerRef.current;
@@ -246,8 +265,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     handleRangeChange = (value, force = false) => {
-        const { rangeDisabled } = this.state;
-        if (!rangeDisabled || force) {
+        if (!this.rangeDisabled || force) {
             const { onRangeChange, outPoint } = this.props;
             const lastTarget = value[1] !== outPoint ? "out" : "in";
             const { inValue, outValue } = this.getFormatedValues(value[0], value[1], lastTarget);
@@ -257,13 +275,13 @@ export default class DnmVideoCut extends React.Component {
 
     handleBeforeRangeChange = (ev, a) => {
         this.pauseVideo();
-        this.setState({ isEditing: true });
+        this.isEditing = true;
     }
 
     handleAfterRangeChange = () => {
         const { playCursorPosition, videoDuration } = this.state;
         this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
-        this.setState({ isEditing: false });
+        this.isEditing = false;
     }
 
     handleFreePlayClick = () => {
@@ -299,13 +317,22 @@ export default class DnmVideoCut extends React.Component {
     handleContainerMouseDown = (ev) => {
         ev.stopPropagation();
         const { target } = ev;
-        const { rangeDisabled, forceCursorDragging } = this.state;
+        const { forceCursorDragging } = this.state;
         if(!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {
-            if (!rangeDisabled || !forceCursorDragging) this.setState({ rangeDisabled: true, forceCursorDragging: true });
-        } else if (rangeDisabled || forceCursorDragging) this.setState({ rangeDisabled: false, forceCursorDragging: false });
+            if (!this.rangeDisabled || !forceCursorDragging) {
+                this.rangeDisabled = true;
+                this.setState({ forceCursorDragging: true });
+            }
+        } else if (this.rangeDisabled || forceCursorDragging) {
+            this.rangeDisabled = false;
+            this.setState({ forceCursorDragging: false });
+        }
     }
 
-    handleContainerMouseUp = () => this.setState({ rangeDisabled: true, forceCursorDragging: false });
+    handleContainerMouseUp = () => {
+        this.rangeDisabled = true;
+        this.setState({ forceCursorDragging: false });
+    }
 
     handleMuteChange = (event) => {
         const { onMuteChange } = this.props;
@@ -318,6 +345,8 @@ export default class DnmVideoCut extends React.Component {
         const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
+
+        // console.log("RENDER");
 
         return (
             <div css={css`${styles}`}> 
@@ -341,10 +370,9 @@ export default class DnmVideoCut extends React.Component {
                                 <audio 
                                     className={`dnm-video-cut-audio-player ${classes.audioPlayer || ""}`}
                                     src={src}
-                                    ref={this.playerRef}
+                                    ref={this.handlePlayerLoad}
                                     loop
                                     onLoadedData={this.handleLoadedData}
-                                    onLoad={this.handlePlayerLoad}
                                     onError={this.handlePlayerError}
                                     preload="auto"
                                 />
@@ -353,12 +381,11 @@ export default class DnmVideoCut extends React.Component {
                             <video 
                                 className={`dnm-video-cut-player ${classes.player || ""}`}
                                 src={src}
-                                ref={this.playerRef}
+                                ref={this.handlePlayerLoad}
                                 loop
                                 muted={muted}
                                 controls={false}
                                 onLoadedData={this.handleLoadedData}
-                                onLoad={this.handlePlayerLoad}
                                 onError={this.handlePlayerError}
                                 preload="auto"
                             />

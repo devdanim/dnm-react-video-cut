@@ -12,8 +12,16 @@ class App extends React.Component {
             outPoint: 100,
             muted: false,
             type: 'audio',
+            src: null,
         }
         this.videoRef = React.createRef();
+    }
+
+    handleFileChange = (e, type) => {
+        const { files } = e.target;
+        if (files[0]) {
+            this.setState({ src: URL.createObjectURL(files[0]), type });
+        }
     }
 
     handleRangeChange = (value) => {
@@ -28,10 +36,26 @@ class App extends React.Component {
     }
 
     render() {
-        const { inPoint, outPoint, muted, type } = this.state;
+        const { inPoint, outPoint, muted, type, src } = this.state;
         return(
             <React.Fragment>
-                <button onClick={() => this.setState({ type: type === 'audio' ? 'video' : 'audio' })}>Toggle mode</button>
+                <button onClick={() => this.setState({ type: type === 'audio' ? 'video' : 'audio', src: null })}>Toggle mode</button>
+                <br />
+                <br />
+                <div>
+                    <label htmlFor="audioFile">Set audio file</label>
+                    <br />
+                    <input type="file" id="audioFile" onChange={e => this.handleFileChange(e, "audio")} />
+                </div>
+                <br />
+                <br />
+                <div>
+                    <label htmlFor="videoFile">Set video file</label>
+                    <br />
+                    <input type="file" id="videoFile" onChange={e => this.handleFileChange(e, "video")} />
+                </div>
+                <br />
+                <br />
                 <DnmVideoCut
                     inPoint={inPoint}
                     outPoint={outPoint}
@@ -43,7 +67,7 @@ class App extends React.Component {
                         loopPlayTooltip: 'Click or press space to play the segment',
                         loopPauseTooltip: 'Click or press space to pause the segment',
                     }}
-                    src={type === 'audio' ? music : video}
+                    src={src || (type === 'audio' ? music : video)}
                     type={type}
                     loader={<p>Is loading...</p>}
                     maxDuration={10}
