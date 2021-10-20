@@ -39313,14 +39313,9 @@
         var wavesurfer = _this.state.wavesurfer;
         var onWaveformReady = _this.props.onWaveformReady;
         onWaveformReady(wavesurfer);
-
-        _this.setState({
-          duration: wavesurfer.getDuration()
-        });
       });
 
       _defineProperty(_assertThisInitialized(_this), "getRegions", function () {
-        var duration = _this.state.duration;
         var range = _this.props.range;
         return {
           cut: {
@@ -39342,14 +39337,8 @@
         onRangeChange([start, end], true);
       });
 
-      _defineProperty(_assertThisInitialized(_this), "secondsToPosition", function (sec) {
-        var duration = _this.state.duration;
-        return 1 / _this.wavesurfer.getDuration() * sec;
-      });
-
       _this.state = {
-        wavesurfer: null,
-        duration: 0
+        wavesurfer: null
       };
       _this.redraw = debounce(_this._redraw, 250);
       return _this;

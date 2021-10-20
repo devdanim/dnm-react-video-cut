@@ -8,7 +8,6 @@ export default class Waveform extends React.Component {
       super(props);
       this.state = {
         wavesurfer: null,
-        duration: 0,
       }
       this.redraw = debounce(this._redraw, 250);
     }
@@ -42,11 +41,9 @@ export default class Waveform extends React.Component {
         const { wavesurfer } = this.state;
         const { onWaveformReady } = this.props;
         onWaveformReady(wavesurfer);
-        this.setState({ duration: wavesurfer.getDuration() });
     }
 
     getRegions = () => {
-        const { duration } = this.state;
         const { range } = this.props;
         return {
             cut: {
@@ -65,11 +62,6 @@ export default class Waveform extends React.Component {
         const { start, end } = e.region;
         onRangeChange([start, end], true);
       };
-
-    secondsToPosition = (sec) => {
-        const { duration } = this.state;
-        return 1 / this.wavesurfer.getDuration() * sec;
-    };
  
     render () {
         const { src, position, range, height, style, visible, } = this.props;
