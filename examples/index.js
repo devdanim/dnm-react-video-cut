@@ -56,26 +56,28 @@ class App extends React.Component {
                 </div>
                 <br />
                 <br />
-                <DnmVideoCut
-                    inPoint={inPoint}
-                    outPoint={outPoint}
-                    muted={muted}
-                    catalogue={{
-                        unmute: 'Enable sound',
-                        playTooltip: 'Click or press P to play',
-                        pauseTooltip: 'Click or press P to pause',
-                        loopPlayTooltip: 'Click or press space to play the segment',
-                        loopPauseTooltip: 'Click or press space to pause the segment',
-                    }}
-                    src={src || (type === 'audio' ? music : video)}
-                    type={type}
-                    loader={<p>Is loading...</p>}
-                    maxDuration={10}
-                    minDuration={4}
-                    onRangeChange={this.handleRangeChange}
-                    onMuteChange={this.handleMuteChange}
-                    onNotSupportedVideoLoad={(err) => console.error("Video source not supported", err)}
-                />
+                <div style={{ width: '350px' }}>
+                    <DnmVideoCut
+                        inPoint={inPoint}
+                        outPoint={outPoint}
+                        muted={muted}
+                        catalogue={{
+                            unmute: 'Enable sound',
+                            playTooltip: 'Click or press P to play',
+                            pauseTooltip: 'Click or press P to pause',
+                            loopPlayTooltip: 'Click or press space to play the segment',
+                            loopPauseTooltip: 'Click or press space to pause the segment',
+                        }}
+                        src={src || (type === 'audio' ? music : video)}
+                        type={type}
+                        loader={<p>Is loading...</p>}
+                        maxDuration={10}
+                        minDuration={4}
+                        onRangeChange={this.handleRangeChange}
+                        onMuteChange={this.handleMuteChange}
+                        onNotSupportedVideoLoad={(err) => console.error("Video source not supported", err)}
+                    />
+                </div>
             </React.Fragment>
         )
     }

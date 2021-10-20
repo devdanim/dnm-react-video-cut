@@ -35,7 +35,6 @@ export default class Waveform extends React.Component {
     }
   
     onLoading = ({ wavesurfer }) => {
-        wavesurfer.toggleInteraction();
         this.setState(({ wavesurfer }));
     };
 
@@ -55,6 +54,8 @@ export default class Waveform extends React.Component {
                 start: range ? range[0] : 0,
                 end: range ? range[1] : 0,
                 color: 'rgba(146, 210, 117, 0.3)',
+                resize: false,
+                drag: false,
             }
         };
     }
@@ -84,13 +85,14 @@ export default class Waveform extends React.Component {
               barHeight: 2,
               barRadius: 3,
               cursorWidth: 0,
+              interact: false,
               height,
               hideScrollbar: true,
               progressColor: '#aeb3b7',
               responsive: true,
               waveColor: '#D1D6DA',
             }}
-            zoom={1}
+            zoom={0}
             pos={position}
             playing={false} 
             onReady={this.onReady}
