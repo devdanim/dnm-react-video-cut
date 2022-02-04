@@ -342,7 +342,7 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, waveformIsReady, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
 
@@ -456,6 +456,13 @@ export default class DnmVideoCut extends React.Component {
                                 </div>
                             </div>
                         </div>
+                        {
+                            outValue - inValue < (parseFloat(minDuration) || 0) ? (
+                                <div>
+                                    <p className="dnm-video-cut-too-short-warning">{ catalogue.videoTooShortWarning }</p>
+                                </div>
+                            ) : null
+                        }
                         <div className="dnm-video-cut-tools">
                             {/* placing the zoom BEFORE the mute checkbox, the css will then handle it for BOTH audio and video: for audio, "space-between" will place the zoom as if it were "flex-start" */}
                             <div className="dnm-video-cut-zoom">
@@ -530,6 +537,7 @@ DnmVideoCut.defaultProps = {
         pauseTooltip: 'Click or press P to pause',
         loopPlayTooltip: 'Click or press space to play the segment',
         loopPauseTooltip: 'Click or press space to pause the segment',
+        videoTooShortWarning: 'Imported video is shorter than the recommended minimum duration, which may lead to an unexpected result.',
     },
     classes: {},
     onRangeChange: points => null,

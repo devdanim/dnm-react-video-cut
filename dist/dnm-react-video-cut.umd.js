@@ -39905,7 +39905,8 @@
             type = _this$props4.type,
             waveformHeight = _this$props4.waveformHeight,
             tooltipRenderer = _this$props4.tooltipRenderer,
-            loader = _this$props4.loader;
+            loader = _this$props4.loader,
+            minDuration = _this$props4.minDuration;
         var loopElPosition = this.getLoopElPosition(); // console.log("RENDER");
 
         return jsx("div", {
@@ -39999,7 +40000,9 @@
           onChange: this.handleRangeChange,
           onBeforeChange: this.handleBeforeRangeChange,
           onAfterChange: this.handleAfterRangeChange
-        }))))), jsx("div", {
+        }))))), outValue - inValue < (parseFloat(minDuration) || 0) ? jsx("div", null, jsx("p", {
+          className: "dnm-video-cut-too-short-warning"
+        }, catalogue.videoTooShortWarning)) : null, jsx("div", {
           className: "dnm-video-cut-tools"
         }, jsx("div", {
           className: "dnm-video-cut-zoom"
@@ -40059,7 +40062,8 @@
       playTooltip: 'Click or press P to play',
       pauseTooltip: 'Click or press P to pause',
       loopPlayTooltip: 'Click or press space to play the segment',
-      loopPauseTooltip: 'Click or press space to pause the segment'
+      loopPauseTooltip: 'Click or press space to pause the segment',
+      videoTooShortWarning: 'Imported video is shorter than the recommended minimum duration, which may lead to an unexpected result.'
     },
     classes: {},
     onRangeChange: function onRangeChange(points) {

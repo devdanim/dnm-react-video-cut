@@ -67,6 +67,7 @@ class App extends React.Component {
                             pauseTooltip: 'Click or press P to pause',
                             loopPlayTooltip: 'Click or press space to play the segment',
                             loopPauseTooltip: 'Click or press space to pause the segment',
+                            videoTooShortWarning: 'Imported video is shorter than the recommended minimum duration, which may lead to an unexpected result.',
                         }}
                         src={src || (type === 'audio' ? music : video)}
                         type={type}
