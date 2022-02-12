@@ -90,7 +90,7 @@ export default class DnmVideoCut extends React.Component {
     }
 
     getFormatedValues = (inPoint, outPoint, lastTarget = "in") => {
-        if(!inPoint) inPoint = this.props.inPoint;  
+        if(!inPoint) inPoint = this.props.inPoint;
         if(!outPoint) outPoint = this.props.outPoint;
         const { min, max } = this.getAcceptedDuration();
         const { videoDuration } = this.state;
@@ -108,7 +108,7 @@ export default class DnmVideoCut extends React.Component {
             }
         }
         format(lastTarget);
-        
+
         if(inValue < 0) {
             inValue = 0;
             format("in");
@@ -117,7 +117,7 @@ export default class DnmVideoCut extends React.Component {
             format("out");
         }
 
-        return { 
+        return {
             inValue,
             outValue
         }
@@ -139,7 +139,7 @@ export default class DnmVideoCut extends React.Component {
         const video = this.playerRef.current;
         if(video && (!video.paused || force)) {
             if(this.playLoop) {
-                const { inValue, outValue } = this.getFormatedValues(); 
+                const { inValue, outValue } = this.getFormatedValues();
                 const time = video.currentTime;
                 if(time < inValue || time > outValue) {
                     // console.log("Auto set current time", inValue);
@@ -211,7 +211,7 @@ export default class DnmVideoCut extends React.Component {
                 const posIcon = `${posLeft + (posRight - posLeft) / 2}%`;
                 return posIcon;
             }
-        } 
+        }
         return '0';
     }
 
@@ -349,7 +349,7 @@ export default class DnmVideoCut extends React.Component {
         // console.log("RENDER");
 
         return (
-            <div css={css`${styles}`}> 
+            <div css={css`${styles}`}>
                 <div className={`dnm-video-cut-root ${classes.root || ""} ${isPlaying ? "is-playing" : "is-paused"}`}>
                     {
                         type === 'audio' ? (
@@ -357,17 +357,17 @@ export default class DnmVideoCut extends React.Component {
                                 {
                                     !waveformIsReady && loader ? loader : null
                                 }
-                                <Waveform 
+                                <Waveform
                                     src={src}
                                     visible={waveformIsReady}
                                     position={playCursorPosition.xRatio}
                                     onPositionChange={this.handleWaveformPositionChange}
                                     onRangeChange={this.handleRangeChange}
                                     onWaveformReady={this.handleWaveformReady}
-                                    range={[inValue, outValue]} 
+                                    range={[inValue, outValue]}
                                     height={waveformHeight}
                                 />
-                                <audio 
+                                <audio
                                     className={`dnm-video-cut-audio-player ${classes.audioPlayer || ""}`}
                                     src={src}
                                     ref={this.handlePlayerLoad}
@@ -378,7 +378,7 @@ export default class DnmVideoCut extends React.Component {
                                 />
                             </React.Fragment>
                         ) : (
-                            <video 
+                            <video
                                 className={`dnm-video-cut-player ${classes.player || ""}`}
                                 src={src}
                                 ref={this.handlePlayerLoad}
@@ -418,7 +418,7 @@ export default class DnmVideoCut extends React.Component {
                                                     >
                                                         {isPlaying ? <PauseIcon /> : <LoopIcon /> }
                                                     </div>
-                                                ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop' })
+                                                ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop', context: {videoDuration} })
                                             }
                                         </div>
                                     </div>
