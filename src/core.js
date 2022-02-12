@@ -418,7 +418,7 @@ export default class DnmVideoCut extends React.Component {
                                                     >
                                                         {isPlaying ? <PauseIcon /> : <LoopIcon /> }
                                                     </div>
-                                                ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop', context: {videoDuration} })
+                                                ), { title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip, id: 'loop', context: {videoDuration, playCursorPosition, playerCursorWidth, zoomFactor} })
                                             }
                                         </div>
                                     </div>

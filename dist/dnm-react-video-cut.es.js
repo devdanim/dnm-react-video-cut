@@ -39955,7 +39955,10 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip,
         id: 'loop',
         context: {
-          videoDuration: videoDuration
+          videoDuration: videoDuration,
+          playCursorPosition: playCursorPosition,
+          playerCursorWidth: playerCursorWidth,
+          zoomFactor: zoomFactor
         }
       }))), jsx("div", {
         className: "dnm-video-cut-progress-container",
