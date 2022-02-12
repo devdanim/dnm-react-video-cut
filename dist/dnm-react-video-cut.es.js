@@ -39955,6 +39955,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip,
         id: 'loop',
         context: {
+          loopElPosition: loopElPosition,
           videoDuration: videoDuration,
           playCursorPosition: playCursorPosition,
           playerCursorWidth: playerCursorWidth,

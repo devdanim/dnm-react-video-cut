@@ -39973,6 +39973,7 @@
           title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip,
           id: 'loop',
           context: {
+            loopElPosition: loopElPosition,
             videoDuration: videoDuration,
             playCursorPosition: playCursorPosition,
             playerCursorWidth: playerCursorWidth,
