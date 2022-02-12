@@ -39958,7 +39958,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           videoDuration: videoDuration,
           playCursorPosition: playCursorPosition,
           playerCursorWidth: playerCursorWidth,
-          zoomFactor: zoomFactor
+          zoomFactor: zoomFactor,
+          inValue: inValue,
+          outValue: outValue
         }
       }))), jsx("div", {
         className: "dnm-video-cut-progress-container",
