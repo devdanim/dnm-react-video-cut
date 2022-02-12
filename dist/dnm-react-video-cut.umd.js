@@ -39971,7 +39971,10 @@
           onClick: this.handleLoopPlayClick
         }, isPlaying ? jsx(PauseIcon, null) : jsx(LoopIcon, null)), {
           title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip,
-          id: 'loop'
+          id: 'loop',
+          context: {
+            videoDuration: videoDuration
+          }
         }))), jsx("div", {
           className: "dnm-video-cut-progress-container",
           onTouchMove: this.handleContainerMouseDown,
