@@ -457,7 +457,8 @@ export default class DnmVideoCut extends React.Component {
                             </div>
                         </div>
                         {
-                            outValue - inValue < (parseFloat(minDuration) || 0) ? (
+                            // +0.001 needed to fix weird round bug
+                            outValue - inValue + 0.001 < (parseFloat(minDuration) || 0) ? (
                                 <div>
                                     <p className="dnm-video-cut-too-short-warning">{ catalogue.videoTooShortWarning }</p>
                                 </div>

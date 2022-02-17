@@ -39991,7 +39991,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleRangeChange,
         onBeforeChange: this.handleBeforeRangeChange,
         onAfterChange: this.handleAfterRangeChange
-      }))))), outValue - inValue < (parseFloat(minDuration) || 0) ? jsx("div", null, jsx("p", {
+      }))))), // +0.001 needed to fix weird round bug
+      outValue - inValue + 0.001 < (parseFloat(minDuration) || 0) ? jsx("div", null, jsx("p", {
         className: "dnm-video-cut-too-short-warning"
       }, catalogue.videoTooShortWarning)) : null, jsx("div", {
         className: "dnm-video-cut-tools"
