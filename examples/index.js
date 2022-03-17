@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import DnmVideoCut from '../dist/dnm-react-video-cut.es';
-import video from './video.mp4';
+import video from './video.MOV';
 import music from './music.wav';
 
 class App extends React.Component {

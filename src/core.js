@@ -264,6 +264,15 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
+    // Used only by video to check if format is supported. H265 will not throw handlePlayerError but video track can't be played
+    handleLoadedMetadata = (event) => {
+        const { videoHeight } = event.target;
+        if (videoHeight === 0) {
+            const { onNotSupportedVideoLoad } = this.props;
+            if (onNotSupportedVideoLoad) onNotSupportedVideoLoad(`Video format is not supported`);
+        }
+    }
+
     handleRangeChange = (value, force = false) => {
         if (!this.rangeDisabled || force) {
             const { onRangeChange, outPoint } = this.props;
@@ -386,6 +395,7 @@ export default class DnmVideoCut extends React.Component {
                                 muted={muted}
                                 controls={false}
                                 onLoadedData={this.handleLoadedData}
+                                onLoadedMetadata={this.handleLoadedMetadata}
                                 onError={this.handlePlayerError}
                                 preload="auto"
                             />

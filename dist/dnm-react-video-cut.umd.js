@@ -39684,6 +39684,15 @@
         }
       });
 
+      _defineProperty(_assertThisInitialized(_this), "handleLoadedMetadata", function (event) {
+        var videoHeight = event.target.videoHeight;
+
+        if (videoHeight === 0) {
+          var onNotSupportedVideoLoad = _this.props.onNotSupportedVideoLoad;
+          if (onNotSupportedVideoLoad) onNotSupportedVideoLoad("Video format is not supported");
+        }
+      });
+
       _defineProperty(_assertThisInitialized(_this), "handleRangeChange", function (value) {
         var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
@@ -39938,6 +39947,7 @@
           muted: muted,
           controls: false,
           onLoadedData: this.handleLoadedData,
+          onLoadedMetadata: this.handleLoadedMetadata,
           onError: this.handlePlayerError,
           preload: "auto"
         }), jsx("div", {
