@@ -12,8 +12,9 @@ const external = {
         'react-dom',
         'prop-types',
         'lodash-es/throttle',
+        'dnm-react-smartcroppr'
     ],
-    umd: ['react', 'react-dom', 'prop-types']
+    umd: ['react', 'react-dom', 'prop-types', 'dnm-react-smartcroppr']
 };
 
 const rollupConfig = ['es', 'umd'].map(format => ({
@@ -26,6 +27,7 @@ const rollupConfig = ['es', 'umd'].map(format => ({
             react: 'React',
             'react-dom': 'ReactDOM',
             'prop-types': 'PropTypes',
+            'dnm-react-smartcroppr': 'SmartCroppr'
         } : null
     },
     external: external[format],

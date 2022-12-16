@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import { css, jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
-import SmartCroppr from '../../dnm-react-smartcroppr';
+import SmartCroppr from 'dnm-react-smartcroppr';
 import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
