@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "1.2.30",
+  "version": "2.0.0",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -59,6 +59,7 @@
   "dependencies": {
     "@dschoon/react-waves": "^4.0.3",
     "@emotion/react": "^11.1.4",
+    "dnm-react-smartcroppr": "^1.5.1",
     "lodash-es": "^4.17.20",
     "rc-slider": "^9.2.2"
   }

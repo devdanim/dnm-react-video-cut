@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import { css, jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
 import Slider from 'rc-slider';
+import SmartCroppr from '../../dnm-react-smartcroppr';
 import styles from './css/styles';
 import Draggable from './lib/draggable';
 import PlayIcon from './lib/svg/play';
@@ -74,7 +75,6 @@ export default class DnmVideoCut extends React.Component {
     _seekVideoTo(time) {
         if (!isNaN(time)) {
             const video = this.playerRef.current;
-            // console.log("Seek to", time);
             if(video) video.currentTime = time;
         }
     }
@@ -142,7 +142,6 @@ export default class DnmVideoCut extends React.Component {
                 const { inValue, outValue } = this.getFormatedValues();
                 const time = video.currentTime;
                 if(time < inValue || time > outValue) {
-                    // console.log("Auto set current time", inValue);
                     video.currentTime = inValue;
                 }
             }
@@ -153,7 +152,6 @@ export default class DnmVideoCut extends React.Component {
     playVideo = () => {
         const video = this.playerRef.current;
         if(video) {
-            // console.log("PLAY", video.currentTime);
             video.play();
         }
         this.setState({ isPlaying: true });
@@ -162,7 +160,6 @@ export default class DnmVideoCut extends React.Component {
     pauseVideo = () => {
         const video = this.playerRef.current;
         if(video) {
-            // console.log("PAUSE", video.currentTime);
             video.pause();
         }
         this.setState({ isPlaying: false });
@@ -219,14 +216,6 @@ export default class DnmVideoCut extends React.Component {
         this.setState({ waveformIsReady: true });
     }
 
-    handlePlayerError = event => {
-        const { error } = event.target;
-        if (error && error.code === 4) {
-            const { onNotSupportedVideoLoad } = this.props;
-            if (onNotSupportedVideoLoad) onNotSupportedVideoLoad(error.message);
-        }
-    }
-
     handleDraggableApiMount = (api) => this.draggableApi = api;
 
     handleKeyPress = event => {
@@ -240,16 +229,18 @@ export default class DnmVideoCut extends React.Component {
     }
 
     handlePlayerLoad = (ref) => {
-        // console.log(ref);
         this.playerRef = { current: ref };
         const video = this.playerRef.current;
         if (video) {
-            // console.log("Add timeupdate listener", video);  
             video.addEventListener('timeupdate', () => {
-                // console.log("timeupdate");
                 this.monitorAutoplay();
             }, false);
         }
+    }
+
+    handleVideoPlayerLoad = (cropprInstance, videoNode) => {
+        this.handlePlayerLoad(videoNode);
+        this.handleLoadedData();
     }
 
     handleLoadedData = () => {
@@ -261,15 +252,6 @@ export default class DnmVideoCut extends React.Component {
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
             if (onVideoLoadedData) onVideoLoadedData(video);
-        }
-    }
-
-    // Used only by video to check if format is supported. H265 will not throw handlePlayerError but video track can't be played
-    handleLoadedMetadata = (event) => {
-        const { videoHeight } = event.target;
-        if (videoHeight === 0) {
-            const { onNotSupportedVideoLoad } = this.props;
-            if (onNotSupportedVideoLoad) onNotSupportedVideoLoad(`Video format is not supported`);
         }
     }
 
@@ -351,11 +333,9 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormatedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, waveformIsReady, } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, } = this.props;
+        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, smartCropprProps, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
-
-        // console.log("RENDER");
 
         return (
             <div css={css`${styles}`}>
@@ -387,17 +367,11 @@ export default class DnmVideoCut extends React.Component {
                                 />
                             </React.Fragment>
                         ) : (
-                            <video
-                                className={`dnm-video-cut-player ${classes.player || ""}`}
+                            <SmartCroppr
+                                { ...(smartCropprProps || {}) }
+                                onMediaLoad={this.handleVideoPlayerLoad}
+                                mediaType="video"
                                 src={src}
-                                ref={this.handlePlayerLoad}
-                                loop
-                                muted={muted}
-                                controls={false}
-                                onLoadedData={this.handleLoadedData}
-                                onLoadedMetadata={this.handleLoadedMetadata}
-                                onError={this.handlePlayerError}
-                                preload="auto"
                             />
                         )
                     }
@@ -518,11 +492,9 @@ DnmVideoCut.propTypes = {
     catalogue: PropTypes.object,
     classes: PropTypes.shape({
         root: PropTypes.string,
-        player: PropTypes.string,
         range: PropTypes.string,
     }),
     onRangeChange: PropTypes.func.isRequired,
-    onNotSupportedVideoLoad: PropTypes.func,
     onVideoLoadedData: PropTypes.func,
     src: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['audio', 'video']),
@@ -537,6 +509,7 @@ DnmVideoCut.propTypes = {
         PropTypes.func,
         PropTypes.number,
     ]),
+    smartCropprProps: PropTypes.object.isRequired,
     waveformHeight: PropTypes.number,
     tooltipRenderer: PropTypes.func,
 };
@@ -552,7 +525,6 @@ DnmVideoCut.defaultProps = {
     },
     classes: {},
     onRangeChange: points => null,
-    onNotSupportedVideoLoad: errMsg => null,
     onVideoLoadedData: video => null,
     inPoint: 0,
     outPoint: 0,

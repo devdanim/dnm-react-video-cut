@@ -76,7 +76,26 @@ class App extends React.Component {
                         minDuration={4}
                         onRangeChange={this.handleRangeChange}
                         onMuteChange={this.handleMuteChange}
-                        onNotSupportedVideoLoad={(err) => console.error("Video source not supported", err)}
+                        smartCropprProps={{
+                            aspectRatio: 2,
+                            debug: true,
+                            maxAspectRatio: 1,
+                            mode: 'real',
+                            onCropEnd: data => console.log('onCropEnd', data),
+                            onCropMove: data => console.log('onCropMove', data),
+                            onCropStart: data => console.log('onCropStart', data),
+                            onInit: (instance, mediaNode) => {
+                                console.log('onInit', instance, mediaNode);
+                            },
+                            onNotSupportedVideoLoad: (err) => console.error("Video source not supported", err),
+                            smartCrop: true,
+                            smartCropOptions: {
+                                minScale: 1,
+                                onSmartCropDone: (data) => {
+                                    console.log("Smartcrop", data)
+                                }
+                            }
+                        }}
                     />
                 </div>
             </React.Fragment>
