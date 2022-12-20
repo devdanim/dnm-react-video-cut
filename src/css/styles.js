@@ -259,12 +259,6 @@ export default css`
     border-width: 4px 4px 0;
     border-top-color: #6c6c6c;
   }
-  
-  .dnm-video-cut-player {
-    opacity: 1;
-    width: 100%;
-    max-height: 60vh;
-  }
 
   .dnm-video-cut-audio-player {
     display: none;
