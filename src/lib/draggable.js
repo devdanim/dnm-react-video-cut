@@ -109,7 +109,7 @@ export default class Draggable extends React.Component {
                 currentY = 0;
             }
 
-            if(forceDragEnd === true) this.handleDragEnd();
+            if(forceDragEnd === true) this.handleDragEnd(e);
 
             this.updateState({ 
                 xRatio: currentX / containerWidth, 
