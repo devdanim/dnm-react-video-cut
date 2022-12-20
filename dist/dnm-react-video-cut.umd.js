@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom'), require('prop-types'), require('dnm-react-smartcroppr')) :
-  typeof define === 'function' && define.amd ? define(['react', 'react-dom', 'prop-types', 'dnm-react-smartcroppr'], factory) :
-  (global = global || self, global.DnmVideoCut = factory(global.React, global.ReactDOM, global.PropTypes, global.SmartCroppr));
-}(this, (function (React, ReactDOM, PropTypes, SmartCroppr) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom'), require('@emotion/react'), require('prop-types'), require('dnm-react-smartcroppr')) :
+  typeof define === 'function' && define.amd ? define(['react', 'react-dom', '@emotion/react', 'prop-types', 'dnm-react-smartcroppr'], factory) :
+  (global = global || self, global.DnmVideoCut = factory(global.React, global.ReactDOM, global.jsx, global.PropTypes, global.SmartCroppr));
+}(this, (function (React, ReactDOM, react, PropTypes, SmartCroppr) { 'use strict';
 
   var React__default = 'default' in React ? React['default'] : React;
   var ReactDOM__default = 'default' in ReactDOM ? ReactDOM['default'] : ReactDOM;
@@ -157,532 +157,6 @@
     }));
   }
 
-  /*
-
-  Based off glamor's StyleSheet, thanks Sunil ❤️
-
-  high performance StyleSheet for css-in-js systems
-
-  - uses multiple style tags behind the scenes for millions of rules
-  - uses `insertRule` for appending in production for *much* faster performance
-
-  // usage
-
-  import { StyleSheet } from '@emotion/sheet'
-
-  let styleSheet = new StyleSheet({ key: '', container: document.head })
-
-  styleSheet.insert('#box { border: 1px solid red; }')
-  - appends a css rule into the stylesheet
-
-  styleSheet.flush()
-  - empties the stylesheet of all its contents
-
-  */
-  // $FlowFixMe
-  function sheetForTag(tag) {
-    if (tag.sheet) {
-      // $FlowFixMe
-      return tag.sheet;
-    } // this weirdness brought to you by firefox
-
-    /* istanbul ignore next */
-
-
-    for (var i = 0; i < document.styleSheets.length; i++) {
-      if (document.styleSheets[i].ownerNode === tag) {
-        // $FlowFixMe
-        return document.styleSheets[i];
-      }
-    }
-  }
-
-  function createStyleElement(options) {
-    var tag = document.createElement('style');
-    tag.setAttribute('data-emotion', options.key);
-
-    if (options.nonce !== undefined) {
-      tag.setAttribute('nonce', options.nonce);
-    }
-
-    tag.appendChild(document.createTextNode(''));
-    tag.setAttribute('data-s', '');
-    return tag;
-  }
-
-  var StyleSheet = /*#__PURE__*/function () {
-    function StyleSheet(options) {
-      var _this = this;
-
-      this._insertTag = function (tag) {
-        var before;
-
-        if (_this.tags.length === 0) {
-          before = _this.prepend ? _this.container.firstChild : _this.before;
-        } else {
-          before = _this.tags[_this.tags.length - 1].nextSibling;
-        }
-
-        _this.container.insertBefore(tag, before);
-
-        _this.tags.push(tag);
-      };
-
-      this.isSpeedy = options.speedy === undefined ? process.env.NODE_ENV === 'production' : options.speedy;
-      this.tags = [];
-      this.ctr = 0;
-      this.nonce = options.nonce; // key is the value of the data-emotion attribute, it's used to identify different sheets
-
-      this.key = options.key;
-      this.container = options.container;
-      this.prepend = options.prepend;
-      this.before = null;
-    }
-
-    var _proto = StyleSheet.prototype;
-
-    _proto.hydrate = function hydrate(nodes) {
-      nodes.forEach(this._insertTag);
-    };
-
-    _proto.insert = function insert(rule) {
-      // the max length is how many rules we have per style tag, it's 65000 in speedy mode
-      // it's 1 in dev because we insert source maps that map a single rule to a location
-      // and you can only have one source map per style tag
-      if (this.ctr % (this.isSpeedy ? 65000 : 1) === 0) {
-        this._insertTag(createStyleElement(this));
-      }
-
-      var tag = this.tags[this.tags.length - 1];
-
-      if (process.env.NODE_ENV !== 'production') {
-        var isImportRule = rule.charCodeAt(0) === 64 && rule.charCodeAt(1) === 105;
-
-        if (isImportRule && this._alreadyInsertedOrderInsensitiveRule) {
-          // this would only cause problem in speedy mode
-          // but we don't want enabling speedy to affect the observable behavior
-          // so we report this error at all times
-          console.error("You're attempting to insert the following rule:\n" + rule + '\n\n`@import` rules must be before all other types of rules in a stylesheet but other rules have already been inserted. Please ensure that `@import` rules are before all other rules.');
-        }
-        this._alreadyInsertedOrderInsensitiveRule = this._alreadyInsertedOrderInsensitiveRule || !isImportRule;
-      }
-
-      if (this.isSpeedy) {
-        var sheet = sheetForTag(tag);
-
-        try {
-          // this is the ultrafast version, works across browsers
-          // the big drawback is that the css won't be editable in devtools
-          sheet.insertRule(rule, sheet.cssRules.length);
-        } catch (e) {
-          if (process.env.NODE_ENV !== 'production' && !/:(-moz-placeholder|-ms-input-placeholder|-moz-read-write|-moz-read-only){/.test(rule)) {
-            console.error("There was a problem inserting the following rule: \"" + rule + "\"", e);
-          }
-        }
-      } else {
-        tag.appendChild(document.createTextNode(rule));
-      }
-
-      this.ctr++;
-    };
-
-    _proto.flush = function flush() {
-      // $FlowFixMe
-      this.tags.forEach(function (tag) {
-        return tag.parentNode.removeChild(tag);
-      });
-      this.tags = [];
-      this.ctr = 0;
-
-      if (process.env.NODE_ENV !== 'production') {
-        this._alreadyInsertedOrderInsensitiveRule = false;
-      }
-    };
-
-    return StyleSheet;
-  }();
-
-  var e="-ms-";var r="-moz-";var a="-webkit-";var c="comm";var n="rule";var t="decl";var i="@import";var p="@keyframes";var k=Math.abs;var d=String.fromCharCode;function m(e,r){return (((r<<2^z(e,0))<<2^z(e,1))<<2^z(e,2))<<2^z(e,3)}function g(e){return e.trim()}function x(e,r){return (e=r.exec(e))?e[0]:e}function y(e,r,a){return e.replace(r,a)}function j(e,r){return e.indexOf(r)}function z(e,r){return e.charCodeAt(r)|0}function C(e,r,a){return e.slice(r,a)}function A(e){return e.length}function M(e){return e.length}function O(e,r){return r.push(e),e}function S(e,r){return e.map(r).join("")}var q=1;var B=1;var D=0;var E=0;var F=0;var G="";function H(e,r,a,c,n,t,s){return {value:e,root:r,parent:a,type:c,props:n,children:t,line:q,column:B,length:s,return:""}}function I(e,r,a){return H(e,r.root,r.parent,a,r.props,r.children,0)}function J(){return F}function K(){F=E<D?z(G,E++):0;if(B++,F===10)B=1,q++;return F}function L(){return z(G,E)}function N(){return E}function P(e,r){return C(G,e,r)}function Q(e){switch(e){case 0:case 9:case 10:case 13:case 32:return 5;case 33:case 43:case 44:case 47:case 62:case 64:case 126:case 59:case 123:case 125:return 4;case 58:return 3;case 34:case 39:case 40:case 91:return 2;case 41:case 93:return 1}return 0}function R(e){return q=B=1,D=A(G=e),E=0,[]}function T(e){return G="",e}function U(e){return g(P(E-1,Y(e===91?e+2:e===40?e+1:e)))}function W(e){while(F=L())if(F<33)K();else break;return Q(e)>2||Q(F)>3?"":" "}function Y(e){while(K())switch(F){case e:return E;case 34:case 39:return Y(e===34||e===39?e:F);case 40:if(e===41)Y(e);break;case 92:K();break}return E}function Z(e,r){while(K())if(e+F===47+10)break;else if(e+F===42+42&&L()===47)break;return "/*"+P(r,E-1)+"*"+d(e===47?e:K())}function _(e){while(!Q(L()))K();return P(e,E)}function ee(e){return T(re("",null,null,null,[""],e=R(e),0,[0],e))}function re(e,r,a,c,n,t,s,u,i){var f=0;var o=0;var l=s;var v=0;var h=0;var p=0;var w=1;var b=1;var $=1;var k=0;var m="";var g=n;var x=t;var j=c;var z=m;while(b)switch(p=k,k=K()){case 34:case 39:case 91:case 40:z+=U(k);break;case 9:case 10:case 13:case 32:z+=W(p);break;case 47:switch(L()){case 42:case 47:O(ce(Z(K(),N()),r,a),i);break;default:z+="/";}break;case 123*w:u[f++]=A(z)*$;case 125*w:case 59:case 0:switch(k){case 0:case 125:b=0;case 59+o:if(h>0)O(h>32?ne(z+";",c,a,l-1):ne(y(z," ","")+";",c,a,l-2),i);break;case 59:z+=";";default:O(j=ae(z,r,a,f,o,n,u,m,g=[],x=[],l),t);if(k===123)if(o===0)re(z,r,j,j,g,t,l,u,x);else switch(v){case 100:case 109:case 115:re(e,j,j,c&&O(ae(e,j,j,0,0,n,u,m,n,g=[],l),x),n,x,l,u,c?g:x);break;default:re(z,j,j,j,[""],x,l,u,x);}}f=o=h=0,w=$=1,m=z="",l=s;break;case 58:l=1+A(z),h=p;default:switch(z+=d(k),k*w){case 38:$=o>0?1:(z+="\f",-1);break;case 44:u[f++]=(A(z)-1)*$,$=1;break;case 64:if(L()===45)z+=U(K());v=L(),o=A(m=z+=_(N())),k++;break;case 45:if(p===45&&A(z)==2)w=0;}}return t}function ae(e,r,a,c,t,s,u,i,f,o,l){var v=t-1;var h=t===0?s:[""];var p=M(h);for(var w=0,b=0,$=0;w<c;++w)for(var d=0,m=C(e,v+1,v=k(b=u[w])),x=e;d<p;++d)if(x=g(b>0?h[d]+" "+m:y(m,/&\f/g,h[d])))f[$++]=x;return H(e,r,a,t===0?n:i,f,o,l)}function ce(e,r,a){return H(e,r,a,c,d(J()),C(e,2,-2),0)}function ne(e,r,a,c){return H(e,r,a,t,C(e,0,c),C(e,c+1,-1),c)}function te(c,n){switch(m(c,n)){case 5737:case 4201:case 3177:case 3433:case 1641:case 4457:case 2921:case 5572:case 6356:case 5844:case 3191:case 6645:case 3005:case 6391:case 5879:case 5623:case 6135:case 4599:case 4855:case 4215:case 6389:case 5109:case 5365:case 5621:case 3829:return a+c+c;case 5349:case 4246:case 4810:case 6968:case 2756:return a+c+r+c+e+c+c;case 6828:case 4268:return a+c+e+c+c;case 6165:return a+c+e+"flex-"+c+c;case 5187:return a+c+y(c,/(\w+).+(:[^]+)/,a+"box-$1$2"+e+"flex-$1$2")+c;case 5443:return a+c+e+"flex-item-"+y(c,/flex-|-self/,"")+c;case 4675:return a+c+e+"flex-line-pack"+y(c,/align-content|flex-|-self/,"")+c;case 5548:return a+c+e+y(c,"shrink","negative")+c;case 5292:return a+c+e+y(c,"basis","preferred-size")+c;case 6060:return a+"box-"+y(c,"-grow","")+a+c+e+y(c,"grow","positive")+c;case 4554:return a+y(c,/([^-])(transform)/g,"$1"+a+"$2")+c;case 6187:return y(y(y(c,/(zoom-|grab)/,a+"$1"),/(image-set)/,a+"$1"),c,"")+c;case 5495:case 3959:return y(c,/(image-set\([^]*)/,a+"$1"+"$`$1");case 4968:return y(y(c,/(.+:)(flex-)?(.*)/,a+"box-pack:$3"+e+"flex-pack:$3"),/s.+-b[^;]+/,"justify")+a+c+c;case 4095:case 3583:case 4068:case 2532:return y(c,/(.+)-inline(.+)/,a+"$1$2")+c;case 8116:case 7059:case 5753:case 5535:case 5445:case 5701:case 4933:case 4677:case 5533:case 5789:case 5021:case 4765:if(A(c)-1-n>6)switch(z(c,n+1)){case 102:n=z(c,n+3);case 109:return y(c,/(.+:)(.+)-([^]+)/,"$1"+a+"$2-$3"+"$1"+r+(n==108?"$3":"$2-$3"))+c;case 115:return ~j(c,"stretch")?te(y(c,"stretch","fill-available"),n)+c:c}break;case 4949:if(z(c,n+1)!==115)break;case 6444:switch(z(c,A(c)-3-(~j(c,"!important")&&10))){case 107:case 111:return y(c,c,a+c)+c;case 101:return y(c,/(.+:)([^;!]+)(;|!.+)?/,"$1"+a+(z(c,14)===45?"inline-":"")+"box$3"+"$1"+a+"$2$3"+"$1"+e+"$2box$3")+c}break;case 5936:switch(z(c,n+11)){case 114:return a+c+e+y(c,/[svh]\w+-[tblr]{2}/,"tb")+c;case 108:return a+c+e+y(c,/[svh]\w+-[tblr]{2}/,"tb-rl")+c;case 45:return a+c+e+y(c,/[svh]\w+-[tblr]{2}/,"lr")+c}return a+c+e+c+c}return c}function se(e,r){var a="";var c=M(e);for(var n=0;n<c;n++)a+=r(e[n],n,e,r)||"";return a}function ue(e,r,a,s){switch(e.type){case i:case t:return e.return=e.return||e.value;case c:return "";case n:e.value=e.props.join(",");}return A(a=se(e.children,s))?e.return=e.value+"{"+a+"}":""}function ie(e){var r=M(e);return function(a,c,n,t){var s="";for(var u=0;u<r;u++)s+=e[u](a,c,n,t)||"";return s}}function fe(e){return function(r){if(!r.root)if(r=r.return)e(r);}}function oe(c,s,u,i){if(!c.return)switch(c.type){case t:c.return=te(c.value,c.length);break;case p:return se([I(y(c.value,"@","@"+a),c,"")],i);case n:if(c.length)return S(c.props,(function(n){switch(x(n,/(::plac\w+|:read-\w+)/)){case":read-only":case":read-write":return se([I(y(n,/:(read-\w+)/,":"+r+"$1"),c,"")],i);case"::placeholder":return se([I(y(n,/:(plac\w+)/,":"+a+"input-$1"),c,""),I(y(n,/:(plac\w+)/,":"+r+"$1"),c,""),I(y(n,/:(plac\w+)/,e+"input-$1"),c,"")],i)}return ""}))}}
-
-  var weakMemoize = function weakMemoize(func) {
-    // $FlowFixMe flow doesn't include all non-primitive types as allowed for weakmaps
-    var cache = new WeakMap();
-    return function (arg) {
-      if (cache.has(arg)) {
-        // $FlowFixMe
-        return cache.get(arg);
-      }
-
-      var ret = func(arg);
-      cache.set(arg, ret);
-      return ret;
-    };
-  };
-
-  function memoize(fn) {
-    var cache = {};
-    return function (arg) {
-      if (cache[arg] === undefined) cache[arg] = fn(arg);
-      return cache[arg];
-    };
-  }
-
-  var last = function last(arr) {
-    return arr.length ? arr[arr.length - 1] : null;
-  };
-
-  var toRules = function toRules(parsed, points) {
-    // pretend we've started with a comma
-    var index = -1;
-    var character = 44;
-
-    do {
-      switch (Q(character)) {
-        case 0:
-          // &\f
-          if (character === 38 && L() === 12) {
-            // this is not 100% correct, we don't account for literal sequences here - like for example quoted strings
-            // stylis inserts \f after & to know when & where it should replace this sequence with the context selector
-            // and when it should just concatenate the outer and inner selectors
-            // it's very unlikely for this sequence to actually appear in a different context, so we just leverage this fact here
-            points[index] = 1;
-          }
-
-          parsed[index] += _(E - 1);
-          break;
-
-        case 2:
-          parsed[index] += U(character);
-          break;
-
-        case 4:
-          // comma
-          if (character === 44) {
-            // colon
-            parsed[++index] = L() === 58 ? '&\f' : '';
-            points[index] = parsed[index].length;
-            break;
-          }
-
-        // fallthrough
-
-        default:
-          parsed[index] += d(character);
-      }
-    } while (character = K());
-
-    return parsed;
-  };
-
-  var getRules = function getRules(value, points) {
-    return T(toRules(R(value), points));
-  }; // WeakSet would be more appropriate, but only WeakMap is supported in IE11
-
-
-  var fixedElements = /* #__PURE__ */new WeakMap();
-  var compat = function compat(element) {
-    if (element.type !== 'rule' || !element.parent || // .length indicates if this rule contains pseudo or not
-    !element.length) {
-      return;
-    }
-
-    var value = element.value,
-        parent = element.parent;
-    var isImplicitRule = element.column === parent.column && element.line === parent.line;
-
-    while (parent.type !== 'rule') {
-      parent = parent.parent;
-      if (!parent) return;
-    } // short-circuit for the simplest case
-
-
-    if (element.props.length === 1 && value.charCodeAt(0) !== 58
-    /* colon */
-    && !fixedElements.get(parent)) {
-      return;
-    } // if this is an implicitly inserted rule (the one eagerly inserted at the each new nested level)
-    // then the props has already been manipulated beforehand as they that array is shared between it and its "rule parent"
-
-
-    if (isImplicitRule) {
-      return;
-    }
-
-    fixedElements.set(element, true);
-    var points = [];
-    var rules = getRules(value, points);
-    var parentRules = parent.props;
-
-    for (var i = 0, k = 0; i < rules.length; i++) {
-      for (var j = 0; j < parentRules.length; j++, k++) {
-        element.props[k] = points[i] ? rules[i].replace(/&\f/g, parentRules[j]) : parentRules[j] + " " + rules[i];
-      }
-    }
-  };
-  var removeLabel = function removeLabel(element) {
-    if (element.type === 'decl') {
-      var value = element.value;
-
-      if ( // charcode for l
-      value.charCodeAt(0) === 108 && // charcode for b
-      value.charCodeAt(2) === 98) {
-        // this ignores label
-        element["return"] = '';
-        element.value = '';
-      }
-    }
-  };
-  var ignoreFlag = 'emotion-disable-server-rendering-unsafe-selector-warning-please-do-not-use-this-the-warning-exists-for-a-reason';
-
-  var isIgnoringComment = function isIgnoringComment(element) {
-    return !!element && element.type === 'comm' && element.children.indexOf(ignoreFlag) > -1;
-  };
-
-  var createUnsafeSelectorsAlarm = function createUnsafeSelectorsAlarm(cache) {
-    return function (element, index, children) {
-      if (element.type !== 'rule') return;
-      var unsafePseudoClasses = element.value.match(/(:first|:nth|:nth-last)-child/g);
-
-      if (unsafePseudoClasses && cache.compat !== true) {
-        var prevElement = index > 0 ? children[index - 1] : null;
-
-        if (prevElement && isIgnoringComment(last(prevElement.children))) {
-          return;
-        }
-
-        unsafePseudoClasses.forEach(function (unsafePseudoClass) {
-          console.error("The pseudo class \"" + unsafePseudoClass + "\" is potentially unsafe when doing server-side rendering. Try changing it to \"" + unsafePseudoClass.split('-child')[0] + "-of-type\".");
-        });
-      }
-    };
-  };
-
-  var isImportRule = function isImportRule(element) {
-    return element.type.charCodeAt(1) === 105 && element.type.charCodeAt(0) === 64;
-  };
-
-  var isPrependedWithRegularRules = function isPrependedWithRegularRules(index, children) {
-    for (var i = index - 1; i >= 0; i--) {
-      if (!isImportRule(children[i])) {
-        return true;
-      }
-    }
-
-    return false;
-  }; // use this to remove incorrect elements from further processing
-  // so they don't get handed to the `sheet` (or anything else)
-  // as that could potentially lead to additional logs which in turn could be overhelming to the user
-
-
-  var nullifyElement = function nullifyElement(element) {
-    element.type = '';
-    element.value = '';
-    element["return"] = '';
-    element.children = '';
-    element.props = '';
-  };
-
-  var incorrectImportAlarm = function incorrectImportAlarm(element, index, children) {
-    if (!isImportRule(element)) {
-      return;
-    }
-
-    if (element.parent) {
-      console.error("`@import` rules can't be nested inside other rules. Please move it to the top level and put it before regular rules. Keep in mind that they can only be used within global styles.");
-      nullifyElement(element);
-    } else if (isPrependedWithRegularRules(index, children)) {
-      console.error("`@import` rules can't be after other rules. Please put your `@import` rules before your other rules.");
-      nullifyElement(element);
-    }
-  };
-
-  var isBrowser = typeof document !== 'undefined';
-  var getServerStylisCache = isBrowser ? undefined : weakMemoize(function () {
-    return memoize(function () {
-      var cache = {};
-      return function (name) {
-        return cache[name];
-      };
-    });
-  });
-  var defaultStylisPlugins = [oe];
-
-  var createCache = function createCache(options) {
-    var key = options.key;
-
-    if (process.env.NODE_ENV !== 'production' && !key) {
-      throw new Error("You have to configure `key` for your cache. Please make sure it's unique (and not equal to 'css') as it's used for linking styles to your cache.\n" + "If multiple caches share the same key they might \"fight\" for each other's style elements.");
-    }
-
-    if (isBrowser && key === 'css') {
-      var ssrStyles = document.querySelectorAll("style[data-emotion]:not([data-s])"); // get SSRed styles out of the way of React's hydration
-      // document.head is a safe place to move them to
-
-      Array.prototype.forEach.call(ssrStyles, function (node) {
-        document.head.appendChild(node);
-        node.setAttribute('data-s', '');
-      });
-    }
-
-    var stylisPlugins = options.stylisPlugins || defaultStylisPlugins;
-
-    if (process.env.NODE_ENV !== 'production') {
-      // $FlowFixMe
-      if (/[^a-z-]/.test(key)) {
-        throw new Error("Emotion key must only contain lower case alphabetical characters and - but \"" + key + "\" was passed");
-      }
-    }
-
-    var inserted = {}; // $FlowFixMe
-
-    var container;
-    var nodesToHydrate = [];
-
-    if (isBrowser) {
-      container = options.container || document.head;
-      Array.prototype.forEach.call(document.querySelectorAll("style[data-emotion]"), function (node) {
-        var attrib = node.getAttribute("data-emotion").split(' ');
-
-        if (attrib[0] !== key) {
-          return;
-        } // $FlowFixMe
-
-
-        for (var i = 1; i < attrib.length; i++) {
-          inserted[attrib[i]] = true;
-        }
-
-        nodesToHydrate.push(node);
-      });
-    }
-
-    var _insert;
-
-    var omnipresentPlugins = [compat, removeLabel];
-
-    if (process.env.NODE_ENV !== 'production') {
-      omnipresentPlugins.push(createUnsafeSelectorsAlarm({
-        get compat() {
-          return cache.compat;
-        }
-
-      }), incorrectImportAlarm);
-    }
-
-    if (isBrowser) {
-      var currentSheet;
-      var finalizingPlugins = [ue, process.env.NODE_ENV !== 'production' ? function (element) {
-        if (!element.root) {
-          if (element["return"]) {
-            currentSheet.insert(element["return"]);
-          } else if (element.value && element.type !== c) {
-            // insert empty rule in non-production environments
-            // so @emotion/jest can grab `key` from the (JS)DOM for caches without any rules inserted yet
-            currentSheet.insert(element.value + "{}");
-          }
-        }
-      } : fe(function (rule) {
-        currentSheet.insert(rule);
-      })];
-      var serializer = ie(omnipresentPlugins.concat(stylisPlugins, finalizingPlugins));
-
-      var stylis = function stylis(styles) {
-        return se(ee(styles), serializer);
-      };
-
-      _insert = function insert(selector, serialized, sheet, shouldCache) {
-        currentSheet = sheet;
-
-        if (process.env.NODE_ENV !== 'production' && serialized.map !== undefined) {
-          currentSheet = {
-            insert: function insert(rule) {
-              sheet.insert(rule + serialized.map);
-            }
-          };
-        }
-
-        stylis(selector ? selector + "{" + serialized.styles + "}" : serialized.styles);
-
-        if (shouldCache) {
-          cache.inserted[serialized.name] = true;
-        }
-      };
-    } else {
-      var _finalizingPlugins = [ue];
-
-      var _serializer = ie(omnipresentPlugins.concat(stylisPlugins, _finalizingPlugins));
-
-      var _stylis = function _stylis(styles) {
-        return se(ee(styles), _serializer);
-      }; // $FlowFixMe
-
-
-      var serverStylisCache = getServerStylisCache(stylisPlugins)(key);
-
-      var getRules = function getRules(selector, serialized) {
-        var name = serialized.name;
-
-        if (serverStylisCache[name] === undefined) {
-          serverStylisCache[name] = _stylis(selector ? selector + "{" + serialized.styles + "}" : serialized.styles);
-        }
-
-        return serverStylisCache[name];
-      };
-
-      _insert = function _insert(selector, serialized, sheet, shouldCache) {
-        var name = serialized.name;
-        var rules = getRules(selector, serialized);
-
-        if (cache.compat === undefined) {
-          // in regular mode, we don't set the styles on the inserted cache
-          // since we don't need to and that would be wasting memory
-          // we return them so that they are rendered in a style tag
-          if (shouldCache) {
-            cache.inserted[name] = true;
-          }
-
-          if ( // using === development instead of !== production
-          // because if people do ssr in tests, the source maps showing up would be annoying
-          process.env.NODE_ENV === 'development' && serialized.map !== undefined) {
-            return rules + serialized.map;
-          }
-
-          return rules;
-        } else {
-          // in compat mode, we put the styles on the inserted cache so
-          // that emotion-server can pull out the styles
-          // except when we don't want to cache it which was in Global but now
-          // is nowhere but we don't want to do a major right now
-          // and just in case we're going to leave the case here
-          // it's also not affecting client side bundle size
-          // so it's really not a big deal
-          if (shouldCache) {
-            cache.inserted[name] = rules;
-          } else {
-            return rules;
-          }
-        }
-      };
-    }
-
-    var cache = {
-      key: key,
-      sheet: new StyleSheet({
-        key: key,
-        container: container,
-        nonce: options.nonce,
-        speedy: options.speedy,
-        prepend: options.prepend
-      }),
-      nonce: options.nonce,
-      inserted: inserted,
-      registered: {},
-      insert: _insert
-    };
-    cache.sheet.hydrate(nodesToHydrate);
-    return cache;
-  };
-
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
   function unwrapExports (x) {
@@ -695,1272 +169,6 @@
 
   function getCjsExportFromNamespace (n) {
   	return n && n['default'] || n;
-  }
-
-  /** @license React v16.13.0
-   * react-is.production.min.js
-   *
-   * Copyright (c) Facebook, Inc. and its affiliates.
-   *
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   */
-  var b="function"===typeof Symbol&&Symbol.for,c$1=b?Symbol.for("react.element"):60103,d$1=b?Symbol.for("react.portal"):60106,e$1=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g$1=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k$1=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m$1=b?Symbol.for("react.concurrent_mode"):60111,n$1=b?Symbol.for("react.forward_ref"):60112,p$1=b?Symbol.for("react.suspense"):60113,q$1=b?
-  Symbol.for("react.suspense_list"):60120,r$1=b?Symbol.for("react.memo"):60115,t$1=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x$1=b?Symbol.for("react.responder"):60118,y$1=b?Symbol.for("react.scope"):60119;
-  function z$1(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c$1:switch(a=a.type,a){case l:case m$1:case e$1:case g$1:case f:case p$1:return a;default:switch(a=a&&a.$$typeof,a){case k$1:case n$1:case t$1:case r$1:case h:return a;default:return u}}case d$1:return u}}}function A$1(a){return z$1(a)===m$1}var AsyncMode=l;var ConcurrentMode=m$1;var ContextConsumer=k$1;var ContextProvider=h;var Element$1=c$1;var ForwardRef=n$1;var Fragment=e$1;var Lazy=t$1;var Memo=r$1;var Portal=d$1;
-  var Profiler=g$1;var StrictMode=f;var Suspense=p$1;var isAsyncMode=function(a){return A$1(a)||z$1(a)===l};var isConcurrentMode=A$1;var isContextConsumer=function(a){return z$1(a)===k$1};var isContextProvider=function(a){return z$1(a)===h};var isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c$1};var isForwardRef=function(a){return z$1(a)===n$1};var isFragment=function(a){return z$1(a)===e$1};var isLazy=function(a){return z$1(a)===t$1};
-  var isMemo=function(a){return z$1(a)===r$1};var isPortal=function(a){return z$1(a)===d$1};var isProfiler=function(a){return z$1(a)===g$1};var isStrictMode=function(a){return z$1(a)===f};var isSuspense=function(a){return z$1(a)===p$1};
-  var isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e$1||a===m$1||a===g$1||a===f||a===p$1||a===q$1||"object"===typeof a&&null!==a&&(a.$$typeof===t$1||a.$$typeof===r$1||a.$$typeof===h||a.$$typeof===k$1||a.$$typeof===n$1||a.$$typeof===w||a.$$typeof===x$1||a.$$typeof===y$1||a.$$typeof===v)};var typeOf=z$1;
-
-  var reactIs_production_min = {
-  	AsyncMode: AsyncMode,
-  	ConcurrentMode: ConcurrentMode,
-  	ContextConsumer: ContextConsumer,
-  	ContextProvider: ContextProvider,
-  	Element: Element$1,
-  	ForwardRef: ForwardRef,
-  	Fragment: Fragment,
-  	Lazy: Lazy,
-  	Memo: Memo,
-  	Portal: Portal,
-  	Profiler: Profiler,
-  	StrictMode: StrictMode,
-  	Suspense: Suspense,
-  	isAsyncMode: isAsyncMode,
-  	isConcurrentMode: isConcurrentMode,
-  	isContextConsumer: isContextConsumer,
-  	isContextProvider: isContextProvider,
-  	isElement: isElement,
-  	isForwardRef: isForwardRef,
-  	isFragment: isFragment,
-  	isLazy: isLazy,
-  	isMemo: isMemo,
-  	isPortal: isPortal,
-  	isProfiler: isProfiler,
-  	isStrictMode: isStrictMode,
-  	isSuspense: isSuspense,
-  	isValidElementType: isValidElementType,
-  	typeOf: typeOf
-  };
-
-  var reactIs_development = createCommonjsModule(function (module, exports) {
-
-
-
-  if (process.env.NODE_ENV !== "production") {
-    (function() {
-
-  // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
-  // nor polyfill, then a plain number is used for performance.
-  var hasSymbol = typeof Symbol === 'function' && Symbol.for;
-  var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
-  var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
-  var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
-  var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
-  var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
-  var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
-  var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
-  // (unstable) APIs that have been removed. Can we remove the symbols?
-
-  var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
-  var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
-  var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
-  var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
-  var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
-  var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
-  var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
-  var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
-  var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
-  var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
-  var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
-
-  function isValidElementType(type) {
-    return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
-    type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
-  }
-
-  function typeOf(object) {
-    if (typeof object === 'object' && object !== null) {
-      var $$typeof = object.$$typeof;
-
-      switch ($$typeof) {
-        case REACT_ELEMENT_TYPE:
-          var type = object.type;
-
-          switch (type) {
-            case REACT_ASYNC_MODE_TYPE:
-            case REACT_CONCURRENT_MODE_TYPE:
-            case REACT_FRAGMENT_TYPE:
-            case REACT_PROFILER_TYPE:
-            case REACT_STRICT_MODE_TYPE:
-            case REACT_SUSPENSE_TYPE:
-              return type;
-
-            default:
-              var $$typeofType = type && type.$$typeof;
-
-              switch ($$typeofType) {
-                case REACT_CONTEXT_TYPE:
-                case REACT_FORWARD_REF_TYPE:
-                case REACT_LAZY_TYPE:
-                case REACT_MEMO_TYPE:
-                case REACT_PROVIDER_TYPE:
-                  return $$typeofType;
-
-                default:
-                  return $$typeof;
-              }
-
-          }
-
-        case REACT_PORTAL_TYPE:
-          return $$typeof;
-      }
-    }
-
-    return undefined;
-  } // AsyncMode is deprecated along with isAsyncMode
-
-  var AsyncMode = REACT_ASYNC_MODE_TYPE;
-  var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
-  var ContextConsumer = REACT_CONTEXT_TYPE;
-  var ContextProvider = REACT_PROVIDER_TYPE;
-  var Element = REACT_ELEMENT_TYPE;
-  var ForwardRef = REACT_FORWARD_REF_TYPE;
-  var Fragment = REACT_FRAGMENT_TYPE;
-  var Lazy = REACT_LAZY_TYPE;
-  var Memo = REACT_MEMO_TYPE;
-  var Portal = REACT_PORTAL_TYPE;
-  var Profiler = REACT_PROFILER_TYPE;
-  var StrictMode = REACT_STRICT_MODE_TYPE;
-  var Suspense = REACT_SUSPENSE_TYPE;
-  var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
-
-  function isAsyncMode(object) {
-    {
-      if (!hasWarnedAboutDeprecatedIsAsyncMode) {
-        hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
-
-        console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
-      }
-    }
-
-    return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
-  }
-  function isConcurrentMode(object) {
-    return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
-  }
-  function isContextConsumer(object) {
-    return typeOf(object) === REACT_CONTEXT_TYPE;
-  }
-  function isContextProvider(object) {
-    return typeOf(object) === REACT_PROVIDER_TYPE;
-  }
-  function isElement(object) {
-    return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
-  }
-  function isForwardRef(object) {
-    return typeOf(object) === REACT_FORWARD_REF_TYPE;
-  }
-  function isFragment(object) {
-    return typeOf(object) === REACT_FRAGMENT_TYPE;
-  }
-  function isLazy(object) {
-    return typeOf(object) === REACT_LAZY_TYPE;
-  }
-  function isMemo(object) {
-    return typeOf(object) === REACT_MEMO_TYPE;
-  }
-  function isPortal(object) {
-    return typeOf(object) === REACT_PORTAL_TYPE;
-  }
-  function isProfiler(object) {
-    return typeOf(object) === REACT_PROFILER_TYPE;
-  }
-  function isStrictMode(object) {
-    return typeOf(object) === REACT_STRICT_MODE_TYPE;
-  }
-  function isSuspense(object) {
-    return typeOf(object) === REACT_SUSPENSE_TYPE;
-  }
-
-  exports.AsyncMode = AsyncMode;
-  exports.ConcurrentMode = ConcurrentMode;
-  exports.ContextConsumer = ContextConsumer;
-  exports.ContextProvider = ContextProvider;
-  exports.Element = Element;
-  exports.ForwardRef = ForwardRef;
-  exports.Fragment = Fragment;
-  exports.Lazy = Lazy;
-  exports.Memo = Memo;
-  exports.Portal = Portal;
-  exports.Profiler = Profiler;
-  exports.StrictMode = StrictMode;
-  exports.Suspense = Suspense;
-  exports.isAsyncMode = isAsyncMode;
-  exports.isConcurrentMode = isConcurrentMode;
-  exports.isContextConsumer = isContextConsumer;
-  exports.isContextProvider = isContextProvider;
-  exports.isElement = isElement;
-  exports.isForwardRef = isForwardRef;
-  exports.isFragment = isFragment;
-  exports.isLazy = isLazy;
-  exports.isMemo = isMemo;
-  exports.isPortal = isPortal;
-  exports.isProfiler = isProfiler;
-  exports.isStrictMode = isStrictMode;
-  exports.isSuspense = isSuspense;
-  exports.isValidElementType = isValidElementType;
-  exports.typeOf = typeOf;
-    })();
-  }
-  });
-  var reactIs_development_1 = reactIs_development.AsyncMode;
-  var reactIs_development_2 = reactIs_development.ConcurrentMode;
-  var reactIs_development_3 = reactIs_development.ContextConsumer;
-  var reactIs_development_4 = reactIs_development.ContextProvider;
-  var reactIs_development_5 = reactIs_development.Element;
-  var reactIs_development_6 = reactIs_development.ForwardRef;
-  var reactIs_development_7 = reactIs_development.Fragment;
-  var reactIs_development_8 = reactIs_development.Lazy;
-  var reactIs_development_9 = reactIs_development.Memo;
-  var reactIs_development_10 = reactIs_development.Portal;
-  var reactIs_development_11 = reactIs_development.Profiler;
-  var reactIs_development_12 = reactIs_development.StrictMode;
-  var reactIs_development_13 = reactIs_development.Suspense;
-  var reactIs_development_14 = reactIs_development.isAsyncMode;
-  var reactIs_development_15 = reactIs_development.isConcurrentMode;
-  var reactIs_development_16 = reactIs_development.isContextConsumer;
-  var reactIs_development_17 = reactIs_development.isContextProvider;
-  var reactIs_development_18 = reactIs_development.isElement;
-  var reactIs_development_19 = reactIs_development.isForwardRef;
-  var reactIs_development_20 = reactIs_development.isFragment;
-  var reactIs_development_21 = reactIs_development.isLazy;
-  var reactIs_development_22 = reactIs_development.isMemo;
-  var reactIs_development_23 = reactIs_development.isPortal;
-  var reactIs_development_24 = reactIs_development.isProfiler;
-  var reactIs_development_25 = reactIs_development.isStrictMode;
-  var reactIs_development_26 = reactIs_development.isSuspense;
-  var reactIs_development_27 = reactIs_development.isValidElementType;
-  var reactIs_development_28 = reactIs_development.typeOf;
-
-  var reactIs = createCommonjsModule(function (module) {
-
-  if (process.env.NODE_ENV === 'production') {
-    module.exports = reactIs_production_min;
-  } else {
-    module.exports = reactIs_development;
-  }
-  });
-
-  var FORWARD_REF_STATICS = {
-    '$$typeof': true,
-    render: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true
-  };
-  var MEMO_STATICS = {
-    '$$typeof': true,
-    compare: true,
-    defaultProps: true,
-    displayName: true,
-    propTypes: true,
-    type: true
-  };
-  var TYPE_STATICS = {};
-  TYPE_STATICS[reactIs.ForwardRef] = FORWARD_REF_STATICS;
-  TYPE_STATICS[reactIs.Memo] = MEMO_STATICS;
-
-  var isBrowser$1 = typeof document !== 'undefined';
-  function getRegisteredStyles(registered, registeredStyles, classNames) {
-    var rawClassName = '';
-    classNames.split(' ').forEach(function (className) {
-      if (registered[className] !== undefined) {
-        registeredStyles.push(registered[className] + ";");
-      } else {
-        rawClassName += className + " ";
-      }
-    });
-    return rawClassName;
-  }
-  var insertStyles = function insertStyles(cache, serialized, isStringTag) {
-    var className = cache.key + "-" + serialized.name;
-
-    if ( // we only need to add the styles to the registered cache if the
-    // class name could be used further down
-    // the tree but if it's a string tag, we know it won't
-    // so we don't have to add it to registered cache.
-    // this improves memory usage since we can avoid storing the whole style string
-    (isStringTag === false || // we need to always store it if we're in compat mode and
-    // in node since emotion-server relies on whether a style is in
-    // the registered cache to know whether a style is global or not
-    // also, note that this check will be dead code eliminated in the browser
-    isBrowser$1 === false && cache.compat !== undefined) && cache.registered[className] === undefined) {
-      cache.registered[className] = serialized.styles;
-    }
-
-    if (cache.inserted[serialized.name] === undefined) {
-      var stylesForSSR = '';
-      var current = serialized;
-
-      do {
-        var maybeStyles = cache.insert(serialized === current ? "." + className : '', current, cache.sheet, true);
-
-        if (!isBrowser$1 && maybeStyles !== undefined) {
-          stylesForSSR += maybeStyles;
-        }
-
-        current = current.next;
-      } while (current !== undefined);
-
-      if (!isBrowser$1 && stylesForSSR.length !== 0) {
-        return stylesForSSR;
-      }
-    }
-  };
-
-  /* eslint-disable */
-  // Inspired by https://github.com/garycourt/murmurhash-js
-  // Ported from https://github.com/aappleby/smhasher/blob/61a0530f28277f2e850bfc39600ce61d02b518de/src/MurmurHash2.cpp#L37-L86
-  function murmur2(str) {
-    // 'm' and 'r' are mixing constants generated offline.
-    // They're not really 'magic', they just happen to work well.
-    // const m = 0x5bd1e995;
-    // const r = 24;
-    // Initialize the hash
-    var h = 0; // Mix 4 bytes at a time into the hash
-
-    var k,
-        i = 0,
-        len = str.length;
-
-    for (; len >= 4; ++i, len -= 4) {
-      k = str.charCodeAt(i) & 0xff | (str.charCodeAt(++i) & 0xff) << 8 | (str.charCodeAt(++i) & 0xff) << 16 | (str.charCodeAt(++i) & 0xff) << 24;
-      k =
-      /* Math.imul(k, m): */
-      (k & 0xffff) * 0x5bd1e995 + ((k >>> 16) * 0xe995 << 16);
-      k ^=
-      /* k >>> r: */
-      k >>> 24;
-      h =
-      /* Math.imul(k, m): */
-      (k & 0xffff) * 0x5bd1e995 + ((k >>> 16) * 0xe995 << 16) ^
-      /* Math.imul(h, m): */
-      (h & 0xffff) * 0x5bd1e995 + ((h >>> 16) * 0xe995 << 16);
-    } // Handle the last few bytes of the input array
-
-
-    switch (len) {
-      case 3:
-        h ^= (str.charCodeAt(i + 2) & 0xff) << 16;
-
-      case 2:
-        h ^= (str.charCodeAt(i + 1) & 0xff) << 8;
-
-      case 1:
-        h ^= str.charCodeAt(i) & 0xff;
-        h =
-        /* Math.imul(h, m): */
-        (h & 0xffff) * 0x5bd1e995 + ((h >>> 16) * 0xe995 << 16);
-    } // Do a few final mixes of the hash to ensure the last few
-    // bytes are well-incorporated.
-
-
-    h ^= h >>> 13;
-    h =
-    /* Math.imul(h, m): */
-    (h & 0xffff) * 0x5bd1e995 + ((h >>> 16) * 0xe995 << 16);
-    return ((h ^ h >>> 15) >>> 0).toString(36);
-  }
-
-  var unitlessKeys = {
-    animationIterationCount: 1,
-    borderImageOutset: 1,
-    borderImageSlice: 1,
-    borderImageWidth: 1,
-    boxFlex: 1,
-    boxFlexGroup: 1,
-    boxOrdinalGroup: 1,
-    columnCount: 1,
-    columns: 1,
-    flex: 1,
-    flexGrow: 1,
-    flexPositive: 1,
-    flexShrink: 1,
-    flexNegative: 1,
-    flexOrder: 1,
-    gridRow: 1,
-    gridRowEnd: 1,
-    gridRowSpan: 1,
-    gridRowStart: 1,
-    gridColumn: 1,
-    gridColumnEnd: 1,
-    gridColumnSpan: 1,
-    gridColumnStart: 1,
-    msGridRow: 1,
-    msGridRowSpan: 1,
-    msGridColumn: 1,
-    msGridColumnSpan: 1,
-    fontWeight: 1,
-    lineHeight: 1,
-    opacity: 1,
-    order: 1,
-    orphans: 1,
-    tabSize: 1,
-    widows: 1,
-    zIndex: 1,
-    zoom: 1,
-    WebkitLineClamp: 1,
-    // SVG-related properties
-    fillOpacity: 1,
-    floodOpacity: 1,
-    stopOpacity: 1,
-    strokeDasharray: 1,
-    strokeDashoffset: 1,
-    strokeMiterlimit: 1,
-    strokeOpacity: 1,
-    strokeWidth: 1
-  };
-
-  var ILLEGAL_ESCAPE_SEQUENCE_ERROR = "You have illegal escape sequence in your template literal, most likely inside content's property value.\nBecause you write your CSS inside a JavaScript string you actually have to do double escaping, so for example \"content: '\\00d7';\" should become \"content: '\\\\00d7';\".\nYou can read more about this here:\nhttps://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#ES2018_revision_of_illegal_escape_sequences";
-  var UNDEFINED_AS_OBJECT_KEY_ERROR = "You have passed in falsy value as style object's key (can happen when in example you pass unexported component as computed key).";
-  var hyphenateRegex = /[A-Z]|^ms/g;
-  var animationRegex = /_EMO_([^_]+?)_([^]*?)_EMO_/g;
-
-  var isCustomProperty = function isCustomProperty(property) {
-    return property.charCodeAt(1) === 45;
-  };
-
-  var isProcessableValue = function isProcessableValue(value) {
-    return value != null && typeof value !== 'boolean';
-  };
-
-  var processStyleName = /* #__PURE__ */memoize(function (styleName) {
-    return isCustomProperty(styleName) ? styleName : styleName.replace(hyphenateRegex, '-$&').toLowerCase();
-  });
-
-  var processStyleValue = function processStyleValue(key, value) {
-    switch (key) {
-      case 'animation':
-      case 'animationName':
-        {
-          if (typeof value === 'string') {
-            return value.replace(animationRegex, function (match, p1, p2) {
-              cursor = {
-                name: p1,
-                styles: p2,
-                next: cursor
-              };
-              return p1;
-            });
-          }
-        }
-    }
-
-    if (unitlessKeys[key] !== 1 && !isCustomProperty(key) && typeof value === 'number' && value !== 0) {
-      return value + 'px';
-    }
-
-    return value;
-  };
-
-  if (process.env.NODE_ENV !== 'production') {
-    var contentValuePattern = /(attr|calc|counters?|url)\(/;
-    var contentValues = ['normal', 'none', 'counter', 'open-quote', 'close-quote', 'no-open-quote', 'no-close-quote', 'initial', 'inherit', 'unset'];
-    var oldProcessStyleValue = processStyleValue;
-    var msPattern = /^-ms-/;
-    var hyphenPattern = /-(.)/g;
-    var hyphenatedCache = {};
-
-    processStyleValue = function processStyleValue(key, value) {
-      if (key === 'content') {
-        if (typeof value !== 'string' || contentValues.indexOf(value) === -1 && !contentValuePattern.test(value) && (value.charAt(0) !== value.charAt(value.length - 1) || value.charAt(0) !== '"' && value.charAt(0) !== "'")) {
-          throw new Error("You seem to be using a value for 'content' without quotes, try replacing it with `content: '\"" + value + "\"'`");
-        }
-      }
-
-      var processed = oldProcessStyleValue(key, value);
-
-      if (processed !== '' && !isCustomProperty(key) && key.indexOf('-') !== -1 && hyphenatedCache[key] === undefined) {
-        hyphenatedCache[key] = true;
-        console.error("Using kebab-case for css properties in objects is not supported. Did you mean " + key.replace(msPattern, 'ms-').replace(hyphenPattern, function (str, _char) {
-          return _char.toUpperCase();
-        }) + "?");
-      }
-
-      return processed;
-    };
-  }
-
-  function handleInterpolation(mergedProps, registered, interpolation) {
-    if (interpolation == null) {
-      return '';
-    }
-
-    if (interpolation.__emotion_styles !== undefined) {
-      if (process.env.NODE_ENV !== 'production' && interpolation.toString() === 'NO_COMPONENT_SELECTOR') {
-        throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
-      }
-
-      return interpolation;
-    }
-
-    switch (typeof interpolation) {
-      case 'boolean':
-        {
-          return '';
-        }
-
-      case 'object':
-        {
-          if (interpolation.anim === 1) {
-            cursor = {
-              name: interpolation.name,
-              styles: interpolation.styles,
-              next: cursor
-            };
-            return interpolation.name;
-          }
-
-          if (interpolation.styles !== undefined) {
-            var next = interpolation.next;
-
-            if (next !== undefined) {
-              // not the most efficient thing ever but this is a pretty rare case
-              // and there will be very few iterations of this generally
-              while (next !== undefined) {
-                cursor = {
-                  name: next.name,
-                  styles: next.styles,
-                  next: cursor
-                };
-                next = next.next;
-              }
-            }
-
-            var styles = interpolation.styles + ";";
-
-            if (process.env.NODE_ENV !== 'production' && interpolation.map !== undefined) {
-              styles += interpolation.map;
-            }
-
-            return styles;
-          }
-
-          return createStringFromObject(mergedProps, registered, interpolation);
-        }
-
-      case 'function':
-        {
-          if (mergedProps !== undefined) {
-            var previousCursor = cursor;
-            var result = interpolation(mergedProps);
-            cursor = previousCursor;
-            return handleInterpolation(mergedProps, registered, result);
-          } else if (process.env.NODE_ENV !== 'production') {
-            console.error('Functions that are interpolated in css calls will be stringified.\n' + 'If you want to have a css call based on props, create a function that returns a css call like this\n' + 'let dynamicStyle = (props) => css`color: ${props.color}`\n' + 'It can be called directly with props or interpolated in a styled call like this\n' + "let SomeComponent = styled('div')`${dynamicStyle}`");
-          }
-
-          break;
-        }
-
-      case 'string':
-        if (process.env.NODE_ENV !== 'production') {
-          var matched = [];
-          var replaced = interpolation.replace(animationRegex, function (match, p1, p2) {
-            var fakeVarName = "animation" + matched.length;
-            matched.push("const " + fakeVarName + " = keyframes`" + p2.replace(/^@keyframes animation-\w+/, '') + "`");
-            return "${" + fakeVarName + "}";
-          });
-
-          if (matched.length) {
-            console.error('`keyframes` output got interpolated into plain string, please wrap it with `css`.\n\n' + 'Instead of doing this:\n\n' + [].concat(matched, ["`" + replaced + "`"]).join('\n') + '\n\nYou should wrap it with `css` like this:\n\n' + ("css`" + replaced + "`"));
-          }
-        }
-
-        break;
-    } // finalize string values (regular strings and functions interpolated into css calls)
-
-
-    if (registered == null) {
-      return interpolation;
-    }
-
-    var cached = registered[interpolation];
-    return cached !== undefined ? cached : interpolation;
-  }
-
-  function createStringFromObject(mergedProps, registered, obj) {
-    var string = '';
-
-    if (Array.isArray(obj)) {
-      for (var i = 0; i < obj.length; i++) {
-        string += handleInterpolation(mergedProps, registered, obj[i]) + ";";
-      }
-    } else {
-      for (var _key in obj) {
-        var value = obj[_key];
-
-        if (typeof value !== 'object') {
-          if (registered != null && registered[value] !== undefined) {
-            string += _key + "{" + registered[value] + "}";
-          } else if (isProcessableValue(value)) {
-            string += processStyleName(_key) + ":" + processStyleValue(_key, value) + ";";
-          }
-        } else {
-          if (_key === 'NO_COMPONENT_SELECTOR' && process.env.NODE_ENV !== 'production') {
-            throw new Error('Component selectors can only be used in conjunction with @emotion/babel-plugin.');
-          }
-
-          if (Array.isArray(value) && typeof value[0] === 'string' && (registered == null || registered[value[0]] === undefined)) {
-            for (var _i = 0; _i < value.length; _i++) {
-              if (isProcessableValue(value[_i])) {
-                string += processStyleName(_key) + ":" + processStyleValue(_key, value[_i]) + ";";
-              }
-            }
-          } else {
-            var interpolated = handleInterpolation(mergedProps, registered, value);
-
-            switch (_key) {
-              case 'animation':
-              case 'animationName':
-                {
-                  string += processStyleName(_key) + ":" + interpolated + ";";
-                  break;
-                }
-
-              default:
-                {
-                  if (process.env.NODE_ENV !== 'production' && _key === 'undefined') {
-                    console.error(UNDEFINED_AS_OBJECT_KEY_ERROR);
-                  }
-
-                  string += _key + "{" + interpolated + "}";
-                }
-            }
-          }
-        }
-      }
-    }
-
-    return string;
-  }
-
-  var labelPattern = /label:\s*([^\s;\n{]+)\s*;/g;
-  var sourceMapPattern;
-
-  if (process.env.NODE_ENV !== 'production') {
-    sourceMapPattern = /\/\*#\ssourceMappingURL=data:application\/json;\S+\s+\*\//g;
-  } // this is the cursor for keyframes
-  // keyframes are stored on the SerializedStyles object as a linked list
-
-
-  var cursor;
-  var serializeStyles = function serializeStyles(args, registered, mergedProps) {
-    if (args.length === 1 && typeof args[0] === 'object' && args[0] !== null && args[0].styles !== undefined) {
-      return args[0];
-    }
-
-    var stringMode = true;
-    var styles = '';
-    cursor = undefined;
-    var strings = args[0];
-
-    if (strings == null || strings.raw === undefined) {
-      stringMode = false;
-      styles += handleInterpolation(mergedProps, registered, strings);
-    } else {
-      if (process.env.NODE_ENV !== 'production' && strings[0] === undefined) {
-        console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
-      }
-
-      styles += strings[0];
-    } // we start at 1 since we've already handled the first arg
-
-
-    for (var i = 1; i < args.length; i++) {
-      styles += handleInterpolation(mergedProps, registered, args[i]);
-
-      if (stringMode) {
-        if (process.env.NODE_ENV !== 'production' && strings[i] === undefined) {
-          console.error(ILLEGAL_ESCAPE_SEQUENCE_ERROR);
-        }
-
-        styles += strings[i];
-      }
-    }
-
-    var sourceMap;
-
-    if (process.env.NODE_ENV !== 'production') {
-      styles = styles.replace(sourceMapPattern, function (match) {
-        sourceMap = match;
-        return '';
-      });
-    } // using a global regex with .exec is stateful so lastIndex has to be reset each time
-
-
-    labelPattern.lastIndex = 0;
-    var identifierName = '';
-    var match; // https://esbench.com/bench/5b809c2cf2949800a0f61fb5
-
-    while ((match = labelPattern.exec(styles)) !== null) {
-      identifierName += '-' + // $FlowFixMe we know it's not null
-      match[1];
-    }
-
-    var name = murmur2(styles) + identifierName;
-
-    if (process.env.NODE_ENV !== 'production') {
-      // $FlowFixMe SerializedStyles type doesn't have toString property (and we don't want to add it)
-      return {
-        name: name,
-        styles: styles,
-        map: sourceMap,
-        next: cursor,
-        toString: function toString() {
-          return "You have tried to stringify object returned from `css` function. It isn't supposed to be used directly (e.g. as value of the `className` prop), but rather handed to emotion so it can handle it (e.g. as value of `css` prop).";
-        }
-      };
-    }
-
-    return {
-      name: name,
-      styles: styles,
-      next: cursor
-    };
-  };
-
-  var isBrowser$2 = typeof document !== 'undefined';
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-  var EmotionCacheContext = /* #__PURE__ */React.createContext( // we're doing this to avoid preconstruct's dead code elimination in this one case
-  // because this module is primarily intended for the browser and node
-  // but it's also required in react native and similar environments sometimes
-  // and we could have a special build just for that
-  // but this is much easier and the native packages
-  // might use a different theme context in the future anyway
-  typeof HTMLElement !== 'undefined' ? /* #__PURE__ */createCache({
-    key: 'css'
-  }) : null);
-  var CacheProvider = EmotionCacheContext.Provider;
-
-  var withEmotionCache = function withEmotionCache(func) {
-    // $FlowFixMe
-    return /*#__PURE__*/React.forwardRef(function (props, ref) {
-      // the cache will never be null in the browser
-      var cache = React.useContext(EmotionCacheContext);
-      return func(props, cache, ref);
-    });
-  };
-
-  if (!isBrowser$2) {
-    withEmotionCache = function withEmotionCache(func) {
-      return function (props) {
-        var cache = React.useContext(EmotionCacheContext);
-
-        if (cache === null) {
-          // yes, we're potentially creating this on every render
-          // it doesn't actually matter though since it's only on the server
-          // so there will only every be a single render
-          // that could change in the future because of suspense and etc. but for now,
-          // this works and i don't want to optimise for a future thing that we aren't sure about
-          cache = createCache({
-            key: 'css'
-          });
-          return /*#__PURE__*/React.createElement(EmotionCacheContext.Provider, {
-            value: cache
-          }, func(props, cache));
-        } else {
-          return func(props, cache);
-        }
-      };
-    };
-  }
-
-  var ThemeContext = /* #__PURE__ */React.createContext({});
-
-  // thus we only need to replace what is a valid character for JS, but not for CSS
-
-  var sanitizeIdentifier = function sanitizeIdentifier(identifier) {
-    return identifier.replace(/\$/g, '-');
-  };
-
-  var typePropName = '__EMOTION_TYPE_PLEASE_DO_NOT_USE__';
-  var labelPropName = '__EMOTION_LABEL_PLEASE_DO_NOT_USE__';
-  var createEmotionProps = function createEmotionProps(type, props) {
-    if (process.env.NODE_ENV !== 'production' && typeof props.css === 'string' && // check if there is a css declaration
-    props.css.indexOf(':') !== -1) {
-      throw new Error("Strings are not allowed as css prop values, please wrap it in a css template literal from '@emotion/react' like this: css`" + props.css + "`");
-    }
-
-    var newProps = {};
-
-    for (var key in props) {
-      if (hasOwnProperty.call(props, key)) {
-        newProps[key] = props[key];
-      }
-    }
-
-    newProps[typePropName] = type;
-
-    if (process.env.NODE_ENV !== 'production') {
-      var error = new Error();
-
-      if (error.stack) {
-        // chrome
-        var match = error.stack.match(/at (?:Object\.|Module\.|)(?:jsx|createEmotionProps).*\n\s+at (?:Object\.|)([A-Z][A-Za-z0-9$]+) /);
-
-        if (!match) {
-          // safari and firefox
-          match = error.stack.match(/.*\n([A-Z][A-Za-z0-9$]+)@/);
-        }
-
-        if (match) {
-          newProps[labelPropName] = sanitizeIdentifier(match[1]);
-        }
-      }
-    }
-
-    return newProps;
-  };
-  var Emotion = /* #__PURE__ */withEmotionCache(function (props, cache, ref) {
-    var cssProp = props.css; // so that using `css` from `emotion` and passing the result to the css prop works
-    // not passing the registered cache to serializeStyles because it would
-    // make certain babel optimisations not possible
-
-    if (typeof cssProp === 'string' && cache.registered[cssProp] !== undefined) {
-      cssProp = cache.registered[cssProp];
-    }
-
-    var type = props[typePropName];
-    var registeredStyles = [cssProp];
-    var className = '';
-
-    if (typeof props.className === 'string') {
-      className = getRegisteredStyles(cache.registered, registeredStyles, props.className);
-    } else if (props.className != null) {
-      className = props.className + " ";
-    }
-
-    var serialized = serializeStyles(registeredStyles, undefined, typeof cssProp === 'function' || Array.isArray(cssProp) ? React.useContext(ThemeContext) : undefined);
-
-    if (process.env.NODE_ENV !== 'production' && serialized.name.indexOf('-') === -1) {
-      var labelFromStack = props[labelPropName];
-
-      if (labelFromStack) {
-        serialized = serializeStyles([serialized, 'label:' + labelFromStack + ';']);
-      }
-    }
-
-    var rules = insertStyles(cache, serialized, typeof type === 'string');
-    className += cache.key + "-" + serialized.name;
-    var newProps = {};
-
-    for (var key in props) {
-      if (hasOwnProperty.call(props, key) && key !== 'css' && key !== typePropName && (process.env.NODE_ENV === 'production' || key !== labelPropName)) {
-        newProps[key] = props[key];
-      }
-    }
-
-    newProps.ref = ref;
-    newProps.className = className;
-    var ele = /*#__PURE__*/React.createElement(type, newProps);
-
-    if (!isBrowser$2 && rules !== undefined) {
-      var _ref;
-
-      var serializedNames = serialized.name;
-      var next = serialized.next;
-
-      while (next !== undefined) {
-        serializedNames += ' ' + next.name;
-        next = next.next;
-      }
-
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + " " + serializedNames, _ref.dangerouslySetInnerHTML = {
-        __html: rules
-      }, _ref.nonce = cache.sheet.nonce, _ref)), ele);
-    }
-
-    return ele;
-  });
-
-  if (process.env.NODE_ENV !== 'production') {
-    Emotion.displayName = 'EmotionCssPropInternal';
-  }
-
-  var _extends_1 = createCommonjsModule(function (module) {
-  function _extends() {
-    module.exports = _extends = Object.assign || function (target) {
-      for (var i = 1; i < arguments.length; i++) {
-        var source = arguments[i];
-
-        for (var key in source) {
-          if (Object.prototype.hasOwnProperty.call(source, key)) {
-            target[key] = source[key];
-          }
-        }
-      }
-
-      return target;
-    };
-
-    return _extends.apply(this, arguments);
-  }
-
-  module.exports = _extends;
-  });
-
-  var pkg = {
-  	name: "@emotion/react",
-  	version: "11.1.4",
-  	main: "dist/emotion-react.cjs.js",
-  	module: "dist/emotion-react.esm.js",
-  	browser: {
-  		"./dist/emotion-react.cjs.js": "./dist/emotion-react.browser.cjs.js",
-  		"./dist/emotion-react.esm.js": "./dist/emotion-react.browser.esm.js"
-  	},
-  	types: "types/index.d.ts",
-  	files: [
-  		"src",
-  		"dist",
-  		"jsx-runtime",
-  		"jsx-dev-runtime",
-  		"isolated-hoist-non-react-statics-do-not-use-this-in-your-code",
-  		"types/*.d.ts",
-  		"macro.js",
-  		"macro.d.ts",
-  		"macro.js.flow"
-  	],
-  	sideEffects: false,
-  	author: "mitchellhamilton <mitchell@mitchellhamilton.me>",
-  	license: "MIT",
-  	scripts: {
-  		"test:typescript": "dtslint types"
-  	},
-  	dependencies: {
-  		"@babel/runtime": "^7.7.2",
-  		"@emotion/cache": "^11.1.3",
-  		"@emotion/serialize": "^1.0.0",
-  		"@emotion/sheet": "^1.0.1",
-  		"@emotion/utils": "^1.0.0",
-  		"@emotion/weak-memoize": "^0.2.5",
-  		"hoist-non-react-statics": "^3.3.1"
-  	},
-  	peerDependencies: {
-  		"@babel/core": "^7.0.0",
-  		react: ">=16.8.0"
-  	},
-  	peerDependenciesMeta: {
-  		"@babel/core": {
-  			optional: true
-  		},
-  		"@types/react": {
-  			optional: true
-  		}
-  	},
-  	devDependencies: {
-  		"@babel/core": "^7.7.2",
-  		"@emotion/css": "11.1.3",
-  		"@emotion/css-prettifier": "1.0.0",
-  		"@emotion/server": "11.0.0",
-  		"@emotion/styled": "11.0.0",
-  		"@types/react": "^16.9.11",
-  		dtslint: "^0.3.0",
-  		"html-tag-names": "^1.1.2",
-  		react: "16.14.0",
-  		"svg-tag-names": "^1.1.1"
-  	},
-  	repository: "https://github.com/emotion-js/emotion/tree/master/packages/react",
-  	publishConfig: {
-  		access: "public"
-  	},
-  	"umd:main": "dist/emotion-react.umd.min.js",
-  	preconstruct: {
-  		entrypoints: [
-  			"./index.js",
-  			"./jsx-runtime.js",
-  			"./jsx-dev-runtime.js",
-  			"./isolated-hoist-non-react-statics-do-not-use-this-in-your-code.js"
-  		],
-  		umdName: "emotionReact"
-  	}
-  };
-
-  var jsx = function jsx(type, props) {
-    var args = arguments;
-
-    if (props == null || !hasOwnProperty.call(props, 'css')) {
-      // $FlowFixMe
-      return React.createElement.apply(undefined, args);
-    }
-
-    var argsLength = args.length;
-    var createElementArgArray = new Array(argsLength);
-    createElementArgArray[0] = Emotion;
-    createElementArgArray[1] = createEmotionProps(type, props);
-
-    for (var i = 2; i < argsLength; i++) {
-      createElementArgArray[i] = args[i];
-    } // $FlowFixMe
-
-
-    return React.createElement.apply(null, createElementArgArray);
-  };
-
-  var warnedAboutCssPropForGlobal = false; // maintain place over rerenders.
-  // initial render from browser, insertBefore context.sheet.tags[0] or if a style hasn't been inserted there yet, appendChild
-  // initial client-side render from SSR, use place of hydrating tag
-
-  var Global = /* #__PURE__ */withEmotionCache(function (props, cache) {
-    if (process.env.NODE_ENV !== 'production' && !warnedAboutCssPropForGlobal && ( // check for className as well since the user is
-    // probably using the custom createElement which
-    // means it will be turned into a className prop
-    // $FlowFixMe I don't really want to add it to the type since it shouldn't be used
-    props.className || props.css)) {
-      console.error("It looks like you're using the css prop on Global, did you mean to use the styles prop instead?");
-      warnedAboutCssPropForGlobal = true;
-    }
-
-    var styles = props.styles;
-    var serialized = serializeStyles([styles], undefined, typeof styles === 'function' || Array.isArray(styles) ? React.useContext(ThemeContext) : undefined);
-
-    if (!isBrowser$2) {
-      var _ref;
-
-      var serializedNames = serialized.name;
-      var serializedStyles = serialized.styles;
-      var next = serialized.next;
-
-      while (next !== undefined) {
-        serializedNames += ' ' + next.name;
-        serializedStyles += next.styles;
-        next = next.next;
-      }
-
-      var shouldCache = cache.compat === true;
-      var rules = cache.insert("", {
-        name: serializedNames,
-        styles: serializedStyles
-      }, cache.sheet, shouldCache);
-
-      if (shouldCache) {
-        return null;
-      }
-
-      return /*#__PURE__*/React.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + "-global " + serializedNames, _ref.dangerouslySetInnerHTML = {
-        __html: rules
-      }, _ref.nonce = cache.sheet.nonce, _ref));
-    } // yes, i know these hooks are used conditionally
-    // but it is based on a constant that will never change at runtime
-    // it's effectively like having two implementations and switching them out
-    // so it's not actually breaking anything
-
-
-    var sheetRef = React.useRef();
-    React.useLayoutEffect(function () {
-      var key = cache.key + "-global";
-      var sheet = new StyleSheet({
-        key: key,
-        nonce: cache.sheet.nonce,
-        container: cache.sheet.container,
-        speedy: cache.sheet.isSpeedy
-      }); // $FlowFixMe
-
-      var node = document.querySelector("style[data-emotion=\"" + key + " " + serialized.name + "\"]");
-
-      if (cache.sheet.tags.length) {
-        sheet.before = cache.sheet.tags[0];
-      }
-
-      if (node !== null) {
-        sheet.hydrate([node]);
-      }
-
-      sheetRef.current = sheet;
-      return function () {
-        sheet.flush();
-      };
-    }, [cache]);
-    React.useLayoutEffect(function () {
-      if (serialized.next !== undefined) {
-        // insert keyframes
-        insertStyles(cache, serialized.next, true);
-      }
-
-      var sheet = sheetRef.current;
-
-      if (sheet.tags.length) {
-        // if this doesn't exist then it will be null so the style element will be appended
-        var element = sheet.tags[sheet.tags.length - 1].nextElementSibling;
-        sheet.before = element;
-        sheet.flush();
-      }
-
-      cache.insert("", serialized, sheet, false);
-    }, [cache, serialized.name]);
-    return null;
-  });
-
-  if (process.env.NODE_ENV !== 'production') {
-    Global.displayName = 'EmotionGlobal';
-  }
-
-  function css() {
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return serializeStyles(args);
-  }
-
-  var classnames = function classnames(args) {
-    var len = args.length;
-    var i = 0;
-    var cls = '';
-
-    for (; i < len; i++) {
-      var arg = args[i];
-      if (arg == null) continue;
-      var toAdd = void 0;
-
-      switch (typeof arg) {
-        case 'boolean':
-          break;
-
-        case 'object':
-          {
-            if (Array.isArray(arg)) {
-              toAdd = classnames(arg);
-            } else {
-              if (process.env.NODE_ENV !== 'production' && arg.styles !== undefined && arg.name !== undefined) {
-                console.error('You have passed styles created with `css` from `@emotion/react` package to the `cx`.\n' + '`cx` is meant to compose class names (strings) so you should convert those styles to a class name by passing them to the `css` received from <ClassNames/> component.');
-              }
-
-              toAdd = '';
-
-              for (var k in arg) {
-                if (arg[k] && k) {
-                  toAdd && (toAdd += ' ');
-                  toAdd += k;
-                }
-              }
-            }
-
-            break;
-          }
-
-        default:
-          {
-            toAdd = arg;
-          }
-      }
-
-      if (toAdd) {
-        cls && (cls += ' ');
-        cls += toAdd;
-      }
-    }
-
-    return cls;
-  };
-
-  function merge(registered, css, className) {
-    var registeredStyles = [];
-    var rawClassName = getRegisteredStyles(registered, registeredStyles, className);
-
-    if (registeredStyles.length < 2) {
-      return className;
-    }
-
-    return rawClassName + css(registeredStyles);
-  }
-
-  var ClassNames = /* #__PURE__ */withEmotionCache(function (props, cache) {
-    var rules = '';
-    var serializedHashes = '';
-    var hasRendered = false;
-
-    var css = function css() {
-      if (hasRendered && process.env.NODE_ENV !== 'production') {
-        throw new Error('css can only be used during render');
-      }
-
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
-
-      var serialized = serializeStyles(args, cache.registered);
-
-      if (isBrowser$2) {
-        insertStyles(cache, serialized, false);
-      } else {
-        var res = insertStyles(cache, serialized, false);
-
-        if (res !== undefined) {
-          rules += res;
-        }
-      }
-
-      if (!isBrowser$2) {
-        serializedHashes += " " + serialized.name;
-      }
-
-      return cache.key + "-" + serialized.name;
-    };
-
-    var cx = function cx() {
-      if (hasRendered && process.env.NODE_ENV !== 'production') {
-        throw new Error('cx can only be used during render');
-      }
-
-      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
-      }
-
-      return merge(cache.registered, css, classnames(args));
-    };
-
-    var content = {
-      css: css,
-      cx: cx,
-      theme: React.useContext(ThemeContext)
-    };
-    var ele = props.children(content);
-    hasRendered = true;
-
-    if (!isBrowser$2 && rules.length !== 0) {
-      var _ref;
-
-      return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("style", (_ref = {}, _ref["data-emotion"] = cache.key + " " + serializedHashes.substring(1), _ref.dangerouslySetInnerHTML = {
-        __html: rules
-      }, _ref.nonce = cache.sheet.nonce, _ref)), ele);
-    }
-
-    return ele;
-  });
-
-  if (process.env.NODE_ENV !== 'production') {
-    ClassNames.displayName = 'EmotionClassNames';
-  }
-
-  if (process.env.NODE_ENV !== 'production') {
-    var isBrowser$3 = typeof document !== 'undefined'; // #1727 for some reason Jest evaluates modules twice if some consuming module gets mocked with jest.mock
-
-    var isJest = typeof jest !== 'undefined';
-
-    if (isBrowser$3 && !isJest) {
-      var globalContext = isBrowser$3 ? window : global;
-      var globalKey = "__EMOTION_REACT_" + pkg.version.split('.')[0] + "__";
-
-      if (globalContext[globalKey]) {
-        console.warn('You are loading @emotion/react when it is already loaded. Running ' + 'multiple instances may cause problems. This can happen if multiple ' + 'versions are used, or if multiple builds of the same version are ' + 'used.');
-      }
-
-      globalContext[globalKey] = true;
-    }
   }
 
   var _global = createCommonjsModule(function (module) {
@@ -2052,7 +260,7 @@
 
   var dP = Object.defineProperty;
 
-  var f$1 = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  var f = _descriptors ? Object.defineProperty : function defineProperty(O, P, Attributes) {
     _anObject(O);
     P = _toPrimitive(P, true);
     _anObject(Attributes);
@@ -2065,7 +273,7 @@
   };
 
   var _objectDp = {
-  	f: f$1
+  	f: f
   };
 
   var _propertyDesc = function (bitmap, value) {
@@ -2084,9 +292,9 @@
     return object;
   };
 
-  var hasOwnProperty$1 = {}.hasOwnProperty;
+  var hasOwnProperty = {}.hasOwnProperty;
   var _has = function (it, key) {
-    return hasOwnProperty$1.call(it, key);
+    return hasOwnProperty.call(it, key);
   };
 
   var PROTOTYPE = 'prototype';
@@ -2274,16 +482,16 @@
     return _objectKeysInternal(O, _enumBugKeys);
   };
 
-  var f$2 = Object.getOwnPropertySymbols;
+  var f$1 = Object.getOwnPropertySymbols;
 
   var _objectGops = {
-  	f: f$2
+  	f: f$1
   };
 
-  var f$3 = {}.propertyIsEnumerable;
+  var f$2 = {}.propertyIsEnumerable;
 
   var _objectPie = {
-  	f: f$3
+  	f: f$2
   };
 
   // 7.1.13 ToObject(argument)
@@ -2662,18 +870,18 @@
     'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
     'TextTrackList,TouchList').split(',');
 
-  for (var i$1 = 0; i$1 < DOMIterables.length; i$1++) {
-    var NAME = DOMIterables[i$1];
+  for (var i = 0; i < DOMIterables.length; i++) {
+    var NAME = DOMIterables[i];
     var Collection = _global[NAME];
     var proto = Collection && Collection.prototype;
     if (proto && !proto[TO_STRING_TAG]) _hide(proto, TO_STRING_TAG, NAME);
     _iterators[NAME] = _iterators.Array;
   }
 
-  var f$4 = _wks;
+  var f$3 = _wks;
 
   var _wksExt = {
-  	f: f$4
+  	f: f$3
   };
 
   var iterator = _wksExt.f('iterator');
@@ -2777,12 +985,12 @@
 
   var hiddenKeys = _enumBugKeys.concat('length', 'prototype');
 
-  var f$5 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
+  var f$4 = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
     return _objectKeysInternal(O, hiddenKeys);
   };
 
   var _objectGopn = {
-  	f: f$5
+  	f: f$4
   };
 
   // fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -2801,17 +1009,17 @@
     }
   };
 
-  var f$6 = function getOwnPropertyNames(it) {
+  var f$5 = function getOwnPropertyNames(it) {
     return windowNames && toString$1.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(_toIobject(it));
   };
 
   var _objectGopnExt = {
-  	f: f$6
+  	f: f$5
   };
 
   var gOPD = Object.getOwnPropertyDescriptor;
 
-  var f$7 = _descriptors ? gOPD : function getOwnPropertyDescriptor(O, P) {
+  var f$6 = _descriptors ? gOPD : function getOwnPropertyDescriptor(O, P) {
     O = _toIobject(O);
     P = _toPrimitive(P, true);
     if (_ie8DomDefine) try {
@@ -2821,7 +1029,7 @@
   };
 
   var _objectGopd = {
-  	f: f$7
+  	f: f$6
   };
 
   // ECMAScript 6 symbols shim
@@ -2992,9 +1200,9 @@
   for (var es6Symbols = (
     // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
     'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
-  ).split(','), j$1 = 0; es6Symbols.length > j$1;)_wks(es6Symbols[j$1++]);
+  ).split(','), j = 0; es6Symbols.length > j;)_wks(es6Symbols[j++]);
 
-  for (var wellKnownSymbols = _objectKeys(_wks.store), k$2 = 0; wellKnownSymbols.length > k$2;) _wksDefine(wellKnownSymbols[k$2++]);
+  for (var wellKnownSymbols = _objectKeys(_wks.store), k = 0; wellKnownSymbols.length > k;) _wksDefine(wellKnownSymbols[k++]);
 
   _export(_export.S + _export.F * !USE_NATIVE, 'Symbol', {
     // 19.4.2.1 Symbol.for(key)
@@ -3516,7 +1724,7 @@
   */
   /* eslint-disable no-unused-vars */
   var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var hasOwnProperty$2 = Object.prototype.hasOwnProperty;
+  var hasOwnProperty$1 = Object.prototype.hasOwnProperty;
   var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
   function toObject(val) {
@@ -3580,7 +1788,7 @@
   		from = Object(arguments[s]);
 
   		for (var key in from) {
-  			if (hasOwnProperty$2.call(from, key)) {
+  			if (hasOwnProperty$1.call(from, key)) {
   				to[key] = from[key];
   			}
   		}
@@ -3937,7 +2145,7 @@
     return addDOMEventListener(target, eventType, callback, option);
   }
 
-  var classnames$1 = createCommonjsModule(function (module) {
+  var classnames = createCommonjsModule(function (module) {
   /*!
     Copyright (c) 2017 Jed Watson.
     Licensed under the MIT License (MIT), see
@@ -4028,7 +2236,7 @@
         style = _extends$2({}, style, activeDotStyle);
       }
 
-      var pointClassName = classnames$1((_classNames = {}, _defineProperty$1(_classNames, prefixCls + '-dot', true), _defineProperty$1(_classNames, prefixCls + '-dot-active', isActived), _defineProperty$1(_classNames, prefixCls + '-dot-reverse', reverse), _classNames));
+      var pointClassName = classnames((_classNames = {}, _defineProperty$1(_classNames, prefixCls + '-dot', true), _defineProperty$1(_classNames, prefixCls + '-dot-active', isActived), _defineProperty$1(_classNames, prefixCls + '-dot-reverse', reverse), _classNames));
 
       return React__default.createElement('span', { className: pointClassName, style: style, key: point });
     });
@@ -4084,7 +2292,7 @@
       }
 
       var isActive = !included && point === upperBound || included && point <= upperBound && point >= lowerBound;
-      var markClassName = classnames$1((_classNames = {}, _defineProperty$1(_classNames, className + '-text', true), _defineProperty$1(_classNames, className + '-text-active', isActive), _classNames));
+      var markClassName = classnames((_classNames = {}, _defineProperty$1(_classNames, className + '-text', true), _defineProperty$1(_classNames, className + '-text-active', isActive), _classNames));
 
       var bottomStyle = _defineProperty$1({
         marginBottom: '-50%'
@@ -4222,7 +2430,7 @@
             ariaValueTextFormatter = _props.ariaValueTextFormatter,
             restProps = _objectWithoutProperties(_props, ['prefixCls', 'vertical', 'reverse', 'offset', 'style', 'disabled', 'min', 'max', 'value', 'tabIndex', 'ariaLabel', 'ariaLabelledBy', 'ariaValueTextFormatter']);
 
-        var className = classnames$1(this.props.className, _defineProperty$1({}, prefixCls + '-handle-click-focused', this.state.clickFocused));
+        var className = classnames(this.props.className, _defineProperty$1({}, prefixCls + '-handle-click-focused', this.state.clickFocused));
         var positionStyle = vertical ? (_ref2 = {}, _defineProperty$1(_ref2, reverse ? 'top' : 'bottom', offset + '%'), _defineProperty$1(_ref2, reverse ? 'bottom' : 'top', 'auto'), _defineProperty$1(_ref2, 'transform', 'translateY(+50%)'), _ref2) : (_ref3 = {}, _defineProperty$1(_ref3, reverse ? 'right' : 'left', offset + '%'), _defineProperty$1(_ref3, reverse ? 'left' : 'right', 'auto'), _defineProperty$1(_ref3, 'transform', 'translateX(' + (reverse ? '+' : '-') + '50%)'), _ref3);
         var elStyle = _extends$2({}, style, positionStyle);
 
@@ -5472,7 +3680,7 @@
               tracks = _get$call.tracks,
               handles = _get$call.handles;
 
-          var sliderClassName = classnames$1(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, prefixCls + '-with-marks', Object.keys(marks).length), _defineProperty$1(_classNames, prefixCls + '-disabled', disabled), _defineProperty$1(_classNames, prefixCls + '-vertical', vertical), _defineProperty$1(_classNames, className, className), _classNames));
+          var sliderClassName = classnames(prefixCls, (_classNames = {}, _defineProperty$1(_classNames, prefixCls + '-with-marks', Object.keys(marks).length), _defineProperty$1(_classNames, prefixCls + '-disabled', disabled), _defineProperty$1(_classNames, prefixCls + '-vertical', vertical), _defineProperty$1(_classNames, className, className), _classNames));
           return React__default.createElement(
             'div',
             {
@@ -6292,7 +4500,7 @@
           }
           var dragging = handle === i;
           return handleGenerator({
-            className: classnames$1((_classNames = {}, _defineProperty$1(_classNames, handleClassName, true), _defineProperty$1(_classNames, handleClassName + '-' + (i + 1), true), _defineProperty$1(_classNames, handleClassName + '-dragging', dragging), _classNames)),
+            className: classnames((_classNames = {}, _defineProperty$1(_classNames, handleClassName, true), _defineProperty$1(_classNames, handleClassName + '-' + (i + 1), true), _defineProperty$1(_classNames, handleClassName + '-dragging', dragging), _classNames)),
             prefixCls: prefixCls,
             vertical: vertical,
             dragging: dragging,
@@ -6318,7 +4526,7 @@
           var _classNames2;
 
           var i = index + 1;
-          var trackClassName = classnames$1((_classNames2 = {}, _defineProperty$1(_classNames2, prefixCls + '-track', true), _defineProperty$1(_classNames2, prefixCls + '-track-' + i, true), _classNames2));
+          var trackClassName = classnames((_classNames2 = {}, _defineProperty$1(_classNames2, prefixCls + '-track', true), _defineProperty$1(_classNames2, prefixCls + '-track-' + i, true), _classNames2));
           return React__default.createElement(Track, {
             className: trackClassName,
             vertical: vertical,
@@ -6475,7 +4683,7 @@
 
   function _setPrototypeOf$1(o, p) { _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$1(o, p); }
 
-  var Portal$1 =
+  var Portal =
   /*#__PURE__*/
   function (_React$Component) {
     _inherits$2(Portal, _React$Component);
@@ -6532,7 +4740,7 @@
     return Portal;
   }(React__default.Component);
 
-  Portal$1.propTypes = {
+  Portal.propTypes = {
     getContainer: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     didUpdate: PropTypes.func
@@ -6616,15 +4824,15 @@
     , raf = root['request' + suffix]
     , caf = root['cancel' + suffix] || root['cancelRequest' + suffix];
 
-  for(var i$2 = 0; !raf && i$2 < vendors.length; i$2++) {
-    raf = root[vendors[i$2] + 'Request' + suffix];
-    caf = root[vendors[i$2] + 'Cancel' + suffix]
-        || root[vendors[i$2] + 'CancelRequest' + suffix];
+  for(var i$1 = 0; !raf && i$1 < vendors.length; i$1++) {
+    raf = root[vendors[i$1] + 'Request' + suffix];
+    caf = root[vendors[i$1] + 'Cancel' + suffix]
+        || root[vendors[i$1] + 'CancelRequest' + suffix];
   }
 
   // Some versions of FF have rAF but not cAF
   if(!raf || !caf) {
-    var last$1 = 0
+    var last = 0
       , id$1 = 0
       , queue = []
       , frameDuration = 1000 / 60;
@@ -6632,8 +4840,8 @@
     raf = function(callback) {
       if(queue.length === 0) {
         var _now = performanceNow()
-          , next = Math.max(0, frameDuration - (_now - last$1));
-        last$1 = next + _now;
+          , next = Math.max(0, frameDuration - (_now - last));
+        last = next + _now;
         setTimeout(function() {
           var cp = queue.slice(0);
           // Clear queue here to prevent
@@ -6643,7 +4851,7 @@
           for(var i = 0; i < cp.length; i++) {
             if(!cp[i].cancelled) {
               try{
-                cp[i].callback(last$1);
+                cp[i].callback(last);
               } catch(e) {
                 setTimeout(function() { throw e }, 0);
               }
@@ -6871,13 +5079,13 @@
     elem.style.display = originalStyle;
   }
 
-  function css$1(el, name, v) {
+  function css(el, name, v) {
     var value = v;
 
     if (_typeof$2(name) === 'object') {
       for (var i in name) {
         if (name.hasOwnProperty(i)) {
-          css$1(el, i, name[i]);
+          css(el, i, name[i]);
         }
       }
 
@@ -7073,7 +5281,7 @@
 
   function setLeftTop(elem, offset, option) {
     // set position first, in-case top/left are set even on static elem
-    if (css$1(elem, 'position') === 'static') {
+    if (css(elem, 'position') === 'static') {
       elem.style.position = 'relative';
     }
 
@@ -7129,7 +5337,7 @@
       }
     }
 
-    css$1(elem, originalStyle); // force relayout
+    css(elem, originalStyle); // force relayout
 
     forceRelayout(elem);
 
@@ -7153,7 +5361,7 @@
       }
     }
 
-    css$1(elem, ret);
+    css(elem, ret);
   }
 
   function setTransform$1(elem, offset) {
@@ -7405,7 +5613,7 @@
             val += getPBMWidth(elem, ['padding', 'border'], which);
           }
 
-          return css$1(elem, name, val);
+          return css(elem, name, val);
         }
 
         return undefined;
@@ -7444,7 +5652,7 @@
     },
     isWindow: isWindow,
     each: each,
-    css: css$1,
+    css: css,
     clone: function clone(obj) {
       var i;
       var ret = {};
@@ -8113,7 +6321,7 @@
   /**
    * Detects whether window and document objects are available in current environment.
    */
-  var isBrowser$4 = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document;
+  var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document;
 
   // Returns global object of a current environment.
   var global$1 = (function () {
@@ -8332,7 +6540,7 @@
       ResizeObserverController.prototype.connect_ = function () {
           // Do nothing if running in a non-browser environment or if listeners
           // have been already added.
-          if (!isBrowser$4 || this.connected_) {
+          if (!isBrowser || this.connected_) {
               return;
           }
           // Subscription to the "Transitionend" event is used as a workaround for
@@ -8364,7 +6572,7 @@
       ResizeObserverController.prototype.disconnect_ = function () {
           // Do nothing if running in a non-browser environment or if listeners
           // have been already removed.
-          if (!isBrowser$4 || !this.connected_) {
+          if (!isBrowser || !this.connected_) {
               return;
           }
           document.removeEventListener('transitionend', this.onTransitionEnd_);
@@ -8612,7 +6820,7 @@
    * @returns {DOMRectInit}
    */
   function getContentRect(target) {
-      if (!isBrowser$4) {
+      if (!isBrowser) {
           return emptyRect;
       }
       if (isSVGGraphicsElement(target)) {
@@ -9676,7 +7884,7 @@
           }
 
           return children(_extends$2({}, eventProps, {
-            className: classnames$1((_classNames = {}, _defineProperty$1(_classNames, getTransitionName$1(motionName, status), status !== STATUS_NONE), _defineProperty$1(_classNames, getTransitionName$1(motionName, status + '-active'), status !== STATUS_NONE && statusActive), _defineProperty$1(_classNames, motionName, typeof motionName === 'string'), _classNames)),
+            className: classnames((_classNames = {}, _defineProperty$1(_classNames, getTransitionName$1(motionName, status), status !== STATUS_NONE), _defineProperty$1(_classNames, getTransitionName$1(motionName, status + '-active'), status !== STATUS_NONE && statusActive), _defineProperty$1(_classNames, motionName, typeof motionName === 'string'), _classNames)),
             style: statusStyle
           }), this.setNodeRef);
         }
@@ -9779,7 +7987,7 @@
 
     return React__default.createElement("div", {
       ref: ref,
-      className: classnames$1(className, !visible && "".concat(props.hiddenClassName)),
+      className: classnames(className, !visible && "".concat(props.hiddenClassName)),
       onMouseEnter: onMouseEnter,
       onMouseLeave: onMouseLeave,
       onMouseDown: onMouseDown,
@@ -9962,7 +8170,7 @@
             onMouseDown = _this$props3.onMouseDown,
             onTouchStart = _this$props3.onTouchStart,
             children = _this$props3.children;
-        var mergedClassName = classnames$1(prefixCls, className, alignClassName);
+        var mergedClassName = classnames(prefixCls, className, alignClassName);
         var hiddenClassName = "".concat(prefixCls, "-hidden"); // ================== Style ==================
 
         var sizeStyle = {};
@@ -10036,7 +8244,7 @@
             prefixCls: prefixCls,
             visible: mergedPopupVisible,
             hiddenClassName: hiddenClassName,
-            className: classnames$1(mergedClassName, motionClassName),
+            className: classnames(mergedClassName, motionClassName),
             ref: composeRef(motionRef, _this.popupRef),
             onMouseEnter: onMouseEnter,
             onMouseLeave: onMouseLeave,
@@ -10081,7 +8289,7 @@
           return React__default.createElement("div", {
             style: _this.getZIndexStyle(),
             key: "mask",
-            className: classnames$1("".concat(prefixCls, "-mask"), className)
+            className: classnames("".concat(prefixCls, "-mask"), className)
           });
         });
       };
@@ -10880,7 +9088,7 @@
             newChildProps.onBlur = this.createTwoChains('onBlur');
           }
 
-          var childrenClassName = classnames$1(child && child.props && child.props.className, className);
+          var childrenClassName = classnames(child && child.props && child.props.className, className);
 
           if (childrenClassName) {
             newChildProps.className = childrenClassName;
@@ -10952,7 +9160,7 @@
     };
     return Trigger;
   }
-  var Trigger = generateTrigger(Portal$1);
+  var Trigger = generateTrigger(Portal);
 
   var autoAdjustOverflow = {
     adjustX: 1,
@@ -11250,7 +9458,7 @@
 
     return data;
   }
-  var styles = css(_templateObject());
+  var styles = react.css(_templateObject());
 
   /** Detect free variable `global` from Node.js. */
   var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
@@ -11268,7 +9476,7 @@
   var objectProto = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$3 = objectProto.hasOwnProperty;
+  var hasOwnProperty$2 = objectProto.hasOwnProperty;
 
   /**
    * Used to resolve the
@@ -11288,7 +9496,7 @@
    * @returns {string} Returns the raw `toStringTag`.
    */
   function getRawTag(value) {
-    var isOwn = hasOwnProperty$3.call(value, symToStringTag),
+    var isOwn = hasOwnProperty$2.call(value, symToStringTag),
         tag = value[symToStringTag];
 
     try {
@@ -11872,11 +10080,11 @@
   var funcToString$1 = funcProto$1.toString;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$4 = objectProto$2.hasOwnProperty;
+  var hasOwnProperty$3 = objectProto$2.hasOwnProperty;
 
   /** Used to detect if a method is native. */
   var reIsNative = RegExp('^' +
-    funcToString$1.call(hasOwnProperty$4).replace(reRegExpChar, '\\$&')
+    funcToString$1.call(hasOwnProperty$3).replace(reRegExpChar, '\\$&')
     .replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'
   );
 
@@ -12209,7 +10417,7 @@
   var objectProto$3 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$5 = objectProto$3.hasOwnProperty;
+  var hasOwnProperty$4 = objectProto$3.hasOwnProperty;
 
   /**
    * Gets the name of `func`.
@@ -12221,7 +10429,7 @@
   function getFuncName(func) {
     var result = (func.name + ''),
         array = realNames[result],
-        length = hasOwnProperty$5.call(realNames, result) ? array.length : 0;
+        length = hasOwnProperty$4.call(realNames, result) ? array.length : 0;
 
     while (length--) {
       var data = array[length],
@@ -12292,7 +10500,7 @@
   var objectProto$4 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$6 = objectProto$4.hasOwnProperty;
+  var hasOwnProperty$5 = objectProto$4.hasOwnProperty;
 
   /**
    * Creates a `lodash` object which wraps `value` to enable implicit method
@@ -12416,7 +10624,7 @@
       if (value instanceof LodashWrapper) {
         return value;
       }
-      if (hasOwnProperty$6.call(value, '__wrapped__')) {
+      if (hasOwnProperty$5.call(value, '__wrapped__')) {
         return wrapperClone(value);
       }
     }
@@ -13325,7 +11533,7 @@
   var objectProto$5 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$7 = objectProto$5.hasOwnProperty;
+  var hasOwnProperty$6 = objectProto$5.hasOwnProperty;
 
   /**
    * Assigns `value` to `key` of `object` if the existing value is not equivalent
@@ -13339,7 +11547,7 @@
    */
   function assignValue(object, key, value) {
     var objValue = object[key];
-    if (!(hasOwnProperty$7.call(object, key) && eq(objValue, value)) ||
+    if (!(hasOwnProperty$6.call(object, key) && eq(objValue, value)) ||
         (value === undefined && !(key in object))) {
       baseAssignValue(object, key, value);
     }
@@ -13600,7 +11808,7 @@
   var objectProto$7 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$8 = objectProto$7.hasOwnProperty;
+  var hasOwnProperty$7 = objectProto$7.hasOwnProperty;
 
   /** Built-in value references. */
   var propertyIsEnumerable = objectProto$7.propertyIsEnumerable;
@@ -13624,7 +11832,7 @@
    * // => false
    */
   var isArguments = baseIsArguments(function() { return arguments; }()) ? baseIsArguments : function(value) {
-    return isObjectLike(value) && hasOwnProperty$8.call(value, 'callee') &&
+    return isObjectLike(value) && hasOwnProperty$7.call(value, 'callee') &&
       !propertyIsEnumerable.call(value, 'callee');
   };
 
@@ -13800,7 +12008,7 @@
   var objectProto$8 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$9 = objectProto$8.hasOwnProperty;
+  var hasOwnProperty$8 = objectProto$8.hasOwnProperty;
 
   /**
    * Creates an array of the enumerable property names of the array-like `value`.
@@ -13820,7 +12028,7 @@
         length = result.length;
 
     for (var key in value) {
-      if ((inherited || hasOwnProperty$9.call(value, key)) &&
+      if ((inherited || hasOwnProperty$8.call(value, key)) &&
           !(skipIndexes && (
              // Safari 9 has enumerable `arguments.length` in strict mode.
              key == 'length' ||
@@ -13858,7 +12066,7 @@
   var objectProto$9 = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$a = objectProto$9.hasOwnProperty;
+  var hasOwnProperty$9 = objectProto$9.hasOwnProperty;
 
   /**
    * The base implementation of `_.keys` which doesn't treat sparse arrays as dense.
@@ -13873,7 +12081,7 @@
     }
     var result = [];
     for (var key in Object(object)) {
-      if (hasOwnProperty$a.call(object, key) && key != 'constructor') {
+      if (hasOwnProperty$9.call(object, key) && key != 'constructor') {
         result.push(key);
       }
     }
@@ -13916,7 +12124,7 @@
   var objectProto$a = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$b = objectProto$a.hasOwnProperty;
+  var hasOwnProperty$a = objectProto$a.hasOwnProperty;
 
   /**
    * Assigns own enumerable string keyed properties of source objects to the
@@ -13956,7 +12164,7 @@
       return;
     }
     for (var key in source) {
-      if (hasOwnProperty$b.call(source, key)) {
+      if (hasOwnProperty$a.call(source, key)) {
         assignValue(object, key, source[key]);
       }
     }
@@ -13985,7 +12193,7 @@
   var objectProto$b = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$c = objectProto$b.hasOwnProperty;
+  var hasOwnProperty$b = objectProto$b.hasOwnProperty;
 
   /**
    * The base implementation of `_.keysIn` which doesn't treat sparse arrays as dense.
@@ -14002,7 +12210,7 @@
         result = [];
 
     for (var key in object) {
-      if (!(key == 'constructor' && (isProto || !hasOwnProperty$c.call(object, key)))) {
+      if (!(key == 'constructor' && (isProto || !hasOwnProperty$b.call(object, key)))) {
         result.push(key);
       }
     }
@@ -14199,7 +12407,7 @@
   var objectProto$c = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$d = objectProto$c.hasOwnProperty;
+  var hasOwnProperty$c = objectProto$c.hasOwnProperty;
 
   /**
    * Gets the hash value for `key`.
@@ -14216,14 +12424,14 @@
       var result = data[key];
       return result === HASH_UNDEFINED ? undefined : result;
     }
-    return hasOwnProperty$d.call(data, key) ? data[key] : undefined;
+    return hasOwnProperty$c.call(data, key) ? data[key] : undefined;
   }
 
   /** Used for built-in method references. */
   var objectProto$d = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$e = objectProto$d.hasOwnProperty;
+  var hasOwnProperty$d = objectProto$d.hasOwnProperty;
 
   /**
    * Checks if a hash value for `key` exists.
@@ -14236,7 +12444,7 @@
    */
   function hashHas(key) {
     var data = this.__data__;
-    return nativeCreate ? (data[key] !== undefined) : hasOwnProperty$e.call(data, key);
+    return nativeCreate ? (data[key] !== undefined) : hasOwnProperty$d.call(data, key);
   }
 
   /** Used to stand-in for `undefined` hash values. */
@@ -14603,7 +12811,7 @@
    * // Replace `_.memoize.Cache`.
    * _.memoize.Cache = WeakMap;
    */
-  function memoize$1(func, resolver) {
+  function memoize(func, resolver) {
     if (typeof func != 'function' || (resolver != null && typeof resolver != 'function')) {
       throw new TypeError(FUNC_ERROR_TEXT$2);
     }
@@ -14619,12 +12827,12 @@
       memoized.cache = cache.set(key, result) || cache;
       return result;
     };
-    memoized.cache = new (memoize$1.Cache || MapCache);
+    memoized.cache = new (memoize.Cache || MapCache);
     return memoized;
   }
 
   // Expose `MapCache`.
-  memoize$1.Cache = MapCache;
+  memoize.Cache = MapCache;
 
   /** Used as the maximum memoize cache size. */
   var MAX_MEMOIZE_SIZE = 500;
@@ -14638,7 +12846,7 @@
    * @returns {Function} Returns the new memoized function.
    */
   function memoizeCapped(func) {
-    var result = memoize$1(func, function(key) {
+    var result = memoize(func, function(key) {
       if (cache.size === MAX_MEMOIZE_SIZE) {
         cache.clear();
       }
@@ -14932,7 +13140,7 @@
   var funcToString$2 = funcProto$2.toString;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$f = objectProto$e.hasOwnProperty;
+  var hasOwnProperty$e = objectProto$e.hasOwnProperty;
 
   /** Used to infer the `Object` constructor. */
   var objectCtorString = funcToString$2.call(Object);
@@ -14973,7 +13181,7 @@
     if (proto === null) {
       return true;
     }
-    var Ctor = hasOwnProperty$f.call(proto, 'constructor') && proto.constructor;
+    var Ctor = hasOwnProperty$e.call(proto, 'constructor') && proto.constructor;
     return typeof Ctor == 'function' && Ctor instanceof Ctor &&
       funcToString$2.call(Ctor) == objectCtorString;
   }
@@ -16345,7 +14553,7 @@
   var objectProto$g = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$g = objectProto$g.hasOwnProperty;
+  var hasOwnProperty$f = objectProto$g.hasOwnProperty;
 
   /**
    * Initializes an array clone.
@@ -16359,7 +14567,7 @@
         result = new array.constructor(length);
 
     // Add properties assigned by `RegExp#exec`.
-    if (length && typeof array[0] == 'string' && hasOwnProperty$g.call(array, 'index')) {
+    if (length && typeof array[0] == 'string' && hasOwnProperty$f.call(array, 'index')) {
       result.index = array.index;
       result.input = array.input;
     }
@@ -17279,7 +15487,7 @@
   var objectProto$h = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$h = objectProto$h.hasOwnProperty;
+  var hasOwnProperty$g = objectProto$h.hasOwnProperty;
 
   /**
    * A specialized version of `baseIsEqualDeep` for objects with support for
@@ -17307,7 +15515,7 @@
     var index = objLength;
     while (index--) {
       var key = objProps[index];
-      if (!(isPartial ? key in other : hasOwnProperty$h.call(other, key))) {
+      if (!(isPartial ? key in other : hasOwnProperty$g.call(other, key))) {
         return false;
       }
     }
@@ -17371,7 +15579,7 @@
   var objectProto$i = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$i = objectProto$i.hasOwnProperty;
+  var hasOwnProperty$h = objectProto$i.hasOwnProperty;
 
   /**
    * A specialized version of `baseIsEqual` for arrays and objects which performs
@@ -17414,8 +15622,8 @@
         : equalByTag(object, other, objTag, bitmask, customizer, equalFunc, stack);
     }
     if (!(bitmask & COMPARE_PARTIAL_FLAG$3)) {
-      var objIsWrapped = objIsObj && hasOwnProperty$i.call(object, '__wrapped__'),
-          othIsWrapped = othIsObj && hasOwnProperty$i.call(other, '__wrapped__');
+      var objIsWrapped = objIsObj && hasOwnProperty$h.call(object, '__wrapped__'),
+          othIsWrapped = othIsObj && hasOwnProperty$h.call(other, '__wrapped__');
 
       if (objIsWrapped || othIsWrapped) {
         var objUnwrapped = objIsWrapped ? object.value() : object,
@@ -18056,7 +16264,7 @@
   var objectProto$j = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$j = objectProto$j.hasOwnProperty;
+  var hasOwnProperty$i = objectProto$j.hasOwnProperty;
 
   /**
    * Creates an object composed of keys generated from the results of running
@@ -18081,7 +16289,7 @@
    * // => { '3': 2, '5': 1 }
    */
   var countBy = createAggregator(function(result, value, key) {
-    if (hasOwnProperty$j.call(result, key)) {
+    if (hasOwnProperty$i.call(result, key)) {
       ++result[key];
     } else {
       baseAssignValue(result, key, 1);
@@ -18466,7 +16674,7 @@
   var objectProto$k = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$k = objectProto$k.hasOwnProperty;
+  var hasOwnProperty$j = objectProto$k.hasOwnProperty;
 
   /**
    * Assigns own and inherited enumerable string keyed properties of source
@@ -18511,7 +16719,7 @@
         var value = object[key];
 
         if (value === undefined ||
-            (eq(value, objectProto$k[key]) && !hasOwnProperty$k.call(object, key))) {
+            (eq(value, objectProto$k[key]) && !hasOwnProperty$j.call(object, key))) {
           object[key] = source[key];
         }
       }
@@ -18992,7 +17200,7 @@
    * _.last([1, 2, 3]);
    * // => 3
    */
-  function last$2(array) {
+  function last$1(array) {
     var length = array == null ? 0 : array.length;
     return length ? array[length - 1] : undefined;
   }
@@ -19024,7 +17232,7 @@
    * // => [{ 'x': 2 }]
    */
   var differenceBy = baseRest(function(array, values) {
-    var iteratee = last$2(values);
+    var iteratee = last$1(values);
     if (isArrayLikeObject(iteratee)) {
       iteratee = undefined;
     }
@@ -19057,7 +17265,7 @@
    * // => [{ 'x': 2, 'y': 1 }]
    */
   var differenceWith = baseRest(function(array, values) {
-    var comparator = last$2(values);
+    var comparator = last$1(values);
     if (isArrayLikeObject(comparator)) {
       comparator = undefined;
     }
@@ -20763,7 +18971,7 @@
   var objectProto$l = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$l = objectProto$l.hasOwnProperty;
+  var hasOwnProperty$k = objectProto$l.hasOwnProperty;
 
   /**
    * Creates an object composed of keys generated from the results of running
@@ -20789,7 +18997,7 @@
    * // => { '3': ['one', 'two'], '5': ['three'] }
    */
   var groupBy = createAggregator(function(result, value, key) {
-    if (hasOwnProperty$l.call(result, key)) {
+    if (hasOwnProperty$k.call(result, key)) {
       result[key].push(value);
     } else {
       baseAssignValue(result, key, [value]);
@@ -20882,7 +19090,7 @@
   var objectProto$m = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$m = objectProto$m.hasOwnProperty;
+  var hasOwnProperty$l = objectProto$m.hasOwnProperty;
 
   /**
    * The base implementation of `_.has` without support for deep paths.
@@ -20893,7 +19101,7 @@
    * @returns {boolean} Returns `true` if `key` exists, else `false`.
    */
   function baseHas(object, key) {
-    return object != null && hasOwnProperty$m.call(object, key);
+    return object != null && hasOwnProperty$l.call(object, key);
   }
 
   /**
@@ -21293,10 +19501,10 @@
    * // => [{ 'x': 1 }]
    */
   var intersectionBy = baseRest(function(arrays) {
-    var iteratee = last$2(arrays),
+    var iteratee = last$1(arrays),
         mapped = arrayMap(arrays, castArrayLikeObject);
 
-    if (iteratee === last$2(mapped)) {
+    if (iteratee === last$1(mapped)) {
       iteratee = undefined;
     } else {
       mapped.pop();
@@ -21328,7 +19536,7 @@
    * // => [{ 'x': 1, 'y': 2 }]
    */
   var intersectionWith = baseRest(function(arrays) {
-    var comparator = last$2(arrays),
+    var comparator = last$1(arrays),
         mapped = arrayMap(arrays, castArrayLikeObject);
 
     comparator = typeof comparator == 'function' ? comparator : undefined;
@@ -21413,7 +19621,7 @@
   var objectProto$o = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$n = objectProto$o.hasOwnProperty;
+  var hasOwnProperty$m = objectProto$o.hasOwnProperty;
 
   /**
    * Used to resolve the
@@ -21454,7 +19662,7 @@
       value = nativeObjectToString$3.call(value);
     }
 
-    if (hasOwnProperty$n.call(result, value)) {
+    if (hasOwnProperty$m.call(result, value)) {
       result[value].push(key);
     } else {
       result[value] = [key];
@@ -21486,7 +19694,7 @@
   function baseInvoke(object, path, args) {
     path = castPath(path, object);
     object = parent(object, path);
-    var func = object == null ? object : object[toKey(last$2(path))];
+    var func = object == null ? object : object[toKey(last$1(path))];
     return func == null ? undefined : apply(func, object, args);
   }
 
@@ -21657,7 +19865,7 @@
    * _.isElement('<body>');
    * // => false
    */
-  function isElement$1(value) {
+  function isElement(value) {
     return isObjectLike(value) && value.nodeType === 1 && !isPlainObject(value);
   }
 
@@ -21669,7 +19877,7 @@
   var objectProto$p = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$o = objectProto$p.hasOwnProperty;
+  var hasOwnProperty$n = objectProto$p.hasOwnProperty;
 
   /**
    * Checks if `value` is an empty object, collection, map, or set.
@@ -21721,7 +19929,7 @@
       return !baseKeys(value).length;
     }
     for (var key in value) {
-      if (hasOwnProperty$o.call(value, key)) {
+      if (hasOwnProperty$n.call(value, key)) {
         return false;
       }
     }
@@ -22876,7 +21084,7 @@
    * _.merge(object, other);
    * // => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
    */
-  var merge$1 = createAssigner(function(object, source, srcIndex) {
+  var merge = createAssigner(function(object, source, srcIndex) {
     baseMerge(object, source, srcIndex);
   });
 
@@ -23290,7 +21498,7 @@
   function baseUnset(object, path) {
     path = castPath(path, object);
     object = parent(object, path);
-    return object == null || delete object[toKey(last$2(path))];
+    return object == null || delete object[toKey(last$1(path))];
   }
 
   /**
@@ -26488,7 +24696,7 @@
   var objectProto$q = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$p = objectProto$q.hasOwnProperty;
+  var hasOwnProperty$o = objectProto$q.hasOwnProperty;
 
   /**
    * Used by `_.defaults` to customize its `_.assignIn` use to assign properties
@@ -26504,7 +24712,7 @@
    */
   function customDefaultsAssignIn(objValue, srcValue, key, object) {
     if (objValue === undefined ||
-        (eq(objValue, objectProto$q[key]) && !hasOwnProperty$p.call(object, key))) {
+        (eq(objValue, objectProto$q[key]) && !hasOwnProperty$o.call(object, key))) {
       return srcValue;
     }
     return objValue;
@@ -26622,7 +24830,7 @@
   var objectProto$r = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$q = objectProto$r.hasOwnProperty;
+  var hasOwnProperty$p = objectProto$r.hasOwnProperty;
 
   /**
    * Creates a compiled template function that can interpolate data properties
@@ -26762,7 +24970,7 @@
     // The sourceURL gets injected into the source that's eval-ed, so be careful
     // to normalize all kinds of whitespace, so e.g. newlines (and unicode versions of it) can't sneak in
     // and escape the comment, thus injecting code that gets evaled.
-    var sourceURL = hasOwnProperty$q.call(options, 'sourceURL')
+    var sourceURL = hasOwnProperty$p.call(options, 'sourceURL')
       ? ('//# sourceURL=' +
          (options.sourceURL + '').replace(/\s/g, ' ') +
          '\n')
@@ -26797,7 +25005,7 @@
 
     // If `variable` is not specified wrap a with-statement around the generated
     // code to add the data object to the top of the scope chain.
-    var variable = hasOwnProperty$q.call(options, 'variable') && options.variable;
+    var variable = hasOwnProperty$p.call(options, 'variable') && options.variable;
     if (!variable) {
       source = 'with (obj) {\n' + source + '\n}\n';
     }
@@ -27632,7 +25840,7 @@
    * // => [{ 'x': 1 }, { 'x': 2 }]
    */
   var unionBy = baseRest(function(arrays) {
-    var iteratee = last$2(arrays);
+    var iteratee = last$1(arrays);
     if (isArrayLikeObject(iteratee)) {
       iteratee = undefined;
     }
@@ -27661,7 +25869,7 @@
    * // => [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
    */
   var unionWith = baseRest(function(arrays) {
-    var comparator = last$2(arrays);
+    var comparator = last$1(arrays);
     comparator = typeof comparator == 'function' ? comparator : undefined;
     return baseUniq(baseFlatten(arrays, 1, isArrayLikeObject, true), undefined, comparator);
   });
@@ -28232,7 +26440,7 @@
    * // => [{ 'x': 2 }]
    */
   var xorBy = baseRest(function(arrays) {
-    var iteratee = last$2(arrays);
+    var iteratee = last$1(arrays);
     if (isArrayLikeObject(iteratee)) {
       iteratee = undefined;
     }
@@ -28261,7 +26469,7 @@
    * // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
    */
   var xorWith = baseRest(function(arrays) {
-    var comparator = last$2(arrays);
+    var comparator = last$1(arrays);
     comparator = typeof comparator == 'function' ? comparator : undefined;
     return baseXor(arrayFilter(arrays, isArrayLikeObject), undefined, comparator);
   });
@@ -28379,7 +26587,7 @@
     fill, findIndex, findLastIndex, first: head, flatten,
     flattenDeep, flattenDepth, fromPairs, head, indexOf,
     initial, intersection, intersectionBy, intersectionWith, join,
-    last: last$2, lastIndexOf, nth, pull, pullAll,
+    last: last$1, lastIndexOf, nth, pull, pullAll,
     pullAllBy, pullAllWith, pullAt, remove, reverse,
     slice, sortedIndex, sortedIndexBy, sortedIndexOf, sortedLastIndex,
     sortedLastIndexBy, sortedLastIndexOf, sortedUniq, sortedUniqBy, tail,
@@ -28405,7 +26613,7 @@
   var func = {
     after, ary, before, bind, bindKey,
     curry, curryRight, debounce, defer, delay,
-    flip: flip$1, memoize: memoize$1, negate, once, overArgs,
+    flip: flip$1, memoize, negate, once, overArgs,
     partial, partialRight, rearg, rest, spread,
     throttle: throttle$1, unary, wrap: wrap$1
   };
@@ -28414,7 +26622,7 @@
     castArray, clone, cloneDeep, cloneDeepWith, cloneWith,
     conformsTo, eq, gt, gte, isArguments,
     isArray, isArrayBuffer, isArrayLike, isArrayLikeObject, isBoolean,
-    isBuffer, isDate, isElement: isElement$1, isEmpty, isEqual,
+    isBuffer, isDate, isElement, isEmpty, isEqual,
     isEqualWith, isError, isFinite: isFinite$1, isFunction, isInteger,
     isLength, isMap, isMatch, isMatchWith, isNaN: isNaN$1,
     isNative, isNil, isNull, isNumber, isObject,
@@ -28442,7 +26650,7 @@
     forInRight, forOwn, forOwnRight, functions, functionsIn,
     get: get$1, has, hasIn, invert, invertBy,
     invoke, keys, keysIn, mapKeys, mapValues,
-    merge: merge$1, mergeWith, omit, omitBy, pick,
+    merge, mergeWith, omit, omitBy, pick,
     pickBy, result, set, setWith, toPairs,
     toPairsIn, transform, unset, update, updateWith,
     values, valuesIn
@@ -28637,7 +26845,7 @@
       objectProto$s = Object.prototype;
 
   /** Used to check objects for own properties. */
-  var hasOwnProperty$r = objectProto$s.hasOwnProperty;
+  var hasOwnProperty$q = objectProto$s.hasOwnProperty;
 
   /** Built-in value references. */
   var symIterator$1 = Symbol$1 ? Symbol$1.iterator : undefined;
@@ -28907,7 +27115,7 @@
   lodash.isWeakSet = lang.isWeakSet;
   lodash.join = array.join;
   lodash.kebabCase = string.kebabCase;
-  lodash.last = last$2;
+  lodash.last = last$1;
   lodash.lastIndexOf = array.lastIndexOf;
   lodash.lowerCase = string.lowerCase;
   lodash.lowerFirst = string.lowerFirst;
@@ -28981,7 +27189,7 @@
   mixin$1(lodash, (function() {
     var source = {};
     baseForOwn(lodash, function(func, methodName) {
-      if (!hasOwnProperty$r.call(lodash.prototype, methodName)) {
+      if (!hasOwnProperty$q.call(lodash.prototype, methodName)) {
         source[methodName] = func;
       }
     });
@@ -29182,7 +27390,7 @@
     var lodashFunc = lodash[methodName];
     if (lodashFunc) {
       var key = lodashFunc.name + '';
-      if (!hasOwnProperty$r.call(realNames, key)) {
+      if (!hasOwnProperty$q.call(realNames, key)) {
         realNames[key] = [];
       }
       realNames[key].push({ 'name': methodName, 'func': lodashFunc });
@@ -38999,9 +37207,9 @@
     }
   }
 
-  var css$2 = ".styles_reactWaves__1M36F {\n  width: 85%;\n  display: inline-block;\n  text-align: center;\n  margin: 2em auto;\n  padding: 4px 15px 0 40px;\n  /* width */\n  /* Track */\n  /* Handle */\n  /* Handle on hover */ }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar {\n    margin-top: 20px;\n    width: 8px;\n    height: 8px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-track {\n    box-shadow: inset 0 0 1px grey;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb {\n    background: #4F49E2;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb:hover {\n    background: rgba(79, 73, 226, 0.85); }\n";
+  var css$1 = ".styles_reactWaves__1M36F {\n  width: 85%;\n  display: inline-block;\n  text-align: center;\n  margin: 2em auto;\n  padding: 4px 15px 0 40px;\n  /* width */\n  /* Track */\n  /* Handle */\n  /* Handle on hover */ }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar {\n    margin-top: 20px;\n    width: 8px;\n    height: 8px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-track {\n    box-shadow: inset 0 0 1px grey;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb {\n    background: #4F49E2;\n    border-radius: 10px; }\n  .styles_reactWaves__1M36F ::-webkit-scrollbar-thumb:hover {\n    background: rgba(79, 73, 226, 0.85); }\n";
   var styles$1 = { "reactWaves": "styles_reactWaves__1M36F" };
-  styleInject(css$2);
+  styleInject(css$1);
 
   var Regions = function (_React$Component) {
     inherits$1(Regions, _React$Component);
@@ -39918,11 +38126,11 @@
             minDuration = _this$props4.minDuration,
             smartCropprProps = _this$props4.smartCropprProps;
         var loopElPosition = this.getLoopElPosition();
-        return jsx("div", {
-          css: css(_templateObject$1(), styles)
-        }, jsx("div", {
+        return react.jsx("div", {
+          css: react.css(_templateObject$1(), styles)
+        }, react.jsx("div", {
           className: "dnm-video-cut-root ".concat(classes.root || "", " ").concat(isPlaying ? "is-playing" : "is-paused")
-        }, type === 'audio' ? jsx(React__default.Fragment, null, !waveformIsReady && loader ? loader : null, jsx(Waveform$1, {
+        }, type === 'audio' ? react.jsx(React__default.Fragment, null, !waveformIsReady && loader ? loader : null, react.jsx(Waveform$1, {
           src: src,
           visible: waveformIsReady,
           position: playCursorPosition.xRatio,
@@ -39931,7 +38139,7 @@
           onWaveformReady: this.handleWaveformReady,
           range: [inValue, outValue],
           height: waveformHeight
-        }), jsx("audio", {
+        }), react.jsx("audio", {
           className: "dnm-video-cut-audio-player ".concat(classes.audioPlayer || ""),
           src: src,
           ref: this.handlePlayerLoad,
@@ -39939,40 +38147,40 @@
           onLoadedData: this.handleLoadedData,
           onError: this.handlePlayerError,
           preload: "auto"
-        })) : jsx(SmartCroppr, _extends({}, smartCropprProps || {}, {
+        })) : react.jsx(SmartCroppr, _extends({}, smartCropprProps || {}, {
           onMediaLoad: this.handleVideoPlayerLoad,
           mediaType: "video",
           src: src
-        })), jsx("div", {
+        })), react.jsx("div", {
           className: "dnm-video-cut-progress-root"
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-progress-core"
-        }, tooltipRenderer(jsx("div", {
+        }, tooltipRenderer(react.jsx("div", {
           className: "dnm-video-cut-play-icon",
           onClick: this.handleFreePlayClick
-        }, isPlaying ? jsx(PauseIcon, null) : jsx(PlayIcon, null)), {
+        }, isPlaying ? react.jsx(PauseIcon, null) : react.jsx(PlayIcon, null)), {
           title: isPlaying ? catalogue.pauseTooltip : catalogue.playTooltip,
           id: 'play'
-        }), jsx("div", {
+        }), react.jsx("div", {
           className: "dnm-video-cut-progress-scrollable-parent",
           ref: this.scrollable
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-progress-scrollable-root",
           style: {
             width: "calc(".concat(zoomFactor[0] + 100, "% - 20px)")
           }
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-loop-icon-container"
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-loop-icon-shell",
           style: {
             position: 'absolute',
             left: "calc(".concat(loopElPosition, " - 10px)")
           }
-        }, tooltipRenderer(jsx("div", {
+        }, tooltipRenderer(react.jsx("div", {
           className: "dnm-video-cut-loop-icon",
           onClick: this.handleLoopPlayClick
-        }, isPlaying ? jsx(PauseIcon, null) : jsx(LoopIcon, null)), {
+        }, isPlaying ? react.jsx(PauseIcon, null) : react.jsx(LoopIcon, null)), {
           title: isPlaying ? catalogue.loopPauseTooltip : catalogue.loopPlayTooltip,
           id: 'loop',
           context: {
@@ -39984,13 +38192,13 @@
             inValue: inValue,
             outValue: outValue
           }
-        }))), jsx("div", {
+        }))), react.jsx("div", {
           className: "dnm-video-cut-progress-container",
           onTouchMove: this.handleContainerMouseDown,
           onTouchEnd: this.handleContainerMouseUp,
           onMouseDown: this.handleContainerMouseDown,
           onMouseUp: this.handleContainerMouseUp
-        }, jsx(Draggable, {
+        }, react.jsx(Draggable, {
           className: "dnm-video-cut-playing-cursor-draggable-item",
           axis: "x",
           forceDragging: forceCursorDragging,
@@ -40000,10 +38208,10 @@
           position: playCursorPosition,
           draggableWidth: playerCursorWidth,
           rerenderKey: zoomFactor[0]
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-playing-cursor",
           ref: this.draggable
-        })), jsx(Range$2, {
+        })), react.jsx(Range$2, {
           className: "dnm-video-cut-range ".concat(classes.range || ""),
           min: 0,
           max: videoDuration || 0,
@@ -40013,13 +38221,13 @@
           onBeforeChange: this.handleBeforeRangeChange,
           onAfterChange: this.handleAfterRangeChange
         }))))), // +0.001 needed to fix weird round bug
-        outValue - inValue + 0.001 < (parseFloat(minDuration) || 0) ? jsx("div", null, jsx("p", {
+        outValue - inValue + 0.001 < (parseFloat(minDuration) || 0) ? react.jsx("div", null, react.jsx("p", {
           className: "dnm-video-cut-too-short-warning"
-        }, catalogue.videoTooShortWarning)) : null, jsx("div", {
+        }, catalogue.videoTooShortWarning)) : null, react.jsx("div", {
           className: "dnm-video-cut-tools"
-        }, jsx("div", {
+        }, react.jsx("div", {
           className: "dnm-video-cut-zoom"
-        }, jsx(Range$2, {
+        }, react.jsx(Range$2, {
           className: "dnm-video-cut-zoom-range ".concat(classes.zoomRange || ""),
           min: 0,
           max: 900,
@@ -40028,17 +38236,17 @@
           onBeforeChange: this.handleZoomFactorDragStart,
           onAfterChange: this.handleZoomFactorDragEnd,
           onChange: this.handleZoomFactorChange
-        }), jsx("div", {
+        }), react.jsx("div", {
           className: "dnm-video-cut-zoom-icon"
-        }, jsx(ZoomIcon, null))), type !== 'audio' ? jsx("div", {
+        }, react.jsx(ZoomIcon, null))), type !== 'audio' ? react.jsx("div", {
           className: "dnm-video-cut-mute"
-        }, onMuteChange && jsx("label", {
+        }, onMuteChange && react.jsx("label", {
           className: "dnm-video-cut-checkbox-container"
-        }, catalogue.unmute, jsx("input", {
+        }, catalogue.unmute, react.jsx("input", {
           type: "checkbox",
           checked: !muted,
           onChange: this.handleMuteChange
-        }), jsx("span", {
+        }), react.jsx("span", {
           className: "dnm-video-cut-checkmark"
         }))) : null))));
       }
