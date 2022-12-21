@@ -237,7 +237,6 @@ export default class DnmVideoCut extends React.Component {
         this.playerRef = { current: ref };
         const video = this.playerRef.current;
         if (video) {
-            // this.monitorAutoplay(true);
             video.addEventListener('timeupdate', this.monitorAutoplay);
             video.addEventListener('seek', this.monitorAutoplay);
         }
@@ -253,10 +252,7 @@ export default class DnmVideoCut extends React.Component {
         const video = this.playerRef.current;
         if (video) {
             const { inPoint } = this.props;
-            if (typeof inPoint !== "undefined") {
-                this.seekVideoTo(inPoint);
-                setTimeout(() => this.seekVideoTo(inPoint), 1000);
-            }
+            if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
             if (onVideoLoadedData) onVideoLoadedData(video);

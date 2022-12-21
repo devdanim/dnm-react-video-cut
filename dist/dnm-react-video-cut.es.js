@@ -37859,7 +37859,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var video = _this.playerRef.current;
 
       if (video) {
-        // this.monitorAutoplay(true);
         video.addEventListener('timeupdate', _this.monitorAutoplay);
         video.addEventListener('seek', _this.monitorAutoplay);
       }
@@ -37877,14 +37876,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (video) {
         var inPoint = _this.props.inPoint;
-
-        if (typeof inPoint !== "undefined") {
-          _this.seekVideoTo(inPoint);
-
-          setTimeout(function () {
-            return _this.seekVideoTo(inPoint);
-          }, 1000);
-        }
+        if (typeof inPoint !== "undefined") _this.seekVideoTo(inPoint);
 
         _this.updatePlayerVolume();
 
