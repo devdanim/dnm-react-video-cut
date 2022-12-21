@@ -13,6 +13,7 @@ class App extends React.Component {
             muted: false,
             type: 'audio',
             src: null,
+            moduleKey: new Date().getTime()
         }
         this.videoRef = React.createRef();
     }
@@ -36,10 +37,11 @@ class App extends React.Component {
     }
 
     render() {
-        const { inPoint, outPoint, muted, type, src } = this.state;
+        const { inPoint, outPoint, muted, type, src, moduleKey } = this.state;
         return(
             <React.Fragment>
                 <button onClick={() => this.setState({ type: type === 'audio' ? 'video' : 'audio', src: null })}>Toggle mode</button>
+                <button onClick={() => this.setState({ moduleKey: new Date().getTime() })}>Update React Key</button>
                 <br />
                 <br />
                 <div>
@@ -58,6 +60,7 @@ class App extends React.Component {
                 <br />
                 <div style={{ width: '350px' }}>
                     <DnmVideoCut
+                        key={moduleKey}
                         inPoint={inPoint}
                         outPoint={outPoint}
                         muted={muted}
@@ -78,7 +81,7 @@ class App extends React.Component {
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,
-                            debug: true,
+                            debug: false,
                             maxAspectRatio: 1,
                             mode: 'real',
                             onCropEnd: data => console.log('onCropEnd', data),

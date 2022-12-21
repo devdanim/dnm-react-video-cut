@@ -37639,6 +37639,12 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "componentWillUnmount", function () {
       window.removeEventListener("keydown", _this.handleKeyPress);
+      var video = _this.playerRef.current;
+
+      if (video) {
+        video.removeEventListener('timeupdate', _this.monitorAutoplay);
+        video.removeEventListener('seek', _this.monitorAutoplay);
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "getAcceptedDuration", function () {
@@ -37715,7 +37721,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var video = _this.playerRef.current;
 
-      if (video && (!video.paused || force)) {
+      if (video && (!video.paused || force === true)) {
         if (_this.playLoop) {
           var _this$getFormatedValu = _this.getFormatedValues(),
               inValue = _this$getFormatedValu.inValue,
@@ -37723,7 +37729,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
           var time = video.currentTime;
 
-          if (time < inValue || time > outValue) {
+          if (time + 0.04 < inValue || time - 0.04 > outValue) {
             video.currentTime = inValue;
           }
         }
@@ -37853,9 +37859,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var video = _this.playerRef.current;
 
       if (video) {
-        video.addEventListener('timeupdate', function () {
-          _this.monitorAutoplay();
-        }, false);
+        // this.monitorAutoplay(true);
+        video.addEventListener('timeupdate', _this.monitorAutoplay);
+        video.addEventListener('seek', _this.monitorAutoplay);
       }
     });
 
@@ -37871,7 +37877,14 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (video) {
         var inPoint = _this.props.inPoint;
-        if (typeof inPoint !== "undefined") _this.seekVideoTo(inPoint);
+
+        if (typeof inPoint !== "undefined") {
+          _this.seekVideoTo(inPoint);
+
+          setTimeout(function () {
+            return _this.seekVideoTo(inPoint);
+          }, 1000);
+        }
 
         _this.updatePlayerVolume();
 

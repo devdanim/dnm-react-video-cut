@@ -69,6 +69,11 @@ export default class DnmVideoCut extends React.Component {
 
     componentWillUnmount = () => {
         window.removeEventListener("keydown", this.handleKeyPress);
+        const video = this.playerRef.current;
+        if (video) {
+            video.removeEventListener('timeupdate', this.monitorAutoplay);
+            video.removeEventListener('seek', this.monitorAutoplay);
+        }
     }
 
 
@@ -137,11 +142,11 @@ export default class DnmVideoCut extends React.Component {
 
     monitorAutoplay = (force = false) => {
         const video = this.playerRef.current;
-        if(video && (!video.paused || force)) {
+        if(video && (!video.paused || force === true)) {
             if(this.playLoop) {
                 const { inValue, outValue } = this.getFormatedValues();
                 const time = video.currentTime;
-                if(time < inValue || time > outValue) {
+                if((time + 0.04) < inValue || (time - 0.04) > outValue) {
                     video.currentTime = inValue;
                 }
             }
@@ -232,9 +237,9 @@ export default class DnmVideoCut extends React.Component {
         this.playerRef = { current: ref };
         const video = this.playerRef.current;
         if (video) {
-            video.addEventListener('timeupdate', () => {
-                this.monitorAutoplay();
-            }, false);
+            // this.monitorAutoplay(true);
+            video.addEventListener('timeupdate', this.monitorAutoplay);
+            video.addEventListener('seek', this.monitorAutoplay);
         }
     }
 
@@ -248,7 +253,10 @@ export default class DnmVideoCut extends React.Component {
         const video = this.playerRef.current;
         if (video) {
             const { inPoint } = this.props;
-            if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
+            if (typeof inPoint !== "undefined") {
+                this.seekVideoTo(inPoint);
+                setTimeout(() => this.seekVideoTo(inPoint), 1000);
+            }
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
             if (onVideoLoadedData) onVideoLoadedData(video);
