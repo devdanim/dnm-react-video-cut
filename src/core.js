@@ -62,6 +62,7 @@ export default class DnmVideoCut extends React.Component {
                 else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
             }
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
+            console.log('Will seek to', time, prevProps.inPoint, inPoint, prevProps.outPoint, outPoint)
             this.seekVideoTo(time);
         }
         if(muted !== prevProps.muted) this.updatePlayerVolume();
@@ -78,7 +79,6 @@ export default class DnmVideoCut extends React.Component {
 
     _seekVideoTo(time) {
         console.log('Seek to', time);
-        console.trace();
         if (!isNaN(time)) {
             const video = this.playerRef.current;
             if(video) video.currentTime = time;
@@ -254,6 +254,7 @@ export default class DnmVideoCut extends React.Component {
         const video = this.playerRef.current;
         if (video) {
             const { inPoint } = this.props;
+            console.log('Will seek from handle load', inPoint);
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
@@ -277,6 +278,7 @@ export default class DnmVideoCut extends React.Component {
 
     handleAfterRangeChange = () => {
         const { playCursorPosition, videoDuration } = this.state;
+        console.log('Will seek from handleAfterRangeChange', playCursorPosition.xRatio, videoDuration);
         this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
         this.isEditing = false;
     }
@@ -293,6 +295,7 @@ export default class DnmVideoCut extends React.Component {
     handlePlayCursorDrag = (position) => {
         const { xRatio } = position;
         const { videoDuration } = this.state;
+        console.log('Will seek from handlePlayCursorDrag', xRatio, videoDuration);
         this.seekVideoTo(videoDuration * xRatio);
         this.setState({ playCursorPosition: position });
     }

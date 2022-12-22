@@ -37878,6 +37878,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (video) {
         var inPoint = _this.props.inPoint;
+        console.log('Will seek from handle load', inPoint);
         if (typeof inPoint !== "undefined") _this.seekVideoTo(inPoint);
 
         _this.updatePlayerVolume();
@@ -37919,6 +37920,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var _this$state2 = _this.state,
           playCursorPosition = _this$state2.playCursorPosition,
           videoDuration = _this$state2.videoDuration;
+      console.log('Will seek from handleAfterRangeChange', playCursorPosition.xRatio, videoDuration);
 
       _this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
 
@@ -37938,6 +37940,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handlePlayCursorDrag", function (position) {
       var xRatio = position.xRatio;
       var videoDuration = _this.state.videoDuration;
+      console.log('Will seek from handlePlayCursorDrag', xRatio, videoDuration);
 
       _this.seekVideoTo(videoDuration * xRatio);
 
@@ -38075,6 +38078,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           if (Math.abs(outPoint - inPoint - min) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
         } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
 
+        console.log('Will seek to', time, prevProps.inPoint, inPoint, prevProps.outPoint, outPoint);
         this.seekVideoTo(time);
       }
 
@@ -38084,7 +38088,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     key: "_seekVideoTo",
     value: function _seekVideoTo(time) {
       console.log('Seek to', time);
-      console.trace();
 
       if (!isNaN(time)) {
         var video = this.playerRef.current;
