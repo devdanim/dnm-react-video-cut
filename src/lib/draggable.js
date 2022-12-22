@@ -39,6 +39,7 @@ export default class Draggable extends React.Component {
         this.ghostContainerDimensions = this.getContainerDimensions();
         // Force rerender if container dimensions has changed
         if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
+            console.log('Container width', containerWidth, containerHeight);
             this._handleWindowResize();
         }
     }
