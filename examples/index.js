@@ -81,9 +81,11 @@ class App extends React.Component {
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,
-                            debug: false,
+                            debug: new Date().getTime(),
                             maxAspectRatio: 1,
                             mode: 'real',
+                            resyncMethod: 'interval',
+                            resyncInterval: 500,
                             onCropEnd: data => console.log('onCropEnd', data),
                             onCropMove: data => console.log('onCropMove', data),
                             onCropStart: data => console.log('onCropStart', data),
@@ -91,7 +93,7 @@ class App extends React.Component {
                                 console.log('onInit', instance, mediaNode);
                             },
                             onNotSupportedVideoLoad: (err) => console.error("Video source not supported", err),
-                            smartCrop: true,
+                            smartCrop: false,
                             smartCropOptions: {
                                 minScale: 1,
                                 onSmartCropDone: (data) => {
