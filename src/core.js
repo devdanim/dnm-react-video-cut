@@ -78,6 +78,7 @@ export default class DnmVideoCut extends React.Component {
 
     _seekVideoTo(time) {
         console.log('Seek to', time);
+        console.trace();
         if (!isNaN(time)) {
             const video = this.playerRef.current;
             if(video) video.currentTime = time;

@@ -38101,6 +38101,7 @@
       key: "_seekVideoTo",
       value: function _seekVideoTo(time) {
         console.log('Seek to', time);
+        console.trace();
 
         if (!isNaN(time)) {
           var video = this.playerRef.current;
