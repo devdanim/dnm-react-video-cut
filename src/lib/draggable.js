@@ -39,7 +39,6 @@ export default class Draggable extends React.Component {
         this.ghostContainerDimensions = this.getContainerDimensions();
         // Force rerender if container dimensions has changed
         if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
-            console.log('Container width', containerWidth, containerHeight);
             this._handleWindowResize();
         }
     }
@@ -177,10 +176,14 @@ export default class Draggable extends React.Component {
     }
 
     updateState = (state) => {
-        this.lastMove = new Date().getTime();
         const { position, onDrag } = this.props;
-        if (!position) this.setState(state);
-        else onDrag({ ...position, ...state });
+        const { containerWidth } = this.getContainerDimensions();
+        console.log('Container width', containerWidth);
+        if (containerWidth) {
+            this.lastMove = new Date().getTime();
+            if (!position) this.setState(state);
+            else onDrag({ ...position, ...state });
+        }
     }
 
     render() {

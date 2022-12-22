@@ -27577,11 +27577,19 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "updateState", function (state) {
-      _this.lastMove = new Date().getTime();
       var _this$props2 = _this.props,
           position = _this$props2.position,
           onDrag = _this$props2.onDrag;
-      if (!position) _this.setState(state);else onDrag(_objectSpread2({}, position, {}, state));
+
+      var _this$getContainerDim4 = _this.getContainerDimensions(),
+          containerWidth = _this$getContainerDim4.containerWidth;
+
+      console.log('Container width', containerWidth);
+
+      if (containerWidth) {
+        _this.lastMove = new Date().getTime();
+        if (!position) _this.setState(state);else onDrag(_objectSpread2({}, position, {}, state));
+      }
     });
 
     _this.state = {
@@ -27621,8 +27629,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       this.ghostContainerDimensions = this.getContainerDimensions(); // Force rerender if container dimensions has changed
 
       if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
-        console.log('Container width', containerWidth, containerHeight);
-
         this._handleWindowResize();
       }
     }
