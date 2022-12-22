@@ -245,6 +245,7 @@ export default class DnmVideoCut extends React.Component {
     handleVideoPlayerLoad = (cropprInstance, videoNode) => {
         this.handlePlayerLoad(videoNode);
         this.handleLoadedData();
+        console.log('video cut load', this.playerRef, this.props.inPoint);
     }
 
     handleLoadedData = () => {
