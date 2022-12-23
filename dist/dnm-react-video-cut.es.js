@@ -9433,7 +9433,7 @@ Slider$1.Handle = Handle;
 Slider$1.createSliderWithTooltip = createSliderWithTooltip;
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: rgb(197, 203, 212);\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: rgb(197, 203, 212);\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n\n  .dnm-video-cut-audio-player {\n    display: none;\n  }\n\n  .dnm-video-cut-audio-waveform-loading {\n    height: 0;\n    overflow: hidden;\n  }\n\n  .dnm-video-cut-audio-waveform {\n    width: 100%;\n    padding: 0;\n    margin: 0;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-region {\n    z-index: 3 !important;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-handle {\n    background-color: rgba(146, 210, 117, 0.9) !important;\n    width: 4px !important;\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n\n  .dnm-video-cut-progress-root {\n    display: flex;\n    justify-content: center; \n    align-items: center;\n    flex-flow: column;\n  }\n  \n  .dnm-video-cut-progress-core {\n    width: 100%;\n    display: flex;\n    align-items: center;\n  }\n\n  .dnm-video-cut-progress-scrollable-parent {\n    width: calc(100% - 45px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 0;\n    padding-top: 10px;\n    overflow-x: scroll;\n  }\n\n  .dnm-video-cut-progress-scrollable-root {\n    margin-left: 10px;\n    padding-right: 10px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-loop-icon-container {\n    height: 22px;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 30px;\n    height: 30px;\n    display: inline-block;\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n    display: flex;\n    justify-content: center; \n    align-items: center;\n  }\n\n  .dnm-video-cut-loop-icon {\n    width: 20px;\n    height: 20px;\n    display: block;\n    transform: scale(1);\n    transition: transform 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    border-radius: 100px;\n    z-index: 3;\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  \n  .dnm-video-cut-loop-icon svg {\n    color: white;\n    position: relative;\n  }\n\n  .dnm-video-cut-play-icon svg {\n    color: white;\n    width: 12px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {\n    width: 9px;\n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-loop-icon svg {\n    width: 14px;\n  }\n  \n  .dnm-video-cut-play-icon:hover, .dnm-video-cut-loop-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }\n\n  .dnm-video-cut-tools {\n    margin-top: 5px;\n    width: 100%;\n    align-self: flex-end;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-flow: row-reverse;\n  }\n\n  .dnm-video-cut-zoom {\n    width: 150px;\n  }\n  \n  .dnm-video-cut-zoom-icon {\n    width: 17px;\n  }\n  \n  .dnm-video-cut-zoom-icon {\n    width: 18px;\n    display: inline-block;\n    margin-left: 10px;\n  }\n\n  .dnm-video-cut-zoom-range {\n    width: calc(100% - 28px);\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon svg {\n    color: rgb(168, 173, 181);\n  }\n\n  .dnm-video-cut-mute {\n    display: inline-block;\n    float: left;\n  }\n\n  .dnm-video-cut-checkbox-container {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    padding-top: 3px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 18px;\n    color: rgb(158 162 169);\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n  }\n\n  .dnm-video-cut-checkbox-container input {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n    height: 0;\n    width: 0;\n  }\n\n  .dnm-video-cut-checkmark {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n    background-color: rgb(229, 233, 240);\n    border-radius: 5px;\n  }\n\n  .dnm-video-cut-checkbox-container:hover input ~ .dnm-video-cut-checkmark {\n    background-color: rgb(197, 203, 212);\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark {\n    background-color: #92d275;\n  }\n\n  .dnm-video-cut-checkmark:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark:after {\n    display: block;\n  }\n\n  .dnm-video-cut-checkbox-container .dnm-video-cut-checkmark:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    -ms-transform: rotate(45deg);\n    transform: rotate(45deg);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  .rc-slider {\n    position: relative;\n    height: 14px;\n    padding: 5px 0;\n    width: 100%;\n    border-radius: 6px;\n    -ms-touch-action: none;\n    touch-action: none;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-rail {\n    position: absolute;\n    width: 100%;\n    background-color: #e9e9e9;\n    height: 4px;\n    border-radius: 6px;\n  }\n  .rc-slider-track {\n    position: absolute;\n    left: 0;\n    height: 4px;\n    border-radius: 6px;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n  }\n  .rc-slider-handle {\n    position: absolute;\n    width: 14px;\n    height: 14px;\n    cursor: pointer;\n    cursor: -webkit-grab;\n    margin-top: -5px;\n    cursor: grab;\n    border-radius: 50%;\n    border: solid 2px #46be8a;\n    background-color: #fff;\n    -ms-touch-action: pan-x;\n    touch-action: pan-x;\n  }\n  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {\n    border-color: #92d275;\n    box-shadow: 0 0 0 5px #92d275;\n  }\n  .rc-slider-handle:focus {\n    outline: none;\n  }\n  .rc-slider-handle-click-focused:focus {\n    border-color: #46be8a;\n    box-shadow: unset;\n  }\n  .rc-slider-handle:hover {\n    border-color: #92d275;\n  }\n  .rc-slider-handle:active {\n    border-color: #92d275;\n    box-shadow: 0 0 5px #92d275;\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  .rc-slider-mark {\n    position: absolute;\n    top: 18px;\n    left: 0;\n    width: 100%;\n    font-size: 12px;\n  }\n  .rc-slider-mark-text {\n    position: absolute;\n    display: inline-block;\n    vertical-align: middle;\n    text-align: center;\n    cursor: pointer;\n    color: #999;\n  }\n  .rc-slider-mark-text-active {\n    color: #666;\n  }\n  .rc-slider-step {\n    position: absolute;\n    width: 100%;\n    height: 4px;\n    background: transparent;\n  }\n  .rc-slider-dot {\n    position: absolute;\n    bottom: -2px;\n    margin-left: -4px;\n    width: 8px;\n    height: 8px;\n    border: 2px solid #e9e9e9;\n    background-color: #fff;\n    cursor: pointer;\n    border-radius: 50%;\n    vertical-align: middle;\n  }\n  .rc-slider-dot-active {\n    border-color: #46be8a;\n  }\n  .rc-slider-dot-reverse {\n    margin-left: 0;\n    margin-right: -4px;\n  }\n  .rc-slider-disabled {\n    background-color: #e9e9e9;\n  }\n  .rc-slider-disabled .rc-slider-track {\n    background-color: rgb(197, 203, 212);\n  }\n  .rc-slider-disabled .rc-slider-handle,\n  .rc-slider-disabled .rc-slider-dot {\n    border-color: rgb(197, 203, 212);\n    box-shadow: none;\n    background-color: #fff;\n    cursor: not-allowed;\n  }\n  .rc-slider-disabled .rc-slider-mark-text,\n  .rc-slider-disabled .rc-slider-dot {\n    cursor: not-allowed !important;\n  }\n  .rc-slider-vertical {\n    width: 14px;\n    height: 100%;\n    padding: 0 5px;\n  }\n  .rc-slider-vertical .rc-slider-rail {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-track {\n    left: 5px;\n    bottom: 0;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-handle {\n    margin-left: -5px;\n    -ms-touch-action: pan-y;\n    touch-action: pan-y;\n  }\n  .rc-slider-vertical .rc-slider-mark {\n    top: 0;\n    left: 18px;\n    height: 100%;\n  }\n  .rc-slider-vertical .rc-slider-step {\n    height: 100%;\n    width: 4px;\n  }\n  .rc-slider-vertical .rc-slider-dot {\n    left: 2px;\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:first-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-vertical .rc-slider-dot:last-of-type {\n    margin-bottom: -4px;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-duration: 0.3s;\n    animation-fill-mode: both;\n    display: block !important;\n    animation-play-state: paused;\n  }\n  .rc-slider-tooltip-zoom-down-enter.rc-slider-tooltip-zoom-down-enter-active,\n  .rc-slider-tooltip-zoom-down-appear.rc-slider-tooltip-zoom-down-appear-active {\n    animation-name: rcSliderTooltipZoomDownIn;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-leave.rc-slider-tooltip-zoom-down-leave-active {\n    animation-name: rcSliderTooltipZoomDownOut;\n    animation-play-state: running;\n  }\n  .rc-slider-tooltip-zoom-down-enter,\n  .rc-slider-tooltip-zoom-down-appear {\n    transform: scale(0, 0);\n    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);\n  }\n  .rc-slider-tooltip-zoom-down-leave {\n    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);\n  }\n  @keyframes rcSliderTooltipZoomDownIn {\n    0% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n    100% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n  }\n  @keyframes rcSliderTooltipZoomDownOut {\n    0% {\n      transform-origin: 50% 100%;\n      transform: scale(1, 1);\n    }\n    100% {\n      opacity: 0;\n      transform-origin: 50% 100%;\n      transform: scale(0, 0);\n    }\n  }\n  .rc-slider-tooltip {\n    position: absolute;\n    left: -9999px;\n    top: -9999px;\n    visibility: visible;\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip * {\n    box-sizing: border-box;\n    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n  }\n  .rc-slider-tooltip-hidden {\n    display: none;\n  }\n  .rc-slider-tooltip-placement-top {\n    padding: 4px 0 8px 0;\n  }\n  .rc-slider-tooltip-inner {\n    padding: 6px 2px;\n    min-width: 24px;\n    height: 24px;\n    font-size: 12px;\n    line-height: 1;\n    color: #fff;\n    text-align: center;\n    text-decoration: none;\n    background-color: #6c6c6c;\n    border-radius: 6px;\n    box-shadow: 0 0 4px #d9d9d9;\n  }\n  .rc-slider-tooltip-arrow {\n    position: absolute;\n    width: 0;\n    height: 0;\n    border-color: transparent;\n    border-style: solid;\n  }\n  .rc-slider-tooltip-placement-top .rc-slider-tooltip-arrow {\n    bottom: 4px;\n    left: 50%;\n    margin-left: -4px;\n    border-width: 4px 4px 0;\n    border-top-color: #6c6c6c;\n  }\n\n  .dnm-video-cut-audio-player {\n    display: none;\n  }\n\n  .dnm-video-cut-audio-waveform-loading {\n    height: 0;\n    overflow: hidden;\n  }\n\n  .dnm-video-cut-audio-waveform {\n    width: 100%;\n    padding: 0;\n    margin: 0;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-region {\n    z-index: 3 !important;\n  }\n  \n  .dnm-video-cut-audio-waveform .wavesurfer-handle {\n    background-color: rgba(146, 210, 117, 0.9) !important;\n    width: 4px !important;\n  }\n  \n  .dnm-video-cut-range {\n    width: 100%;\n    position: relative;\n    bottom: 17px;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    height: 20px;\n    width: 10px;\n    background-color: white;\n    border-radius: 10px;\n    margin-top: -3px;\n    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item {\n    width: 10px;\n    z-index: 2;\n    position: relative;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:hover {\n    cursor: grab;\n  }\n  \n  .dnm-video-cut-playing-cursor-draggable-item:active {\n    cursor: -webkit-grabbing;\n    cursor: grabbing;\n  }\n  \n  .dnm-video-cut-playing-cursor {\n    transform: scale(1);\n    transition: all 0.2s ease-in-out;\n  }\n  \n  .dnm-video-cut-playing-cursor:hover {\n    transform: scale(1.3);\n  }\n\n  .dnm-video-cut-progress-root {\n    margin-top: 5px;\n    display: flex;\n    justify-content: center; \n    align-items: center;\n    flex-flow: column;\n  }\n  \n  .dnm-video-cut-progress-core {\n    width: 100%;\n    display: flex;\n    align-items: center;\n    margin-top: -10px;\n  }\n\n  .dnm-video-cut-progress-scrollable-parent {\n    width: calc(100% - 45px);\n    display: inline-block;\n    margin-left: 15px;\n    margin-top: 0;\n    padding-top: 10px;\n    overflow-x: scroll;\n  }\n\n  .dnm-video-cut-progress-scrollable-root {\n    margin-left: 10px;\n    padding-right: 10px;\n    position: relative;\n  }\n  \n  .dnm-video-cut-loop-icon-container {\n    height: 22px;\n  }\n\n  .dnm-video-cut-play-icon, .dnm-video-cut-loop-icon, .dnm-video-cut-in-icon, .dnm-video-cut-out-icon {\n    transform: scale(1);\n    transition: transform 0.2s ease-in-out;\n    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);\n    display: flex;\n    justify-content: center;\n    align-items: center;\n  }\n  \n  .dnm-video-cut-play-icon {\n    width: 30px;\n    height: 30px;\n    border-radius: 100px;\n  }\n\n  .dnm-video-cut-loop-icon {\n    width: 20px;\n    height: 20px;\n    border-radius: 100px;\n    z-index: 3;\n  }\n  \n  .dnm-video-cut-in-icon, .dnm-video-cut-out-icon {\n    width: 22px;\n    height: 22px;\n    border-radius: 5px;\n  }\n\n  .dnm-video-cut-out-icon {\n    margin-left: 5px;\n  }\n\n  .dnm-video-cut-loop-icon svg, .dnm-video-cut-play-icon svg, .dnm-video-cut-cutter-icons svg {\n    color: white;\n    position: relative;\n  }\n\n  .dnm-video-cut-out-icon svg {\n    -webkit-transform: scaleX(-1);\n    transform: scaleX(-1);\n  }\n\n  .dnm-video-cut-cutter-icons svg {\n    width: 18px;\n  }\n\n  .dnm-video-cut-play-icon svg {\n    width: 12px;\n  }\n  \n  .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {\n    width: 9px;\n  }\n  \n  .dnm-video-cut-root.is-paused .dnm-video-cut-loop-icon svg {\n    width: 14px;\n  }\n  \n  .dnm-video-cut-play-icon:hover, .dnm-video-cut-loop-icon:hover {\n    cursor: pointer;\n    transform: scale(1.2);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);\n  }\n  \n  .dnm-video-cut-in-icon:hover, .dnm-video-cut-out-icon:hover {\n    cursor: pointer;\n    transform: scale(1.1);\n    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);\n  }\n\n  .dnm-video-cut-cutter-icons {\n      display: flex;\n      align-items: flex-start;\n      width: 100%;\n      justify-content: end;\n  }\n\n  .dnm-video-cut-tools {\n    margin-top: 5px;\n    width: 100%;\n    align-self: flex-end;\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n    flex-flow: row-reverse;\n  }\n\n  .dnm-video-cut-zoom {\n    width: 150px;\n  }\n  \n  .dnm-video-cut-zoom-icon {\n    width: 18px;\n  }\n  \n  .dnm-video-cut-zoom-icon {\n    display: inline-block;\n    margin-left: 10px;\n  }\n\n  .dnm-video-cut-zoom-range {\n    width: calc(100% - 28px);\n    display: inline-block;\n  }\n\n  .dnm-video-cut-zoom-icon svg {\n    color: rgb(168, 173, 181);\n  }\n\n  .dnm-video-cut-mute {\n    display: inline-block;\n    float: left;\n  }\n\n  .dnm-video-cut-checkbox-container {\n    display: block;\n    position: relative;\n    padding-left: 35px;\n    padding-top: 3px;\n    margin-bottom: 12px;\n    cursor: pointer;\n    font-size: 18px;\n    color: rgb(158 162 169);\n    -webkit-user-select: none;\n    -moz-user-select: none;\n    -ms-user-select: none;\n    user-select: none;\n  }\n\n  .dnm-video-cut-checkbox-container input {\n    position: absolute;\n    opacity: 0;\n    cursor: pointer;\n    height: 0;\n    width: 0;\n  }\n\n  .dnm-video-cut-checkmark {\n    position: absolute;\n    top: 0;\n    left: 0;\n    height: 25px;\n    width: 25px;\n    background-color: rgb(229, 233, 240);\n    border-radius: 5px;\n  }\n\n  .dnm-video-cut-checkbox-container:hover input ~ .dnm-video-cut-checkmark {\n    background-color: rgb(197, 203, 212);\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark {\n    background-color: #92d275;\n  }\n\n  .dnm-video-cut-checkmark:after {\n    content: \"\";\n    position: absolute;\n    display: none;\n  }\n\n  .dnm-video-cut-checkbox-container input:checked ~ .dnm-video-cut-checkmark:after {\n    display: block;\n  }\n\n  .dnm-video-cut-checkbox-container .dnm-video-cut-checkmark:after {\n    left: 9px;\n    top: 5px;\n    width: 5px;\n    height: 10px;\n    border: solid white;\n    border-width: 0 3px 3px 0;\n    -webkit-transform: rotate(45deg);\n    -ms-transform: rotate(45deg);\n    transform: rotate(45deg);\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -27442,7 +27442,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       if (_this.active || forceDragging || force === true) {
         e.preventDefault();
         var currentX, currentY;
-        console.log('handleDrag', e.clientX, _this.initialX);
 
         if (e.type === "touchmove") {
           currentX = e.touches[0].clientX - _this.initialX;
@@ -27481,7 +27480,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
         }
 
         if (forceDragEnd === true) _this.handleDragEnd(e);
-        console.log("handleDrag", e, force, currentX);
 
         _this.updateState({
           xRatio: currentX / containerWidth,
@@ -27586,8 +27584,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       var _this$getContainerDim4 = _this.getContainerDimensions(),
           containerWidth = _this$getContainerDim4.containerWidth;
 
-      console.log('Container width', containerWidth);
-
       if (containerWidth) {
         _this.lastMove = new Date().getTime();
         if (!position) _this.setState(state);else onDrag(_objectSpread2({}, position, {}, state));
@@ -27631,8 +27627,6 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
       this.ghostContainerDimensions = this.getContainerDimensions(); // Force rerender if container dimensions has changed
 
       if (containerWidth !== this.ghostContainerDimensions.containerWidth && containerWidth && this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight && containerHeight && this.ghostContainerDimensions.containerHeight) {
-        console.log('force handleWindowResize', containerWidth, this.ghostContainerDimensions.containerWidth, containerHeight, this.ghostContainerDimensions.containerHeight);
-
         this._handleWindowResize();
       }
     }
@@ -27780,6 +27774,30 @@ var ZoomIcon = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return ZoomIcon;
+}(React.Component);
+
+var StartIcon = /*#__PURE__*/function (_React$Component) {
+  _inherits(StartIcon, _React$Component);
+
+  function StartIcon() {
+    _classCallCheck(this, StartIcon);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(StartIcon).apply(this, arguments));
+  }
+
+  _createClass(StartIcon, [{
+    key: "render",
+    value: function render() {
+      return React.createElement("svg", {
+        viewBox: "0 0 24 24"
+      }, React.createElement("path", {
+        fill: "currentColor",
+        d: "M14.59 7.41 18.17 11H6v2h12.17l-3.59 3.59L16 18l6-6-6-6-1.41 1.41zM2 6v12h2V6H2z"
+      }));
+    }
+  }]);
+
+  return StartIcon;
 }(React.Component);
 
 var commonjsGlobal$1 = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
@@ -37880,8 +37898,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       _this.handlePlayerLoad(videoNode);
 
       _this.handleLoadedData();
-
-      console.log('video cut load', _this.playerRef, _this.props.inPoint);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleLoadedData", function () {
@@ -37890,7 +37906,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
 
       if (video) {
         var inPoint = _this.props.inPoint;
-        console.log('Will seek from handle load', inPoint);
         if (typeof inPoint !== "undefined") _this.seekVideoTo(inPoint);
 
         _this.updatePlayerVolume();
@@ -37932,11 +37947,37 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       var _this$state2 = _this.state,
           playCursorPosition = _this$state2.playCursorPosition,
           videoDuration = _this$state2.videoDuration;
-      console.log('Will seek from handleAfterRangeChange', playCursorPosition.xRatio, videoDuration);
 
       _this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
 
       _this.isEditing = false;
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCutInClick", function () {
+      var forceRerenderKey = _this.state.forceRerenderKey;
+      var outPoint = _this.props.outPoint;
+
+      _this.handleRangeChange([_this.playerRef.current.currentTime, outPoint], true); // We need to force rerendering to recalculate position of loop icon
+
+
+      setTimeout(function () {
+        return _this.setState({
+          forceRerenderKey: forceRerenderKey + 1
+        });
+      }, 100);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleCutOutClick", function () {
+      var forceRerenderKey = _this.state.forceRerenderKey;
+      var inPoint = _this.props.inPoint;
+
+      _this.handleRangeChange([inPoint, _this.playerRef.current.currentTime], true);
+
+      setTimeout(function () {
+        return _this.setState({
+          forceRerenderKey: forceRerenderKey + 1
+        });
+      }, 100);
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleFreePlayClick", function () {
@@ -37952,7 +37993,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "handlePlayCursorDrag", function (position) {
       var xRatio = position.xRatio;
       var videoDuration = _this.state.videoDuration;
-      console.log('Will seek from handlePlayCursorDrag', xRatio, videoDuration);
 
       _this.seekVideoTo(videoDuration * xRatio);
 
@@ -38029,6 +38069,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
 
     _this.state = {
+      // We sometimes need to force rerender because some elements position need to be recalculated
+      forceRerenderKey: 0,
       videoDuration: 0,
       isPlaying: false,
       forceCursorDragging: false,
@@ -38090,7 +38132,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
           if (Math.abs(outPoint - inPoint - min) < Math.abs(outPoint - inPoint - max)) time = prevProps.inPoint < inPoint ? inPoint : outPoint;else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
         } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
 
-        console.log('Will seek to', time, prevProps.inPoint, inPoint, prevProps.outPoint, outPoint);
         this.seekVideoTo(time);
       }
 
@@ -38099,8 +38140,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "_seekVideoTo",
     value: function _seekVideoTo(time) {
-      console.log('Seek to', time);
-
       if (!isNaN(time)) {
         var video = this.playerRef.current;
         if (video) video.currentTime = time;
@@ -38162,6 +38201,20 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       })), jsx("div", {
         className: "dnm-video-cut-progress-root"
       }, jsx("div", {
+        className: "dnm-video-cut-cutter-icons"
+      }, tooltipRenderer(jsx("div", {
+        className: "dnm-video-cut-in-icon",
+        onClick: this.handleCutInClick
+      }, jsx(StartIcon, null)), {
+        title: catalogue.cutInTooltip,
+        id: 'cut-in'
+      }), tooltipRenderer(jsx("div", {
+        className: "dnm-video-cut-out-icon",
+        onClick: this.handleCutOutClick
+      }, jsx(StartIcon, null)), {
+        title: catalogue.cutOutTooltip,
+        id: 'cut-out'
+      })), jsx("div", {
         className: "dnm-video-cut-progress-core"
       }, tooltipRenderer(jsx("div", {
         className: "dnm-video-cut-play-icon",
@@ -38287,6 +38340,8 @@ DnmVideoCut.propTypes = {
 DnmVideoCut.defaultProps = {
   catalogue: {
     unmute: 'Enable sound',
+    cutInTooltip: 'Define inpoint',
+    cutOutTooltip: 'Define outpoint',
     playTooltip: 'Click or press P to play',
     pauseTooltip: 'Click or press P to pause',
     loopPlayTooltip: 'Click or press space to play the segment',

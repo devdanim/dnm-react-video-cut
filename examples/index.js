@@ -11,7 +11,7 @@ class App extends React.Component {
             inPoint: 0,
             outPoint: 100,
             muted: false,
-            type: 'audio',
+            type: 'video',
             src: null,
             moduleKey: new Date().getTime()
         }
@@ -66,6 +66,8 @@ class App extends React.Component {
                         muted={muted}
                         catalogue={{
                             unmute: 'Enable sound',
+                            cutInTooltip: 'Define inpoint',
+                            cutOutTooltip: 'Define outpoint',
                             playTooltip: 'Click or press P to play',
                             pauseTooltip: 'Click or press P to pause',
                             loopPlayTooltip: 'Click or press space to play the segment',

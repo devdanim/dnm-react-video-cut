@@ -12,6 +12,7 @@ import PlayIcon from './lib/svg/play';
 import PauseIcon from './lib/svg/pause';
 import LoopIcon from './lib/svg/loop';
 import ZoomIcon from './lib/svg/zoom';
+import StartIcon from './lib/svg/start';
 import { throttle } from 'lodash-es';
 import Waveform from './lib/Waveform';
 
@@ -20,6 +21,8 @@ export default class DnmVideoCut extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // We sometimes need to force rerender because some elements position need to be recalculated
+            forceRerenderKey: 0,
             videoDuration: 0,
             isPlaying: false,
             forceCursorDragging: false,
@@ -62,7 +65,6 @@ export default class DnmVideoCut extends React.Component {
                 else time = prevProps.inPoint > inPoint ? inPoint : outPoint;
             }
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
-            console.log('Will seek to', time, prevProps.inPoint, inPoint, prevProps.outPoint, outPoint)
             this.seekVideoTo(time);
         }
         if(muted !== prevProps.muted) this.updatePlayerVolume();
@@ -78,7 +80,6 @@ export default class DnmVideoCut extends React.Component {
     }
 
     _seekVideoTo(time) {
-        console.log('Seek to', time);
         if (!isNaN(time)) {
             const video = this.playerRef.current;
             if(video) video.currentTime = time;
@@ -246,7 +247,6 @@ export default class DnmVideoCut extends React.Component {
     handleVideoPlayerLoad = (cropprInstance, videoNode) => {
         this.handlePlayerLoad(videoNode);
         this.handleLoadedData();
-        console.log('video cut load', this.playerRef, this.props.inPoint);
     }
 
     handleLoadedData = () => {
@@ -254,7 +254,6 @@ export default class DnmVideoCut extends React.Component {
         const video = this.playerRef.current;
         if (video) {
             const { inPoint } = this.props;
-            console.log('Will seek from handle load', inPoint);
             if (typeof inPoint !== "undefined") this.seekVideoTo(inPoint);
             this.updatePlayerVolume();
             this.setState({ videoDuration: video.duration }, () => this.updatePlayCursorPosition())
@@ -278,9 +277,23 @@ export default class DnmVideoCut extends React.Component {
 
     handleAfterRangeChange = () => {
         const { playCursorPosition, videoDuration } = this.state;
-        console.log('Will seek from handleAfterRangeChange', playCursorPosition.xRatio, videoDuration);
         this.seekVideoTo(playCursorPosition.xRatio * videoDuration);
         this.isEditing = false;
+    }
+
+    handleCutInClick = () => {
+        const { forceRerenderKey } = this.state;
+        const { outPoint } = this.props;
+        this.handleRangeChange([this.playerRef.current.currentTime, outPoint], true);
+        // We need to force rerendering to recalculate position of loop icon
+        setTimeout(() => this.setState({ forceRerenderKey: forceRerenderKey + 1 }), 100);
+    }
+
+    handleCutOutClick = () => {
+        const { forceRerenderKey } = this.state;
+        const { inPoint } = this.props;
+        this.handleRangeChange([inPoint, this.playerRef.current.currentTime], true);
+        setTimeout(() => this.setState({ forceRerenderKey: forceRerenderKey + 1 }), 100);
     }
 
     handleFreePlayClick = () => {
@@ -295,7 +308,6 @@ export default class DnmVideoCut extends React.Component {
     handlePlayCursorDrag = (position) => {
         const { xRatio } = position;
         const { videoDuration } = this.state;
-        console.log('Will seek from handlePlayCursorDrag', xRatio, videoDuration);
         this.seekVideoTo(videoDuration * xRatio);
         this.setState({ playCursorPosition: position });
     }
@@ -385,6 +397,28 @@ export default class DnmVideoCut extends React.Component {
                         )
                     }
                     <div className="dnm-video-cut-progress-root">
+                        <div className="dnm-video-cut-cutter-icons">
+                            {
+                                tooltipRenderer((
+                                    <div
+                                        className="dnm-video-cut-in-icon"
+                                        onClick={this.handleCutInClick}
+                                    >
+                                        <StartIcon />
+                                    </div>
+                                ), { title: catalogue.cutInTooltip, id: 'cut-in' })
+                            }
+                            {
+                                tooltipRenderer((
+                                    <div
+                                        className="dnm-video-cut-out-icon"
+                                        onClick={this.handleCutOutClick}
+                                    >
+                                        <StartIcon />
+                                    </div>
+                                ), { title: catalogue.cutOutTooltip, id: 'cut-out' })
+                            }
+                        </div>
                         <div className="dnm-video-cut-progress-core">
                             {
                                 tooltipRenderer((
@@ -526,6 +560,8 @@ DnmVideoCut.propTypes = {
 DnmVideoCut.defaultProps = {
     catalogue: {
         unmute: 'Enable sound',
+        cutInTooltip: 'Define inpoint',
+        cutOutTooltip: 'Define outpoint',
         playTooltip: 'Click or press P to play',
         pauseTooltip: 'Click or press P to pause',
         loopPlayTooltip: 'Click or press space to play the segment',

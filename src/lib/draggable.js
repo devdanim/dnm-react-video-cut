@@ -39,7 +39,6 @@ export default class Draggable extends React.Component {
         this.ghostContainerDimensions = this.getContainerDimensions();
         // Force rerender if container dimensions has changed
         if ((containerWidth !== this.ghostContainerDimensions.containerWidth && containerWidth && this.ghostContainerDimensions.containerWidth) || (containerHeight !== this.ghostContainerDimensions.containerHeight && containerHeight && this.ghostContainerDimensions.containerHeight)) {
-            console.log('force handleWindowResize', containerWidth, this.ghostContainerDimensions.containerWidth, containerHeight, this.ghostContainerDimensions.containerHeight);
             this._handleWindowResize();
         }
     }
@@ -76,7 +75,6 @@ export default class Draggable extends React.Component {
             e.preventDefault();
 
             let currentX, currentY;
-            console.log('handleDrag', e.clientX, this.initialX)
             if (e.type === "touchmove") {
                 currentX = e.touches[0].clientX - this.initialX;
                 currentY = e.touches[0].clientY - this.initialY;
@@ -112,7 +110,6 @@ export default class Draggable extends React.Component {
 
             if(forceDragEnd === true) this.handleDragEnd(e);
 
-            console.log("handleDrag", e, force, currentX)
             this.updateState({ 
                 xRatio: currentX / containerWidth, 
                 yRatio: currentY / containerHeight
@@ -180,7 +177,6 @@ export default class Draggable extends React.Component {
     updateState = (state) => {
         const { position, onDrag } = this.props;
         const { containerWidth } = this.getContainerDimensions();
-        console.log('Container width', containerWidth);
         if (containerWidth) {
             this.lastMove = new Date().getTime();
             if (!position) this.setState(state);

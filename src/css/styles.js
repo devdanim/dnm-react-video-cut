@@ -324,6 +324,7 @@ export default css`
   }
 
   .dnm-video-cut-progress-root {
+    margin-top: 5px;
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -334,6 +335,7 @@ export default css`
     width: 100%;
     display: flex;
     align-items: center;
+    margin-top: -10px;
   }
 
   .dnm-video-cut-progress-scrollable-parent {
@@ -354,43 +356,55 @@ export default css`
   .dnm-video-cut-loop-icon-container {
     height: 22px;
   }
-  
-  .dnm-video-cut-play-icon {
-    width: 30px;
-    height: 30px;
-    display: inline-block;
-    transform: scale(1);
-    transition: all 0.2s ease-in-out;
-    background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
-    border-radius: 100px;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-  }
 
-  .dnm-video-cut-loop-icon {
-    width: 20px;
-    height: 20px;
-    display: block;
+  .dnm-video-cut-play-icon, .dnm-video-cut-loop-icon, .dnm-video-cut-in-icon, .dnm-video-cut-out-icon {
     transform: scale(1);
     transition: transform 0.2s ease-in-out;
     background: linear-gradient(45deg,#46be8a 0,#92d275 100%);
-    border-radius: 100px;
-    z-index: 3;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
-  .dnm-video-cut-loop-icon svg {
+  .dnm-video-cut-play-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 100px;
+  }
+
+  .dnm-video-cut-loop-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    z-index: 3;
+  }
+  
+  .dnm-video-cut-in-icon, .dnm-video-cut-out-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+  }
+
+  .dnm-video-cut-out-icon {
+    margin-left: 5px;
+  }
+
+  .dnm-video-cut-loop-icon svg, .dnm-video-cut-play-icon svg, .dnm-video-cut-cutter-icons svg {
     color: white;
     position: relative;
   }
 
+  .dnm-video-cut-out-icon svg {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+  }
+
+  .dnm-video-cut-cutter-icons svg {
+    width: 18px;
+  }
+
   .dnm-video-cut-play-icon svg {
-    color: white;
     width: 12px;
-    position: relative;
   }
   
   .dnm-video-cut-root.is-playing .dnm-video-cut-loop-icon svg {
@@ -405,6 +419,19 @@ export default css`
     cursor: pointer;
     transform: scale(1.2);
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dnm-video-cut-in-icon:hover, .dnm-video-cut-out-icon:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .dnm-video-cut-cutter-icons {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      justify-content: end;
   }
 
   .dnm-video-cut-tools {
@@ -422,11 +449,10 @@ export default css`
   }
   
   .dnm-video-cut-zoom-icon {
-    width: 17px;
+    width: 18px;
   }
   
   .dnm-video-cut-zoom-icon {
-    width: 18px;
     display: inline-block;
     margin-left: 10px;
   }
