@@ -27459,6 +27459,7 @@
         if (_this.active || forceDragging || force === true) {
           e.preventDefault();
           var currentX, currentY;
+          console.log('handleDrag', e.clientX, _this.initialX);
 
           if (e.type === "touchmove") {
             currentX = e.touches[0].clientX - _this.initialX;

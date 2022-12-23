@@ -75,7 +75,7 @@ export default class Draggable extends React.Component {
             e.preventDefault();
 
             let currentX, currentY;
-
+            console.log('handleDrag', e.clientX, this.initialX)
             if (e.type === "touchmove") {
                 currentX = e.touches[0].clientX - this.initialX;
                 currentY = e.touches[0].clientY - this.initialY;
