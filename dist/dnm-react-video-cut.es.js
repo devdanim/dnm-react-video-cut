@@ -27630,7 +27630,7 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
           containerHeight = _this$ghostContainerD.containerHeight;
       this.ghostContainerDimensions = this.getContainerDimensions(); // Force rerender if container dimensions has changed
 
-      if (containerWidth !== this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight) {
+      if (containerWidth !== this.ghostContainerDimensions.containerWidth && containerWidth && this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight && containerHeight && this.ghostContainerDimensions.containerHeight) {
         console.log('force handleWindowResize', containerWidth, this.ghostContainerDimensions.containerWidth);
 
         this._handleWindowResize();
