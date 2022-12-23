@@ -27497,6 +27497,7 @@
           }
 
           if (forceDragEnd === true) _this.handleDragEnd(e);
+          console.log("handleDrag", e, force, currentX);
 
           _this.updateState({
             xRatio: currentX / containerWidth,
