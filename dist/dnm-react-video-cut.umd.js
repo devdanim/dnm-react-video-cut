@@ -27648,7 +27648,7 @@
         this.ghostContainerDimensions = this.getContainerDimensions(); // Force rerender if container dimensions has changed
 
         if (containerWidth !== this.ghostContainerDimensions.containerWidth && containerWidth && this.ghostContainerDimensions.containerWidth || containerHeight !== this.ghostContainerDimensions.containerHeight && containerHeight && this.ghostContainerDimensions.containerHeight) {
-          console.log('force handleWindowResize', containerWidth, this.ghostContainerDimensions.containerWidth);
+          console.log('force handleWindowResize', containerWidth, this.ghostContainerDimensions.containerWidth, containerHeight, this.ghostContainerDimensions.containerHeight);
 
           this._handleWindowResize();
         }
