@@ -77,8 +77,8 @@ class App extends React.Component {
                         src={src || (type === 'audio' ? music : video)}
                         type={type}
                         loader={<p>Is loading...</p>}
-                        maxDuration={10}
-                        minDuration={4}
+                        maxDuration="10"
+                        minDuration="10"
                         onRangeChange={this.handleRangeChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{

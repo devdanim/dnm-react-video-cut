@@ -27479,7 +27479,7 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
           currentY = 0;
         }
 
-        if (forceDragEnd === true) _this.handleDragEnd(e);
+        if (forceDragEnd === true) _this.handleDragEnd(e, true);
 
         _this.updateState({
           xRatio: currentX / containerWidth,
@@ -27489,10 +27489,11 @@ var Draggable = /*#__PURE__*/function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "handleDragEnd", function (e) {
+      var forceDragEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       _this.active = false;
       var onDragEnd = _this.props.onDragEnd;
       if (onDragEnd) onDragEnd();
-      if (new Date().getTime() - _this.lastMouseDown < 300) _this.handleDrag(e, true);
+      if (!forceDragEnd && new Date().getTime() - _this.lastMouseDown < 300) _this.handleDrag(e, true);
     });
 
     _defineProperty(_assertThisInitialized(_this), "_handleWindowResize", function () {

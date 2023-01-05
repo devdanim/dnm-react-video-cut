@@ -108,7 +108,7 @@ export default class Draggable extends React.Component {
                 currentY = 0;
             }
 
-            if(forceDragEnd === true) this.handleDragEnd(e);
+            if(forceDragEnd === true) this.handleDragEnd(e, true);
 
             this.updateState({ 
                 xRatio: currentX / containerWidth, 
@@ -117,11 +117,11 @@ export default class Draggable extends React.Component {
         }
     }
 
-    handleDragEnd = (e) => {
+    handleDragEnd = (e, forceDragEnd = false) => {
         this.active = false;
         const { onDragEnd } = this.props;
-        if(onDragEnd) onDragEnd(); 
-        if (new Date().getTime() - this.lastMouseDown < 300) this.handleDrag(e, true);
+        if (onDragEnd) onDragEnd(); 
+        if (!forceDragEnd && (new Date().getTime() - this.lastMouseDown < 300)) this.handleDrag(e, true);
     }
 
     _handleWindowResize = () => {
