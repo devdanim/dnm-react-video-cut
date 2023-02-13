@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import DnmVideoCut from '../dist/dnm-react-video-cut.es';
-import video from './video.MOV';
-import music from './music.wav';
+import video from './video.mp4';
+// import music from './music.wav';
 
 class App extends React.Component {
     constructor(props) {
@@ -74,7 +74,8 @@ class App extends React.Component {
                             loopPauseTooltip: 'Click or press space to pause the segment',
                             videoTooShortWarning: 'Imported video is shorter than the recommended minimum duration, which may lead to an unexpected result.',
                         }}
-                        src={src || (type === 'audio' ? music : video)}
+                        /* src={src || (type === 'audio' ? music : video)} */
+                        src={src || video}
                         type={type}
                         loader={<p>Is loading...</p>}
                         maxDuration="10"

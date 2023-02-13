@@ -4600,33 +4600,487 @@
 
   var Range$1 = createSlider(Range);
 
-  function contains(root, n) {
-    var node = n;
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
 
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof(obj);
+  }
+
+  function _toPrimitive$1(input, hint) {
+    if (_typeof(input) !== "object" || input === null) return input;
+    var prim = input[Symbol.toPrimitive];
+    if (prim !== undefined) {
+      var res = prim.call(input, hint || "default");
+      if (_typeof(res) !== "object") return res;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return (hint === "string" ? String : Number)(input);
+  }
+
+  function _toPropertyKey(arg) {
+    var key = _toPrimitive$1(arg, "string");
+    return _typeof(key) === "symbol" ? key : String(key);
+  }
+
+  function _defineProperty$2(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
+
+  function ownKeys$1(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread2$1(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = null != arguments[i] ? arguments[i] : {};
+      i % 2 ? ownKeys$1(Object(source), !0).forEach(function (key) {
+        _defineProperty$2(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$1(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+
+  function _objectWithoutProperties$1(source, excluded) {
+    if (source == null) return {};
+    var target = _objectWithoutPropertiesLoose(source, excluded);
+    var key, i;
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+      for (i = 0; i < sourceSymbolKeys.length; i++) {
+        key = sourceSymbolKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+        target[key] = source[key];
+      }
+    }
+    return target;
+  }
+
+  function _classCallCheck$2(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties$1(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
+    }
+  }
+  function _createClass$2(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties$1(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties$1(Constructor, staticProps);
+    Object.defineProperty(Constructor, "prototype", {
+      writable: false
+    });
+    return Constructor;
+  }
+
+  function _assertThisInitialized$1(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+    return self;
+  }
+
+  function _setPrototypeOf$1(o, p) {
+    _setPrototypeOf$1 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+    return _setPrototypeOf$1(o, p);
+  }
+
+  function _inherits$2(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    Object.defineProperty(subClass, "prototype", {
+      writable: false
+    });
+    if (superClass) _setPrototypeOf$1(subClass, superClass);
+  }
+
+  function _getPrototypeOf$1(o) {
+    _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf$1(o);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+    try {
+      Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _possibleConstructorReturn$2(self, call) {
+    if (call && (_typeof(call) === "object" || typeof call === "function")) {
+      return call;
+    } else if (call !== void 0) {
+      throw new TypeError("Derived constructors may only return object or undefined");
+    }
+    return _assertThisInitialized$1(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+    return function _createSuperInternal() {
+      var Super = _getPrototypeOf$1(Derived),
+        result;
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf$1(this).constructor;
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+      return _possibleConstructorReturn$2(this, result);
+    };
+  }
+
+  function contains(root, n) {
+    if (!root) {
+      return false;
+    }
+
+    // Use native if support
+    if (root.contains) {
+      return root.contains(n);
+    }
+
+    // `document.contains` not support with IE11
+    var node = n;
     while (node) {
       if (node === root) {
         return true;
       }
-
       node = node.parentNode;
     }
-
     return false;
   }
 
   /**
    * Return if a node is a DOM node. Else will return by `findDOMNode`
    */
-
   function findDOMNode(node) {
     if (node instanceof HTMLElement) {
       return node;
     }
-
-    return ReactDOM__default.findDOMNode(node);
+    if (node instanceof React__default.Component) {
+      return ReactDOM__default.findDOMNode(node);
+    }
+    return null;
   }
 
-  function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+  /** @license React v16.13.0
+   * react-is.production.min.js
+   *
+   * Copyright (c) Facebook, Inc. and its affiliates.
+   *
+   * This source code is licensed under the MIT license found in the
+   * LICENSE file in the root directory of this source tree.
+   */
+  var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f$7=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k$1=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?
+  Symbol.for("react.suspense_list"):60120,r=b?Symbol.for("react.memo"):60115,t=b?Symbol.for("react.lazy"):60116,v=b?Symbol.for("react.block"):60121,w=b?Symbol.for("react.fundamental"):60117,x=b?Symbol.for("react.responder"):60118,y=b?Symbol.for("react.scope"):60119;
+  function z(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f$7:case p:return a;default:switch(a=a&&a.$$typeof,a){case k$1:case n:case t:case r:case h:return a;default:return u}}case d:return u}}}function A(a){return z(a)===m}var AsyncMode=l;var ConcurrentMode=m;var ContextConsumer=k$1;var ContextProvider=h;var Element$1=c;var ForwardRef=n;var Fragment=e;var Lazy=t;var Memo=r;var Portal=d;
+  var Profiler=g;var StrictMode=f$7;var Suspense=p;var isAsyncMode=function(a){return A(a)||z(a)===l};var isConcurrentMode=A;var isContextConsumer=function(a){return z(a)===k$1};var isContextProvider=function(a){return z(a)===h};var isElement=function(a){return "object"===typeof a&&null!==a&&a.$$typeof===c};var isForwardRef=function(a){return z(a)===n};var isFragment=function(a){return z(a)===e};var isLazy=function(a){return z(a)===t};
+  var isMemo=function(a){return z(a)===r};var isPortal=function(a){return z(a)===d};var isProfiler=function(a){return z(a)===g};var isStrictMode=function(a){return z(a)===f$7};var isSuspense=function(a){return z(a)===p};
+  var isValidElementType=function(a){return "string"===typeof a||"function"===typeof a||a===e||a===m||a===g||a===f$7||a===p||a===q||"object"===typeof a&&null!==a&&(a.$$typeof===t||a.$$typeof===r||a.$$typeof===h||a.$$typeof===k$1||a.$$typeof===n||a.$$typeof===w||a.$$typeof===x||a.$$typeof===y||a.$$typeof===v)};var typeOf=z;
+
+  var reactIs_production_min = {
+  	AsyncMode: AsyncMode,
+  	ConcurrentMode: ConcurrentMode,
+  	ContextConsumer: ContextConsumer,
+  	ContextProvider: ContextProvider,
+  	Element: Element$1,
+  	ForwardRef: ForwardRef,
+  	Fragment: Fragment,
+  	Lazy: Lazy,
+  	Memo: Memo,
+  	Portal: Portal,
+  	Profiler: Profiler,
+  	StrictMode: StrictMode,
+  	Suspense: Suspense,
+  	isAsyncMode: isAsyncMode,
+  	isConcurrentMode: isConcurrentMode,
+  	isContextConsumer: isContextConsumer,
+  	isContextProvider: isContextProvider,
+  	isElement: isElement,
+  	isForwardRef: isForwardRef,
+  	isFragment: isFragment,
+  	isLazy: isLazy,
+  	isMemo: isMemo,
+  	isPortal: isPortal,
+  	isProfiler: isProfiler,
+  	isStrictMode: isStrictMode,
+  	isSuspense: isSuspense,
+  	isValidElementType: isValidElementType,
+  	typeOf: typeOf
+  };
+
+  var reactIs_development = createCommonjsModule(function (module, exports) {
+
+
+
+  if (process.env.NODE_ENV !== "production") {
+    (function() {
+
+  // The Symbol used to tag the ReactElement-like types. If there is no native Symbol
+  // nor polyfill, then a plain number is used for performance.
+  var hasSymbol = typeof Symbol === 'function' && Symbol.for;
+  var REACT_ELEMENT_TYPE = hasSymbol ? Symbol.for('react.element') : 0xeac7;
+  var REACT_PORTAL_TYPE = hasSymbol ? Symbol.for('react.portal') : 0xeaca;
+  var REACT_FRAGMENT_TYPE = hasSymbol ? Symbol.for('react.fragment') : 0xeacb;
+  var REACT_STRICT_MODE_TYPE = hasSymbol ? Symbol.for('react.strict_mode') : 0xeacc;
+  var REACT_PROFILER_TYPE = hasSymbol ? Symbol.for('react.profiler') : 0xead2;
+  var REACT_PROVIDER_TYPE = hasSymbol ? Symbol.for('react.provider') : 0xeacd;
+  var REACT_CONTEXT_TYPE = hasSymbol ? Symbol.for('react.context') : 0xeace; // TODO: We don't use AsyncMode or ConcurrentMode anymore. They were temporary
+  // (unstable) APIs that have been removed. Can we remove the symbols?
+
+  var REACT_ASYNC_MODE_TYPE = hasSymbol ? Symbol.for('react.async_mode') : 0xeacf;
+  var REACT_CONCURRENT_MODE_TYPE = hasSymbol ? Symbol.for('react.concurrent_mode') : 0xeacf;
+  var REACT_FORWARD_REF_TYPE = hasSymbol ? Symbol.for('react.forward_ref') : 0xead0;
+  var REACT_SUSPENSE_TYPE = hasSymbol ? Symbol.for('react.suspense') : 0xead1;
+  var REACT_SUSPENSE_LIST_TYPE = hasSymbol ? Symbol.for('react.suspense_list') : 0xead8;
+  var REACT_MEMO_TYPE = hasSymbol ? Symbol.for('react.memo') : 0xead3;
+  var REACT_LAZY_TYPE = hasSymbol ? Symbol.for('react.lazy') : 0xead4;
+  var REACT_BLOCK_TYPE = hasSymbol ? Symbol.for('react.block') : 0xead9;
+  var REACT_FUNDAMENTAL_TYPE = hasSymbol ? Symbol.for('react.fundamental') : 0xead5;
+  var REACT_RESPONDER_TYPE = hasSymbol ? Symbol.for('react.responder') : 0xead6;
+  var REACT_SCOPE_TYPE = hasSymbol ? Symbol.for('react.scope') : 0xead7;
+
+  function isValidElementType(type) {
+    return typeof type === 'string' || typeof type === 'function' || // Note: its typeof might be other than 'symbol' or 'number' if it's a polyfill.
+    type === REACT_FRAGMENT_TYPE || type === REACT_CONCURRENT_MODE_TYPE || type === REACT_PROFILER_TYPE || type === REACT_STRICT_MODE_TYPE || type === REACT_SUSPENSE_TYPE || type === REACT_SUSPENSE_LIST_TYPE || typeof type === 'object' && type !== null && (type.$$typeof === REACT_LAZY_TYPE || type.$$typeof === REACT_MEMO_TYPE || type.$$typeof === REACT_PROVIDER_TYPE || type.$$typeof === REACT_CONTEXT_TYPE || type.$$typeof === REACT_FORWARD_REF_TYPE || type.$$typeof === REACT_FUNDAMENTAL_TYPE || type.$$typeof === REACT_RESPONDER_TYPE || type.$$typeof === REACT_SCOPE_TYPE || type.$$typeof === REACT_BLOCK_TYPE);
+  }
+
+  function typeOf(object) {
+    if (typeof object === 'object' && object !== null) {
+      var $$typeof = object.$$typeof;
+
+      switch ($$typeof) {
+        case REACT_ELEMENT_TYPE:
+          var type = object.type;
+
+          switch (type) {
+            case REACT_ASYNC_MODE_TYPE:
+            case REACT_CONCURRENT_MODE_TYPE:
+            case REACT_FRAGMENT_TYPE:
+            case REACT_PROFILER_TYPE:
+            case REACT_STRICT_MODE_TYPE:
+            case REACT_SUSPENSE_TYPE:
+              return type;
+
+            default:
+              var $$typeofType = type && type.$$typeof;
+
+              switch ($$typeofType) {
+                case REACT_CONTEXT_TYPE:
+                case REACT_FORWARD_REF_TYPE:
+                case REACT_LAZY_TYPE:
+                case REACT_MEMO_TYPE:
+                case REACT_PROVIDER_TYPE:
+                  return $$typeofType;
+
+                default:
+                  return $$typeof;
+              }
+
+          }
+
+        case REACT_PORTAL_TYPE:
+          return $$typeof;
+      }
+    }
+
+    return undefined;
+  } // AsyncMode is deprecated along with isAsyncMode
+
+  var AsyncMode = REACT_ASYNC_MODE_TYPE;
+  var ConcurrentMode = REACT_CONCURRENT_MODE_TYPE;
+  var ContextConsumer = REACT_CONTEXT_TYPE;
+  var ContextProvider = REACT_PROVIDER_TYPE;
+  var Element = REACT_ELEMENT_TYPE;
+  var ForwardRef = REACT_FORWARD_REF_TYPE;
+  var Fragment = REACT_FRAGMENT_TYPE;
+  var Lazy = REACT_LAZY_TYPE;
+  var Memo = REACT_MEMO_TYPE;
+  var Portal = REACT_PORTAL_TYPE;
+  var Profiler = REACT_PROFILER_TYPE;
+  var StrictMode = REACT_STRICT_MODE_TYPE;
+  var Suspense = REACT_SUSPENSE_TYPE;
+  var hasWarnedAboutDeprecatedIsAsyncMode = false; // AsyncMode should be deprecated
+
+  function isAsyncMode(object) {
+    {
+      if (!hasWarnedAboutDeprecatedIsAsyncMode) {
+        hasWarnedAboutDeprecatedIsAsyncMode = true; // Using console['warn'] to evade Babel and ESLint
+
+        console['warn']('The ReactIs.isAsyncMode() alias has been deprecated, ' + 'and will be removed in React 17+. Update your code to use ' + 'ReactIs.isConcurrentMode() instead. It has the exact same API.');
+      }
+    }
+
+    return isConcurrentMode(object) || typeOf(object) === REACT_ASYNC_MODE_TYPE;
+  }
+  function isConcurrentMode(object) {
+    return typeOf(object) === REACT_CONCURRENT_MODE_TYPE;
+  }
+  function isContextConsumer(object) {
+    return typeOf(object) === REACT_CONTEXT_TYPE;
+  }
+  function isContextProvider(object) {
+    return typeOf(object) === REACT_PROVIDER_TYPE;
+  }
+  function isElement(object) {
+    return typeof object === 'object' && object !== null && object.$$typeof === REACT_ELEMENT_TYPE;
+  }
+  function isForwardRef(object) {
+    return typeOf(object) === REACT_FORWARD_REF_TYPE;
+  }
+  function isFragment(object) {
+    return typeOf(object) === REACT_FRAGMENT_TYPE;
+  }
+  function isLazy(object) {
+    return typeOf(object) === REACT_LAZY_TYPE;
+  }
+  function isMemo(object) {
+    return typeOf(object) === REACT_MEMO_TYPE;
+  }
+  function isPortal(object) {
+    return typeOf(object) === REACT_PORTAL_TYPE;
+  }
+  function isProfiler(object) {
+    return typeOf(object) === REACT_PROFILER_TYPE;
+  }
+  function isStrictMode(object) {
+    return typeOf(object) === REACT_STRICT_MODE_TYPE;
+  }
+  function isSuspense(object) {
+    return typeOf(object) === REACT_SUSPENSE_TYPE;
+  }
+
+  exports.AsyncMode = AsyncMode;
+  exports.ConcurrentMode = ConcurrentMode;
+  exports.ContextConsumer = ContextConsumer;
+  exports.ContextProvider = ContextProvider;
+  exports.Element = Element;
+  exports.ForwardRef = ForwardRef;
+  exports.Fragment = Fragment;
+  exports.Lazy = Lazy;
+  exports.Memo = Memo;
+  exports.Portal = Portal;
+  exports.Profiler = Profiler;
+  exports.StrictMode = StrictMode;
+  exports.Suspense = Suspense;
+  exports.isAsyncMode = isAsyncMode;
+  exports.isConcurrentMode = isConcurrentMode;
+  exports.isContextConsumer = isContextConsumer;
+  exports.isContextProvider = isContextProvider;
+  exports.isElement = isElement;
+  exports.isForwardRef = isForwardRef;
+  exports.isFragment = isFragment;
+  exports.isLazy = isLazy;
+  exports.isMemo = isMemo;
+  exports.isPortal = isPortal;
+  exports.isProfiler = isProfiler;
+  exports.isStrictMode = isStrictMode;
+  exports.isSuspense = isSuspense;
+  exports.isValidElementType = isValidElementType;
+  exports.typeOf = typeOf;
+    })();
+  }
+  });
+  var reactIs_development_1 = reactIs_development.AsyncMode;
+  var reactIs_development_2 = reactIs_development.ConcurrentMode;
+  var reactIs_development_3 = reactIs_development.ContextConsumer;
+  var reactIs_development_4 = reactIs_development.ContextProvider;
+  var reactIs_development_5 = reactIs_development.Element;
+  var reactIs_development_6 = reactIs_development.ForwardRef;
+  var reactIs_development_7 = reactIs_development.Fragment;
+  var reactIs_development_8 = reactIs_development.Lazy;
+  var reactIs_development_9 = reactIs_development.Memo;
+  var reactIs_development_10 = reactIs_development.Portal;
+  var reactIs_development_11 = reactIs_development.Profiler;
+  var reactIs_development_12 = reactIs_development.StrictMode;
+  var reactIs_development_13 = reactIs_development.Suspense;
+  var reactIs_development_14 = reactIs_development.isAsyncMode;
+  var reactIs_development_15 = reactIs_development.isConcurrentMode;
+  var reactIs_development_16 = reactIs_development.isContextConsumer;
+  var reactIs_development_17 = reactIs_development.isContextProvider;
+  var reactIs_development_18 = reactIs_development.isElement;
+  var reactIs_development_19 = reactIs_development.isForwardRef;
+  var reactIs_development_20 = reactIs_development.isFragment;
+  var reactIs_development_21 = reactIs_development.isLazy;
+  var reactIs_development_22 = reactIs_development.isMemo;
+  var reactIs_development_23 = reactIs_development.isPortal;
+  var reactIs_development_24 = reactIs_development.isProfiler;
+  var reactIs_development_25 = reactIs_development.isStrictMode;
+  var reactIs_development_26 = reactIs_development.isSuspense;
+  var reactIs_development_27 = reactIs_development.isValidElementType;
+  var reactIs_development_28 = reactIs_development.typeOf;
+
+  var reactIs = createCommonjsModule(function (module) {
+
+  if (process.env.NODE_ENV === 'production') {
+    module.exports = reactIs_production_min;
+  } else {
+    module.exports = reactIs_development;
+  }
+  });
+  var reactIs_1 = reactIs.isMemo;
 
   function fillRef(ref, node) {
     if (typeof ref === 'function') {
@@ -4635,15 +5089,20 @@
       ref.current = node;
     }
   }
+
   /**
    * Merge refs into one ref function to support ref passing.
    */
-
   function composeRef() {
     for (var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++) {
       refs[_key] = arguments[_key];
     }
-
+    var refList = refs.filter(function (ref) {
+      return ref;
+    });
+    if (refList.length <= 1) {
+      return refList[0];
+    }
     return function (node) {
       refs.forEach(function (ref) {
         fillRef(ref, node);
@@ -4651,106 +5110,83 @@
     };
   }
   function supportRef(nodeOrComponent) {
+    var _type$prototype, _nodeOrComponent$prot;
+    var type = reactIs_1(nodeOrComponent) ? nodeOrComponent.type.type : nodeOrComponent.type;
+
     // Function component node
-    if (nodeOrComponent.type && nodeOrComponent.type.prototype && !nodeOrComponent.type.prototype.render) {
-      return false;
-    } // Class component
-
-
-    if (typeof nodeOrComponent === 'function' && nodeOrComponent.prototype && !nodeOrComponent.prototype.render) {
+    if (typeof type === 'function' && !((_type$prototype = type.prototype) !== null && _type$prototype !== void 0 && _type$prototype.render)) {
       return false;
     }
 
+    // Class component
+    if (typeof nodeOrComponent === 'function' && !((_nodeOrComponent$prot = nodeOrComponent.prototype) !== null && _nodeOrComponent$prot !== void 0 && _nodeOrComponent$prot.render)) {
+      return false;
+    }
     return true;
   }
   /* eslint-enable */
 
-  function _typeof$1(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$1 = function _typeof(obj) { return typeof obj; }; } else { _typeof$1 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$1(obj); }
+  function addEventListenerWrap$1(target, eventType, cb, option) {
+    /* eslint camelcase: 2 */
+    var callback = ReactDOM__default.unstable_batchedUpdates ? function run(e) {
+      ReactDOM__default.unstable_batchedUpdates(cb, e);
+    } : cb;
+    if (target.addEventListener) {
+      target.addEventListener(eventType, callback, option);
+    }
+    return {
+      remove: function remove() {
+        if (target.removeEventListener) {
+          target.removeEventListener(eventType, callback, option);
+        }
+      }
+    };
+  }
 
-  function _classCallCheck$2(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+  function canUseDom() {
+    return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  }
 
-  function _defineProperties$1(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+  var Portal$1 = /*#__PURE__*/React.forwardRef(function (props, ref) {
+    var didUpdate = props.didUpdate,
+      getContainer = props.getContainer,
+      children = props.children;
+    var parentRef = React.useRef();
+    var containerRef = React.useRef();
 
-  function _createClass$2(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties$1(Constructor.prototype, protoProps); if (staticProps) _defineProperties$1(Constructor, staticProps); return Constructor; }
+    // Ref return nothing, only for wrapper check exist
+    React.useImperativeHandle(ref, function () {
+      return {};
+    });
 
-  function _possibleConstructorReturn$2(self, call) { if (call && (_typeof$1(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$1(self); }
-
-  function _assertThisInitialized$1(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-  function _getPrototypeOf$1(o) { _getPrototypeOf$1 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$1(o); }
-
-  function _inherits$2(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$1(subClass, superClass); }
-
-  function _setPrototypeOf$1(o, p) { _setPrototypeOf$1 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$1(o, p); }
-
-  var Portal =
-  /*#__PURE__*/
-  function (_React$Component) {
-    _inherits$2(Portal, _React$Component);
-
-    function Portal() {
-      _classCallCheck$2(this, Portal);
-
-      return _possibleConstructorReturn$2(this, _getPrototypeOf$1(Portal).apply(this, arguments));
+    // Create container in client side with sync to avoid useEffect not get ref
+    var initRef = React.useRef(false);
+    if (!initRef.current && canUseDom()) {
+      containerRef.current = getContainer();
+      parentRef.current = containerRef.current.parentNode;
+      initRef.current = true;
     }
 
-    _createClass$2(Portal, [{
-      key: "componentDidMount",
-      value: function componentDidMount() {
-        this.createContainer();
+    // [Legacy] Used by `rc-trigger`
+    React.useEffect(function () {
+      didUpdate === null || didUpdate === void 0 ? void 0 : didUpdate(props);
+    });
+    React.useEffect(function () {
+      // Restore container to original place
+      // React 18 StrictMode will unmount first and mount back for effect test:
+      // https://reactjs.org/blog/2022/03/29/react-v18.html#new-strict-mode-behaviors
+      if (containerRef.current.parentNode === null && parentRef.current !== null) {
+        parentRef.current.appendChild(containerRef.current);
       }
-    }, {
-      key: "componentDidUpdate",
-      value: function componentDidUpdate(prevProps) {
-        var didUpdate = this.props.didUpdate;
-
-        if (didUpdate) {
-          didUpdate(prevProps);
-        }
-      }
-    }, {
-      key: "componentWillUnmount",
-      value: function componentWillUnmount() {
-        this.removeContainer();
-      }
-    }, {
-      key: "createContainer",
-      value: function createContainer() {
-        this._container = this.props.getContainer();
-        this.forceUpdate();
-      }
-    }, {
-      key: "removeContainer",
-      value: function removeContainer() {
-        if (this._container) {
-          this._container.parentNode.removeChild(this._container);
-        }
-      }
-    }, {
-      key: "render",
-      value: function render() {
-        if (this._container) {
-          return ReactDOM__default.createPortal(this.props.children, this._container);
-        }
-
-        return null;
-      }
-    }]);
-
-    return Portal;
-  }(React__default.Component);
-
-  Portal.propTypes = {
-    getContainer: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    didUpdate: PropTypes.func
-  };
-
-  function ownKeys$1(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-  function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$1(source, true).forEach(function (key) { _defineProperty$2(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$1(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function _defineProperty$2(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+      return function () {
+        var _containerRef$current, _containerRef$current2;
+        // [Legacy] This should not be handle by Portal but parent PortalWrapper instead.
+        // Since some component use `Portal` directly, we have to keep the logic here.
+        (_containerRef$current = containerRef.current) === null || _containerRef$current === void 0 ? void 0 : (_containerRef$current2 = _containerRef$current.parentNode) === null || _containerRef$current2 === void 0 ? void 0 : _containerRef$current2.removeChild(containerRef.current);
+      };
+    }, []);
+    return containerRef.current ? /*#__PURE__*/ReactDOM__default.createPortal(children, containerRef.current) : null;
+  });
 
   function isPointsEq(a1, a2, isAlignPoint) {
     if (isAlignPoint) {
@@ -4762,7 +5198,7 @@
 
   function getAlignFromPlacement(builtinPlacements, placementStr, align) {
     var baseAlign = builtinPlacements[placementStr] || {};
-    return _objectSpread({}, baseAlign, {}, align);
+    return _objectSpread2$1(_objectSpread2$1({}, baseAlign), align);
   }
   function getAlignPopupClassName(builtinPlacements, prefixCls, align, isAlignPoint) {
     var points = align.points;
@@ -4895,20 +5331,91 @@
   raf_1.cancel = cancel;
   raf_1.polyfill = polyfill;
 
-  function _typeof$2(obj) {
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof$2 = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof$2 = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof$2(obj);
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
   }
 
+  function _iterableToArrayLimit(arr, i) {
+    var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+    if (null != _i) {
+      var _s,
+        _e,
+        _x,
+        _r,
+        _arr = [],
+        _n = !0,
+        _d = !1;
+      try {
+        if (_x = (_i = _i.call(arr)).next, 0 === i) {
+          if (Object(_i) !== _i) return;
+          _n = !1;
+        } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+      } catch (err) {
+        _d = !0, _e = err;
+      } finally {
+        try {
+          if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+        } finally {
+          if (_d) throw _e;
+        }
+      }
+      return _arr;
+    }
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+    return arr2;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function ownKeys$2(object, enumerableOnly) {
+    var keys = Object.keys(object);
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      enumerableOnly && (symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      })), keys.push.apply(keys, symbols);
+    }
+    return keys;
+  }
+  function _objectSpread2$2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = null != arguments[i] ? arguments[i] : {};
+      i % 2 ? ownKeys$2(Object(source), !0).forEach(function (key) {
+        _defineProperty$3(target, key, source[key]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys$2(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+    return target;
+  }
+  function _typeof$1(obj) {
+    "@babel/helpers - typeof";
+
+    return _typeof$1 = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+      return typeof obj;
+    } : function (obj) {
+      return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    }, _typeof$1(obj);
+  }
   function _defineProperty$3(obj, key, value) {
     if (key in obj) {
       Object.defineProperty(obj, key, {
@@ -4920,42 +5427,7 @@
     } else {
       obj[key] = value;
     }
-
     return obj;
-  }
-
-  function ownKeys$2(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      if (enumerableOnly) symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-      keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2$1(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i] != null ? arguments[i] : {};
-
-      if (i % 2) {
-        ownKeys$2(source, true).forEach(function (key) {
-          _defineProperty$3(target, key, source[key]);
-        });
-      } else if (Object.getOwnPropertyDescriptors) {
-        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-      } else {
-        ownKeys$2(source).forEach(function (key) {
-          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-        });
-      }
-    }
-
-    return target;
   }
 
   var vendorPrefix;
@@ -4966,63 +5438,50 @@
     ms: '-ms-',
     O: '-o-'
   };
-
   function getVendorPrefix() {
     if (vendorPrefix !== undefined) {
       return vendorPrefix;
     }
-
     vendorPrefix = '';
     var style = document.createElement('p').style;
     var testProp = 'Transform';
-
     for (var key in jsCssMap) {
       if (key + testProp in style) {
         vendorPrefix = key;
       }
     }
-
     return vendorPrefix;
   }
-
   function getTransitionName() {
     return getVendorPrefix() ? "".concat(getVendorPrefix(), "TransitionProperty") : 'transitionProperty';
   }
-
   function getTransformName() {
     return getVendorPrefix() ? "".concat(getVendorPrefix(), "Transform") : 'transform';
   }
   function setTransitionProperty(node, value) {
     var name = getTransitionName();
-
     if (name) {
       node.style[name] = value;
-
       if (name !== 'transitionProperty') {
         node.style.transitionProperty = value;
       }
     }
   }
-
   function setTransform(node, value) {
     var name = getTransformName();
-
     if (name) {
       node.style[name] = value;
-
       if (name !== 'transform') {
         node.style.transform = value;
       }
     }
   }
-
   function getTransitionProperty(node) {
     return node.style.transitionProperty || node.style[getTransitionName()];
   }
   function getTransformXY(node) {
     var style = window.getComputedStyle(node, null);
     var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
-
     if (transform && transform !== 'none') {
       var matrix = transform.replace(/[^0-9\-.,]/g, '').split(',');
       return {
@@ -5030,7 +5489,6 @@
         y: parseFloat(matrix[13] || matrix[5], 0)
       };
     }
-
     return {
       x: 0,
       y: 0
@@ -5041,11 +5499,9 @@
   function setTransformXY(node, xy) {
     var style = window.getComputedStyle(node, null);
     var transform = style.getPropertyValue('transform') || style.getPropertyValue(getTransformName());
-
     if (transform && transform !== 'none') {
       var arr;
       var match2d = transform.match(matrix2d);
-
       if (match2d) {
         match2d = match2d[1];
         arr = match2d.split(',').map(function (item) {
@@ -5069,64 +5525,63 @@
   }
 
   var RE_NUM = /[\-+]?(?:\d*\.|)\d+(?:[eE][\-+]?\d+|)/.source;
-  var getComputedStyleX; // https://stackoverflow.com/a/3485654/3040605
+  var getComputedStyleX;
 
+  // https://stackoverflow.com/a/3485654/3040605
   function forceRelayout(elem) {
     var originalStyle = elem.style.display;
     elem.style.display = 'none';
     elem.offsetHeight; // eslint-disable-line
-
     elem.style.display = originalStyle;
   }
-
   function css(el, name, v) {
     var value = v;
-
-    if (_typeof$2(name) === 'object') {
+    if (_typeof$1(name) === 'object') {
       for (var i in name) {
         if (name.hasOwnProperty(i)) {
           css(el, i, name[i]);
         }
       }
-
       return undefined;
     }
-
     if (typeof value !== 'undefined') {
       if (typeof value === 'number') {
         value = "".concat(value, "px");
       }
-
       el.style[name] = value;
       return undefined;
     }
-
     return getComputedStyleX(el, name);
   }
-
   function getClientPosition(elem) {
     var box;
     var x;
     var y;
     var doc = elem.ownerDocument;
     var body = doc.body;
-    var docElem = doc && doc.documentElement; // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
+    var docElem = doc && doc.documentElement;
+    // 根据 GBS 最新数据，A-Grade Browsers 都已支持 getBoundingClientRect 方法，不用再考虑传统的实现方式
+    box = elem.getBoundingClientRect();
 
-    box = elem.getBoundingClientRect(); // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
+    // 注：jQuery 还考虑减去 docElem.clientLeft/clientTop
     // 但测试发现，这样反而会导致当 html 和 body 有边距/边框样式时，获取的值不正确
     // 此外，ie6 会忽略 html 的 margin 值，幸运地是没有谁会去设置 html 的 margin
 
-    x = box.left;
-    y = box.top; // In IE, most of the time, 2 extra pixels are added to the top and left
+    x = Math.floor(box.left);
+    y = Math.floor(box.top);
+
+    // In IE, most of the time, 2 extra pixels are added to the top and left
     // due to the implicit 2-pixel inset border.  In IE6/7 quirks mode and
     // IE6 standards mode, this border can be overridden by setting the
     // document element's border to zero -- thus, we cannot rely on the
     // offset always being 2 pixels.
+
     // In quirks mode, the offset can be determined by querying the body's
     // clientLeft/clientTop, but in standards mode, it is found by querying
     // the document element's clientLeft/clientTop.  Since we already called
     // getClientBoundingRect we have already forced a reflow, so it is not
     // too expensive just to query them all.
+
     // ie 下应该减去窗口的边框吧，毕竟默认 absolute 都是相对窗口定位的
     // 窗口边框标准是设 documentElement ,quirks 时设置 body
     // 最好禁止在 body 和 html 上边框 ，但 ie < 9 html 默认有 2px ，减去
@@ -5142,33 +5597,26 @@
       top: y
     };
   }
-
   function getScroll(w, top) {
     var ret = w["page".concat(top ? 'Y' : 'X', "Offset")];
     var method = "scroll".concat(top ? 'Top' : 'Left');
-
     if (typeof ret !== 'number') {
-      var d = w.document; // ie6,7,8 standard mode
-
+      var d = w.document;
+      // ie6,7,8 standard mode
       ret = d.documentElement[method];
-
       if (typeof ret !== 'number') {
         // quirks mode
         ret = d.body[method];
       }
     }
-
     return ret;
   }
-
   function getScrollLeft(w) {
     return getScroll(w);
   }
-
   function getScrollTop(w) {
     return getScroll(w, true);
   }
-
   function getOffset(el) {
     var pos = getClientPosition(el);
     var doc = el.ownerDocument;
@@ -5177,95 +5625,86 @@
     pos.top += getScrollTop(w);
     return pos;
   }
+
   /**
    * A crude way of determining if an object is a window
    * @member util
    */
-
-
   function isWindow(obj) {
     // must use == for ie8
-
     /* eslint eqeqeq:0 */
     return obj !== null && obj !== undefined && obj == obj.window;
   }
-
   function getDocument(node) {
     if (isWindow(node)) {
       return node.document;
     }
-
     if (node.nodeType === 9) {
       return node;
     }
-
     return node.ownerDocument;
   }
-
   function _getComputedStyle(elem, name, cs) {
     var computedStyle = cs;
     var val = '';
     var d = getDocument(elem);
-    computedStyle = computedStyle || d.defaultView.getComputedStyle(elem, null); // https://github.com/kissyteam/kissy/issues/61
+    computedStyle = computedStyle || d.defaultView.getComputedStyle(elem, null);
 
+    // https://github.com/kissyteam/kissy/issues/61
     if (computedStyle) {
       val = computedStyle.getPropertyValue(name) || computedStyle[name];
     }
-
     return val;
   }
-
   var _RE_NUM_NO_PX = new RegExp("^(".concat(RE_NUM, ")(?!px)[a-z%]+$"), 'i');
-
   var RE_POS = /^(top|right|bottom|left)$/;
   var CURRENT_STYLE = 'currentStyle';
   var RUNTIME_STYLE = 'runtimeStyle';
   var LEFT = 'left';
   var PX = 'px';
-
   function _getComputedStyleIE(elem, name) {
     // currentStyle maybe null
     // http://msdn.microsoft.com/en-us/library/ms535231.aspx
-    var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name]; // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
+    var ret = elem[CURRENT_STYLE] && elem[CURRENT_STYLE][name];
+
+    // 当 width/height 设置为百分比时，通过 pixelLeft 方式转换的 width/height 值
     // 一开始就处理了! CUSTOM_STYLE.height,CUSTOM_STYLE.width ,cssHook 解决@2011-08-19
     // 在 ie 下不对，需要直接用 offset 方式
     // borderWidth 等值也有问题，但考虑到 borderWidth 设为百分比的概率很小，这里就不考虑了
+
     // From the awesome hack by Dean Edwards
     // http://erik.eae.net/archives/2007/07/27/18.54.15/#comment-102291
     // If we're not dealing with a regular pixel number
     // but a number that has a weird ending, we need to convert it to pixels
     // exclude left right for relativity
-
     if (_RE_NUM_NO_PX.test(ret) && !RE_POS.test(name)) {
       // Remember the original values
       var style = elem.style;
       var left = style[LEFT];
-      var rsLeft = elem[RUNTIME_STYLE][LEFT]; // prevent flashing of content
+      var rsLeft = elem[RUNTIME_STYLE][LEFT];
 
-      elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT]; // Put in the new values to get a computed value out
+      // prevent flashing of content
+      elem[RUNTIME_STYLE][LEFT] = elem[CURRENT_STYLE][LEFT];
 
+      // Put in the new values to get a computed value out
       style[LEFT] = name === 'fontSize' ? '1em' : ret || 0;
-      ret = style.pixelLeft + PX; // Revert the changed values
+      ret = style.pixelLeft + PX;
 
+      // Revert the changed values
       style[LEFT] = left;
       elem[RUNTIME_STYLE][LEFT] = rsLeft;
     }
-
     return ret === '' ? 'auto' : ret;
   }
-
   if (typeof window !== 'undefined') {
     getComputedStyleX = window.getComputedStyle ? _getComputedStyle : _getComputedStyleIE;
   }
-
   function getOffsetDirection(dir, option) {
     if (dir === 'left') {
       return option.useCssRight ? 'right' : dir;
     }
-
     return option.useCssBottom ? 'bottom' : dir;
   }
-
   function oppositeOffsetDirection(dir) {
     if (dir === 'left') {
       return 'right';
@@ -5276,59 +5715,49 @@
     } else if (dir === 'bottom') {
       return 'top';
     }
-  } // 设置 elem 相对 elem.ownerDocument 的坐标
+  }
 
-
+  // 设置 elem 相对 elem.ownerDocument 的坐标
   function setLeftTop(elem, offset, option) {
     // set position first, in-case top/left are set even on static elem
     if (css(elem, 'position') === 'static') {
       elem.style.position = 'relative';
     }
-
     var presetH = -999;
     var presetV = -999;
     var horizontalProperty = getOffsetDirection('left', option);
     var verticalProperty = getOffsetDirection('top', option);
     var oppositeHorizontalProperty = oppositeOffsetDirection(horizontalProperty);
     var oppositeVerticalProperty = oppositeOffsetDirection(verticalProperty);
-
     if (horizontalProperty !== 'left') {
       presetH = 999;
     }
-
     if (verticalProperty !== 'top') {
       presetV = 999;
     }
-
     var originalTransition = '';
     var originalOffset = getOffset(elem);
-
     if ('left' in offset || 'top' in offset) {
       originalTransition = getTransitionProperty(elem) || '';
       setTransitionProperty(elem, 'none');
     }
-
     if ('left' in offset) {
       elem.style[oppositeHorizontalProperty] = '';
       elem.style[horizontalProperty] = "".concat(presetH, "px");
     }
-
     if ('top' in offset) {
       elem.style[oppositeVerticalProperty] = '';
       elem.style[verticalProperty] = "".concat(presetV, "px");
-    } // force relayout
-
-
+    }
+    // force relayout
     forceRelayout(elem);
     var old = getOffset(elem);
     var originalStyle = {};
-
     for (var key in offset) {
       if (offset.hasOwnProperty(key)) {
         var dir = getOffsetDirection(key, option);
         var preset = key === 'left' ? presetH : presetV;
         var off = originalOffset[key] - old[key];
-
         if (dir === key) {
           originalStyle[dir] = preset + off;
         } else {
@@ -5336,23 +5765,17 @@
         }
       }
     }
-
-    css(elem, originalStyle); // force relayout
-
+    css(elem, originalStyle);
+    // force relayout
     forceRelayout(elem);
-
     if ('left' in offset || 'top' in offset) {
       setTransitionProperty(elem, originalTransition);
     }
-
     var ret = {};
-
     for (var _key in offset) {
       if (offset.hasOwnProperty(_key)) {
         var _dir = getOffsetDirection(_key, option);
-
         var _off = offset[_key] - originalOffset[_key];
-
         if (_key === _dir) {
           ret[_dir] = originalStyle[_dir] + _off;
         } else {
@@ -5360,10 +5783,8 @@
         }
       }
     }
-
     css(elem, ret);
   }
-
   function setTransform$1(elem, offset) {
     var originalOffset = getOffset(elem);
     var originalXY = getTransformXY(elem);
@@ -5371,18 +5792,14 @@
       x: originalXY.x,
       y: originalXY.y
     };
-
     if ('left' in offset) {
       resultXY.x = originalXY.x + offset.left - originalOffset.left;
     }
-
     if ('top' in offset) {
       resultXY.y = originalXY.y + offset.top - originalOffset.top;
     }
-
     setTransformXY(elem, resultXY);
   }
-
   function setOffset(elem, offset, option) {
     if (option.ignoreShake) {
       var oriOffset = getOffset(elem);
@@ -5390,12 +5807,10 @@
       var oTop = oriOffset.top.toFixed(0);
       var tLeft = offset.left.toFixed(0);
       var tTop = offset.top.toFixed(0);
-
       if (oLeft === tLeft && oTop === tTop) {
         return;
       }
     }
-
     if (option.useCssRight || option.useCssBottom) {
       setLeftTop(elem, offset, option);
     } else if (option.useCssTransform && getTransformName() in document.body.style) {
@@ -5404,75 +5819,64 @@
       setLeftTop(elem, offset, option);
     }
   }
-
   function each(arr, fn) {
     for (var i = 0; i < arr.length; i++) {
       fn(arr[i]);
     }
   }
-
   function isBorderBoxFn(elem) {
     return getComputedStyleX(elem, 'boxSizing') === 'border-box';
   }
-
   var BOX_MODELS = ['margin', 'border', 'padding'];
   var CONTENT_INDEX = -1;
   var PADDING_INDEX = 2;
   var BORDER_INDEX = 1;
   var MARGIN_INDEX = 0;
-
   function swap(elem, options, callback) {
     var old = {};
     var style = elem.style;
-    var name; // Remember the old values, and insert the new ones
+    var name;
 
+    // Remember the old values, and insert the new ones
     for (name in options) {
       if (options.hasOwnProperty(name)) {
         old[name] = style[name];
         style[name] = options[name];
       }
     }
+    callback.call(elem);
 
-    callback.call(elem); // Revert the old values
-
+    // Revert the old values
     for (name in options) {
       if (options.hasOwnProperty(name)) {
         style[name] = old[name];
       }
     }
   }
-
   function getPBMWidth(elem, props, which) {
     var value = 0;
     var prop;
     var j;
     var i;
-
     for (j = 0; j < props.length; j++) {
       prop = props[j];
-
       if (prop) {
         for (i = 0; i < which.length; i++) {
           var cssProp = void 0;
-
           if (prop === 'border') {
             cssProp = "".concat(prop).concat(which[i], "Width");
           } else {
             cssProp = prop + which[i];
           }
-
           value += parseFloat(getComputedStyleX(elem, cssProp)) || 0;
         }
       }
     }
-
     return value;
   }
-
   var domUtils = {
     getParent: function getParent(element) {
       var parent = element;
-
       do {
         if (parent.nodeType === 11 && parent.host) {
           parent = parent.host;
@@ -5480,31 +5884,32 @@
           parent = parent.parentNode;
         }
       } while (parent && parent.nodeType !== 1 && parent.nodeType !== 9);
-
       return parent;
     }
   };
   each(['Width', 'Height'], function (name) {
     domUtils["doc".concat(name)] = function (refWin) {
       var d = refWin.document;
-      return Math.max( // firefox chrome documentElement.scrollHeight< body.scrollHeight
+      return Math.max(
+      // firefox chrome documentElement.scrollHeight< body.scrollHeight
       // ie standard mode : documentElement.scrollHeight> body.scrollHeight
-      d.documentElement["scroll".concat(name)], // quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
+      d.documentElement["scroll".concat(name)],
+      // quirks : documentElement.scrollHeight 最大等于可视窗口多一点？
       d.body["scroll".concat(name)], domUtils["viewport".concat(name)](d));
     };
-
     domUtils["viewport".concat(name)] = function (win) {
       // pc browser includes scrollbar in window.innerWidth
       var prop = "client".concat(name);
       var doc = win.document;
       var body = doc.body;
       var documentElement = doc.documentElement;
-      var documentElementProp = documentElement[prop]; // 标准模式取 documentElement
+      var documentElementProp = documentElement[prop];
+      // 标准模式取 documentElement
       // backcompat 取 body
-
       return doc.compatMode === 'CSS1Compat' && documentElementProp || body && body[prop] || documentElementProp;
     };
   });
+
   /*
    得到元素的大小信息
    @param elem
@@ -5513,74 +5918,60 @@
    'border' : (css width) + padding + border
    'margin' : (css width) + padding + border + margin
    */
-
   function getWH(elem, name, ex) {
     var extra = ex;
-
     if (isWindow(elem)) {
       return name === 'width' ? domUtils.viewportWidth(elem) : domUtils.viewportHeight(elem);
     } else if (elem.nodeType === 9) {
       return name === 'width' ? domUtils.docWidth(elem) : domUtils.docHeight(elem);
     }
-
     var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-    var borderBoxValue = name === 'width' ? elem.getBoundingClientRect().width : elem.getBoundingClientRect().height;
-    var computedStyle = getComputedStyleX(elem);
+    var borderBoxValue = name === 'width' ? Math.floor(elem.getBoundingClientRect().width) : Math.floor(elem.getBoundingClientRect().height);
     var isBorderBox = isBorderBoxFn(elem);
     var cssBoxValue = 0;
-
     if (borderBoxValue === null || borderBoxValue === undefined || borderBoxValue <= 0) {
-      borderBoxValue = undefined; // Fall back to computed then un computed css if necessary
-
+      borderBoxValue = undefined;
+      // Fall back to computed then un computed css if necessary
       cssBoxValue = getComputedStyleX(elem, name);
-
       if (cssBoxValue === null || cssBoxValue === undefined || Number(cssBoxValue) < 0) {
         cssBoxValue = elem.style[name] || 0;
-      } // Normalize '', auto, and prepare for extra
-
-
-      cssBoxValue = parseFloat(cssBoxValue) || 0;
+      }
+      // Normalize '', auto, and prepare for extra
+      cssBoxValue = Math.floor(parseFloat(cssBoxValue)) || 0;
     }
-
     if (extra === undefined) {
       extra = isBorderBox ? BORDER_INDEX : CONTENT_INDEX;
     }
-
     var borderBoxValueOrIsBorderBox = borderBoxValue !== undefined || isBorderBox;
     var val = borderBoxValue || cssBoxValue;
-
     if (extra === CONTENT_INDEX) {
       if (borderBoxValueOrIsBorderBox) {
         return val - getPBMWidth(elem, ['border', 'padding'], which);
       }
-
       return cssBoxValue;
     } else if (borderBoxValueOrIsBorderBox) {
       if (extra === BORDER_INDEX) {
         return val;
       }
-
       return val + (extra === PADDING_INDEX ? -getPBMWidth(elem, ['border'], which) : getPBMWidth(elem, ['margin'], which));
     }
-
     return cssBoxValue + getPBMWidth(elem, BOX_MODELS.slice(extra), which);
   }
-
   var cssShow = {
     position: 'absolute',
     visibility: 'hidden',
     display: 'block'
-  }; // fix #119 : https://github.com/kissyteam/kissy/issues/119
+  };
 
+  // fix #119 : https://github.com/kissyteam/kissy/issues/119
   function getWHIgnoreDisplay() {
     for (var _len = arguments.length, args = new Array(_len), _key2 = 0; _key2 < _len; _key2++) {
       args[_key2] = arguments[_key2];
     }
-
     var val;
-    var elem = args[0]; // in case elem is window
+    var elem = args[0];
+    // in case elem is window
     // elem.offsetWidth === undefined
-
     if (elem.offsetWidth !== 0) {
       val = getWH.apply(undefined, args);
     } else {
@@ -5588,57 +5979,42 @@
         val = getWH.apply(undefined, args);
       });
     }
-
     return val;
   }
-
   each(['width', 'height'], function (name) {
     var first = name.charAt(0).toUpperCase() + name.slice(1);
-
     domUtils["outer".concat(first)] = function (el, includeMargin) {
       return el && getWHIgnoreDisplay(el, name, includeMargin ? MARGIN_INDEX : BORDER_INDEX);
     };
-
     var which = name === 'width' ? ['Left', 'Right'] : ['Top', 'Bottom'];
-
     domUtils[name] = function (elem, v) {
       var val = v;
-
       if (val !== undefined) {
         if (elem) {
-          var computedStyle = getComputedStyleX(elem);
           var isBorderBox = isBorderBoxFn(elem);
-
           if (isBorderBox) {
             val += getPBMWidth(elem, ['padding', 'border'], which);
           }
-
           return css(elem, name, val);
         }
-
         return undefined;
       }
-
       return elem && getWHIgnoreDisplay(elem, name, CONTENT_INDEX);
     };
   });
-
   function mix(to, from) {
     for (var i in from) {
       if (from.hasOwnProperty(i)) {
         to[i] = from[i];
       }
     }
-
     return to;
   }
-
   var utils = {
     getWindow: function getWindow(node) {
       if (node && node.document && node.setTimeout) {
         return node;
       }
-
       var doc = node.ownerDocument || node;
       return doc.defaultView || doc.parentWindow;
     },
@@ -5656,15 +6032,12 @@
     clone: function clone(obj) {
       var i;
       var ret = {};
-
       for (i in obj) {
         if (obj.hasOwnProperty(i)) {
           ret[i] = obj[i];
         }
       }
-
       var overflow = obj.overflow;
-
       if (overflow) {
         for (i in obj) {
           if (obj.hasOwnProperty(i)) {
@@ -5672,7 +6045,6 @@
           }
         }
       }
-
       return ret;
     },
     mix: mix,
@@ -5684,11 +6056,9 @@
     },
     merge: function merge() {
       var ret = {};
-
       for (var i = 0; i < arguments.length; i++) {
         utils.mix(ret, i < 0 || arguments.length <= i ? undefined : arguments[i]);
       }
-
       return ret;
     },
     viewportWidth: 0,
@@ -5699,14 +6069,12 @@
   /**
    * 得到会导致元素显示不全的祖先元素
    */
-
   var getParent = utils.getParent;
-
   function getOffsetParent(element) {
     if (utils.isWindow(element) || element.nodeType === 9) {
       return null;
-    } // ie 这个也不是完全可行
-
+    }
+    // ie 这个也不是完全可行
     /*
      <div style="width: 50px;height: 100px;overflow: hidden">
      <div style="width: 50px;height: 100px;position: relative;" id="d6">
@@ -5721,26 +6089,20 @@
     //            return element.offsetParent;
     //        }
     // 统一的 offsetParent 方法
-
-
     var doc = utils.getDocument(element);
     var body = doc.body;
     var parent;
     var positionStyle = utils.css(element, 'position');
     var skipStatic = positionStyle === 'fixed' || positionStyle === 'absolute';
-
     if (!skipStatic) {
       return element.nodeName.toLowerCase() === 'html' ? null : getParent(element);
     }
-
     for (parent = getParent(element); parent && parent !== body && parent.nodeType !== 9; parent = getParent(parent)) {
       positionStyle = utils.css(parent, 'position');
-
       if (positionStyle !== 'static') {
         return parent;
       }
     }
-
     return null;
   }
 
@@ -5749,27 +6111,24 @@
     if (utils.isWindow(element) || element.nodeType === 9) {
       return false;
     }
-
     var doc = utils.getDocument(element);
     var body = doc.body;
     var parent = null;
-
-    for (parent = getParent$1(element); parent && parent !== body; parent = getParent$1(parent)) {
+    for (parent = getParent$1(element);
+    // 修复元素位于 document.documentElement 下导致崩溃问题
+    parent && parent !== body && parent !== doc; parent = getParent$1(parent)) {
       var positionStyle = utils.css(parent, 'position');
-
       if (positionStyle === 'fixed') {
         return true;
       }
     }
-
     return false;
   }
 
   /**
    * 获得元素的显示部分的区域
    */
-
-  function getVisibleRectForElement(element) {
+  function getVisibleRectForElement(element, alwaysByViewport) {
     var visibleRect = {
       left: 0,
       right: Infinity,
@@ -5780,69 +6139,66 @@
     var doc = utils.getDocument(element);
     var win = doc.defaultView || doc.parentWindow;
     var body = doc.body;
-    var documentElement = doc.documentElement; // Determine the size of the visible rect by climbing the dom accounting for
-    // all scrollable containers.
+    var documentElement = doc.documentElement;
 
+    // Determine the size of the visible rect by climbing the dom accounting for
+    // all scrollable containers.
     while (el) {
       // clientWidth is zero for inline block elements in ie.
-      if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) && // body may have overflow set on it, yet we still get the entire
+      if ((navigator.userAgent.indexOf('MSIE') === -1 || el.clientWidth !== 0) &&
+      // body may have overflow set on it, yet we still get the entire
       // viewport. In some browsers, el.offsetParent may be
       // document.documentElement, so check for that too.
       el !== body && el !== documentElement && utils.css(el, 'overflow') !== 'visible') {
-        var pos = utils.offset(el); // add border
-
+        var pos = utils.offset(el);
+        // add border
         pos.left += el.clientLeft;
         pos.top += el.clientTop;
         visibleRect.top = Math.max(visibleRect.top, pos.top);
-        visibleRect.right = Math.min(visibleRect.right, // consider area without scrollBar
+        visibleRect.right = Math.min(visibleRect.right,
+        // consider area without scrollBar
         pos.left + el.clientWidth);
         visibleRect.bottom = Math.min(visibleRect.bottom, pos.top + el.clientHeight);
         visibleRect.left = Math.max(visibleRect.left, pos.left);
       } else if (el === body || el === documentElement) {
         break;
       }
-
       el = getOffsetParent(el);
-    } // Set element position to fixed
+    }
+
+    // Set element position to fixed
     // make sure absolute element itself don't affect it's visible area
     // https://github.com/ant-design/ant-design/issues/7601
-
-
     var originalPosition = null;
-
     if (!utils.isWindow(element) && element.nodeType !== 9) {
       originalPosition = element.style.position;
       var position = utils.css(element, 'position');
-
       if (position === 'absolute') {
         element.style.position = 'fixed';
       }
     }
-
     var scrollX = utils.getWindowScrollLeft(win);
     var scrollY = utils.getWindowScrollTop(win);
     var viewportWidth = utils.viewportWidth(win);
     var viewportHeight = utils.viewportHeight(win);
     var documentWidth = documentElement.scrollWidth;
-    var documentHeight = documentElement.scrollHeight; // scrollXXX on html is sync with body which means overflow: hidden on body gets wrong scrollXXX.
+    var documentHeight = documentElement.scrollHeight;
+
+    // scrollXXX on html is sync with body which means overflow: hidden on body gets wrong scrollXXX.
     // We should cut this ourself.
-
     var bodyStyle = window.getComputedStyle(body);
-
     if (bodyStyle.overflowX === 'hidden') {
       documentWidth = win.innerWidth;
     }
-
     if (bodyStyle.overflowY === 'hidden') {
       documentHeight = win.innerHeight;
-    } // Reset element position after calculate the visible area
+    }
 
-
+    // Reset element position after calculate the visible area
     if (element.style) {
       element.style.position = originalPosition;
     }
-
-    if (isAncestorFixed(element)) {
+    if (alwaysByViewport || isAncestorFixed(element)) {
       // Clip by viewport's size.
       visibleRect.left = Math.max(visibleRect.left, scrollX);
       visibleRect.top = Math.max(visibleRect.top, scrollY);
@@ -5855,7 +6211,6 @@
       var maxVisibleHeight = Math.max(documentHeight, scrollY + viewportHeight);
       visibleRect.bottom = Math.min(visibleRect.bottom, maxVisibleHeight);
     }
-
     return visibleRect.top >= 0 && visibleRect.left >= 0 && visibleRect.bottom > visibleRect.top && visibleRect.right > visibleRect.left ? visibleRect : null;
   }
 
@@ -5865,38 +6220,36 @@
       width: elRegion.width,
       height: elRegion.height
     };
-
     if (overflow.adjustX && pos.left < visibleRect.left) {
       pos.left = visibleRect.left;
-    } // Left edge inside and right edge outside viewport, try to resize it.
+    }
 
-
+    // Left edge inside and right edge outside viewport, try to resize it.
     if (overflow.resizeWidth && pos.left >= visibleRect.left && pos.left + size.width > visibleRect.right) {
       size.width -= pos.left + size.width - visibleRect.right;
-    } // Right edge outside viewport, try to move it.
+    }
 
-
+    // Right edge outside viewport, try to move it.
     if (overflow.adjustX && pos.left + size.width > visibleRect.right) {
       // 保证左边界和可视区域左边界对齐
       pos.left = Math.max(visibleRect.right - size.width, visibleRect.left);
-    } // Top edge outside viewport, try to move it.
+    }
 
-
+    // Top edge outside viewport, try to move it.
     if (overflow.adjustY && pos.top < visibleRect.top) {
       pos.top = visibleRect.top;
-    } // Top edge inside and bottom edge outside viewport, try to resize it.
+    }
 
-
+    // Top edge inside and bottom edge outside viewport, try to resize it.
     if (overflow.resizeHeight && pos.top >= visibleRect.top && pos.top + size.height > visibleRect.bottom) {
       size.height -= pos.top + size.height - visibleRect.bottom;
-    } // Bottom edge outside viewport, try to move it.
+    }
 
-
+    // Bottom edge outside viewport, try to move it.
     if (overflow.adjustY && pos.top + size.height > visibleRect.bottom) {
       // 保证上边界和可视区域上边界对齐
       pos.top = Math.max(visibleRect.bottom - size.height, visibleRect.top);
     }
-
     return utils.mix(pos, size);
   }
 
@@ -5904,7 +6257,6 @@
     var offset;
     var w;
     var h;
-
     if (!utils.isWindow(node) && node.nodeType !== 9) {
       offset = utils.offset(node);
       w = utils.outerWidth(node);
@@ -5918,7 +6270,6 @@
       w = utils.viewportWidth(win);
       h = utils.viewportHeight(win);
     }
-
     offset.width = w;
     offset.height = h;
     return offset;
@@ -5927,6 +6278,7 @@
   /**
    * 获取 node 上的 align 对齐点 相对于页面的坐标
    */
+
   function getAlignOffset(region, align) {
     var V = align.charAt(0);
     var H = align.charAt(1);
@@ -5934,19 +6286,16 @@
     var h = region.height;
     var x = region.left;
     var y = region.top;
-
     if (V === 'c') {
       y += h / 2;
     } else if (V === 'b') {
       y += h;
     }
-
     if (H === 'c') {
       x += w / 2;
     } else if (H === 'r') {
       x += w;
     }
-
     return {
       left: x,
       top: y
@@ -5968,22 +6317,20 @@
    * @author yiminghe@gmail.com
    */
 
+  // http://yiminghe.iteye.com/blog/1124720
+
   function isFailX(elFuturePos, elRegion, visibleRect) {
     return elFuturePos.left < visibleRect.left || elFuturePos.left + elRegion.width > visibleRect.right;
   }
-
   function isFailY(elFuturePos, elRegion, visibleRect) {
     return elFuturePos.top < visibleRect.top || elFuturePos.top + elRegion.height > visibleRect.bottom;
   }
-
   function isCompleteFailX(elFuturePos, elRegion, visibleRect) {
     return elFuturePos.left > visibleRect.right || elFuturePos.left + elRegion.width < visibleRect.left;
   }
-
   function isCompleteFailY(elFuturePos, elRegion, visibleRect) {
     return elFuturePos.top > visibleRect.bottom || elFuturePos.top + elRegion.height < visibleRect.top;
   }
-
   function flip(points, reg, map) {
     var ret = [];
     utils.each(points, function (p) {
@@ -5993,35 +6340,29 @@
     });
     return ret;
   }
-
   function flipOffset(offset, index) {
     offset[index] = -offset[index];
     return offset;
   }
-
   function convertOffset(str, offsetLen) {
     var n;
-
     if (/%$/.test(str)) {
       n = parseInt(str.substring(0, str.length - 1), 10) / 100 * offsetLen;
     } else {
       n = parseInt(str, 10);
     }
-
     return n || 0;
   }
-
   function normalizeOffset(offset, el) {
     offset[0] = convertOffset(offset[0], el.width);
     offset[1] = convertOffset(offset[1], el.height);
   }
+
   /**
    * @param el
    * @param tgtRegion 参照节点所占的区域: { left, top, width, height }
    * @param align
    */
-
-
   function doAlign(el, tgtRegion, align, isTgtRegionVisible) {
     var points = align.points;
     var offset = align.offset || [0, 0];
@@ -6032,19 +6373,21 @@
     targetOffset = [].concat(targetOffset);
     overflow = overflow || {};
     var newOverflowCfg = {};
-    var fail = 0; // 当前节点可以被放置的显示区域
-
-    var visibleRect = getVisibleRectForElement(source); // 当前节点所占的区域, left/top/width/height
-
-    var elRegion = getRegion(source); // 将 offset 转换成数值，支持百分比
-
+    var fail = 0;
+    var alwaysByViewport = !!(overflow && overflow.alwaysByViewport);
+    // 当前节点可以被放置的显示区域
+    var visibleRect = getVisibleRectForElement(source, alwaysByViewport);
+    // 当前节点所占的区域, left/top/width/height
+    var elRegion = getRegion(source);
+    // 将 offset 转换成数值，支持百分比
     normalizeOffset(offset, elRegion);
-    normalizeOffset(targetOffset, tgtRegion); // 当前节点将要被放置的位置
+    normalizeOffset(targetOffset, tgtRegion);
+    // 当前节点将要被放置的位置
+    var elFuturePos = getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset);
+    // 当前节点将要所处的区域
+    var newElRegion = utils.merge(elRegion, elFuturePos);
 
-    var elFuturePos = getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset); // 当前节点将要所处的区域
-
-    var newElRegion = utils.merge(elRegion, elFuturePos); // 如果可视区域不能完全放置当前节点时允许调整
-
+    // 如果可视区域不能完全放置当前节点时允许调整
     if (visibleRect && (overflow.adjustX || overflow.adjustY) && isTgtRegionVisible) {
       if (overflow.adjustX) {
         // 如果横向不能放下
@@ -6053,12 +6396,11 @@
           var newPoints = flip(points, /[lr]/gi, {
             l: 'r',
             r: 'l'
-          }); // 偏移量也反下
-
+          });
+          // 偏移量也反下
           var newOffset = flipOffset(offset, 0);
           var newTargetOffset = flipOffset(targetOffset, 0);
           var newElFuturePos = getElFuturePos(elRegion, tgtRegion, newPoints, newOffset, newTargetOffset);
-
           if (!isCompleteFailX(newElFuturePos, elRegion, visibleRect)) {
             fail = 1;
             points = newPoints;
@@ -6067,7 +6409,6 @@
           }
         }
       }
-
       if (overflow.adjustY) {
         // 如果纵向不能放下
         if (isFailY(elFuturePos, elRegion, visibleRect)) {
@@ -6075,15 +6416,11 @@
           var _newPoints = flip(points, /[tb]/gi, {
             t: 'b',
             b: 't'
-          }); // 偏移量也反下
-
-
+          });
+          // 偏移量也反下
           var _newOffset = flipOffset(offset, 1);
-
           var _newTargetOffset = flipOffset(targetOffset, 1);
-
           var _newElFuturePos = getElFuturePos(elRegion, tgtRegion, _newPoints, _newOffset, _newTargetOffset);
-
           if (!isCompleteFailY(_newElFuturePos, elRegion, visibleRect)) {
             fail = 1;
             points = _newPoints;
@@ -6091,45 +6428,58 @@
             targetOffset = _newTargetOffset;
           }
         }
-      } // 如果失败，重新计算当前节点将要被放置的位置
+      }
 
-
+      // 如果失败，重新计算当前节点将要被放置的位置
       if (fail) {
         elFuturePos = getElFuturePos(elRegion, tgtRegion, points, offset, targetOffset);
         utils.mix(newElRegion, elFuturePos);
       }
-
       var isStillFailX = isFailX(elFuturePos, elRegion, visibleRect);
-      var isStillFailY = isFailY(elFuturePos, elRegion, visibleRect); // 检查反下后的位置是否可以放下了，如果仍然放不下：
+      var isStillFailY = isFailY(elFuturePos, elRegion, visibleRect);
+      // 检查反下后的位置是否可以放下了，如果仍然放不下：
       // 1. 复原修改过的定位参数
-
       if (isStillFailX || isStillFailY) {
-        points = align.points;
+        var _newPoints2 = points;
+
+        // 重置对应部分的翻转逻辑
+        if (isStillFailX) {
+          _newPoints2 = flip(points, /[lr]/gi, {
+            l: 'r',
+            r: 'l'
+          });
+        }
+        if (isStillFailY) {
+          _newPoints2 = flip(points, /[tb]/gi, {
+            t: 'b',
+            b: 't'
+          });
+        }
+        points = _newPoints2;
         offset = align.offset || [0, 0];
         targetOffset = align.targetOffset || [0, 0];
-      } // 2. 只有指定了可以调整当前方向才调整
-
-
+      }
+      // 2. 只有指定了可以调整当前方向才调整
       newOverflowCfg.adjustX = overflow.adjustX && isStillFailX;
-      newOverflowCfg.adjustY = overflow.adjustY && isStillFailY; // 确实要调整，甚至可能会调整高度宽度
+      newOverflowCfg.adjustY = overflow.adjustY && isStillFailY;
 
+      // 确实要调整，甚至可能会调整高度宽度
       if (newOverflowCfg.adjustX || newOverflowCfg.adjustY) {
         newElRegion = adjustForViewport(elFuturePos, elRegion, visibleRect, newOverflowCfg);
       }
-    } // need judge to in case set fixed with in css on height auto element
+    }
 
-
+    // need judge to in case set fixed with in css on height auto element
     if (newElRegion.width !== elRegion.width) {
       utils.css(source, 'width', utils.width(source) + newElRegion.width - elRegion.width);
     }
-
     if (newElRegion.height !== elRegion.height) {
       utils.css(source, 'height', utils.height(source) + newElRegion.height - elRegion.height);
-    } // https://github.com/kissyteam/kissy/issues/190
+    }
+
+    // https://github.com/kissyteam/kissy/issues/190
     // 相对于屏幕位置没变，而 left/top 变了
     // 例如 <div 'relative'><el absolute></div>
-
-
     utils.offset(source, {
       left: newElRegion.left,
       top: newElRegion.top
@@ -6155,19 +6505,17 @@
    *   - 增加智能对齐，以及大小调整选项
    **/
 
-  function isOutOfVisibleRect(target) {
-    var visibleRect = getVisibleRectForElement(target);
+  function isOutOfVisibleRect(target, alwaysByViewport) {
+    var visibleRect = getVisibleRectForElement(target, alwaysByViewport);
     var targetRegion = getRegion(target);
     return !visibleRect || targetRegion.left + targetRegion.width <= visibleRect.left || targetRegion.top + targetRegion.height <= visibleRect.top || targetRegion.left >= visibleRect.right || targetRegion.top >= visibleRect.bottom;
   }
-
   function alignElement(el, refNode, align) {
     var target = align.target || refNode;
     var refNodeRegion = getRegion(target);
-    var isTargetNotOutOfVisible = !isOutOfVisibleRect(target);
+    var isTargetNotOutOfVisible = !isOutOfVisibleRect(target, align.overflow && align.overflow.alwaysByViewport);
     return doAlign(el, refNodeRegion, align, isTargetNotOutOfVisible);
   }
-
   alignElement.__getOffsetParent = getOffsetParent;
   alignElement.__getVisibleRectForElement = getVisibleRectForElement;
 
@@ -6185,32 +6533,217 @@
     var scrollY = utils.getWindowScrollTop(win);
     var viewportWidth = utils.viewportWidth(win);
     var viewportHeight = utils.viewportHeight(win);
-
     if ('pageX' in tgtPoint) {
       pageX = tgtPoint.pageX;
     } else {
       pageX = scrollX + tgtPoint.clientX;
     }
-
     if ('pageY' in tgtPoint) {
       pageY = tgtPoint.pageY;
     } else {
       pageY = scrollY + tgtPoint.clientY;
     }
-
     var tgtRegion = {
       left: pageX,
       top: pageY,
       width: 0,
       height: 0
     };
-    var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight; // Provide default target point
+    var pointInView = pageX >= 0 && pageX <= scrollX + viewportWidth && pageY >= 0 && pageY <= scrollY + viewportHeight;
 
+    // Provide default target point
     var points = [align.points[0], 'cc'];
-    return doAlign(el, tgtRegion, _objectSpread2$1({}, align, {
+    return doAlign(el, tgtRegion, _objectSpread2$2(_objectSpread2$2({}, align), {}, {
       points: points
     }), pointInView);
   }
+
+  /* eslint-disable no-console */
+  var warned = {};
+  function warning$1(valid, message) {
+    // Support uglify
+    if (process.env.NODE_ENV !== 'production' && !valid && console !== undefined) {
+      console.error("Warning: ".concat(message));
+    }
+  }
+  function call(method, valid, message) {
+    if (!valid && !warned[message]) {
+      method(false, message);
+      warned[message] = true;
+    }
+  }
+  function warningOnce(valid, message) {
+    call(warning$1, valid, message);
+  }
+  /* eslint-enable */
+
+  /**
+   * Deeply compares two object literals.
+   * @param obj1 object 1
+   * @param obj2 object 2
+   * @param shallow shallow compare
+   * @returns
+   */
+  function isEqual(obj1, obj2) {
+    var shallow = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+    // https://github.com/mapbox/mapbox-gl-js/pull/5979/files#diff-fde7145050c47cc3a306856efd5f9c3016e86e859de9afbd02c879be5067e58f
+    var refSet = new Set();
+    function deepEqual(a, b) {
+      var level = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+      var circular = refSet.has(a);
+      warningOnce(!circular, 'Warning: There may be circular references');
+      if (circular) {
+        return false;
+      }
+      if (a === b) {
+        return true;
+      }
+      if (shallow && level > 1) {
+        return false;
+      }
+      refSet.add(a);
+      var newLevel = level + 1;
+      if (Array.isArray(a)) {
+        if (!Array.isArray(b) || a.length !== b.length) {
+          return false;
+        }
+        for (var i = 0; i < a.length; i++) {
+          if (!deepEqual(a[i], b[i], newLevel)) {
+            return false;
+          }
+        }
+        return true;
+      }
+      if (a && b && _typeof(a) === 'object' && _typeof(b) === 'object') {
+        var keys = Object.keys(a);
+        if (keys.length !== Object.keys(b).length) {
+          return false;
+        }
+        return keys.every(function (key) {
+          return deepEqual(a[key], b[key], newLevel);
+        });
+      }
+      // other
+      return false;
+    }
+    return deepEqual(obj1, obj2);
+  }
+
+  function addEventListenerWrap$2(target, eventType, cb, option) {
+    /* eslint camelcase: 2 */
+    var callback = ReactDOM__default.unstable_batchedUpdates ? function run(e) {
+      ReactDOM__default.unstable_batchedUpdates(cb, e);
+    } : cb;
+    if (target.addEventListener) {
+      target.addEventListener(eventType, callback, option);
+    }
+    return {
+      remove: function remove() {
+        if (target.removeEventListener) {
+          target.removeEventListener(eventType, callback, option);
+        }
+      }
+    };
+  }
+
+  var isVisible = (function (element) {
+    if (!element) {
+      return false;
+    }
+    if (element instanceof HTMLElement && element.offsetParent) {
+      return true;
+    }
+    if (element instanceof SVGGraphicsElement && element.getBBox) {
+      var _element$getBBox = element.getBBox(),
+        width = _element$getBBox.width,
+        height = _element$getBBox.height;
+      if (width || height) {
+        return true;
+      }
+    }
+    if (element instanceof HTMLElement && element.getBoundingClientRect) {
+      var _element$getBoundingC = element.getBoundingClientRect(),
+        _width = _element$getBoundingC.width,
+        _height = _element$getBoundingC.height;
+      if (_width || _height) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  function canUseDom$1() {
+    return !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  }
+
+  /**
+   * Wrap `React.useLayoutEffect` which will not throw warning message in test env
+   */
+  var useLayoutEffect = process.env.NODE_ENV !== 'test' && canUseDom$1() ? React.useLayoutEffect : React.useEffect;
+
+  function fillRef$1(ref, node) {
+    if (typeof ref === 'function') {
+      ref(node);
+    } else if (_typeof(ref) === 'object' && ref && 'current' in ref) {
+      ref.current = node;
+    }
+  }
+
+  /**
+   * Merge refs into one ref function to support ref passing.
+   */
+  function composeRef$1() {
+    for (var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++) {
+      refs[_key] = arguments[_key];
+    }
+    var refList = refs.filter(function (ref) {
+      return ref;
+    });
+    if (refList.length <= 1) {
+      return refList[0];
+    }
+    return function (node) {
+      refs.forEach(function (ref) {
+        fillRef$1(ref, node);
+      });
+    };
+  }
+  /* eslint-enable */
+
+  var useBuffer = (function (callback, buffer) {
+    var calledRef = React__default.useRef(false);
+    var timeoutRef = React__default.useRef(null);
+
+    function cancelTrigger() {
+      window.clearTimeout(timeoutRef.current);
+    }
+
+    function trigger(force) {
+      cancelTrigger();
+
+      if (!calledRef.current || force === true) {
+        if (callback(force) === false) {
+          // Not delay since callback cancelled self
+          return;
+        }
+
+        calledRef.current = true;
+        timeoutRef.current = window.setTimeout(function () {
+          calledRef.current = false;
+        }, buffer);
+      } else {
+        timeoutRef.current = window.setTimeout(function () {
+          calledRef.current = false;
+          trigger();
+        }, buffer);
+      }
+    }
+
+    return [trigger, function () {
+      calledRef.current = false;
+      cancelTrigger();
+    }];
+  });
 
   /**
    * A collection of shims that provide minimal functionality of the ES6 collections.
@@ -7139,13 +7672,27 @@
       return ResizeObserver;
   })();
 
-  function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+  function contains$1(root, n) {
+    if (!root) {
+      return false;
+    }
 
-  function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+    // Use native if support
+    if (root.contains) {
+      return root.contains(n);
+    }
 
-  function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+    // `document.contains` not support with IE11
+    var node = n;
+    while (node) {
+      if (node === root) {
+        return true;
+      }
+      node = node.parentNode;
+    }
+    return false;
+  }
 
-  function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
   function isSamePoint(prev, next) {
     if (prev === next) return true;
     if (!prev || !next) return false;
@@ -7162,7 +7709,7 @@
   }
   function restoreFocus(activeElement, container) {
     // Focus back if is in the container
-    if (activeElement !== document.activeElement && contains(container, activeElement)) {
+    if (activeElement !== document.activeElement && contains$1(container, activeElement) && typeof activeElement.focus === 'function') {
       activeElement.focus();
     }
   }
@@ -7174,6 +7721,8 @@
       var _ref2 = _slicedToArray(_ref, 1),
           target = _ref2[0].target;
 
+      if (!document.documentElement.contains(target)) return;
+
       var _target$getBoundingCl = target.getBoundingClientRect(),
           width = _target$getBoundingCl.width,
           height = _target$getBoundingCl.height;
@@ -7182,9 +7731,12 @@
       var fixedHeight = Math.floor(height);
 
       if (prevWidth !== fixedWidth || prevHeight !== fixedHeight) {
-        callback({
-          width: fixedWidth,
-          height: fixedHeight
+        // https://webkit.org/blog/9997/resizeobserver-in-webkit/
+        Promise.resolve().then(function () {
+          callback({
+            width: fixedWidth,
+            height: fixedHeight
+          });
         });
       }
 
@@ -7203,58 +7755,13 @@
     };
   }
 
-  var useBuffer = (function (callback, buffer) {
-    var calledRef = React__default.useRef(false);
-    var timeoutRef = React__default.useRef(null);
-
-    function cancelTrigger() {
-      window.clearTimeout(timeoutRef.current);
-    }
-
-    function trigger(force) {
-      if (!calledRef.current || force === true) {
-        if (callback() === false) {
-          // Not delay since callback cancelled self
-          return;
-        }
-
-        calledRef.current = true;
-        cancelTrigger();
-        timeoutRef.current = window.setTimeout(function () {
-          calledRef.current = false;
-        }, buffer);
-      } else {
-        cancelTrigger();
-        timeoutRef.current = window.setTimeout(function () {
-          calledRef.current = false;
-          trigger();
-        }, buffer);
-      }
-    }
-
-    return [trigger, function () {
-      calledRef.current = false;
-      cancelTrigger();
-    }];
-  });
-
-  function _slicedToArray$1(arr, i) { return _arrayWithHoles$1(arr) || _iterableToArrayLimit$1(arr, i) || _nonIterableRest$1(); }
-
-  function _nonIterableRest$1() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-  function _iterableToArrayLimit$1(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-  function _arrayWithHoles$1(arr) { if (Array.isArray(arr)) return arr; }
-
-  function _typeof$3(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$3 = function _typeof(obj) { return typeof obj; }; } else { _typeof$3 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$3(obj); }
-
   function getElement(func) {
     if (typeof func !== 'function') return null;
     return func();
   }
 
   function getPoint(point) {
-    if (_typeof$3(point) !== 'object' || !point) return null;
+    if (_typeof(point) !== 'object' || !point) return null;
     return point;
   }
 
@@ -7268,6 +7775,8 @@
         _ref$monitorBufferTim = _ref.monitorBufferTime,
         monitorBufferTime = _ref$monitorBufferTim === void 0 ? 0 : _ref$monitorBufferTim;
     var cacheRef = React__default.useRef({});
+    /** Popup node ref */
+
     var nodeRef = React__default.useRef();
     var childNode = React__default.Children.only(children); // ===================== Align ======================
     // We save the props here to avoid closure makes props ood
@@ -7275,35 +7784,42 @@
     var forceAlignPropsRef = React__default.useRef({});
     forceAlignPropsRef.current.disabled = disabled;
     forceAlignPropsRef.current.target = target;
+    forceAlignPropsRef.current.align = align;
     forceAlignPropsRef.current.onAlign = onAlign;
 
     var _useBuffer = useBuffer(function () {
       var _forceAlignPropsRef$c = forceAlignPropsRef.current,
           latestDisabled = _forceAlignPropsRef$c.disabled,
-          latestTarget = _forceAlignPropsRef$c.target;
+          latestTarget = _forceAlignPropsRef$c.target,
+          latestAlign = _forceAlignPropsRef$c.align,
+          latestOnAlign = _forceAlignPropsRef$c.onAlign;
+      var source = nodeRef.current;
 
-      if (!latestDisabled && latestTarget) {
-        var source = nodeRef.current;
-        var result;
-        var element = getElement(latestTarget);
-        var point = getPoint(latestTarget);
-        cacheRef.current.element = element;
-        cacheRef.current.point = point; // IE lose focus after element realign
+      if (!latestDisabled && latestTarget && source) {
+        var _result;
+
+        var _element = getElement(latestTarget);
+
+        var _point = getPoint(latestTarget);
+
+        cacheRef.current.element = _element;
+        cacheRef.current.point = _point;
+        cacheRef.current.align = latestAlign; // IE lose focus after element realign
         // We should record activeElement and restore later
 
         var _document = document,
-            activeElement = _document.activeElement;
+            activeElement = _document.activeElement; // We only align when element is visible
 
-        if (element) {
-          result = alignElement(source, element, align);
-        } else if (point) {
-          result = alignPoint(source, point, align);
+        if (_element && isVisible(_element)) {
+          _result = alignElement(source, _element, latestAlign);
+        } else if (_point) {
+          _result = alignPoint(source, _point, latestAlign);
         }
 
         restoreFocus(activeElement, source);
 
-        if (onAlign) {
-          onAlign(source, result);
+        if (latestOnAlign && _result) {
+          latestOnAlign(source, _result);
         }
 
         return true;
@@ -7311,40 +7827,41 @@
 
       return false;
     }, monitorBufferTime),
-        _useBuffer2 = _slicedToArray$1(_useBuffer, 2),
+        _useBuffer2 = _slicedToArray(_useBuffer, 2),
         _forceAlign = _useBuffer2[0],
         cancelForceAlign = _useBuffer2[1]; // ===================== Effect =====================
-    // Listen for target updated
+    // Handle props change
 
 
-    var resizeMonitor = React__default.useRef({
-      cancel: function cancel() {}
-    }); // Listen for source updated
+    var _React$useState = React__default.useState(),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        element = _React$useState2[0],
+        setElement = _React$useState2[1];
 
-    var sourceResizeMonitor = React__default.useRef({
-      cancel: function cancel() {}
+    var _React$useState3 = React__default.useState(),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        point = _React$useState4[0],
+        setPoint = _React$useState4[1];
+
+    useLayoutEffect(function () {
+      setElement(getElement(target));
+      setPoint(getPoint(target));
     });
     React__default.useEffect(function () {
-      var element = getElement(target);
-      var point = getPoint(target);
-
-      if (nodeRef.current !== sourceResizeMonitor.current.element) {
-        sourceResizeMonitor.current.cancel();
-        sourceResizeMonitor.current.element = nodeRef.current;
-        sourceResizeMonitor.current.cancel = monitorResize(nodeRef.current, _forceAlign);
+      if (cacheRef.current.element !== element || !isSamePoint(cacheRef.current.point, point) || !isEqual(cacheRef.current.align, align)) {
+        _forceAlign();
       }
+    }); // Watch popup element resize
 
-      if (cacheRef.current.element !== element || !isSamePoint(cacheRef.current.point, point)) {
-        _forceAlign(); // Add resize observer
+    React__default.useEffect(function () {
+      var cancelFn = monitorResize(nodeRef.current, _forceAlign);
+      return cancelFn;
+    }, [nodeRef.current]); // Watch target element resize
 
-
-        if (resizeMonitor.current.element !== element) {
-          resizeMonitor.current.cancel();
-          resizeMonitor.current.element = element;
-          resizeMonitor.current.cancel = monitorResize(element, _forceAlign);
-        }
-      }
-    }); // Listen for disabled change
+    React__default.useEffect(function () {
+      var cancelFn = monitorResize(element, _forceAlign);
+      return cancelFn;
+    }, [element]); // Listen for disabled change
 
     React__default.useEffect(function () {
       if (!disabled) {
@@ -7354,23 +7871,15 @@
       }
     }, [disabled]); // Listen for window resize
 
-    var winResizeRef = React__default.useRef(null);
     React__default.useEffect(function () {
       if (monitorWindowResize) {
-        if (!winResizeRef.current) {
-          winResizeRef.current = addEventListenerWrap(window, 'resize', _forceAlign);
-        }
-      } else if (winResizeRef.current) {
-        winResizeRef.current.remove();
-        winResizeRef.current = null;
+        var cancelFn = addEventListenerWrap$2(window, 'resize', _forceAlign);
+        return cancelFn.remove;
       }
     }, [monitorWindowResize]); // Clear all if unmount
 
     React__default.useEffect(function () {
       return function () {
-        resizeMonitor.current.cancel();
-        sourceResizeMonitor.current.cancel();
-        if (winResizeRef.current) winResizeRef.current.remove();
         cancelForceAlign();
       };
     }, []); // ====================== Ref =======================
@@ -7383,190 +7892,30 @@
       };
     }); // ===================== Render =====================
 
-    if (React__default.isValidElement(childNode)) {
-      childNode = React__default.cloneElement(childNode, {
-        ref: composeRef(childNode.ref, nodeRef)
+    if ( /*#__PURE__*/React__default.isValidElement(childNode)) {
+      childNode = /*#__PURE__*/React__default.cloneElement(childNode, {
+        ref: composeRef$1(childNode.ref, nodeRef)
       });
     }
 
     return childNode;
   };
 
-  var RefAlign = React__default.forwardRef(Align);
-  RefAlign.displayName = 'Align';
+  var RcAlign = /*#__PURE__*/React__default.forwardRef(Align);
+  RcAlign.displayName = 'Align';
 
   // export this package's api
 
-  /**
-   * Copyright (c) 2013-present, Facebook, Inc.
-   *
-   * This source code is licensed under the MIT license found in the
-   * LICENSE file in the root directory of this source tree.
-   */
-
-  function componentWillMount() {
-    // Call this.constructor.gDSFP to support sub-classes.
-    var state = this.constructor.getDerivedStateFromProps(this.props, this.state);
-    if (state !== null && state !== undefined) {
-      this.setState(state);
-    }
-  }
-
-  function componentWillReceiveProps(nextProps) {
-    // Call this.constructor.gDSFP to support sub-classes.
-    // Use the setState() updater to ensure state isn't stale in certain edge cases.
-    function updater(prevState) {
-      var state = this.constructor.getDerivedStateFromProps(nextProps, prevState);
-      return state !== null && state !== undefined ? state : null;
-    }
-    // Binding "this" is important for shallow renderer support.
-    this.setState(updater.bind(this));
-  }
-
-  function componentWillUpdate(nextProps, nextState) {
-    try {
-      var prevProps = this.props;
-      var prevState = this.state;
-      this.props = nextProps;
-      this.state = nextState;
-      this.__reactInternalSnapshotFlag = true;
-      this.__reactInternalSnapshot = this.getSnapshotBeforeUpdate(
-        prevProps,
-        prevState
-      );
-    } finally {
-      this.props = prevProps;
-      this.state = prevState;
-    }
-  }
-
-  // React may warn about cWM/cWRP/cWU methods being deprecated.
-  // Add a flag to suppress these warnings for this special case.
-  componentWillMount.__suppressDeprecationWarning = true;
-  componentWillReceiveProps.__suppressDeprecationWarning = true;
-  componentWillUpdate.__suppressDeprecationWarning = true;
-
-  function polyfill$1(Component) {
-    var prototype = Component.prototype;
-
-    if (!prototype || !prototype.isReactComponent) {
-      throw new Error('Can only polyfill class components');
-    }
-
-    if (
-      typeof Component.getDerivedStateFromProps !== 'function' &&
-      typeof prototype.getSnapshotBeforeUpdate !== 'function'
-    ) {
-      return Component;
-    }
-
-    // If new component APIs are defined, "unsafe" lifecycles won't be called.
-    // Error if any of these lifecycles are present,
-    // Because they would work differently between older and newer (16.3+) versions of React.
-    var foundWillMountName = null;
-    var foundWillReceivePropsName = null;
-    var foundWillUpdateName = null;
-    if (typeof prototype.componentWillMount === 'function') {
-      foundWillMountName = 'componentWillMount';
-    } else if (typeof prototype.UNSAFE_componentWillMount === 'function') {
-      foundWillMountName = 'UNSAFE_componentWillMount';
-    }
-    if (typeof prototype.componentWillReceiveProps === 'function') {
-      foundWillReceivePropsName = 'componentWillReceiveProps';
-    } else if (typeof prototype.UNSAFE_componentWillReceiveProps === 'function') {
-      foundWillReceivePropsName = 'UNSAFE_componentWillReceiveProps';
-    }
-    if (typeof prototype.componentWillUpdate === 'function') {
-      foundWillUpdateName = 'componentWillUpdate';
-    } else if (typeof prototype.UNSAFE_componentWillUpdate === 'function') {
-      foundWillUpdateName = 'UNSAFE_componentWillUpdate';
-    }
-    if (
-      foundWillMountName !== null ||
-      foundWillReceivePropsName !== null ||
-      foundWillUpdateName !== null
-    ) {
-      var componentName = Component.displayName || Component.name;
-      var newApiName =
-        typeof Component.getDerivedStateFromProps === 'function'
-          ? 'getDerivedStateFromProps()'
-          : 'getSnapshotBeforeUpdate()';
-
-      throw Error(
-        'Unsafe legacy lifecycles will not be called for components using new component APIs.\n\n' +
-          componentName +
-          ' uses ' +
-          newApiName +
-          ' but also contains the following legacy lifecycles:' +
-          (foundWillMountName !== null ? '\n  ' + foundWillMountName : '') +
-          (foundWillReceivePropsName !== null
-            ? '\n  ' + foundWillReceivePropsName
-            : '') +
-          (foundWillUpdateName !== null ? '\n  ' + foundWillUpdateName : '') +
-          '\n\nThe above lifecycles should be removed. Learn more about this warning here:\n' +
-          'https://fb.me/react-async-component-lifecycle-hooks'
-      );
-    }
-
-    // React <= 16.2 does not support static getDerivedStateFromProps.
-    // As a workaround, use cWM and cWRP to invoke the new static lifecycle.
-    // Newer versions of React will ignore these lifecycles if gDSFP exists.
-    if (typeof Component.getDerivedStateFromProps === 'function') {
-      prototype.componentWillMount = componentWillMount;
-      prototype.componentWillReceiveProps = componentWillReceiveProps;
-    }
-
-    // React <= 16.2 does not support getSnapshotBeforeUpdate.
-    // As a workaround, use cWU to invoke the new lifecycle.
-    // Newer versions of React will ignore that lifecycle if gSBU exists.
-    if (typeof prototype.getSnapshotBeforeUpdate === 'function') {
-      if (typeof prototype.componentDidUpdate !== 'function') {
-        throw new Error(
-          'Cannot polyfill getSnapshotBeforeUpdate() for components that do not define componentDidUpdate() on the prototype'
-        );
-      }
-
-      prototype.componentWillUpdate = componentWillUpdate;
-
-      var componentDidUpdate = prototype.componentDidUpdate;
-
-      prototype.componentDidUpdate = function componentDidUpdatePolyfill(
-        prevProps,
-        prevState,
-        maybeSnapshot
-      ) {
-        // 16.3+ will not execute our will-update method;
-        // It will pass a snapshot value to did-update though.
-        // Older versions will require our polyfilled will-update value.
-        // We need to handle both cases, but can't just check for the presence of "maybeSnapshot",
-        // Because for <= 15.x versions this might be a "prevContext" object.
-        // We also can't just check "__reactInternalSnapshot",
-        // Because get-snapshot might return a falsy value.
-        // So check for the explicit __reactInternalSnapshotFlag flag to determine behavior.
-        var snapshot = this.__reactInternalSnapshotFlag
-          ? this.__reactInternalSnapshot
-          : maybeSnapshot;
-
-        componentDidUpdate.call(this, prevProps, prevState, snapshot);
-      };
-    }
-
-    return Component;
-  }
-
-  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-  // ================= Transition =================
+  var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement); // ================= Transition =================
   // Event wrapper. Copy from react source code
+
   function makePrefixMap(styleProp, eventName) {
     var prefixes = {};
-
     prefixes[styleProp.toLowerCase()] = eventName.toLowerCase();
-    prefixes['Webkit' + styleProp] = 'webkit' + eventName;
-    prefixes['Moz' + styleProp] = 'moz' + eventName;
-    prefixes['ms' + styleProp] = 'MS' + eventName;
-    prefixes['O' + styleProp] = 'o' + eventName.toLowerCase();
-
+    prefixes["Webkit".concat(styleProp)] = "webkit".concat(eventName);
+    prefixes["Moz".concat(styleProp)] = "moz".concat(eventName);
+    prefixes["ms".concat(styleProp)] = "MS".concat(eventName);
+    prefixes["O".concat(styleProp)] = "o".concat(eventName.toLowerCase());
     return prefixes;
   }
 
@@ -7588,17 +7937,16 @@
 
     return prefixes;
   }
-
   var vendorPrefixes = getVendorPrefixes(canUseDOM, typeof window !== 'undefined' ? window : {});
-
   var style = {};
 
   if (canUseDOM) {
-    style = document.createElement('div').style;
+    var _document$createEleme = document.createElement('div');
+
+    style = _document$createEleme.style;
   }
 
   var prefixedEventNames = {};
-
   function getVendorPrefixedEventName(eventName) {
     if (prefixedEventNames[eventName]) {
       return prefixedEventNames[eventName];
@@ -7609,8 +7957,10 @@
     if (prefixMap) {
       var stylePropList = Object.keys(prefixMap);
       var len = stylePropList.length;
+
       for (var i = 0; i < len; i += 1) {
         var styleProp = stylePropList[i];
+
         if (Object.prototype.hasOwnProperty.call(prefixMap, styleProp) && styleProp in style) {
           prefixedEventNames[eventName] = prefixMap[styleProp];
           return prefixedEventNames[eventName];
@@ -7620,22 +7970,20 @@
 
     return '';
   }
-
   var animationEndName = getVendorPrefixedEventName('animationend');
   var transitionEndName = getVendorPrefixedEventName('transitionend');
   var supportTransition = !!(animationEndName && transitionEndName);
-
   function getTransitionName$1(transitionName, transitionType) {
     if (!transitionName) return null;
 
-    if (typeof transitionName === 'object') {
+    if (_typeof(transitionName) === 'object') {
       var type = transitionType.replace(/-\w/g, function (match) {
         return match[1].toUpperCase();
       });
       return transitionName[type];
     }
 
-    return transitionName + '-' + transitionType;
+    return "".concat(transitionName, "-").concat(transitionType);
   }
 
   var STATUS_NONE = 'none';
@@ -7643,37 +7991,16 @@
   var STATUS_ENTER = 'enter';
   var STATUS_LEAVE = 'leave';
 
-  var MotionPropTypes = {
-    eventProps: PropTypes.object, // Internal usage. Only pass by CSSMotionList
-    visible: PropTypes.bool,
-    children: PropTypes.func,
-    motionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    motionAppear: PropTypes.bool,
-    motionEnter: PropTypes.bool,
-    motionLeave: PropTypes.bool,
-    motionLeaveImmediately: PropTypes.bool, // Trigger leave motion immediately
-    removeOnLeave: PropTypes.bool,
-    leavedClassName: PropTypes.string,
-    onAppearStart: PropTypes.func,
-    onAppearActive: PropTypes.func,
-    onAppearEnd: PropTypes.func,
-    onEnterStart: PropTypes.func,
-    onEnterActive: PropTypes.func,
-    onEnterEnd: PropTypes.func,
-    onLeaveStart: PropTypes.func,
-    onLeaveActive: PropTypes.func,
-    onLeaveEnd: PropTypes.func
-  };
-
   /**
    * `transitionSupport` is used for none transition test case.
    * Default we use browser transition event support check.
    */
+
   function genCSSMotion(config) {
     var transitionSupport = config;
-    var forwardRef = !!React__default.forwardRef;
+    var forwardRef = !!React.forwardRef;
 
-    if (typeof config === 'object') {
+    if (_typeof(config) === 'object') {
       transitionSupport = config.transitionSupport;
       forwardRef = 'forwardRef' in config ? config.forwardRef : forwardRef;
     }
@@ -7682,13 +8009,28 @@
       return !!(props.motionName && transitionSupport);
     }
 
-    var CSSMotion = function (_React$Component) {
-      _inherits$1(CSSMotion, _React$Component);
+    var CSSMotion = /*#__PURE__*/function (_React$Component) {
+      _inherits$2(CSSMotion, _React$Component);
+
+      var _super = _createSuper(CSSMotion);
 
       function CSSMotion() {
-        _classCallCheck$1(this, CSSMotion);
+        var _this;
 
-        var _this = _possibleConstructorReturn$1(this, (CSSMotion.__proto__ || Object.getPrototypeOf(CSSMotion)).call(this));
+        _classCallCheck$2(this, CSSMotion);
+
+        _this = _super.apply(this, arguments);
+        _this.$cacheEle = null;
+        _this.node = null;
+        _this.raf = null;
+        _this.destroyed = false;
+        _this.deadlineId = null;
+        _this.state = {
+          status: STATUS_NONE,
+          statusActive: false,
+          newStatus: false,
+          statusStyle: null
+        };
 
         _this.onDomUpdate = function () {
           var _this$state = _this.state,
@@ -7705,20 +8047,22 @@
               motionEnter = _this$props.motionEnter,
               motionLeave = _this$props.motionLeave;
 
-
           if (!isSupportTransition(_this.props)) {
             return;
-          }
+          } // Event injection
 
-          // Event injection
+
           var $ele = _this.getElement();
+
           if (_this.$cacheEle !== $ele) {
             _this.removeEventListener(_this.$cacheEle);
-            _this.addEventListener($ele);
-            _this.$cacheEle = $ele;
-          }
 
-          // Init status
+            _this.addEventListener($ele);
+
+            _this.$cacheEle = $ele;
+          } // Init status
+
+
           if (newStatus && status === STATUS_APPEAR && motionAppear) {
             _this.updateStatus(onAppearStart, null, null, function () {
               _this.updateActiveStatus(onAppearActive, STATUS_APPEAR);
@@ -7735,6 +8079,13 @@
         };
 
         _this.onMotionEnd = function (event) {
+          if (event && !event.deadline && event.target !== _this.getElement()) {
+            // event exists
+            // not initiated by deadline
+            // transitionend not fired by inner elements
+            return;
+          }
+
           var _this$state2 = _this.state,
               status = _this$state2.status,
               statusActive = _this$state2.statusActive;
@@ -7744,60 +8095,66 @@
               onLeaveEnd = _this$props2.onLeaveEnd;
 
           if (status === STATUS_APPEAR && statusActive) {
-            _this.updateStatus(onAppearEnd, { status: STATUS_NONE }, event);
+            _this.updateStatus(onAppearEnd, {
+              status: STATUS_NONE
+            }, event);
           } else if (status === STATUS_ENTER && statusActive) {
-            _this.updateStatus(onEnterEnd, { status: STATUS_NONE }, event);
+            _this.updateStatus(onEnterEnd, {
+              status: STATUS_NONE
+            }, event);
           } else if (status === STATUS_LEAVE && statusActive) {
-            _this.updateStatus(onLeaveEnd, { status: STATUS_NONE }, event);
+            _this.updateStatus(onLeaveEnd, {
+              status: STATUS_NONE
+            }, event);
           }
         };
 
         _this.setNodeRef = function (node) {
           var internalRef = _this.props.internalRef;
-
           _this.node = node;
-
-          if (typeof internalRef === 'function') {
-            internalRef(node);
-          } else if (internalRef && 'current' in internalRef) {
-            internalRef.current = node;
-          }
+          fillRef(internalRef, node);
         };
 
         _this.getElement = function () {
-          return findDOMNode(_this.node || _this);
+          try {
+            return findDOMNode(_this.node || _assertThisInitialized$1(_this));
+          } catch (e) {
+            /**
+             * Fallback to cache element.
+             * This is only happen when `motionDeadline` trigger but element removed.
+             */
+            return _this.$cacheEle;
+          }
         };
 
         _this.addEventListener = function ($ele) {
           if (!$ele) return;
-
           $ele.addEventListener(transitionEndName, _this.onMotionEnd);
           $ele.addEventListener(animationEndName, _this.onMotionEnd);
         };
 
         _this.removeEventListener = function ($ele) {
           if (!$ele) return;
-
           $ele.removeEventListener(transitionEndName, _this.onMotionEnd);
           $ele.removeEventListener(animationEndName, _this.onMotionEnd);
         };
 
         _this.updateStatus = function (styleFunc, additionalState, event, callback) {
           var statusStyle = styleFunc ? styleFunc(_this.getElement(), event) : null;
+          if (statusStyle === false || _this.destroyed) return;
+          var nextStep;
 
-          if (statusStyle === false || _this._destroyed) return;
-
-          var nextStep = void 0;
           if (callback) {
             nextStep = function nextStep() {
               _this.nextFrame(callback);
             };
           }
 
-          _this.setState(_extends$2({
-            statusStyle: typeof statusStyle === 'object' ? statusStyle : null,
+          _this.setState(_objectSpread2$1({
+            statusStyle: _typeof(statusStyle) === 'object' ? statusStyle : null,
             newStatus: false
           }, additionalState), nextStep); // Trigger before next frame & after `componentDidMount`
+
         };
 
         _this.updateActiveStatus = function (styleFunc, currentStatus) {
@@ -7805,15 +8162,26 @@
           // Let's use requestAnimationFrame to update new state in next frame.
           _this.nextFrame(function () {
             var status = _this.state.status;
-
             if (status !== currentStatus) return;
+            var motionDeadline = _this.props.motionDeadline;
 
-            _this.updateStatus(styleFunc, { statusActive: true });
+            _this.updateStatus(styleFunc, {
+              statusActive: true
+            });
+
+            if (motionDeadline > 0) {
+              _this.deadlineId = setTimeout(function () {
+                _this.onMotionEnd({
+                  deadline: true
+                });
+              }, motionDeadline);
+            }
           });
         };
 
         _this.nextFrame = function (func) {
           _this.cancelNextFrame();
+
           _this.raf = raf_1(func);
         };
 
@@ -7824,110 +8192,100 @@
           }
         };
 
-        _this.state = {
-          status: STATUS_NONE,
-          statusActive: false,
-          newStatus: false,
-          statusStyle: null
-        };
-        _this.$cacheEle = null;
-        _this.node = null;
-        _this.raf = null;
         return _this;
       }
 
-      _createClass$1(CSSMotion, [{
-        key: 'componentDidMount',
+      _createClass$2(CSSMotion, [{
+        key: "componentDidMount",
         value: function componentDidMount() {
           this.onDomUpdate();
         }
       }, {
-        key: 'componentDidUpdate',
+        key: "componentDidUpdate",
         value: function componentDidUpdate() {
           this.onDomUpdate();
         }
       }, {
-        key: 'componentWillUnmount',
+        key: "componentWillUnmount",
         value: function componentWillUnmount() {
-          this._destroyed = true;
+          this.destroyed = true;
           this.removeEventListener(this.$cacheEle);
           this.cancelNextFrame();
+          clearTimeout(this.deadlineId);
         }
       }, {
-        key: 'render',
+        key: "render",
         value: function render() {
           var _classNames;
 
-          var _state = this.state,
-              status = _state.status,
-              statusActive = _state.statusActive,
-              statusStyle = _state.statusStyle;
-          var _props = this.props,
-              children = _props.children,
-              motionName = _props.motionName,
-              visible = _props.visible,
-              removeOnLeave = _props.removeOnLeave,
-              leavedClassName = _props.leavedClassName,
-              eventProps = _props.eventProps;
-
-
+          var _this$state3 = this.state,
+              status = _this$state3.status,
+              statusActive = _this$state3.statusActive,
+              statusStyle = _this$state3.statusStyle;
+          var _this$props3 = this.props,
+              children = _this$props3.children,
+              motionName = _this$props3.motionName,
+              visible = _this$props3.visible,
+              removeOnLeave = _this$props3.removeOnLeave,
+              leavedClassName = _this$props3.leavedClassName,
+              eventProps = _this$props3.eventProps;
           if (!children) return null;
 
           if (status === STATUS_NONE || !isSupportTransition(this.props)) {
             if (visible) {
-              return children(_extends$2({}, eventProps), this.setNodeRef);
-            } else if (!removeOnLeave) {
-              return children(_extends$2({}, eventProps, { className: leavedClassName }), this.setNodeRef);
+              return children(_objectSpread2$1({}, eventProps), this.setNodeRef);
+            }
+
+            if (!removeOnLeave) {
+              return children(_objectSpread2$1(_objectSpread2$1({}, eventProps), {}, {
+                className: leavedClassName
+              }), this.setNodeRef);
             }
 
             return null;
           }
 
-          return children(_extends$2({}, eventProps, {
-            className: classnames((_classNames = {}, _defineProperty$1(_classNames, getTransitionName$1(motionName, status), status !== STATUS_NONE), _defineProperty$1(_classNames, getTransitionName$1(motionName, status + '-active'), status !== STATUS_NONE && statusActive), _defineProperty$1(_classNames, motionName, typeof motionName === 'string'), _classNames)),
+          return children(_objectSpread2$1(_objectSpread2$1({}, eventProps), {}, {
+            className: classnames(getTransitionName$1(motionName, status), (_classNames = {}, _defineProperty$2(_classNames, getTransitionName$1(motionName, "".concat(status, "-active")), statusActive), _defineProperty$2(_classNames, motionName, typeof motionName === 'string'), _classNames)),
             style: statusStyle
           }), this.setNodeRef);
         }
       }], [{
-        key: 'getDerivedStateFromProps',
+        key: "getDerivedStateFromProps",
         value: function getDerivedStateFromProps(props, _ref) {
           var prevProps = _ref.prevProps,
               prevStatus = _ref.status;
-
           if (!isSupportTransition(props)) return {};
-
           var visible = props.visible,
               motionAppear = props.motionAppear,
               motionEnter = props.motionEnter,
               motionLeave = props.motionLeave,
               motionLeaveImmediately = props.motionLeaveImmediately;
-
           var newState = {
             prevProps: props
-          };
+          }; // Clean up status if prop set to false
 
-          // Clean up status if prop set to false
           if (prevStatus === STATUS_APPEAR && !motionAppear || prevStatus === STATUS_ENTER && !motionEnter || prevStatus === STATUS_LEAVE && !motionLeave) {
             newState.status = STATUS_NONE;
             newState.statusActive = false;
             newState.newStatus = false;
-          }
+          } // Appear
 
-          // Appear
+
           if (!prevProps && visible && motionAppear) {
             newState.status = STATUS_APPEAR;
             newState.statusActive = false;
             newState.newStatus = true;
-          }
+          } // Enter
 
-          // Enter
+
           if (prevProps && !prevProps.visible && visible && motionEnter) {
             newState.status = STATUS_ENTER;
             newState.statusActive = false;
             newState.newStatus = true;
-          }
+          } // Leave
 
-          // Leave
+
           if (prevProps && prevProps.visible && !visible && motionLeave || !prevProps && motionLeaveImmediately && !visible && motionLeave) {
             newState.status = STATUS_LEAVE;
             newState.statusActive = false;
@@ -7939,12 +8297,8 @@
       }]);
 
       return CSSMotion;
-    }(React__default.Component);
+    }(React.Component);
 
-    CSSMotion.propTypes = _extends$2({}, MotionPropTypes, {
-
-      internalRef: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
-    });
     CSSMotion.defaultProps = {
       visible: true,
       motionEnter: true,
@@ -7953,24 +8307,21 @@
       removeOnLeave: true
     };
 
-
-    polyfill$1(CSSMotion);
-
     if (!forwardRef) {
       return CSSMotion;
     }
 
-    return React__default.forwardRef(function (props, ref) {
-      return React__default.createElement(CSSMotion, _extends$2({ internalRef: ref }, props));
+    return React.forwardRef(function (props, ref) {
+      return React.createElement(CSSMotion, Object.assign({
+        internalRef: ref
+      }, props));
     });
   }
-
-  var RawCSSMotion = genCSSMotion(supportTransition);
+  var CSSMotion = genCSSMotion(supportTransition);
 
   var PopupInner = function PopupInner(props, ref) {
     var prefixCls = props.prefixCls,
         className = props.className,
-        visible = props.visible,
         style = props.style,
         children = props.children,
         onMouseEnter = props.onMouseEnter,
@@ -7979,15 +8330,15 @@
         onTouchStart = props.onTouchStart;
     var childNode = children;
 
-    if (React__default.Children.count(children) > 1) {
-      childNode = React__default.createElement("div", {
+    if (React.Children.count(children) > 1) {
+      childNode = React.createElement("div", {
         className: "".concat(prefixCls, "-content")
       }, children);
     }
 
-    return React__default.createElement("div", {
+    return React.createElement("div", {
       ref: ref,
-      className: classnames(className, !visible && "".concat(props.hiddenClassName)),
+      className: className,
       onMouseEnter: onMouseEnter,
       onMouseLeave: onMouseLeave,
       onMouseDown: onMouseDown,
@@ -7996,7 +8347,7 @@
     }, childNode);
   };
 
-  var RefPopupInner = React__default.forwardRef(PopupInner);
+  var RefPopupInner = React.forwardRef(PopupInner);
   RefPopupInner.displayName = 'PopupInner';
 
   function getMotion(_ref) {
@@ -8024,56 +8375,28 @@
     return null;
   }
 
-  function _typeof$4(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$4 = function _typeof(obj) { return typeof obj; }; } else { _typeof$4 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$4(obj); }
-
-  function _objectWithoutProperties$1(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-  function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-  function ownKeys$3(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-  function _objectSpread$1(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$3(source, true).forEach(function (key) { _defineProperty$4(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$3(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function _defineProperty$4(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-  function _classCallCheck$3(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-  function _defineProperties$2(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass$3(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties$2(Constructor.prototype, protoProps); if (staticProps) _defineProperties$2(Constructor, staticProps); return Constructor; }
-
-  function _possibleConstructorReturn$3(self, call) { if (call && (_typeof$4(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$2(self); }
-
-  function _assertThisInitialized$2(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-  function _getPrototypeOf$2(o) { _getPrototypeOf$2 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$2(o); }
-
-  function _inherits$3(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$2(subClass, superClass); }
-
-  function _setPrototypeOf$2(o, p) { _setPrototypeOf$2 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$2(o, p); }
-  var CSSMotion = RawCSSMotion;
-
   function supportMotion(motion) {
     return motion && motion.motionName;
   }
 
-  var Popup =
-  /*#__PURE__*/
-  function (_Component) {
-    _inherits$3(Popup, _Component);
+  var Popup = /*#__PURE__*/function (_Component) {
+    _inherits$2(Popup, _Component);
+
+    var _super = _createSuper(Popup);
 
     function Popup() {
       var _this;
 
-      _classCallCheck$3(this, Popup);
+      _classCallCheck$2(this, Popup);
 
-      _this = _possibleConstructorReturn$3(this, _getPrototypeOf$2(Popup).apply(this, arguments));
+      _this = _super.apply(this, arguments);
       _this.state = {
         targetWidth: undefined,
         targetHeight: undefined,
         status: null,
         prevVisible: null,
-        alignClassName: null
+        alignClassName: null,
+        inMotion: false
       };
       _this.popupRef = React__default.createRef();
       _this.alignRef = React__default.createRef();
@@ -8112,16 +8435,17 @@
         var visible = _this.props.visible;
 
         _this.setState({
-          status: visible ? 'AfterMotion' : 'stable'
+          status: visible ? 'AfterMotion' : 'stable',
+          inMotion: false
         });
       };
 
       _this.setStateOnNextFrame = function (state) {
         _this.cancelFrameState();
 
-        _this.nextFrameState = _objectSpread$1({}, _this.nextFrameState, {}, state);
+        _this.nextFrameState = _objectSpread2$1(_objectSpread2$1({}, _this.nextFrameState), state);
         _this.nextFrameId = raf_1(function () {
-          var submitState = _objectSpread$1({}, _this.nextFrameState);
+          var submitState = _objectSpread2$1({}, _this.nextFrameState);
 
           _this.nextFrameState = null;
 
@@ -8130,7 +8454,7 @@
       };
 
       _this.getMotion = function () {
-        return _objectSpread$1({}, getMotion(_this.props));
+        return _objectSpread2$1({}, getMotion(_this.props));
       }; // `target` on `rc-align` can accept as a function to get the bind element or a point.
       // ref: https://www.npmjs.com/package/rc-align
 
@@ -8190,8 +8514,9 @@
           }
         }
 
-        var mergedStyle = _objectSpread$1({}, sizeStyle, {}, _this.getZIndexStyle(), {}, style, {
-          opacity: status === 'stable' || !visible ? undefined : 0
+        var mergedStyle = _objectSpread2$1(_objectSpread2$1(_objectSpread2$1(_objectSpread2$1({}, sizeStyle), _this.getZIndexStyle()), style), {}, {
+          opacity: status === 'stable' || !visible ? undefined : 0,
+          pointerEvents: status === 'stable' || !visible ? undefined : 'none'
         }); // ================= Motions =================
 
 
@@ -8207,8 +8532,24 @@
 
         if (status === 'afterAlign' || status === 'beforeMotion') {
           mergedMotionVisible = false;
-        } // ================== Align ==================
+        } // Update trigger to tell if is in motion
 
+
+        ['onEnterStart', 'onAppearStart', 'onLeaveStart'].forEach(function (event) {
+          var originFunc = mergedMotion === null || mergedMotion === void 0 ? void 0 : mergedMotion[event];
+
+          mergedMotion[event] = function () {
+            for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+              args[_key] = arguments[_key];
+            }
+
+            originFunc === null || originFunc === void 0 ? void 0 : originFunc.apply(void 0, args);
+
+            _this.setState({
+              inMotion: true
+            });
+          };
+        }); // ================== Align ==================
 
         var mergedAlignDisabled = !visible || status !== 'align' && status !== 'aligned' && status !== 'stable'; // ================== Popup ==================
 
@@ -8228,11 +8569,12 @@
         }, mergedMotion, {
           removeOnLeave: false,
           onEnterEnd: _this.onMotionEnd,
-          onLeaveEnd: _this.onMotionEnd
+          onLeaveEnd: _this.onMotionEnd,
+          leavedClassName: hiddenClassName
         }), function (_ref, motionRef) {
           var motionStyle = _ref.style,
               motionClassName = _ref.className;
-          return React__default.createElement(RefAlign, {
+          return React__default.createElement(RcAlign, {
             target: _this.getAlignTarget(),
             key: "popup",
             ref: _this.alignRef,
@@ -8242,15 +8584,13 @@
             onAlign: _this.onAlign
           }, React__default.createElement(RefPopupInner, {
             prefixCls: prefixCls,
-            visible: mergedPopupVisible,
-            hiddenClassName: hiddenClassName,
             className: classnames(mergedClassName, motionClassName),
             ref: composeRef(motionRef, _this.popupRef),
             onMouseEnter: onMouseEnter,
             onMouseLeave: onMouseLeave,
             onMouseDown: onMouseDown,
             onTouchStart: onTouchStart,
-            style: _objectSpread$1({}, mergedStyle, {}, motionStyle)
+            style: _objectSpread2$1(_objectSpread2$1({}, mergedStyle), motionStyle)
           }, children));
         });
       };
@@ -8271,7 +8611,7 @@
         var motion = {};
 
         if (maskMotion && maskMotion.motionName) {
-          motion = _objectSpread$1({
+          motion = _objectSpread2$1({
             motionAppear: true
           }, getMotion({
             motion: maskMotion,
@@ -8297,7 +8637,7 @@
       return _this;
     }
 
-    _createClass$3(Popup, [{
+    _createClass$2(Popup, [{
       key: "componentDidMount",
       value: function componentDidMount() {
         this.componentDidUpdate();
@@ -8392,7 +8732,8 @@
             props = _objectWithoutProperties$1(_ref3, ["visible"]);
 
         var prevVisible = _ref4.prevVisible,
-            status = _ref4.status;
+            status = _ref4.status,
+            inMotion = _ref4.inMotion;
         var newState = {
           prevVisible: visible,
           status: status
@@ -8402,8 +8743,11 @@
         if (prevVisible === null && visible === false) {
           // Init render should always be stable
           newState.status = 'stable';
+          newState.inMotion = false;
         } else if (visible !== prevVisible) {
-          if (visible || supportMotion(mergedMotion) && ['motion', 'AfterMotion', 'stable'].includes(status)) {
+          newState.inMotion = false;
+
+          if (visible || supportMotion(mergedMotion) && inMotion) {
             newState.status = null;
           } else {
             newState.status = 'stable';
@@ -8422,31 +8766,7 @@
   }(React.Component);
   /* eslint-enable */
 
-  var TriggerContext = React__default.createContext(null);
-
-  function _typeof$5(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof$5 = function _typeof(obj) { return typeof obj; }; } else { _typeof$5 = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof$5(obj); }
-
-  function ownKeys$4(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-  function _objectSpread$2(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$4(source, true).forEach(function (key) { _defineProperty$5(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$4(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function _defineProperty$5(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-  function _classCallCheck$4(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-  function _defineProperties$3(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass$4(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties$3(Constructor.prototype, protoProps); if (staticProps) _defineProperties$3(Constructor, staticProps); return Constructor; }
-
-  function _possibleConstructorReturn$4(self, call) { if (call && (_typeof$5(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized$3(self); }
-
-  function _getPrototypeOf$3(o) { _getPrototypeOf$3 = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf$3(o); }
-
-  function _assertThisInitialized$3(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-  function _inherits$4(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf$3(subClass, superClass); }
-
-  function _setPrototypeOf$3(o, p) { _setPrototypeOf$3 = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf$3(o, p); }
+  var TriggerContext = React.createContext(null);
 
   function noop$1() {}
 
@@ -8464,17 +8784,17 @@
    */
 
   function generateTrigger(PortalComponent) {
-    var Trigger =
-    /*#__PURE__*/
-    function (_React$Component) {
-      _inherits$4(Trigger, _React$Component);
+    var Trigger = /*#__PURE__*/function (_React$Component) {
+      _inherits$2(Trigger, _React$Component);
+
+      var _super = _createSuper(Trigger);
 
       function Trigger(props) {
         var _this;
 
-        _classCallCheck$4(this, Trigger);
+        _classCallCheck$2(this, Trigger);
 
-        _this = _possibleConstructorReturn$4(this, _getPrototypeOf$3(Trigger).call(this, props));
+        _this = _super.call(this, props);
         _this.popupRef = React__default.createRef();
         _this.triggerRef = React__default.createRef();
 
@@ -8645,7 +8965,7 @@
           } catch (err) {// Do nothing
           }
 
-          return ReactDOM__default.findDOMNode(_assertThisInitialized$3(_this));
+          return ReactDOM__default.findDOMNode(_assertThisInitialized$1(_this));
         };
 
         _this.getPopupClassNameFromAlign = function (align) {
@@ -8730,7 +9050,7 @@
         };
 
         _this.getContainer = function () {
-          var _assertThisInitialize = _assertThisInitialized$3(_this),
+          var _assertThisInitialize = _assertThisInitialized$1(_this),
               props = _assertThisInitialize.props;
 
           var popupContainer = document.createElement('div'); // Make sure default popup container will never cause scrollbar appearing
@@ -8783,7 +9103,7 @@
         return _this;
       }
 
-      _createClass$4(Trigger, [{
+      _createClass$2(Trigger, [{
         key: "componentDidMount",
         value: function componentDidMount() {
           this.componentDidUpdate();
@@ -8802,24 +9122,24 @@
 
             if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextMenuToShow())) {
               currentDocument = props.getDocument();
-              this.clickOutsideHandler = addEventListenerWrap(currentDocument, 'mousedown', this.onDocumentClick);
+              this.clickOutsideHandler = addEventListenerWrap$1(currentDocument, 'mousedown', this.onDocumentClick);
             } // always hide on mobile
 
 
             if (!this.touchOutsideHandler) {
               currentDocument = currentDocument || props.getDocument();
-              this.touchOutsideHandler = addEventListenerWrap(currentDocument, 'touchstart', this.onDocumentClick);
+              this.touchOutsideHandler = addEventListenerWrap$1(currentDocument, 'touchstart', this.onDocumentClick);
             } // close popup when trigger type contains 'onContextMenu' and document is scrolling.
 
 
             if (!this.contextMenuOutsideHandler1 && this.isContextMenuToShow()) {
               currentDocument = currentDocument || props.getDocument();
-              this.contextMenuOutsideHandler1 = addEventListenerWrap(currentDocument, 'scroll', this.onContextMenuClose);
+              this.contextMenuOutsideHandler1 = addEventListenerWrap$1(currentDocument, 'scroll', this.onContextMenuClose);
             } // close popup when trigger type contains 'onContextMenu' and window is blur.
 
 
             if (!this.contextMenuOutsideHandler2 && this.isContextMenuToShow()) {
-              this.contextMenuOutsideHandler2 = addEventListenerWrap(window, 'blur', this.onContextMenuClose);
+              this.contextMenuOutsideHandler2 = addEventListenerWrap$1(window, 'blur', this.onContextMenuClose);
             }
 
             return;
@@ -9042,7 +9362,8 @@
               children = _this$props10.children,
               forceRender = _this$props10.forceRender,
               alignPoint = _this$props10.alignPoint,
-              className = _this$props10.className;
+              className = _this$props10.className,
+              autoDestroy = _this$props10.autoDestroy;
           var child = React__default.Children.only(children);
           var newChildProps = {
             key: 'trigger'
@@ -9094,7 +9415,7 @@
             newChildProps.className = childrenClassName;
           }
 
-          var cloneProps = _objectSpread$2({}, newChildProps);
+          var cloneProps = _objectSpread2$1({}, newChildProps);
 
           if (supportRef(child)) {
             cloneProps.ref = composeRef(this.triggerRef, child.ref);
@@ -9109,6 +9430,10 @@
               getContainer: this.getContainer,
               didUpdate: this.handlePortalUpdate
             }, this.getComponent());
+          }
+
+          if (!popupVisible && autoDestroy) {
+            portal = null;
           }
 
           return React__default.createElement(TriggerContext.Provider, {
@@ -9156,11 +9481,12 @@
       maskClosable: true,
       action: [],
       showAction: [],
-      hideAction: []
+      hideAction: [],
+      autoDestroy: false
     };
     return Trigger;
   }
-  var Trigger = generateTrigger(Portal);
+  var Trigger = generateTrigger(Portal$1);
 
   var autoAdjustOverflow = {
     adjustX: 1,
@@ -9245,23 +9571,15 @@
   var Content = function Content(props) {
     var overlay = props.overlay,
         prefixCls = props.prefixCls,
-        id = props.id;
-    return React__default.createElement("div", {
+        id = props.id,
+        overlayInnerStyle = props.overlayInnerStyle;
+    return React.createElement("div", {
       className: "".concat(prefixCls, "-inner"),
       id: id,
-      role: "tooltip"
+      role: "tooltip",
+      style: overlayInnerStyle
     }, typeof overlay === 'function' ? overlay() : overlay);
   };
-
-  function ownKeys$5(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-  function _objectSpread$3(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys$5(source, true).forEach(function (key) { _defineProperty$6(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys$5(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-  function _defineProperty$6(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-  function _objectWithoutProperties$2(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose$1(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-  function _objectWithoutPropertiesLoose$1(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
   var Tooltip = function Tooltip(props, ref) {
     var overlayClassName = props.overlayClassName,
@@ -9287,14 +9605,15 @@
         destroyTooltipOnHide = _props$destroyTooltip === void 0 ? false : _props$destroyTooltip,
         defaultVisible = props.defaultVisible,
         getTooltipContainer = props.getTooltipContainer,
-        restProps = _objectWithoutProperties$2(props, ["overlayClassName", "trigger", "mouseEnterDelay", "mouseLeaveDelay", "overlayStyle", "prefixCls", "children", "onVisibleChange", "afterVisibleChange", "transitionName", "animation", "placement", "align", "destroyTooltipOnHide", "defaultVisible", "getTooltipContainer"]);
+        overlayInnerStyle = props.overlayInnerStyle,
+        restProps = _objectWithoutProperties$1(props, ["overlayClassName", "trigger", "mouseEnterDelay", "mouseLeaveDelay", "overlayStyle", "prefixCls", "children", "onVisibleChange", "afterVisibleChange", "transitionName", "animation", "placement", "align", "destroyTooltipOnHide", "defaultVisible", "getTooltipContainer", "overlayInnerStyle"]);
 
     var domRef = React.useRef(null);
     React.useImperativeHandle(ref, function () {
       return domRef.current;
     });
 
-    var extraProps = _objectSpread$3({}, restProps);
+    var extraProps = _objectSpread2$1({}, restProps);
 
     if ('visible' in props) {
       extraProps.popupVisible = props.visible;
@@ -9305,18 +9624,30 @@
           arrowContent = _props$arrowContent === void 0 ? null : _props$arrowContent,
           overlay = props.overlay,
           id = props.id;
-      return [React__default.createElement("div", {
+      return [React.createElement("div", {
         className: "".concat(prefixCls, "-arrow"),
         key: "arrow"
-      }, arrowContent), React__default.createElement(Content, {
+      }, arrowContent), React.createElement(Content, {
         key: "content",
         prefixCls: prefixCls,
         id: id,
-        overlay: overlay
+        overlay: overlay,
+        overlayInnerStyle: overlayInnerStyle
       })];
     };
 
-    return React__default.createElement(Trigger, Object.assign({
+    var destroyTooltip = false;
+    var autoDestroy = false;
+
+    if (typeof destroyTooltipOnHide === 'boolean') {
+      destroyTooltip = destroyTooltipOnHide;
+    } else if (destroyTooltipOnHide && _typeof(destroyTooltipOnHide) === 'object') {
+      var keepParent = destroyTooltipOnHide.keepParent;
+      destroyTooltip = keepParent === true;
+      autoDestroy = keepParent === false;
+    }
+
+    return React.createElement(Trigger, Object.assign({
       popupClassName: overlayClassName,
       prefixCls: prefixCls,
       popup: getPopupElement,
@@ -9331,7 +9662,8 @@
       popupTransitionName: transitionName,
       popupAnimation: animation,
       defaultPopupVisible: defaultVisible,
-      destroyPopupOnHide: destroyTooltipOnHide,
+      destroyPopupOnHide: destroyTooltip,
+      autoDestroy: autoDestroy,
       mouseLeaveDelay: mouseLeaveDelay,
       popupStyle: overlayStyle,
       mouseEnterDelay: mouseEnterDelay
@@ -14496,7 +14828,7 @@
   var Promise$1 = getNative(root$1, 'Promise');
 
   /* Built-in method references that are verified to be native. */
-  var Set = getNative(root$1, 'Set');
+  var Set$1 = getNative(root$1, 'Set');
 
   /** `Object#toString` result references. */
   var mapTag$1 = '[object Map]',
@@ -14511,7 +14843,7 @@
   var dataViewCtorString = toSource(DataView),
       mapCtorString = toSource(Map$1),
       promiseCtorString = toSource(Promise$1),
-      setCtorString = toSource(Set),
+      setCtorString = toSource(Set$1),
       weakMapCtorString = toSource(WeakMap$1);
 
   /**
@@ -14527,7 +14859,7 @@
   if ((DataView && getTag(new DataView(new ArrayBuffer(1))) != dataViewTag$1) ||
       (Map$1 && getTag(new Map$1) != mapTag$1) ||
       (Promise$1 && getTag(Promise$1.resolve()) != promiseTag) ||
-      (Set && getTag(new Set) != setTag$1) ||
+      (Set$1 && getTag(new Set$1) != setTag$1) ||
       (WeakMap$1 && getTag(new WeakMap$1) != weakMapTag$1)) {
     getTag = function(value) {
       var result = baseGetTag(value),
@@ -19865,7 +20197,7 @@
    * _.isElement('<body>');
    * // => false
    */
-  function isElement(value) {
+  function isElement$1(value) {
     return isObjectLike(value) && value.nodeType === 1 && !isPlainObject(value);
   }
 
@@ -19964,7 +20296,7 @@
    * object === other;
    * // => false
    */
-  function isEqual(value, other) {
+  function isEqual$1(value, other) {
     return baseIsEqual(value, other);
   }
 
@@ -25728,8 +26060,8 @@
    * @param {Array} values The values to add to the set.
    * @returns {Object} Returns the new set.
    */
-  var createSet = !(Set && (1 / setToArray(new Set([,-0]))[1]) == INFINITY$5) ? noop$2 : function(values) {
-    return new Set(values);
+  var createSet = !(Set$1 && (1 / setToArray(new Set$1([,-0]))[1]) == INFINITY$5) ? noop$2 : function(values) {
+    return new Set$1(values);
   };
 
   /** Used as the size to enable large array optimizations. */
@@ -26622,7 +26954,7 @@
     castArray, clone, cloneDeep, cloneDeepWith, cloneWith,
     conformsTo, eq, gt, gte, isArguments,
     isArray, isArrayBuffer, isArrayLike, isArrayLikeObject, isBoolean,
-    isBuffer, isDate, isElement, isEmpty, isEqual,
+    isBuffer, isDate, isElement: isElement$1, isEmpty, isEqual: isEqual$1,
     isEqualWith, isError, isFinite: isFinite$1, isFunction, isInteger,
     isLength, isMap, isMatch, isMatchWith, isNaN: isNaN$1,
     isNative, isNil, isNull, isNumber, isObject,
@@ -27445,6 +27777,7 @@
 
         if (e.target === _this.draggableRef.current || _this.draggableRef.current.contains(e.target)) {
           var onDragStart = _this.props.onDragStart;
+          console.log('ok');
           if (onDragStart) onDragStart();
           _this.active = true;
         }
@@ -27457,7 +27790,6 @@
         var forceDragging = _this.props.forceDragging;
 
         if (_this.active || forceDragging || force === true) {
-          e.preventDefault();
           var currentX, currentY;
 
           if (e.type === "touchmove") {
@@ -27627,13 +27959,13 @@
       value: function componentDidMount() {
         var onMount = this.props.onMount;
         this.container = ReactDOM__default.findDOMNode(this).parentNode;
-        this.container.addEventListener("touchstart", this.handleDragStart, false);
-        this.container.addEventListener("touchend", this.handleDragEnd, false);
-        this.container.addEventListener("touchmove", this.handleDrag, false);
-        this.container.addEventListener("mousedown", this.handleDragStart, false);
-        this.container.addEventListener("mouseup", this.handleDragEnd, false);
-        this.container.addEventListener("mousemove", this.handleDrag, false);
-        window.addEventListener("resize", this.handleWindowResize, false);
+        this.container.addEventListener("touchstart", this.handleDragStart);
+        this.container.addEventListener("touchend", this.handleDragEnd);
+        this.container.addEventListener("touchmove", this.handleDrag);
+        this.container.addEventListener("mousedown", this.handleDragStart);
+        this.container.addEventListener("mouseup", this.handleDragEnd);
+        this.container.addEventListener("mousemove", this.handleDrag);
+        window.addEventListener("resize", this.handleWindowResize);
         if (onMount) onMount(this);
       }
     }, {
@@ -27651,12 +27983,12 @@
     }, {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
-        this.container.removeEventListener("touchstart", this.handleDragStart);
-        this.container.removeEventListener("touchend", this.handleDragEnd);
-        this.container.removeEventListener("touchmove", this.handleDrag);
-        this.container.removeEventListener("mousedown", this.handleDragStart);
-        this.container.removeEventListener("mouseup", this.handleDragEnd);
-        this.container.removeEventListener("mousemove", this.handleDrag);
+        this.container.removeEventListener("touchstart", this.handleDragStart, false);
+        this.container.removeEventListener("touchend", this.handleDragEnd, false);
+        this.container.removeEventListener("touchmove", this.handleDrag, false);
+        this.container.removeEventListener("mousedown", this.handleDragStart, false);
+        this.container.removeEventListener("mouseup", this.handleDragEnd, false);
+        this.container.removeEventListener("mousemove", this.handleDrag, false);
         window.removeEventListener("resize", this.handleWindowResize, false);
       }
     }, {
@@ -36128,7 +36460,7 @@
       }
   }
 
-  var _typeof$6 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  var _typeof$2 = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
     return typeof obj;
   } : function (obj) {
     return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
@@ -36978,7 +37310,7 @@
         isReady: false
       };
 
-      if ((typeof WaveSurfer === "undefined" ? "undefined" : _typeof$6(WaveSurfer)) === undefined) {
+      if ((typeof WaveSurfer === "undefined" ? "undefined" : _typeof$2(WaveSurfer)) === undefined) {
         throw new Error("WaveSurfer is undefined!");
       }
       return _this;
