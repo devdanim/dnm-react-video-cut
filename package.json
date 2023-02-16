@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -60,8 +60,8 @@
   },
   "dependencies": {
     "@dschoon/react-waves": "^4.0.3",
-    "lodash-es": "^4.17.20",
-    "rc-slider": "^9.2.2",
+    "lodash-es": "^4.17.21",
+    "rc-slider": "^9.7.5",
     "react-event-injector": "^1.1.2"
   }
 }

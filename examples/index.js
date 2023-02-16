@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import DnmVideoCut from '../dist/dnm-react-video-cut.es';
 import video from './video.mp4';
 // import music from './music.wav';
@@ -78,8 +78,8 @@ class App extends React.Component {
                         src={src || video}
                         type={type}
                         loader={<p>Is loading...</p>}
-                        maxDuration="10"
-                        minDuration="10"
+                        maxDuration={10}
+                        minDuration={10}
                         onRangeChange={this.handleRangeChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
@@ -111,7 +111,6 @@ class App extends React.Component {
     }
 }
 
-render(
-    <App />,
-    document.getElementById('root')
-);
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(<App />);

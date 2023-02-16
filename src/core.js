@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 /** @jsx jsx */
 import { css, jsx } from '@emotion/react';
 import PropTypes from 'prop-types';
-import Slider from 'rc-slider';
+import { Range } from 'rc-slider';
 import SmartCroppr from 'dnm-react-smartcroppr';
 import styles from './css/styles';
 import Draggable from './lib/draggable';
@@ -16,7 +16,6 @@ import StartIcon from './lib/svg/start';
 import { throttle } from 'lodash-es';
 import Waveform from './lib/Waveform';
 
-const Range = Slider.Range;
 export default class DnmVideoCut extends React.Component {
     constructor(props) {
         super(props);
@@ -327,7 +326,6 @@ export default class DnmVideoCut extends React.Component {
     }
 
     handleContainerMouseDown = (ev) => {
-        ev.stopPropagation();
         const { target } = ev;
         const { forceCursorDragging } = this.state;
         if(!target.classList.contains("rc-slider-handle") && !target.classList.contains("dnm-video-cut-playing-cursor")) {

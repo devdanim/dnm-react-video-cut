@@ -26,10 +26,10 @@ export default class Draggable extends React.Component {
         this.container = ReactDOM.findDOMNode(this).parentNode;
         this.container.addEventListener("touchstart", this.handleDragStart, false);
         this.container.addEventListener("touchend", this.handleDragEnd, false);
-        this.container.addEventListener("touchmove", this.handleDrag, false);
+        this.container.addEventListener("touchmove", this.handleDrag, { passive: false });
         this.container.addEventListener("mousedown", this.handleDragStart, false);
         this.container.addEventListener("mouseup", this.handleDragEnd, false);
-        this.container.addEventListener("mousemove", this.handleDrag, false);
+        this.container.addEventListener("mousemove", this.handleDrag, { passive: false });
         window.addEventListener("resize", this.handleWindowResize, false);
         if (onMount) onMount(this);
     }
