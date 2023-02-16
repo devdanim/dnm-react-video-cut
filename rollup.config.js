@@ -39,7 +39,12 @@ const rollupConfig = ['es', 'umd'].map(format => ({
         babel({
             exclude: 'node_modules/**'
         }),
-        commonjs(),
+        commonjs({
+            include: 'node_modules/**',
+            namedExports: {
+              'node_modules/react-is/index.js': ['isMemo']
+            }
+          }),
         postcss({
             extensions: ['.css']
         })
