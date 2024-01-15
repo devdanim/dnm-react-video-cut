@@ -1,100 +1,87 @@
 import React from 'react';
-import ReactWaves, { Regions } from '@dschoon/react-waves';
-import { debounce } from 'lodash-es';
+import WavesurferPlayer from '@wavesurfer/react'
+import Regions from 'wavesurfer.js/dist/plugins/regions.esm.js';
 
 export default class Waveform extends React.Component {
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        wavesurfer: null,
-      }
-      this.redraw = debounce(this._redraw, 250);
-    }
-
-    componentDidMount() {
-      window.addEventListener('resize', this.redraw);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.redraw);
-    }
-
-    componentDidUpdate(prevProps) {
-        const { wavesurfer } = this.state;
-        const { position } = this.props;
-        if (wavesurfer && prevProps.position !== position) {
-            wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
-        }
-    }
-     
-    _redraw = () => {
-        const { wavesurfer } = this.state;
-        if (wavesurfer) wavesurfer.drawBuffer();
-    }
-  
-    onLoading = ({ wavesurfer }) => {
-        this.setState(({ wavesurfer }));
-    };
-
-    onReady = () => {
-        const { wavesurfer } = this.state;
-        const { onWaveformReady } = this.props;
-        onWaveformReady(wavesurfer);
-    }
-
-    getRegions = () => {
-        const { range } = this.props;
-        return {
-            cut: {
-                id: 'cut',
-                start: range ? range[0] : 0,
-                end: range ? range[1] : 0,
-                color: 'rgba(146, 210, 117, 0.3)',
-                resize: false,
-                drag: false,
-            }
-        };
-    }
-
-    handleSingleRegionUpdate = (e) => {
-        const { onRangeChange } = this.props;
-        const { start, end } = e.region;
-        onRangeChange([start, end], true);
-      };
- 
-    render () {
-        const { src, position, range, height, style, visible, } = this.props;
-        const regions = this.getRegions();
-
-        return (
-          <ReactWaves
-            audioFile={src}
-            className={`dnm-video-cut-audio-waveform ${visible === false ? 'dnm-video-cut-audio-waveform-loading' : ''}`}
-            options={{
-              barGap: 3,
-              barWidth: 4,
-              barHeight: 2,
-              barRadius: 3,
-              cursorWidth: 0,
-              interact: false,
-              height,
-              hideScrollbar: true,
-              progressColor: '#aeb3b7',
-              responsive: true,
-              waveColor: '#D1D6DA',
-            }}
-            zoom={0}
-            pos={position}
-            playing={false} 
-            onReady={this.onReady}
-            onLoading={this.onLoading}
-          >
-            <Regions
-                onSingleRegionUpdate={this.handleSingleRegionUpdate}
-                regions={regions}
-            />
-          </ReactWaves>
-      )
+  constructor(props) {
+    super(props);
+    this.state = {
+      wavesurfer: null,
+      wavesurferRegions: null
     }
   }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.redraw);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.redraw);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { wavesurfer, wavesurferRegions } = this.state;
+    const { position, range, volume, zoomFactor } = this.props;
+    if (wavesurfer) {
+      if (prevProps.position !== position) wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
+      if (prevProps.volume !== volume) {
+        wavesurfer.setVolume(volume);
+      }
+      if (prevProps.zoomFactor !== zoomFactor) {
+        wavesurfer.zoom(zoomFactor)
+      }
+    }
+    if (wavesurferRegions && prevProps.range !== range) {
+      wavesurferRegions.clearRegions();
+      wavesurferRegions.addRegion({
+        id: 'cut',
+        start: range ? range[0] : 0,
+        end: range ? range[1] : 0,
+        color: 'rgba(146, 210, 117, 0.3)',
+        resize: false,
+        drag: false
+      })
+    }
+  }
+
+  onReady = (wavesurfer) => {
+    const { onWaveformReady, range } = this.props;
+    const wavesurferRegions = wavesurfer.registerPlugin(Regions.create())
+    wavesurferRegions.addRegion({
+      id: 'cut',
+      start: range ? range[0] : 0,
+      end: range ? range[1] : 0,
+      color: 'rgba(146, 210, 117, 0.3)',
+      resize: false,
+      drag: false
+    })
+    onWaveformReady(wavesurfer);
+    this.setState(({ wavesurfer, wavesurferRegions }));
+  }
+
+
+  handleSingleRegionUpdate = (e) => {
+    const { onRangeChange } = this.props;
+    const { start, end } = e.region;
+    onRangeChange([start, end], true);
+  };
+
+  render() {
+    const { src, height, visible } = this.props;
+
+    return <div
+      className={`dnm-video-cut-audio-waveform ${visible === false ? 'dnm-video-cut-audio-waveform-loading' : ''}`}>
+      <WavesurferPlayer
+        key={src}
+        url={src}
+        height={height}
+        waveColor={'#D1D6DA'}
+        hideScrollbar={true}
+        interact={false}
+        progressColor={'#aeb3b7'}
+        onReady={this.onReady}
+      />
+    </div>
+  }
+}

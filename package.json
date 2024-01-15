@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -59,7 +59,7 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "dependencies": {
-    "@dschoon/react-waves": "^4.0.3",
+    "@wavesurfer/react": "^1.0.4",
     "lodash-es": "^4.17.21",
     "rc-slider": "^9.7.5",
     "react-event-injector": "^1.1.2"
