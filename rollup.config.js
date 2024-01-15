@@ -13,9 +13,10 @@ const external = {
         'prop-types',
         'lodash-es/throttle',
         'dnm-react-smartcroppr',
-        '@emotion/react'
+        '@emotion/react',
+        '@wavesurfer/react'
     ],
-    umd: ['react', 'react-dom', 'prop-types', 'dnm-react-smartcroppr', '@emotion/react']
+    umd: ['react', 'react-dom', 'prop-types', 'dnm-react-smartcroppr', '@emotion/react', '@wavesurfer/react']
 };
 
 const rollupConfig = ['es', 'umd'].map(format => ({
@@ -28,9 +29,10 @@ const rollupConfig = ['es', 'umd'].map(format => ({
             react: 'React',
             'react-dom': 'ReactDOM',
             'prop-types': 'PropTypes',
-            'dnm-react-smartcroppr': 'SmartCroppr', 
+            'dnm-react-smartcroppr': 'SmartCroppr',
             '@emotion/react': 'css',
             '@emotion/react': 'jsx',
+            '@wavesurfer/react': 'WavesurferPlayer'
         } : null
     },
     external: external[format],
@@ -42,9 +44,11 @@ const rollupConfig = ['es', 'umd'].map(format => ({
         commonjs({
             include: 'node_modules/**',
             namedExports: {
-              'node_modules/react-is/index.js': ['isMemo']
-            }
-          }),
+                'node_modules/react-is/index.js': ['isMemo'],
+                'node_modules/rc-util/node_modules/react-is/index.js': ['isMemo', 'isFragment'],
+            },
+            requireReturnsDefault: 'auto'
+        }),
         postcss({
             extensions: ['.css']
         })
