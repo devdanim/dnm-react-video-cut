@@ -27067,14 +27067,19 @@
     }, {
       key: "componentWillUnmount",
       value: function componentWillUnmount() {
+        var _this$state = this.state,
+          wavesurfer = _this$state.wavesurfer,
+          wavesurferRegions = _this$state.wavesurferRegions;
         window.removeEventListener('resize', this.redraw);
+        if (wavesurfer) wavesurfer.destroy();
+        if (wavesurferRegions) wavesurferRegions.destroy();
       }
     }, {
       key: "componentDidUpdate",
       value: function componentDidUpdate(prevProps) {
-        var _this$state = this.state,
-          wavesurfer = _this$state.wavesurfer,
-          wavesurferRegions = _this$state.wavesurferRegions;
+        var _this$state2 = this.state,
+          wavesurfer = _this$state2.wavesurfer,
+          wavesurferRegions = _this$state2.wavesurferRegions;
         var _this$props2 = this.props,
           position = _this$props2.position,
           range = _this$props2.range,

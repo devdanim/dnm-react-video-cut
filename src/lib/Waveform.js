@@ -17,7 +17,10 @@ export default class Waveform extends React.Component {
   }
 
   componentWillUnmount() {
+    const { wavesurfer, wavesurferRegions } = this.state
     window.removeEventListener('resize', this.redraw);
+    if (wavesurfer) wavesurfer.destroy();
+    if (wavesurferRegions) wavesurferRegions.destroy();
   }
 
   componentDidUpdate(prevProps) {
