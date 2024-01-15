@@ -543,9 +543,9 @@ export default class DnmVideoCut extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex-row'>
-                                {
-                                    type !== 'audio' ? (
+                            {type !== 'audio' ? (
+                                <div className='flex-row'>
+                                    {
                                         <div className="dnm-video-cut-mute">
                                             {
                                                 onMuteChange && (
@@ -557,9 +557,9 @@ export default class DnmVideoCut extends React.Component {
                                                 )
                                             }
                                         </div>
-                                    ) : null
-                                }
-                            </div>
+                                    }
+                                </div>
+                            ) : null}
                         </div>
                     </div>
                 </div>

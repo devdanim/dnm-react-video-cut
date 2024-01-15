@@ -273,7 +273,7 @@ export default css`
     width: 100%;
     padding: 0;
     margin: 0;
-  }
+    }
   
   .dnm-video-cut-audio-waveform .wavesurfer-region {
     z-index: 3 !important;
@@ -537,7 +537,8 @@ export default css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 0 0.5rem;
     align-items: flex-start;
     width: 100%;
   }
