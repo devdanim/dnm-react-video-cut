@@ -27078,13 +27078,9 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
       var _this$props2 = this.props,
         position = _this$props2.position,
         range = _this$props2.range,
-        volume = _this$props2.volume,
         zoomFactor = _this$props2.zoomFactor;
       if (wavesurfer) {
         if (prevProps.position !== position) wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
-        if (prevProps.volume !== volume) {
-          wavesurfer.setVolume(volume);
-        }
         if (prevProps.zoomFactor !== zoomFactor) {
           wavesurfer.zoom(zoomFactor);
         }
@@ -27255,9 +27251,10 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
     });
     _defineProperty(_assertThisInitialized(_this), "updatePlayerVolume", function () {
       var muted = _this.props.muted;
+      var volume = _this.state.volume;
       var video = _this.playerRef.current;
       if (video) {
-        video.volume = muted ? 0 : 0.5;
+        video.volume = muted ? 0 : volume !== null && volume !== void 0 ? volume : 0.5;
       }
     });
     _defineProperty(_assertThisInitialized(_this), "scrollToCursor", function () {
@@ -27449,13 +27446,13 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       });
     });
     _defineProperty(_assertThisInitialized(_this), "handleVolumeChange", function (value) {
-      var onVolumeChange = _this.props.onVolumeChange;
+      var onGainChange = _this.props.onGainChange;
       var video = _this.playerRef.current;
       if (video) {
         video.volume = value[0];
       }
       // We need to convert volume to decibel
-      onVolumeChange(20 * Math.log10(value[0]));
+      onGainChange(20 * Math.log10(value[0]));
       _this.setState({
         volume: value
       }, _this.scrollToCursor);
@@ -27492,9 +27489,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       forceRerenderKey: 0,
       videoDuration: 0,
       isPlaying: false,
+      volume: props.gain !== undefined ? [Math.pow(10, props.gain / 20)] : [0.5],
       forceCursorDragging: false,
       zoomFactor: [0],
-      volume: [0.5],
       playCursorPosition: {
         xRatio: 0,
         yRatio: 0
@@ -27527,7 +27524,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         outPoint = _this$props3.outPoint,
         src = _this$props3.src,
         muted = _this$props3.muted,
-        type = _this$props3.type;
+        type = _this$props3.type,
+        gain = _this$props3.gain;
       if (!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
         this.handleRangeChange([inPoint, outPoint], true);
       }
@@ -27547,7 +27545,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         } else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
         this.seekVideoTo(time);
       }
-      if (muted !== prevProps.muted) this.updatePlayerVolume();
+      if (muted !== prevProps.muted || gain !== prevProps.gain) this.updatePlayerVolume();
     }
   }, {
     key: "_seekVideoTo",
@@ -27596,7 +27594,6 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onPositionChange: this.handleWaveformPositionChange,
         onRangeChange: this.handleRangeChange,
         onWaveformReady: this.handleWaveformReady,
-        volume: volume[0],
         zoomFactor: zoomFactor[0],
         range: [inValue, outValue],
         height: waveformHeight
@@ -27720,7 +27717,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleZoomFactorChange
       }), jsx("div", {
         className: "dnm-video-cut-zoom-icon"
-      }, jsx(ZoomIcon, null))), jsx("div", {
+      }, jsx(ZoomIcon, null))), type === 'audio' && jsx("div", {
         className: "dnm-video-cut-volume"
       }, jsx(Range$1, {
         className: "dnm-video-cut-volume-range ".concat(classes.volumeRange || ""),
@@ -27761,12 +27758,13 @@ DnmVideoCut.propTypes = {
     range: PropTypes.string
   }),
   onRangeChange: PropTypes.func.isRequired,
-  onVolumeChange: PropTypes.func,
+  onGainChange: PropTypes.func,
   onVideoLoadedData: PropTypes.func,
   src: PropTypes.string.isRequired,
   type: PropTypes.oneOf(['audio', 'video']),
   inPoint: PropTypes.number,
   outPoint: PropTypes.number,
+  gain: PropTypes.number,
   draggableWidth: PropTypes.number,
   maxDuration: PropTypes.number,
   minDuration: PropTypes.number,
@@ -27792,7 +27790,7 @@ DnmVideoCut.defaultProps = {
   onRangeChange: function onRangeChange(points) {
     return null;
   },
-  onVolumeChange: function onVolumeChange(volume) {
+  onGainChange: function onGainChange(gain) {
     return null;
   },
   onVideoLoadedData: function onVideoLoadedData(video) {
@@ -27800,6 +27798,7 @@ DnmVideoCut.defaultProps = {
   },
   inPoint: 0,
   outPoint: 0,
+  gain: 0,
   type: 'video',
   draggableWidth: null,
   maxDuration: 0,

@@ -36,8 +36,8 @@ class App extends React.Component {
         this.setState({ muted })
     }
 
-    handleVolumeChange = (volume) => {
-        console.log('volume', volume);
+    handleGainChange = (gain) => {
+        console.log('handleGainChange', gain);
     }
 
     render() {
@@ -68,6 +68,7 @@ class App extends React.Component {
                         inPoint={inPoint}
                         outPoint={outPoint}
                         muted={muted}
+                        gain={0}
                         catalogue={{
                             unmute: 'Enable sound',
                             cutInTooltip: 'Define inpoint',
@@ -85,7 +86,7 @@ class App extends React.Component {
                         // maxDuration={10}
                         minDuration={10}
                         onRangeChange={this.handleRangeChange}
-                        onVolumeChange={this.handleVolumeChange}
+                        onGainChange={this.handleGainChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,

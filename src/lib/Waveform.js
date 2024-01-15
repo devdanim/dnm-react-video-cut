@@ -25,12 +25,9 @@ export default class Waveform extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { wavesurfer, wavesurferRegions } = this.state;
-    const { position, range, volume, zoomFactor } = this.props;
+    const { position, range, zoomFactor } = this.props;
     if (wavesurfer) {
       if (prevProps.position !== position) wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
-      if (prevProps.volume !== volume) {
-        wavesurfer.setVolume(volume);
-      }
       if (prevProps.zoomFactor !== zoomFactor) {
         wavesurfer.zoom(zoomFactor)
       }

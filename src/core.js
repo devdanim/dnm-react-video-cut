@@ -25,9 +25,9 @@ export default class DnmVideoCut extends React.Component {
             forceRerenderKey: 0,
             videoDuration: 0,
             isPlaying: false,
+            volume: props.gain !== undefined ? [Math.pow(10, props.gain / 20)] : [0.5],
             forceCursorDragging: false,
             zoomFactor: [0],
-            volume: [0.5],
             playCursorPosition: {
                 xRatio: 0,
                 yRatio: 0
@@ -50,7 +50,7 @@ export default class DnmVideoCut extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { videoDuration } = this.state;
-        const { inPoint, outPoint, src, muted, type, } = this.props;
+        const { inPoint, outPoint, src, muted, type, gain } = this.props;
         if (!isNaN(videoDuration) && videoDuration !== prevState.videoDuration) {
             this.handleRangeChange([inPoint, outPoint], true);
         }
@@ -68,7 +68,7 @@ export default class DnmVideoCut extends React.Component {
             else time = prevProps.outPoint !== outPoint ? outPoint : inPoint;
             this.seekVideoTo(time);
         }
-        if (muted !== prevProps.muted) this.updatePlayerVolume();
+        if (muted !== prevProps.muted || gain !== prevProps.gain) this.updatePlayerVolume();
     }
 
     componentWillUnmount = () => {
@@ -176,9 +176,10 @@ export default class DnmVideoCut extends React.Component {
 
     updatePlayerVolume = () => {
         const { muted } = this.props;
+        const { volume } = this.state;
         const video = this.playerRef.current;
         if (video) {
-            video.volume = muted ? 0 : 0.5;
+            video.volume = muted ? 0 : volume ?? 0.5;
         }
     }
 
@@ -331,13 +332,13 @@ export default class DnmVideoCut extends React.Component {
     handleVolumeDragEnd = () => this.setState({ forceCursorDragging: false });
 
     handleVolumeChange = value => {
-        const { onVolumeChange } = this.props;
+        const { onGainChange } = this.props;
         const video = this.playerRef.current;
         if (video) {
             video.volume = value[0];
         }
         // We need to convert volume to decibel
-        onVolumeChange(20 * Math.log10(value[0]));
+        onGainChange(20 * Math.log10(value[0]));
         this.setState({ volume: value }, this.scrollToCursor);
     }
 
@@ -389,7 +390,6 @@ export default class DnmVideoCut extends React.Component {
                                     onPositionChange={this.handleWaveformPositionChange}
                                     onRangeChange={this.handleRangeChange}
                                     onWaveformReady={this.handleWaveformReady}
-                                    volume={volume[0]}
                                     zoomFactor={zoomFactor[0]}
                                     range={[inValue, outValue]}
                                     height={waveformHeight}
@@ -526,22 +526,24 @@ export default class DnmVideoCut extends React.Component {
                                         <ZoomIcon />
                                     </div>
                                 </div>
-                                <div className="dnm-video-cut-volume">
-                                    <Range
-                                        className={`dnm-video-cut-volume-range ${classes.volumeRange || ""}`}
-                                        marks={{ 0.1: '10%', 1: '100%' }}
-                                        min={0.1}
-                                        max={1}
-                                        step={0.05}
-                                        value={volume}
-                                        onBeforeChange={this.handleVolumeDragStart}
-                                        onAfterChange={this.handleVolumeDragEnd}
-                                        onChange={this.handleVolumeChange}
-                                    />
-                                    <div className="dnm-video-cut-volume-icon">
-                                        <VolumeIcon />
+                                {type === 'audio' && (
+                                    <div className="dnm-video-cut-volume">
+                                        <Range
+                                            className={`dnm-video-cut-volume-range ${classes.volumeRange || ""}`}
+                                            marks={{ 0.1: '10%', 1: '100%' }}
+                                            min={0.1}
+                                            max={1}
+                                            step={0.05}
+                                            value={volume}
+                                            onBeforeChange={this.handleVolumeDragStart}
+                                            onAfterChange={this.handleVolumeDragEnd}
+                                            onChange={this.handleVolumeChange}
+                                        />
+                                        <div className="dnm-video-cut-volume-icon">
+                                            <VolumeIcon />
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </div>
                             {type !== 'audio' ? (
                                 <div className='flex-row'>
@@ -575,12 +577,13 @@ DnmVideoCut.propTypes = {
         range: PropTypes.string,
     }),
     onRangeChange: PropTypes.func.isRequired,
-    onVolumeChange: PropTypes.func,
+    onGainChange: PropTypes.func,
     onVideoLoadedData: PropTypes.func,
     src: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['audio', 'video']),
     inPoint: PropTypes.number,
     outPoint: PropTypes.number,
+    gain: PropTypes.number,
     draggableWidth: PropTypes.number,
     maxDuration: PropTypes.number,
     minDuration: PropTypes.number,
@@ -608,10 +611,11 @@ DnmVideoCut.defaultProps = {
     },
     classes: {},
     onRangeChange: points => null,
-    onVolumeChange: volume => null,
+    onGainChange: gain => null,
     onVideoLoadedData: video => null,
     inPoint: 0,
     outPoint: 0,
+    gain: 0,
     type: 'video',
     draggableWidth: null,
     maxDuration: 0,
