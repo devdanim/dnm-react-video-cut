@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",

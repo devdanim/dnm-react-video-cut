@@ -435,12 +435,11 @@ export default css`
   }
 
   .dnm-video-cut-tools {
-    margin-top: 5px;
     gap: 1rem;
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 1rem;
+    margin: 1rem 0;
     align-items: center
   }
 
@@ -538,7 +537,7 @@ export default css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 0.5rem;
+    padding: 0.5rem 0.5rem;
     align-items: flex-start;
     width: 100%;
   }
