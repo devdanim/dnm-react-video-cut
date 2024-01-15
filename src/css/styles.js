@@ -436,33 +436,33 @@ export default css`
 
   .dnm-video-cut-tools {
     margin-top: 5px;
+    gap: 1rem;
     width: 100%;
-    align-self: flex-end;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-flow: row-reverse;
+    flex-direction: column;
+    margin-top: 1rem;
+    align-items: center
   }
 
-  .dnm-video-cut-zoom {
+  .dnm-video-cut-zoom, .dnm-video-cut-volume {
     width: 150px;
   }
   
-  .dnm-video-cut-zoom-icon {
+  .dnm-video-cut-zoom-icon, .dnm-video-cut-volume-icon {
     width: 18px;
   }
   
-  .dnm-video-cut-zoom-icon {
+  .dnm-video-cut-zoom-icon, .dnm-video-cut-volume-icon {
     display: inline-block;
     margin-left: 10px;
   }
 
-  .dnm-video-cut-zoom-range {
+  .dnm-video-cut-zoom-range, .dnm-video-cut-volume-range {
     width: calc(100% - 28px);
     display: inline-block;
   }
 
-  .dnm-video-cut-zoom-icon svg {
+  .dnm-video-cut-zoom-icon svg, .dnm-video-cut-volume-icon svg {
     color: rgb(168, 173, 181);
   }
 
@@ -532,5 +532,13 @@ export default css`
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
+  }
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
   }
 `

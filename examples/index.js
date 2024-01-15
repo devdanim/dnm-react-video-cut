@@ -11,7 +11,7 @@ class App extends React.Component {
             inPoint: 0,
             outPoint: 100,
             muted: false,
-            type: 'video',
+            type: 'audio',
             src: null,
             moduleKey: new Date().getTime()
         }
@@ -36,9 +36,13 @@ class App extends React.Component {
         this.setState({ muted })
     }
 
+    handleVolumeChange = (volume) => {
+        console.log('volume', volume);
+    }
+
     render() {
         const { inPoint, outPoint, muted, type, src, moduleKey } = this.state;
-        return(
+        return (
             <React.Fragment>
                 <button onClick={() => this.setState({ type: type === 'audio' ? 'video' : 'audio', src: null })}>Toggle mode</button>
                 <button onClick={() => this.setState({ moduleKey: new Date().getTime() })}>Update React Key</button>
@@ -78,9 +82,10 @@ class App extends React.Component {
                         src={src || video}
                         type={type}
                         loader={<p>Is loading...</p>}
-                        maxDuration={10}
+                        // maxDuration={10}
                         minDuration={10}
                         onRangeChange={this.handleRangeChange}
+                        onVolumeChange={this.handleVolumeChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,
