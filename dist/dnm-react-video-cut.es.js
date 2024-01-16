@@ -27181,9 +27181,9 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         min = _this$getAcceptedDura.min,
         max = _this$getAcceptedDura.max;
       var videoDuration = _this.state.videoDuration;
-      var type = _this.props.type;
+      var cutInOnly = _this.props.cutInOnly;
       var inValue = inPoint || 0;
-      var outValue = type === 'audio' ? videoDuration : outPoint || videoDuration;
+      var outValue = cutInOnly ? videoDuration : outPoint || videoDuration;
       var format = function format(_lastTarget) {
         if (outValue - inValue > max) {
           if (_lastTarget === "in") outValue = inValue + max;else inValue = outValue - max;
@@ -27571,6 +27571,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         waveformIsReady = _this$state3.waveformIsReady;
       var _this$props4 = this.props,
         src = _this$props4.src,
+        cutInOnly = _this$props4.cutInOnly,
         catalogue = _this$props4.catalogue,
         classes = _this$props4.classes,
         playerCursorWidth = _this$props4.playerCursorWidth,
@@ -27619,7 +27620,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       }, jsx(StartIcon, null)), {
         title: catalogue.cutInTooltip,
         id: 'cut-in'
-      }), type !== 'audio' && tooltipRenderer(jsx("div", {
+      }), !cutInOnly && tooltipRenderer(jsx("div", {
         className: "dnm-video-cut-out-icon",
         onClick: this.handleCutOutClick
       }, jsx(StartIcon, null)), {
@@ -27752,6 +27753,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
   return DnmVideoCut;
 }(React__default.Component);
 DnmVideoCut.propTypes = {
+  cutInOnly: PropTypes.bool,
   catalogue: PropTypes.object,
   classes: PropTypes.shape({
     root: PropTypes.string,
@@ -27776,6 +27778,7 @@ DnmVideoCut.propTypes = {
   tooltipRenderer: PropTypes.func
 };
 DnmVideoCut.defaultProps = {
+  cutInOnly: false,
   catalogue: {
     unmute: 'Enable sound',
     cutInTooltip: 'Define inpoint',

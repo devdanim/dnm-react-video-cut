@@ -102,10 +102,10 @@ export default class DnmVideoCut extends React.Component {
         if (!outPoint) outPoint = this.props.outPoint;
         const { min, max } = this.getAcceptedDuration();
         const { videoDuration } = this.state;
-        const { type } = this.props;
+        const { cutInOnly } = this.props;
 
         let inValue = inPoint || 0;
-        let outValue = type === 'audio' ? videoDuration : outPoint || videoDuration;
+        let outValue = cutInOnly ? videoDuration : outPoint || videoDuration;
 
         const format = (_lastTarget) => {
             if (outValue - inValue > max) {
@@ -370,7 +370,7 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormattedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, volume, waveformIsReady } = this.state;
-        const { src, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, smartCropprProps, } = this.props;
+        const { src, cutInOnly, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, smartCropprProps, } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
 
@@ -426,7 +426,7 @@ export default class DnmVideoCut extends React.Component {
                                 ), { title: catalogue.cutInTooltip, id: 'cut-in' })
                             }
                             {
-                                type !== 'audio' && tooltipRenderer((
+                                !cutInOnly && tooltipRenderer((
                                     <div
                                         className="dnm-video-cut-out-icon"
                                         onClick={this.handleCutOutClick}
@@ -571,6 +571,7 @@ export default class DnmVideoCut extends React.Component {
 }
 
 DnmVideoCut.propTypes = {
+    cutInOnly: PropTypes.bool,
     catalogue: PropTypes.object,
     classes: PropTypes.shape({
         root: PropTypes.string,
@@ -599,6 +600,7 @@ DnmVideoCut.propTypes = {
 };
 
 DnmVideoCut.defaultProps = {
+    cutInOnly: false,
     catalogue: {
         unmute: 'Enable sound',
         cutInTooltip: 'Define inpoint',

@@ -85,6 +85,7 @@ class App extends React.Component {
                         loader={<p>Is loading...</p>}
                         // maxDuration={10}
                         minDuration={10}
+                        // cutInOnly
                         onRangeChange={this.handleRangeChange}
                         onGainChange={this.handleGainChange}
                         onMuteChange={this.handleMuteChange}
