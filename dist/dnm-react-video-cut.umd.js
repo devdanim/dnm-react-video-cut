@@ -27587,7 +27587,8 @@
           tooltipRenderer = _this$props4.tooltipRenderer,
           loader = _this$props4.loader,
           minDuration = _this$props4.minDuration,
-          smartCropprProps = _this$props4.smartCropprProps;
+          smartCropprProps = _this$props4.smartCropprProps,
+          gain = _this$props4.gain;
         var loopElPosition = this.getLoopElPosition();
         return react.jsx("div", {
           css: react.css(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["", ""])), styles)
@@ -27723,7 +27724,7 @@
           onChange: this.handleZoomFactorChange
         }), react.jsx("div", {
           className: "dnm-video-cut-zoom-icon"
-        }, react.jsx(ZoomIcon, null))), type === 'audio' && react.jsx("div", {
+        }, react.jsx(ZoomIcon, null))), type === 'audio' && !!gain && react.jsx("div", {
           className: "dnm-video-cut-volume"
         }, react.jsx(Range$1, {
           className: "dnm-video-cut-volume-range ".concat(classes.volumeRange || ""),
@@ -27806,7 +27807,7 @@
     },
     inPoint: 0,
     outPoint: 0,
-    gain: 0,
+    gain: null,
     type: 'video',
     draggableWidth: null,
     maxDuration: 0,

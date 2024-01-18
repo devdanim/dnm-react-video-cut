@@ -370,7 +370,7 @@ export default class DnmVideoCut extends React.Component {
     render() {
         const { inValue, outValue } = this.getFormattedValues();
         const { videoDuration, playCursorPosition, isPlaying, forceCursorDragging, zoomFactor, volume, waveformIsReady } = this.state;
-        const { src, cutInOnly, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, smartCropprProps, } = this.props;
+        const { src, cutInOnly, catalogue, classes, playerCursorWidth, muted, onMuteChange, type, waveformHeight, tooltipRenderer, loader, minDuration, smartCropprProps, gain } = this.props;
 
         const loopElPosition = this.getLoopElPosition();
 
@@ -526,7 +526,7 @@ export default class DnmVideoCut extends React.Component {
                                         <ZoomIcon />
                                     </div>
                                 </div>
-                                {type === 'audio' && (
+                                {type === 'audio' && !!gain && (
                                     <div className="dnm-video-cut-volume">
                                         <Range
                                             className={`dnm-video-cut-volume-range ${classes.volumeRange || ""}`}
@@ -617,7 +617,7 @@ DnmVideoCut.defaultProps = {
     onVideoLoadedData: video => null,
     inPoint: 0,
     outPoint: 0,
-    gain: 0,
+    gain: null,
     type: 'video',
     draggableWidth: null,
     maxDuration: 0,

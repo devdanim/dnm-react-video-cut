@@ -27582,7 +27582,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         tooltipRenderer = _this$props4.tooltipRenderer,
         loader = _this$props4.loader,
         minDuration = _this$props4.minDuration,
-        smartCropprProps = _this$props4.smartCropprProps;
+        smartCropprProps = _this$props4.smartCropprProps,
+        gain = _this$props4.gain;
       var loopElPosition = this.getLoopElPosition();
       return jsx("div", {
         css: css$1(_templateObject$1 || (_templateObject$1 = _taggedTemplateLiteral(["", ""])), styles)
@@ -27718,7 +27719,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleZoomFactorChange
       }), jsx("div", {
         className: "dnm-video-cut-zoom-icon"
-      }, jsx(ZoomIcon, null))), type === 'audio' && jsx("div", {
+      }, jsx(ZoomIcon, null))), type === 'audio' && !!gain && jsx("div", {
         className: "dnm-video-cut-volume"
       }, jsx(Range$1, {
         className: "dnm-video-cut-volume-range ".concat(classes.volumeRange || ""),
@@ -27801,7 +27802,7 @@ DnmVideoCut.defaultProps = {
   },
   inPoint: 0,
   outPoint: 0,
-  gain: 0,
+  gain: null,
   type: 'video',
   draggableWidth: null,
   maxDuration: 0,

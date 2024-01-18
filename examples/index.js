@@ -66,9 +66,9 @@ class App extends React.Component {
                     <DnmVideoCut
                         key={moduleKey}
                         inPoint={inPoint}
-                        outPoint={outPoint}
+                        // outPoint={outPoint}
                         muted={muted}
-                        gain={0}
+                        // gain={0}
                         catalogue={{
                             unmute: 'Enable sound',
                             cutInTooltip: 'Define inpoint',
@@ -83,11 +83,11 @@ class App extends React.Component {
                         src={src || video}
                         type={type}
                         loader={<p>Is loading...</p>}
+                        cutInOnly
                         // maxDuration={10}
                         minDuration={10}
-                        // cutInOnly
                         onRangeChange={this.handleRangeChange}
-                        onGainChange={this.handleGainChange}
+                        // onGainChange={this.handleGainChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,
