@@ -46,7 +46,7 @@ export default class Waveform extends React.Component {
   }
 
   onReady = (wavesurfer) => {
-    const { onWaveformReady, range } = this.props;
+    const { onWaveformReady, range, position } = this.props;
     const wavesurferRegions = wavesurfer.registerPlugin(Regions.create())
     wavesurferRegions.addRegion({
       id: 'cut',
@@ -57,6 +57,7 @@ export default class Waveform extends React.Component {
       drag: false
     })
     onWaveformReady(wavesurfer);
+    if (wavesurfer && position) wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
     this.setState(({ wavesurfer, wavesurferRegions }));
   }
 

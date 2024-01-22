@@ -27025,7 +27025,8 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "onReady", function (wavesurfer) {
       var _this$props = _this.props,
         onWaveformReady = _this$props.onWaveformReady,
-        range = _this$props.range;
+        range = _this$props.range,
+        position = _this$props.position;
       var wavesurferRegions = wavesurfer.registerPlugin(r.create());
       wavesurferRegions.addRegion({
         id: 'cut',
@@ -27036,6 +27037,7 @@ var Waveform = /*#__PURE__*/function (_React$Component) {
         drag: false
       });
       onWaveformReady(wavesurfer);
+      if (wavesurfer && position) wavesurfer.seekTo(Math.min(1, Math.max(0, position)));
       _this.setState({
         wavesurfer: wavesurfer,
         wavesurferRegions: wavesurferRegions

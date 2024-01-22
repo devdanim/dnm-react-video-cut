@@ -8,7 +8,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            inPoint: 0,
+            inPoint: 3,
             outPoint: 100,
             muted: false,
             type: 'audio',
