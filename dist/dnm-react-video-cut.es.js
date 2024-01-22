@@ -27489,7 +27489,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       forceRerenderKey: 0,
       videoDuration: 0,
       isPlaying: false,
-      volume: props.gain !== undefined ? [Math.pow(10, props.gain / 20)] : [0.5],
+      volume: props.gain !== null ? [Math.pow(10, props.gain / 20)] : [0.5],
       forceCursorDragging: false,
       zoomFactor: [0],
       playCursorPosition: {
@@ -27719,7 +27719,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         onChange: this.handleZoomFactorChange
       }), jsx("div", {
         className: "dnm-video-cut-zoom-icon"
-      }, jsx(ZoomIcon, null))), type === 'audio' && !!gain && jsx("div", {
+      }, jsx(ZoomIcon, null))), type === 'audio' && gain !== null && jsx("div", {
         className: "dnm-video-cut-volume"
       }, jsx(Range$1, {
         className: "dnm-video-cut-volume-range ".concat(classes.volumeRange || ""),

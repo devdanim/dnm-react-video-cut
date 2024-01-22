@@ -27494,7 +27494,7 @@
         forceRerenderKey: 0,
         videoDuration: 0,
         isPlaying: false,
-        volume: props.gain !== undefined ? [Math.pow(10, props.gain / 20)] : [0.5],
+        volume: props.gain !== null ? [Math.pow(10, props.gain / 20)] : [0.5],
         forceCursorDragging: false,
         zoomFactor: [0],
         playCursorPosition: {
@@ -27724,7 +27724,7 @@
           onChange: this.handleZoomFactorChange
         }), react.jsx("div", {
           className: "dnm-video-cut-zoom-icon"
-        }, react.jsx(ZoomIcon, null))), type === 'audio' && !!gain && react.jsx("div", {
+        }, react.jsx(ZoomIcon, null))), type === 'audio' && gain !== null && react.jsx("div", {
           className: "dnm-video-cut-volume"
         }, react.jsx(Range$1, {
           className: "dnm-video-cut-volume-range ".concat(classes.volumeRange || ""),

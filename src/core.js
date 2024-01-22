@@ -25,7 +25,7 @@ export default class DnmVideoCut extends React.Component {
             forceRerenderKey: 0,
             videoDuration: 0,
             isPlaying: false,
-            volume: props.gain !== undefined ? [Math.pow(10, props.gain / 20)] : [0.5],
+            volume: props.gain !== null ? [Math.pow(10, props.gain / 20)] : [0.5],
             forceCursorDragging: false,
             zoomFactor: [0],
             playCursorPosition: {
@@ -526,7 +526,7 @@ export default class DnmVideoCut extends React.Component {
                                         <ZoomIcon />
                                     </div>
                                 </div>
-                                {type === 'audio' && !!gain && (
+                                {type === 'audio' && gain !== null && (
                                     <div className="dnm-video-cut-volume">
                                         <Range
                                             className={`dnm-video-cut-volume-range ${classes.volumeRange || ""}`}
