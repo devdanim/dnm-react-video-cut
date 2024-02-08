@@ -68,7 +68,7 @@ class App extends React.Component {
                         inPoint={inPoint}
                         // outPoint={outPoint}
                         muted={muted}
-                        // gain={0}
+                        gain={-9}
                         catalogue={{
                             unmute: 'Enable sound',
                             cutInTooltip: 'Define inpoint',
@@ -87,7 +87,7 @@ class App extends React.Component {
                         // maxDuration={10}
                         minDuration={10}
                         onRangeChange={this.handleRangeChange}
-                        // onGainChange={this.handleGainChange}
+                        onGainChange={this.handleGainChange}
                         onMuteChange={this.handleMuteChange}
                         smartCropprProps={{
                             aspectRatio: 2,

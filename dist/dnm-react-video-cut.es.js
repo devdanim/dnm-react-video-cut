@@ -27454,7 +27454,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
         video.volume = value[0];
       }
       // We need to convert volume to decibel
-      onGainChange(20 * Math.log10(value[0]));
+      onGainChange(30 * Math.log10(value[0]));
       _this.setState({
         volume: value
       }, _this.scrollToCursor);
@@ -27491,7 +27491,7 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       forceRerenderKey: 0,
       videoDuration: 0,
       isPlaying: false,
-      volume: props.gain !== null ? [Math.pow(10, props.gain / 20)] : [0.5],
+      volume: props.gain !== null ? [Math.pow(10, props.gain / 30)] : [0.5],
       forceCursorDragging: false,
       zoomFactor: [0],
       playCursorPosition: {
