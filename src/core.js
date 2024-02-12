@@ -521,7 +521,9 @@ export default class DnmVideoCut extends React.Component {
                                         onBeforeChange={this.handleZoomFactorDragStart}
                                         onAfterChange={this.handleZoomFactorDragEnd}
                                         onChange={this.handleZoomFactorChange}
-                                    />
+                                    >
+                                        <div className="dnm-range-text">Zoom</div>
+                                    </Range>
                                     <div className="dnm-video-cut-zoom-icon">
                                         <ZoomIcon />
                                     </div>
@@ -538,7 +540,9 @@ export default class DnmVideoCut extends React.Component {
                                             onBeforeChange={this.handleVolumeDragStart}
                                             onAfterChange={this.handleVolumeDragEnd}
                                             onChange={this.handleVolumeChange}
-                                        />
+                                        >
+                                            <div className="dnm-range-text">Volume</div>
+                                        </Range>
                                         <div className="dnm-video-cut-volume-icon">
                                             <VolumeIcon />
                                         </div>

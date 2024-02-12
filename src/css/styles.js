@@ -445,6 +445,14 @@ export default css`
 
   .dnm-video-cut-zoom, .dnm-video-cut-volume {
     width: 150px;
+    .dnm-range-text {
+      position: absolute;
+      top: 1.05rem;
+      font-size: 0.9em;
+      left: 50%;
+      transform: translate(-50%);
+      color: rgb(168, 173, 181);
+    }
   }
   
   .dnm-video-cut-zoom-icon, .dnm-video-cut-volume-icon {
