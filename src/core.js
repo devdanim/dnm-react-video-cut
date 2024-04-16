@@ -409,6 +409,8 @@ export default class DnmVideoCut extends React.Component {
                                 {...(smartCropprProps || {})}
                                 onMediaLoad={this.handleVideoPlayerLoad}
                                 mediaType="video"
+                                autoPlay={this.props.autoPlayVideo}
+                                loop={this.props.loop}
                                 src={src}
                             />
                         )
@@ -601,6 +603,8 @@ DnmVideoCut.propTypes = {
     smartCropprProps: PropTypes.object.isRequired,
     waveformHeight: PropTypes.number,
     tooltipRenderer: PropTypes.func,
+    autoPlayVideo: PropTypes.bool,
+    loop: PropTypes.bool,
 };
 
 DnmVideoCut.defaultProps = {
@@ -630,4 +634,6 @@ DnmVideoCut.defaultProps = {
     playerCursorWidth: 14,
     waveformHeight: 150,
     tooltipRenderer: (children, { title }) => children,
+    autoPlayVideo: false,
+    loop: true,
 };
