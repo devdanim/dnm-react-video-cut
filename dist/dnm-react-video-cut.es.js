@@ -27612,6 +27612,8 @@ var DnmVideoCut = /*#__PURE__*/function (_React$Component) {
       })) : jsx(SmartCroppr, _extends({}, smartCropprProps || {}, {
         onMediaLoad: this.handleVideoPlayerLoad,
         mediaType: "video",
+        autoPlay: this.props.autoPlayVideo,
+        loop: this.props.loop,
         src: src
       })), jsx("div", {
         className: "dnm-video-cut-progress-root"
@@ -27782,7 +27784,9 @@ DnmVideoCut.propTypes = {
   playerCursorWidth: PropTypes.oneOfType([PropTypes.func, PropTypes.number]),
   smartCropprProps: PropTypes.object.isRequired,
   waveformHeight: PropTypes.number,
-  tooltipRenderer: PropTypes.func
+  tooltipRenderer: PropTypes.func,
+  autoPlayVideo: PropTypes.bool,
+  loop: PropTypes.bool
 };
 DnmVideoCut.defaultProps = {
   cutInOnly: false,
@@ -27819,7 +27823,9 @@ DnmVideoCut.defaultProps = {
   tooltipRenderer: function tooltipRenderer(children, _ref) {
     var title = _ref.title;
     return children;
-  }
+  },
+  autoPlayVideo: false,
+  loop: true
 };
 
 export default DnmVideoCut;
