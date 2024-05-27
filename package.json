@@ -1,6 +1,6 @@
 {
   "name": "dnm-react-video-cut",
-  "version": "2.3.18",
+  "version": "2.3.19",
   "description": "",
   "main": "dist/dnm-react-video-cut.umd.min.js",
   "module": "dist/dnm-react-video-cut.es.min.js",
@@ -32,7 +32,7 @@
   "homepage": "https://github.com/devdanim/dnm-react-video-cut#readme",
   "peerDependencies": {
     "@emotion/react": "^11.1.4",
-    "dnm-react-smartcroppr": "^1.6.22",
+    "dnm-react-smartcroppr": "^1.6.23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
