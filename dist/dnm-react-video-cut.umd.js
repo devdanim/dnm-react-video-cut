@@ -27231,8 +27231,10 @@
               inValue = _this$getFormattedVal.inValue,
               outValue = _this$getFormattedVal.outValue;
             var time = video.currentTime;
-            if (time + 0.04 < inValue || time - 0.04 > outValue) {
-              video.currentTime = inValue;
+            if (_this.isValidTime(inValue, video)) {
+              if (time + 0.04 < inValue || time - 0.04 > outValue) {
+                video.currentTime = inValue;
+              }
             }
           }
           _this.updatePlayCursorPosition(null, true);
@@ -27555,10 +27557,15 @@
         if (muted !== prevProps.muted || gain !== prevProps.gain) this.updatePlayerVolume();
       }
     }, {
+      key: "isValidTime",
+      value: function isValidTime(time, media) {
+        return typeof time === 'number' && !Number.isNaN(time) && Number.isFinite(time) && time >= 0 && (media === null || media === void 0 ? void 0 : media.duration) && time <= (media.duration || 0);
+      }
+    }, {
       key: "_seekVideoTo",
       value: function _seekVideoTo(time) {
-        if (!isNaN(time)) {
-          var video = this.playerRef.current;
+        var video = this.playerRef.current;
+        if (this.isValidTime(time, video)) {
           if (video) video.currentTime = time;
         }
       }

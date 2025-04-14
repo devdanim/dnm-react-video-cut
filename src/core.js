@@ -86,6 +86,7 @@ export default class DnmVideoCut extends React.Component {
             !Number.isNaN(time) &&
             Number.isFinite(time) &&
             time >= 0 &&
+            media?.duration &&
             time <= (media.duration || 0)
         );
     }
