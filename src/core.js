@@ -80,9 +80,19 @@ export default class DnmVideoCut extends React.Component {
         }
     }
 
+    isValidTime(time, media) {
+        return (
+            typeof time === 'number' &&
+            !Number.isNaN(time) &&
+            Number.isFinite(time) &&
+            time >= 0 &&
+            time <= (media.duration || 0)
+        );
+    }
+
     _seekVideoTo(time) {
-        if (!isNaN(time)) {
-            const video = this.playerRef.current;
+        const video = this.playerRef.current;
+        if (this.isValidTime(time, video)) {
             if (video) video.currentTime = time;
         }
     }
@@ -150,8 +160,10 @@ export default class DnmVideoCut extends React.Component {
             if (this.playLoop) {
                 const { inValue, outValue } = this.getFormattedValues();
                 const time = video.currentTime;
-                if ((time + 0.04) < inValue || (time - 0.04) > outValue) {
-                    video.currentTime = inValue;
+                if (this.isValidTime(inValue, video)) {
+                    if ((time + 0.04) < inValue || (time - 0.04) > outValue) {
+                        video.currentTime = inValue;
+                    }
                 }
             }
             this.updatePlayCursorPosition(null, true);
